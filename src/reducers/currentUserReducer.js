@@ -1,32 +1,11 @@
-const initialState = {
-    requesting: false,
-    username: null
-}
-
-const currentUserReducer = (
-    state = { ...initialState },
-    action
-) => {
+const currentUserReducer = (state = {}, action) => {
     switch(action.type) {
-        
-        case 'START_SETTING_CURRENT_USER':
-            console.log('starting to set current user')
-            return {
-                ...state,
-                requesting: true
-            }
 
         case 'SET_CURRENT_USER':
-            console.log('setting current user')
-            return {
-                ...state,
-                requesting: false,
-                username: action.currentUser.username,
-            }
+            return action.currentUser
         
         case 'REMOVE_CURRENT_USER':
-            console.log('removing current user')
-            return { ...initialState }
+            return {}
 
         default:
             return state

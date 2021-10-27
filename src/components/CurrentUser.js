@@ -4,13 +4,9 @@ import { connect } from 'react-redux'
 const CurrentUser = ({ currentUser }) => {
 
     const renderCurrentUser = () => {
-        if (currentUser.username) {
-            return `Logged in as ${currentUser.username}.`
+        if (currentUser.attributes) {
+            return `Logged in as ${currentUser.attributes.username}.`
         }
-        if (currentUser.requesting) {
-            return 'Fetching current user.'
-        }
-        return 'Not logged in.'
     }
 
     return (
