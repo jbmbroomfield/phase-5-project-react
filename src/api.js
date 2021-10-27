@@ -1,6 +1,6 @@
 const baseUrl = 'http://localhost:3000/api/v1/'
 
-const api = (url, body, method = 'GET', jwt) => {
+const api = (url, jwt, method = 'GET', body) => {
     const configObject = {
         method: method,
         headers: {

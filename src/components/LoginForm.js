@@ -20,7 +20,7 @@ const LoginForm = ({ setCurrentUser }) => {
 
     const handleSubmit = event => {
         event.preventDefault()
-        api('login', request_body(), 'POST')
+        api('login', null, 'POST', request_body())
         .then(json => {
             console.log(json)
             if (json.jwt) {

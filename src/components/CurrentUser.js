@@ -3,9 +3,19 @@ import api from '../api'
 import { connect } from 'react-redux'
 
 const CurrentUser = ({ currentUser }) => {
-    console.log(currentUser)
+
+    const renderCurrentUser = () => {
+        if (currentUser.username) {
+            return `Logged in as ${currentUser.username}.`
+        }
+        if (currentUser.requesting) {
+            return 'Fetching current user.'
+        }
+        return 'Not logged in.'
+    }
+
     return (
-        <div>{currentUser ? `Logged in as ${currentUser.username}` : 'Not logged in'} </div>
+        <div>{renderCurrentUser()}</div>
     )
 }
 

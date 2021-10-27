@@ -6,22 +6,16 @@ import {
 import CurrentUser from './components/CurrentUser'
 import { connect } from 'react-redux'
 
-import { setCurrentUser } from './actions/currentUserActions'
-
 import UsersContainer from './containers/UsersContainer'
 import LoginContainer from './containers/LoginContainer.js'
 import NavbarContainer from './containers/NavbarContainer'
 
-import api from './api'
+import { fetchCurrentUser } from './actions/currentUserActions'
 
-const App = props => {
+const App = ({ fetchCurrentUser }) => {
 
   useEffect(() => {
-    const jwt = localStorage.getItem('jwt')
-    jwt && api('current_user', null, 'GET', jwt)
-    .then(json => {
-        json.data && props.setCurrentUser(json.data.attributes)
-    })
+    fetchCurrentUser()
   }, [])
 
   return (
@@ -41,8 +35,8 @@ const mapStateToProps = state => ({
   currentUser: state.currentUser
 })
 
-const mapDispatchToProps = {
-  setCurrentUser
-}
+const mapDispatchToProps = dispatch => ({
+  fetchCurrentUser: () => dispatch(fetchCurrentUser())
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
