@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import api from '../api'
 
-const LoginForm = () => {
+const LoginForm = ({ currentUser, setCurrentUser }) => {
 
     const [state, setState] = useState({
         username: '',
         password: ''
     })
+    
+    const history = useHistory()
 
     const handleChange = event => {
         setState({
@@ -17,19 +20,14 @@ const LoginForm = () => {
 
     const handleSubmit = event => {
         event.preventDefault()
-        const body = {
-                user: {
-                    username: state.username,
-                    password_authentication_attributes: {
-                        password: state.password
-                    }
-                }
-            }
         api('login', request_body(), 'POST')
         .then(json => {
             console.log(json)
-            console.log(json.jwt)
-            localStorage.setItem('jwt', json.jwt)
+            if (json.jwt) {
+                localStorage.setItem('jwt', json.jwt)
+                setCurrentUser(json.user.data.attributes)
+                history.push("/")
+            }
         })
     }
 

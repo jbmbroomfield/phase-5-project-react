@@ -1,4 +1,4 @@
-const currentUserReducer = (state = {}, action) => {
+const currentUserReducer = (state = null, action) => {
     switch(action.type) {
         
         case 'SET_CURRENT_USER':
@@ -7,7 +7,7 @@ const currentUserReducer = (state = {}, action) => {
         
         case 'REMOVE_CURRENT_USER':
             console.log('removing current user')
-            return {}
+            return null
 
         default:
             return state

@@ -1,12 +1,26 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
+import { connect } from 'react-redux'
+import { removeCurrentUser } from '../actions/currentUserActions'
 
-const NavbarContainer = props => {
+const NavbarContainer = ({ currentUser, removeCurrentUser }) => {
+    console.log(currentUser)
     return (
         <div>
-            <Navbar />
+            <Navbar
+                currentUser={currentUser}
+                removeCurrentUser={removeCurrentUser}
+            />
         </div>
     )
 }
 
-export default NavbarContainer
+const mapStateToProps = state => ({
+    currentUser: state.currentUser
+})
+
+const mapDispatchToProps = ({
+    removeCurrentUser
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavbarContainer)
