@@ -10,6 +10,7 @@ import { setCurrentUser } from './actions/currentUserActions'
 
 import UsersContainer from './containers/UsersContainer'
 import LoginContainer from './containers/LoginContainer.js'
+import NavbarContainer from './containers/NavbarContainer'
 
 import api from './api'
 
@@ -17,7 +18,7 @@ const App = props => {
 
   useEffect(() => {
     const jwt = localStorage.getItem('jwt')
-    jwt && api('current_user', null, undefined, jwt)
+    jwt && api('current_user', null, 'GET', jwt)
     .then(json => {
         json.data && props.setCurrentUser(json.data.attributes)
     })
@@ -26,6 +27,7 @@ const App = props => {
   return (
     <Router>
       <div className="App">
+        <NavbarContainer />
         <CurrentUser />
         <Route exact path="/" render={() => <div>Home</div>} />
         <Route exact path="/users"><UsersContainer /></Route>
