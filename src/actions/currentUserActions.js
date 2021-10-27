@@ -13,14 +13,13 @@ export const removeCurrentUser = () => ({
     type: 'REMOVE_CURRENT_USER'
 })
 
-export const fetchCurrentUser = () => (
+export const fetchCurrentUser = dispatch => (
     dispatch => {
         const jwt = localStorage.getItem('jwt')
         if (jwt) {
             dispatch(startSettingCurrentUser())
             api('current_user', jwt)
             .then(json => {
-                console.log(json)
                 dispatch(setCurrentUser(json.data.attributes))
             })
         } else {
