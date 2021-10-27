@@ -9,7 +9,7 @@ export const removeCurrentUser = () => ({
     type: 'REMOVE_CURRENT_USER'
 })
 
-export const fetchCurrentUser = dispatch => (
+export const fetchCurrentUser = () => (
     dispatch => {
         const jwt = localStorage.getItem('jwt')
         if (jwt) {

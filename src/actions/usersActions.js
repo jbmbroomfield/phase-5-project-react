@@ -5,7 +5,7 @@ const addUsers = users => ({
     users
 })
 
-export const fetchUsers = dispatch => (
+export const fetchUsers = () => (
     dispatch => {
         api('users')
         .then(json => {

@@ -5,7 +5,7 @@ const addSections = sections => ({
     sections
 })
 
-export const fetchSections = dispatch => (
+export const fetchSections = () => (
     dispatch => {
         api('sections')
         .then(json => {
