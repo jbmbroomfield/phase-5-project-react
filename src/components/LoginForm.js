@@ -2,13 +2,13 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import api from '../api'
 
-const LoginForm = ({ currentUser, setCurrentUser }) => {
+const LoginForm = ({ setCurrentUser }) => {
 
     const [state, setState] = useState({
         username: '',
         password: ''
     })
-    
+
     const history = useHistory()
 
     const handleChange = event => {
