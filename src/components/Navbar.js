@@ -6,7 +6,7 @@ const Navbar = ({ currentUser, removeCurrentUser }) => {
     const renderAuthLinks = () => {
         if (currentUser) {
             return (
-                <li><a onClick={removeCurrentUser}>Logout</a></li>
+                <li><a href="#" onClick={removeCurrentUser}>Logout</a></li>
             )
         } else {
             return (

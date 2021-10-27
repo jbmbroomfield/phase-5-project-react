@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import {
   BrowserRouter as Router,
   Route
@@ -16,7 +16,7 @@ const App = ({ fetchCurrentUser }) => {
 
   useEffect(() => {
     fetchCurrentUser()
-  }, [])
+  }, [fetchCurrentUser])
 
   return (
     <Router>
