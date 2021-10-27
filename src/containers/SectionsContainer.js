@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 
-import { fetchSections, fetchSubsections } from '../actions/sectionsActions'
+import { fetchSections } from '../actions/sectionsActions'
 
 import Section from '../components/Section'
 
