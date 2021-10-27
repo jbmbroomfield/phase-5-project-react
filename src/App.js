@@ -9,6 +9,7 @@ import { connect } from 'react-redux'
 import UsersContainer from './containers/UsersContainer'
 import LoginContainer from './containers/LoginContainer.js'
 import NavbarContainer from './containers/NavbarContainer'
+import SectionsContainer from './containers/SectionsContainer'
 
 import { fetchCurrentUser } from './actions/currentUserActions'
 
@@ -23,7 +24,7 @@ const App = ({ fetchCurrentUser }) => {
       <div className="App">
         <NavbarContainer />
         <CurrentUser />
-        <Route exact path="/" render={() => <div>Home</div>} />
+        <Route exact path="/"><SectionsContainer /></Route>
         <Route exact path="/users"><UsersContainer /></Route>
         <Route exact path="/login"><LoginContainer /></Route>
       </div>
@@ -36,7 +37,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchCurrentUser: () => dispatch(fetchCurrentUser())
+  fetchCurrentUser: () => dispatch(fetchCurrentUser()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

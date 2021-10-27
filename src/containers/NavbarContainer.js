@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { removeCurrentUser } from '../actions/currentUserActions'
 
 const NavbarContainer = ({ currentUser, removeCurrentUser }) => {
-    console.log(currentUser)
     return (
         <div>
             <Navbar
