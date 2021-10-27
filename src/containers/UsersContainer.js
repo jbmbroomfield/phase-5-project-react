@@ -12,7 +12,7 @@ const UsersContainer = ({ users, fetchUsers }) => {
     }, [fetchUsers])
 
     const renderUsers = () => (
-        users.map(user => <p>{user.attributes.username}</p>)
+        users.map(user => <User key={user.id} username={user.attributes.username} />)
     )
     console.log(users)
     return (

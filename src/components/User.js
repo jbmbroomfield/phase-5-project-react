@@ -2,9 +2,9 @@ import React from 'react'
 
 const User = ({ username }) => {
     return (
-        <div>
+        <p>
             { username }
-        </div>
+        </p>
     )
 }
 
