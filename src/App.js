@@ -4,11 +4,24 @@ import {
   Route
 } from 'react-router-dom'
 import CurrentUser from './components/CurrentUser'
+import { connect } from 'react-redux'
+
+import { setCurrentUser } from './actions/currentUserActions'
 
 import UsersContainer from './containers/UsersContainer'
 import LoginContainer from './containers/LoginContainer.js'
 
-const App = () => {
+import api from './api'
+
+const App = props => {
+
+  useEffect(() => {
+    const jwt = localStorage.getItem('jwt')
+    jwt && api('current_user', null, undefined, jwt)
+    .then(json => {
+        json.data && props.setCurrentUser(json.data.attributes)
+    })
+  }, [])
 
   return (
     <Router>
@@ -22,4 +35,12 @@ const App = () => {
   );
 }
 
-export default App;
+const mapStateToProps = state => ({
+  currentUser: state.currentUser
+})
+
+const mapDispatchToProps = {
+  setCurrentUser
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
