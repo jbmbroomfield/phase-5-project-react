@@ -1,19 +1,24 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 
-import { fetchSections } from '../actions/sectionsActions'
+import { fetchSections, fetchSubsections } from '../actions/sectionsActions'
 
 import Section from '../components/Section'
 
-const SectionsContainer = ({ sections, fetchSections }) => {
+const SectionsContainer = ({ sections, fetchSections, fetchSubsections }) => {
 
     useEffect(() => {
         fetchSections()
     }, [fetchSections])
 
     const renderSections = () => {
-        console.log(sections)
-        return sections.map(section => <Section key={section.id} title={section.attributes.title} />)
+        return sections.map(section => (
+            <Section
+                key={section.id}
+                title={section.attributes.title}
+                subsections={section.subsections || []}
+            />
+        ))
     }
 
     return (

@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
-const Section = ({ title }) => {
+const Section = ({ title, subsections }) => {
     return (
-        <p>
-            {title}
-        </p>
+        <div>
+            <p>{title}</p>
+            {subsections.map(subsection => <p>{subsection.attributes.title}</p>)}
+        </div>
     )
 }
 
