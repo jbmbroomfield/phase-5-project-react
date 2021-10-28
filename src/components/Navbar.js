@@ -6,11 +6,11 @@ const Navbar = ({ currentUser, removeCurrentUser }) => {
     const renderAuthLinks = () => {
         if (currentUser) {
             return (
-                <li><a href="#" onClick={removeCurrentUser}>Logout</a></li>
+                <li><span className="nav-link" onClick={removeCurrentUser}>Logout</span></li>
             )
         } else {
             return (
-                <li><NavLink to="/login">Login</NavLink></li>
+                <li><NavLink className="nav-link" to="/login">Login</NavLink></li>
             )
         }
     }
