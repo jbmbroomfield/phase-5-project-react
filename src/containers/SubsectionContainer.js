@@ -4,9 +4,7 @@ import { connect } from 'react-redux'
 const SubsectionContainer = ({ match, sections, subsections, topics }) => {
     const subsectionId = match.params.subsectionId
     const subsection = subsections.find(subsection => parseInt(subsection.id) === parseInt(subsectionId))
-    console.log(topics)
     topics = topics.filter(topic => parseInt(topic.attributes.subsection_id) === parseInt(subsectionId))
-    console.log(topics)
 
     return (
         <div>
