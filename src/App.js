@@ -15,14 +15,21 @@ import SubsectionContainer from './containers/SubsectionContainer'
 import { fetchCurrentUser } from './actions/currentUserActions'
 import { fetchSections } from './actions/sectionsActions'
 import { fetchSubsections } from './actions/subsectionsActions'
+import { fetchTopics } from './actions/topicsActions'
 
-const App = ({ fetchCurrentUser, fetchSections, fetchSubsections }) => {
+const App = ({
+	fetchCurrentUser,
+	fetchSections,
+	fetchSubsections,
+	fetchTopics,
+}) => {
 
 	useEffect(() => {
 		fetchCurrentUser()
 		fetchSections()
 		fetchSubsections()
-	}, [fetchCurrentUser, fetchSections, fetchSubsections])
+		fetchTopics()
+	}, [fetchCurrentUser, fetchSections, fetchSubsections, fetchTopics])
 
 	return (
 		<Router>
@@ -46,6 +53,7 @@ const mapDispatchToProps = dispatch => ({
 	fetchCurrentUser: () => dispatch(fetchCurrentUser()),
 	fetchSections: () => dispatch(fetchSections()),
 	fetchSubsections: () => dispatch(fetchSubsections()),
+	fetchTopics: () => dispatch(fetchTopics()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
