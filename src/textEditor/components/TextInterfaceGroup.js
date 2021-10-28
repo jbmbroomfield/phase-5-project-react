@@ -1,8 +1,8 @@
 import React from 'react'
 
-const TextInterfaceGroup = props => (
+const TextInterfaceGroup = ({ buttons }) => (
     <div className="sceditor-group">
-            {props.buttons}
+            {buttons}
     </div>
 )
 

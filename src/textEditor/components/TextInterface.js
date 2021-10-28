@@ -2,10 +2,10 @@ import React from 'react'
 import TextInterfaceButton from './TextInterfaceButton'
 import TextInterfaceGroup from './TextInterfaceGroup'
 
-const TextInterface = props => {
+const TextInterface = ({ bbCodeObjects, onButtonClick }) => {
 
-    const buttons = props.bbCodeObjects.map((bbCodeObject, index) => {
-        return <TextInterfaceButton key={index} onClick={props.onButtonClick} bbCodeObject={bbCodeObject} />
+    const buttons = bbCodeObjects.map((bbCodeObject, index) => {
+        return <TextInterfaceButton key={index} onClick={onButtonClick} bbCodeObject={bbCodeObject} />
     })
 
     return (
