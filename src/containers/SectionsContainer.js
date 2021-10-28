@@ -7,7 +7,7 @@ const SectionsContainer = ({ sections, subsections }) => {
 
     const getSubsections = sectionId => (
         subsections.filter(subsection => (
-            subsection.attributes.section_id.toString() === sectionId
+            parseInt(subsection.attributes.section_id) === parseInt(sectionId)
         ))
     ) 
 

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 const SubsectionContainer = ({ match, sections, subsections }) => {
     const subsectionId = match.params.subsectionId
-    let subsection = subsections.find(subsection => subsection.id === subsectionId)
+    let subsection = subsections.find(subsection => parseInt(subsection.id) === parseInt(subsectionId))
 
     useEffect(() => {
         

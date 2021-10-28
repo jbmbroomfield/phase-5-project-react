@@ -2,13 +2,7 @@ const subsectionsReducer = (state = [], action) => {
     switch(action.type) {
 
         case 'ADD_SUBSECTIONS':
-            return action.subsections.map(subsection => ({
-                ...subsection,
-                attributes: {
-                    ...subsection.attributes,
-                    section_id: subsection.attributes.section_id.toString(),
-                }
-            }))
+            return action.subsections
 
         default:
             return state
