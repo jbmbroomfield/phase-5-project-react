@@ -6,7 +6,7 @@ import Post from '../components/Post'
 
 const TopicContainer = ({
     match,
-    subsections, topics, posts,
+    subsections, topics, posts, users,
     fetchPosts,
 }) => {
     const topicId = match.params.topicId
@@ -15,6 +15,8 @@ const TopicContainer = ({
     useEffect(() => {
         fetchPosts(topicId)
     }, [fetchPosts, topicId])
+
+    const getUser = userId => users.find(user => parseInt(user.id) === parseInt(userId))
 
     posts = posts.filter(post => (
         parseInt(post.attributes.topic_id) === parseInt(topicId)
@@ -26,6 +28,7 @@ const TopicContainer = ({
             {posts.map(post => (
                 <Post
                     key={post.id}
+                    user={getUser(post.attributes.user_id)}
                     text={post.attributes.text}
                 />
             ))}
@@ -39,6 +42,7 @@ const mapStateToProps = state => ({
     subsections: state.subsections,
     topics: state.topics,
     posts: state.posts,
+    users: state.users,
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -1,8 +1,13 @@
 import React from 'react'
+import PostContent from './PostContent'
+import PostInfo from './PostInfo'
 
-const Post = ({ text }) => {
+const Post = ({ text, user }) => {
     return (
-        <div>{text}</div>
+        <div className="post">
+            <PostInfo username={user && user.attributes.username} />
+            <PostContent text={text} />
+        </div>
     )
 }
 

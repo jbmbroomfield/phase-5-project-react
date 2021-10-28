@@ -12,7 +12,7 @@ code {
     monospace;
 }
 
-ul {
+ul.navbar {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -20,11 +20,11 @@ ul {
   background-color: #333;
 }
 
-li {
+ul.navbar li {
   float: left;
 }
 
-li a {
+ul.navbar li a {
   display: block;
   color: white;
   text-align: center;
@@ -33,10 +33,19 @@ li a {
 }
 
 /* Change the link color to #111 (black) on hover */
-li a:hover {
+ul.navbar li a:hover {
   background-color: #111;
 }
 
 a {
   cursor: pointer;
+}
+
+.post {
+  background-color: #ddd;
+  padding: 15px;
+  margin: 10px;
+  border-radius: 20px;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
 }
