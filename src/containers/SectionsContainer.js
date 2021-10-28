@@ -1,22 +1,22 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
-
-import { fetchSections } from '../actions/sectionsActions'
 
 import Section from '../components/Section'
 
-const SectionsContainer = ({ sections, fetchSections, fetchSubsections }) => {
+const SectionsContainer = ({ sections, subsections }) => {
 
-    useEffect(() => {
-        fetchSections()
-    }, [fetchSections])
+    const getSubsections = sectionId => (
+        subsections.filter(subsection => (
+            subsection.attributes.section_id.toString() === sectionId
+        ))
+    ) 
 
     const renderSections = () => {
         return sections.map(section => (
             <Section
                 key={section.id}
                 title={section.attributes.title}
-                subsections={section.subsections || []}
+                subsections={getSubsections(section.id)}
             />
         ))
     }
@@ -27,11 +27,11 @@ const SectionsContainer = ({ sections, fetchSections, fetchSubsections }) => {
 }
 
 const mapStateToProps = state => ({
-    sections: state.sections
+    sections: state.sections,
+    subsections: state.subsections,
 })
 
 const mapDispatchToProps = dispatch => ({
-    fetchSections: () => dispatch(fetchSections()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SectionsContainer)
