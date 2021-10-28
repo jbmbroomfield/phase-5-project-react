@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 
 import { fetchPosts } from '../actions/postsActions'
+import BottomPadding from '../components/BottomPadding'
 import Post from '../components/Post'
 import TopicReplyContainer from './TopicReplyContainer'
 
@@ -44,6 +45,7 @@ const TopicContainer = ({
                     text={post.attributes.text}
                 />
             ))}
+            <BottomPadding displayTextArea={displayTextArea} />
             <TopicReplyContainer
                 topicId={topicId}
                 displayTextArea={displayTextArea}
