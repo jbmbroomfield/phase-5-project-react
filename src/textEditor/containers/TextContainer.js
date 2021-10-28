@@ -6,10 +6,7 @@ import TextPreview from '../components/TextPreview'
 
 import { bbCodeObjects } from '../bbCode/BBCodeObject'
 
-const TextContainer = ({ text, setText }) => {
-
-    const [selectionStart, setSelectionStart] = useState(0)
-    const [selectionEnd, setSelectionEnd] = useState(0)
+const TextContainer = ({ text, setText, selection, setSelection }) => {
 
     const textArea = useRef(null)
 
@@ -19,26 +16,16 @@ const TextContainer = ({ text, setText }) => {
     }
 
     const handleTextAreaBlur = event => {
-        setSelectionStart(event.target.selectionStart)
-        setSelectionEnd(event.target.selectionEnd)
-    }
-
-    const handleButtonClick = insert => {
-        const [nextText, nextSelectionStart, nextSelectionEnd] = insert(text, selectionStart, selectionEnd)
-        setText(nextText)
-        setSelectionStart(nextSelectionStart)
-        setSelectionEnd(nextSelectionEnd)
+        setSelection([event.target.selectionStart, event.target.selectionEnd])
     }
 
     useEffect(() => {
         textArea.current.focus()
-        textArea.current.setSelectionRange(selectionStart, selectionEnd)
-    }, [selectionStart, selectionEnd])
+        textArea.current.setSelectionRange(selection[0], selection[1])
+    }, [selection])
 
     return (
         <div className='text-container'>
-            {/* <TextInterface onButtonClick={handleButtonClick} bbCodeObjects={bbCodeObjects} />
-            <div></div> */}
             <TextArea ref={textArea} text={text} onChange={handleTextAreaChange} onBlur={handleTextAreaBlur} />
             <TextPreview text={text} bbCodeObjects={bbCodeObjects} />
         </div>
