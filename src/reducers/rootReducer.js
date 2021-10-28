@@ -5,6 +5,7 @@ import usersReducer from "./usersReducer"
 import sectionsReducer from './sectionsReducer'
 import subsectionsReducer from "./subsectionsReducer"
 import topicsReducer from './topicsReducer'
+import postsReducer from "./postsReducer"
 
 const rootReducer = combineReducers({
     currentUser: currentUserReducer,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
     sections: sectionsReducer,
     subsections: subsectionsReducer,
     topics: topicsReducer,
+    posts: postsReducer,
 })
 
 export default rootReducer
