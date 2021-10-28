@@ -1,4 +1,5 @@
 import React from 'react'
+
 const TextInterfaceButton = ({ bbCodeObject, onClick }) => {
     const insertion = bbCodeObject.insertion
     const display = bbCodeObject.display
