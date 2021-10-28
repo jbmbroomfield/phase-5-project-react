@@ -1,13 +1,11 @@
 import React from 'react'
 
 const BottomPadding = ({ displayTextArea }) => {
-    const style={
+    const style = {
         height: displayTextArea ? '310px' : '60px'
     }
     return (
-        <div style={style}>
-
-        </div>
+        <div style={style}></div>
     )
 }
 
