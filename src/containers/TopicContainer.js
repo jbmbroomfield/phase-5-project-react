@@ -13,7 +13,7 @@ const TopicContainer = ({
 
     useEffect(() => {
         fetchPosts(topicId)
-    }, [fetchPosts])
+    }, [fetchPosts, topicId])
 
     posts = posts.filter(post => (
         parseInt(post.attributes.topic_id) === parseInt(topicId)

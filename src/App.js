@@ -17,12 +17,14 @@ import { fetchCurrentUser } from './actions/currentUserActions'
 import { fetchSections } from './actions/sectionsActions'
 import { fetchSubsections } from './actions/subsectionsActions'
 import { fetchTopics } from './actions/topicsActions'
+import { fetchUsers } from './actions/usersActions'
 
 const App = ({
 	fetchCurrentUser,
 	fetchSections,
 	fetchSubsections,
 	fetchTopics,
+	fetchUsers,
 }) => {
 
 	useEffect(() => {
@@ -30,7 +32,14 @@ const App = ({
 		fetchSections()
 		fetchSubsections()
 		fetchTopics()
-	}, [fetchCurrentUser, fetchSections, fetchSubsections, fetchTopics])
+		fetchUsers()
+	}, [
+		fetchCurrentUser,
+		fetchSections,
+		fetchSubsections,
+		fetchTopics,
+		fetchUsers,
+])
 
 	return (
 		<Router>
@@ -62,6 +71,7 @@ const mapDispatchToProps = dispatch => ({
 	fetchSections: () => dispatch(fetchSections()),
 	fetchSubsections: () => dispatch(fetchSubsections()),
 	fetchTopics: () => dispatch(fetchTopics()),
+	fetchUsers: () => dispatch(fetchUsers()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
