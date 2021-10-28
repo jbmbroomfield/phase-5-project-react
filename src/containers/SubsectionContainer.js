@@ -1,17 +1,17 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 
-const SubsectionContainer = ({ match, sections, subsections }) => {
+const SubsectionContainer = ({ match, sections, subsections, topics }) => {
     const subsectionId = match.params.subsectionId
-    let subsection = subsections.find(subsection => parseInt(subsection.id) === parseInt(subsectionId))
-
-    useEffect(() => {
-        
-    })
+    const subsection = subsections.find(subsection => parseInt(subsection.id) === parseInt(subsectionId))
+    console.log(topics)
+    topics = topics.filter(topic => parseInt(topic.attributes.subsection_id) === parseInt(subsectionId))
+    console.log(topics)
 
     return (
         <div>
             <h1>Subsection - {subsection && subsection.attributes.title}</h1>
+            {topics.map(topic => <p key={topic.id}>{topic.attributes.title}</p>)}
         </div>
     )
 }
@@ -19,6 +19,7 @@ const SubsectionContainer = ({ match, sections, subsections }) => {
 const mapStateToProps = state => ({
     sections: state.sections,
     subsections: state.subsections,
+    topics: state.topics
 })
 
 const mapDispatchToProps = dispatch => ({
