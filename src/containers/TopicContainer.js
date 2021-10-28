@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import { fetchPosts } from '../actions/postsActions'
 import Post from '../components/Post'
+import TopicReplyContainer from './TopicReplyContainer'
 
 const TopicContainer = ({
     match,
@@ -32,7 +33,7 @@ const TopicContainer = ({
                     text={post.attributes.text}
                 />
             ))}
-
+            <TopicReplyContainer />
         </div>
     )
 }

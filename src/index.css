@@ -24,8 +24,18 @@ ul.navbar li {
   float: left;
 }
 
+.bottom-bar {
+  background-color: #333;
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
 ul.navbar li a,
-ul.navbar li span {
+ul.navbar li span,
+.bottom-bar a,
+.bottom-bar span {
   display: block;
   color: white;
   text-align: center;
@@ -34,11 +44,17 @@ ul.navbar li span {
   background-color: #333;
   cursor: pointer;
   border: none;
+  float: left;
 }
 
-/* Change the link color to #111 (black) on hover */
+.bottom-bar span {
+  float: right;
+}
+
 ul.navbar li a:hover,
-ul.navbar li span:hover {
+ul.navbar li span:hover,
+.bottom-bar a:hover,
+.bottom-bar span:hover {
   background-color: #111;
 }
 
