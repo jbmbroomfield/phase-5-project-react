@@ -11,6 +11,7 @@ import LoginContainer from './containers/LoginContainer.js'
 import NavbarContainer from './containers/NavbarContainer'
 import SectionsContainer from './containers/SectionsContainer'
 import SubsectionContainer from './containers/SubsectionContainer'
+import TopicContainer from './containers/TopicContainer'
 
 import { fetchCurrentUser } from './actions/currentUserActions'
 import { fetchSections } from './actions/sectionsActions'
@@ -39,7 +40,14 @@ const App = ({
 			<Route exact path="/"><SectionsContainer /></Route>
 			<Route exact path="/users"><UsersContainer /></Route>
 			<Route exact path="/login"><LoginContainer /></Route>
-			<Route path="/subsections/:subsectionId" render={routerProps => <SubsectionContainer {...routerProps} />} />
+			<Route
+				path="/subsections/:subsectionId"
+				render={routerProps => <SubsectionContainer {...routerProps}/>}
+			/>
+			<Route
+				path="/topics/:topicId"
+				render={routerProps => <TopicContainer {...routerProps}/>}
+			/>
 		</div>
 		</Router>
 	);
