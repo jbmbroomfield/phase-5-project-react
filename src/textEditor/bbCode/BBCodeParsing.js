@@ -9,7 +9,6 @@ class BBCodeParsing {
 
     static parse = (text, bbCodeObjects) => {
         const safeText = BBCodeParsing.escapeHtml(text)
-        console.log(bbCodeParser.codes)
         bbCodeParser.codes = [
             {
                 regexp: /\n/gim,

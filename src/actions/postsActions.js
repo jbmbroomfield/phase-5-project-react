@@ -13,3 +13,16 @@ export const fetchPosts = topicId => (
         })
     }
 )
+
+export const createPost = (topicId, text) => (
+    dispatch => {
+        const jwt = localStorage.getItem('jwt')
+        const body = {
+            "post": {
+                "text": text
+            }
+        }
+        api(`topics/${topicId}/posts`, jwt, 'POST', body)
+        .then(json => dispatch(fetchPosts(topicId)))
+    }
+)

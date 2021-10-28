@@ -33,7 +33,7 @@ const TopicContainer = ({
                     text={post.attributes.text}
                 />
             ))}
-            <TopicReplyContainer />
+            <TopicReplyContainer topicId={topicId} />
         </div>
     )
 }

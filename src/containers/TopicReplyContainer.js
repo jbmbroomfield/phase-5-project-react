@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
+import { connect } from 'react-redux'
 import TextContainer from '../textEditor/containers/TextContainer'
+import { createPost } from '../actions/postsActions'
 
-const TopicReplyContainer = () => {
+const TopicReplyContainer = ({ topicId, createPost }) => {
 
     const [displayTextArea, setDisplayTextArea] = useState(false)
     const [text, setText] = useState('')
@@ -9,7 +11,9 @@ const TopicReplyContainer = () => {
     const toggleDisplayTextArea = () => {setDisplayTextArea(!displayTextArea)}
 
     const handlePost = () => {
-        console.log('posting')
+        createPost(topicId, text)
+        setText('')
+        setDisplayTextArea(false)
     }
 
     const style = {
@@ -29,4 +33,8 @@ const TopicReplyContainer = () => {
     )
 }
 
-export default TopicReplyContainer
+const mapDispatchToProps = dispatch => ({
+    createPost: (topicId, text) => dispatch(createPost(topicId, text))
+})
+
+export default connect(null, mapDispatchToProps)(TopicReplyContainer)
