@@ -54,11 +54,6 @@ ul.navbar li span,
   float: right;
 }
 
-ul.navbar li a:hover,
-ul.navbar li span:hover,
-.bottom-bar a:hover,
-.bottom-bar span:hover {
-}
 .nav-link:hover {
   background-color: #111;
 }
