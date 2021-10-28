@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 
 import { fetchPosts } from '../actions/postsActions'
+import Post from '../components/Post'
 
 const TopicContainer = ({
     match,
@@ -23,7 +24,10 @@ const TopicContainer = ({
         <div>
             <h1>Topic - {topic && topic.attributes.title}</h1>
             {posts.map(post => (
-                <p key={post.id}>{post.attributes.text}</p>
+                <Post
+                    key={post.id}
+                    text={post.attributes.text}
+                />
             ))}
 
         </div>
