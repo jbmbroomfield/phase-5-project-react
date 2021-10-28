@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import TextContainer from '../textEditor/containers/TextContainer'
 import { createPost } from '../actions/postsActions'
+import BottomBar from '../components/BottomBar'
 
 const TopicReplyContainer = ({ topicId, createPost }) => {
 
@@ -15,19 +16,13 @@ const TopicReplyContainer = ({ topicId, createPost }) => {
         setText('')
         setDisplayTextArea(false)
     }
-
-    const style = {
-        bottom: `${displayTextArea ? 250 : 0}px`
-    }
-
-    const replyCaret = displayTextArea ? <i className="fa fa-caret-down" aria-hidden="true"></i> : <i className="fa fa-caret-up" aria-hidden="true"></i>
-
     return (
         <div>
-            <div className='bottom-bar' style={style}>
-                <span onClick={toggleDisplayTextArea}>{replyCaret} Reply</span>
-                { displayTextArea && <span onClick={handlePost}>Post</span>}
-            </div>
+            <BottomBar
+                displayTextArea={displayTextArea}
+                toggleDisplayTextArea={toggleDisplayTextArea}
+                handlePost={handlePost}
+            />
             { displayTextArea && <TextContainer text={text} setText={setText} /> }
         </div>
     )

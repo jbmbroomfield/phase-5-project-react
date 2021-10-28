@@ -8,10 +8,8 @@ import { bbCodeObjects } from '../bbCode/BBCodeObject'
 
 const TextContainer = ({ text, setText }) => {
 
-    // const [text, setText] = useState('aaa[b]bold[/b]aaa')
     const [selectionStart, setSelectionStart] = useState(0)
     const [selectionEnd, setSelectionEnd] = useState(0)
-
 
     const textArea = useRef(null)
 
@@ -39,8 +37,8 @@ const TextContainer = ({ text, setText }) => {
 
     return (
         <div className='text-container'>
-            <TextInterface onButtonClick={handleButtonClick} bbCodeObjects={bbCodeObjects} />
-            <div></div>
+            {/* <TextInterface onButtonClick={handleButtonClick} bbCodeObjects={bbCodeObjects} />
+            <div></div> */}
             <TextArea ref={textArea} text={text} onChange={handleTextAreaChange} onBlur={handleTextAreaBlur} />
             <TextPreview text={text} bbCodeObjects={bbCodeObjects} />
         </div>
