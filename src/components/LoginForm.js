@@ -42,12 +42,14 @@ const LoginForm = ({ setCurrentUser }) => {
     return (
         <div>
             <form onSubmit={handleSubmit}>
+                Username:<br />
                 <input
                     type="text"
                     name="username"
                     value={state.username}
                     onChange={handleChange}
-                />
+                /><br />
+                Password:<br />
                 <input
                     type="password"
                     name="password"

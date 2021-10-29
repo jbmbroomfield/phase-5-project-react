@@ -5,6 +5,7 @@ const currentUserReducer = (state = {}, action) => {
             return action.currentUser
         
         case 'REMOVE_CURRENT_USER':
+            localStorage.removeItem('jwt')
             return {}
 
         default:

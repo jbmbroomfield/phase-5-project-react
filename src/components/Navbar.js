@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 const Navbar = ({ currentUser, removeCurrentUser }) => {
 
     const renderAuthLinks = () => {
-        if (currentUser) {
+        if (currentUser.attributes) {
             return (
                 <li><span className="nav-link" onClick={removeCurrentUser}>Logout</span></li>
             )

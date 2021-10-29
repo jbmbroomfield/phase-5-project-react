@@ -9,16 +9,18 @@ const LoginContainer = ({ currentUser, setCurrentUser }) => {
 
     const history = useHistory()
 
-    if (currentUser) {
+    if (currentUser.attributes) {
         history.push("/")
         return <div></div>
     }
 
     return (
-        <div>
-            <h1>Login</h1>
-            <LoginForm setCurrentUser={setCurrentUser} />
-        </div>
+        <main>
+            <div className="page">
+                <h1>Login</h1>
+                <LoginForm setCurrentUser={setCurrentUser} />
+            </div>
+        </main>
     )
 }
 

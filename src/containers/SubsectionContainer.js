@@ -47,7 +47,7 @@ const SubsectionContainer = ({
 		fetchSubsections,
 		fetchTopics,
 		fetchUsers,
-])
+    ])
 
     return (
         <div>
