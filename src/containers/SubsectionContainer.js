@@ -52,7 +52,7 @@ const SubsectionContainer = ({
     return (
         <div>
             <main>
-                <h1>Subsection - {subsection && subsection.attributes.title}</h1>
+                <h1>{subsection && subsection.attributes.title}</h1>
                 {topics.map(topic => (
                     <div key={topic.id} className="topic">
                         <Link to={`/topics/${topic.id}`}>
