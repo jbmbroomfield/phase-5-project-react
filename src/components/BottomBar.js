@@ -4,7 +4,14 @@ import TextInterface from '../textEditor/components/TextInterface'
 
 import { bbCodeObjects } from '../textEditor/bbCode/BBCodeObject'
 
-const BottomBar = ({ displayTextArea, toggleDisplayTextArea, handlePost, handleButtonClick, text }) => {
+const BottomBar = ({
+    displayTextArea, toggleDisplayTextArea,
+    handlePost,
+    handleButtonClick,
+    title, setTitle,
+    text,
+    toggleLabel,
+}) => {
 
     const style = {
         bottom: `${displayTextArea ? 250 : 0}px`
@@ -17,8 +24,17 @@ const BottomBar = ({ displayTextArea, toggleDisplayTextArea, handlePost, handleB
             { displayTextArea && (
                 <TextInterface onButtonClick={handleButtonClick} bbCodeObjects={bbCodeObjects} />
             ) }
-            <span className="nav-link" onClick={toggleDisplayTextArea}>{replyCaret} Reply</span>
-            { displayTextArea && text.length > 0 && (
+            { displayTextArea && toggleLabel === 'New Topic' && (
+                <input
+                    type="text"
+                    className="topic-title-input"
+                    placeholder="Title"
+                    value={title}
+                    onChange={event => setTitle(event.target.value)}
+                />
+            )}
+            <span className="nav-link" onClick={toggleDisplayTextArea}>{replyCaret} {toggleLabel}</span>
+            { displayTextArea && text.length > 0 && (toggleLabel === 'Reply' || title.length > 0) && (
                 <span className="nav-link" onClick={handlePost}>Post</span>
             ) }
         </div>

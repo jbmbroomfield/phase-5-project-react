@@ -1,35 +1,41 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import TextContainer from '../textEditor/containers/TextContainer'
-import { createPost } from '../actions/postsActions'
-import BottomBar from '../components/BottomBar'
 
-const TopicReplyContainer = ({
-    createPost,
+import BottomBar from '../components/BottomBar'
+import TextContainer from '../textEditor/containers/TextContainer'
+
+import { createTopic } from '../actions/topicsActions'
+
+const NewTopicContainer = ({
+    createTopic,
     handleButtonClick,
-    topicId,
+    subsectionId,
     displayTextArea, setDisplayTextArea,
+    title, setTitle,
     text, setText,
     selection, setSelection,
 }) => {
 
     const toggleDisplayTextArea = () => {setDisplayTextArea(!displayTextArea)}
-
+    
     const handlePost = () => {
-        createPost(topicId, text)
+        createTopic(subsectionId, title, text)
         setText('')
+        setTitle('')
         setDisplayTextArea(false)
     }
-    
+
     return (
         <div>
             <BottomBar
-                toggleLabel="Reply"
+                toggleLabel="New Topic"
                 displayTextArea={displayTextArea}
                 toggleDisplayTextArea={toggleDisplayTextArea}
                 handlePost={handlePost}
                 handleButtonClick={handleButtonClick}
                 text={text}
+                title={title}
+                setTitle={setTitle}
             />
             { displayTextArea && (
                 <TextContainer
@@ -44,7 +50,11 @@ const TopicReplyContainer = ({
 }
 
 const mapDispatchToProps = dispatch => ({
-    createPost: (topicId, text) => dispatch(createPost(topicId, text))
+    createTopic: (
+        subsectionId, title, text
+    ) => dispatch(createTopic(
+        subsectionId, title, text
+    ))
 })
 
-export default connect(null, mapDispatchToProps)(TopicReplyContainer)
+export default connect(null, mapDispatchToProps)(NewTopicContainer)

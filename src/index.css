@@ -116,3 +116,9 @@ div.sceditor-toolbar {
 button {
   cursor: pointer;
 }
+
+.topic-title-input {
+  margin: 10px;
+  height: 30px;
+  width: 500px;
+}

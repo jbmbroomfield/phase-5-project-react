@@ -1,6 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useRef, useEffect } from 'react'
 
-import TextInterface from '../components/TextInterface'
 import TextArea from '../components/TextArea'
 import TextPreview from '../components/TextPreview'
 
@@ -20,7 +19,7 @@ const TextContainer = ({ text, setText, selection, setSelection }) => {
     }
 
     useEffect(() => {
-        textArea.current.focus()
+        // textArea.current.focus()
         textArea.current.setSelectionRange(selection[0], selection[1])
     }, [selection])
 
