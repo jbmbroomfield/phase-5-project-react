@@ -22,7 +22,7 @@ const SectionsContainer = ({ sections, subsections }) => {
     }
 
     return (
-        <div>{renderSections()}</div>
+        <main>{renderSections()}</main>
     )
 }
 

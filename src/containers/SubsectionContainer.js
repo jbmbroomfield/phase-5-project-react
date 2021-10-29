@@ -51,14 +51,16 @@ const SubsectionContainer = ({
 
     return (
         <div>
-            <h1>Subsection - {subsection && subsection.attributes.title}</h1>
-            {topics.map(topic => (
-                <p key={topic.id}>
-                    <Link to={`/topics/${topic.id}`}>
-                        {topic.attributes.title}
-                    </Link>
-                </p>
-            ))}
+            <main>
+                <h1>Subsection - {subsection && subsection.attributes.title}</h1>
+                {topics.map(topic => (
+                    <div key={topic.id} className="topic">
+                        <Link to={`/topics/${topic.id}`}>
+                            {topic.attributes.title}
+                        </Link>
+                    </div>
+                ))}
+            </main>
             <NewTopicContainer
                 subsectionId={subsectionId}
                 displayTextArea={displayTextArea}

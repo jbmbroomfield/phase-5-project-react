@@ -70,18 +70,20 @@ const TopicContainer = ({
 
     return (
         <div>
-            <h1>Topic - {topic && topic.attributes.title}</h1>
-            {posts.map(post => (
-                <Post
-                    key={post.id}
-                    id={post.id}
-                    user={getUser(post.attributes.user_id)}
-                    text={post.attributes.text}
-                    tag={post.attributes.tag}
-                    createdAt={post.attributes.created_at}
-                    insertText={insertText}
-                />
-            ))}
+            <main>
+                <h1>Topic - {topic && topic.attributes.title}</h1>
+                {posts.map(post => (
+                    <Post
+                        key={post.id}
+                        id={post.id}
+                        user={getUser(post.attributes.user_id)}
+                        text={post.attributes.text}
+                        tag={post.attributes.tag}
+                        createdAt={post.attributes.created_at}
+                        insertText={insertText}
+                    />
+                ))}
+            </main>
             <BottomPadding displayTextArea={displayTextArea} />
             <TopicReplyContainer
                 topicId={topicId}

@@ -12,7 +12,7 @@ const Section = ({ title, subsections }) => {
     )
 
     return (
-        <div>
+        <div className='section'>
             <h1>{title}</h1>
             {renderSubsections()}
         </div>
