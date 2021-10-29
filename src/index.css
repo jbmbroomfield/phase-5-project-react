@@ -68,7 +68,7 @@ a {
   margin: 10px;
   border-radius: 20px;
   display: grid;
-  grid-template-columns: 1fr 4fr;
+  grid-template-columns: 2fr 17fr 1fr;
 }
 
 .text-container {
@@ -111,4 +111,8 @@ div.sceditor-toolbar {
 .text-preview {
   background-color: #ddd;
   padding: 20px;
+}
+
+button {
+  cursor: pointer;
 }

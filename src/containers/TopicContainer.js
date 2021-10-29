@@ -35,16 +35,26 @@ const TopicContainer = ({
         setSelection([nextSelectionStart, nextSelectionEnd])
     }
 
+    const insertText = newText => {
+        setDisplayTextArea(true)
+        const beginning = text.slice(0, selection[0])
+        const end = text.slice(selection[1])
+        setText(beginning + newText + end)
+
+    }
+
     return (
         <div>
             <h1>Topic - {topic && topic.attributes.title}</h1>
             {posts.map(post => (
                 <Post
                     key={post.id}
+                    id={post.id}
                     user={getUser(post.attributes.user_id)}
                     text={post.attributes.text}
                     tag={post.attributes.tag}
                     createdAt={post.attributes.created_at}
+                    insertText={insertText}
                 />
             ))}
             <BottomPadding displayTextArea={displayTextArea} />
