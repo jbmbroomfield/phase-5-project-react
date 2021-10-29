@@ -14,7 +14,9 @@ const BottomBar = ({ displayTextArea, toggleDisplayTextArea, handlePost, handleB
 
     return (
         <div className="bottom-bar" style={style}>
-            <TextInterface onButtonClick={handleButtonClick} bbCodeObjects={bbCodeObjects} />
+            { displayTextArea && (
+                <TextInterface onButtonClick={handleButtonClick} bbCodeObjects={bbCodeObjects} />
+            ) }
             <span className="nav-link" onClick={toggleDisplayTextArea}>{replyCaret} Reply</span>
             { displayTextArea && text.length > 0 && (
                 <span className="nav-link" onClick={handlePost}>Post</span>
