@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import BottomBar from '../components/BottomBar'
 import TextContainer from '../textEditor/containers/TextContainer'
+import { useHistory } from 'react-router-dom'
 
 import { createTopic } from '../actions/topicsActions'
 
@@ -16,10 +17,17 @@ const NewTopicContainer = ({
     selection, setSelection,
 }) => {
 
+    
+    const history = useHistory()
+
     const toggleDisplayTextArea = () => {setDisplayTextArea(!displayTextArea)}
     
+    const redirect = topicId => {
+        history.push(`/topics/${topicId}`)
+    }
+
     const handlePost = () => {
-        createTopic(subsectionId, title, text)
+        createTopic(subsectionId, title, text, redirect)
         setText('')
         setTitle('')
         setDisplayTextArea(false)
@@ -51,9 +59,9 @@ const NewTopicContainer = ({
 
 const mapDispatchToProps = dispatch => ({
     createTopic: (
-        subsectionId, title, text
+        subsectionId, title, text, redirect
     ) => dispatch(createTopic(
-        subsectionId, title, text
+        subsectionId, title, text, redirect
     ))
 })
 

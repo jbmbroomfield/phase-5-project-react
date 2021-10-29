@@ -6,11 +6,36 @@ import BottomPadding from '../components/BottomPadding'
 import Post from '../components/Post'
 import TopicReplyContainer from './TopicReplyContainer'
 
+import { fetchCurrentUser } from '../actions/currentUserActions'
+import { fetchSections } from '../actions/sectionsActions'
+import { fetchSubsections } from '../actions/subsectionsActions'
+import { fetchTopics } from '../actions/topicsActions'
+import { fetchUsers } from '../actions/usersActions'
+
 const TopicContainer = ({
     match,
     subsections, topics, posts, users,
     fetchPosts,
+	fetchCurrentUser,
+	fetchSections,
+	fetchSubsections,
+	fetchTopics,
+	fetchUsers,
 }) => {
+
+	useEffect(() => {
+		fetchCurrentUser()
+		fetchSections()
+		fetchSubsections()
+		fetchTopics()
+		fetchUsers()
+	}, [
+		fetchCurrentUser,
+		fetchSections,
+		fetchSubsections,
+		fetchTopics,
+		fetchUsers,
+])
 
     const [displayTextArea, setDisplayTextArea] = useState(false)
     const [text, setText] = useState('')
@@ -82,6 +107,11 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     fetchPosts: topicId => dispatch(fetchPosts(topicId)),
+	fetchCurrentUser: () => dispatch(fetchCurrentUser()),
+	fetchSections: () => dispatch(fetchSections()),
+	fetchSubsections: () => dispatch(fetchSubsections()),
+	fetchTopics: () => dispatch(fetchTopics()),
+	fetchUsers: () => dispatch(fetchUsers()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TopicContainer)

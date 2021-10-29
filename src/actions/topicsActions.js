@@ -14,7 +14,7 @@ export const fetchTopics = () => (
     }
 )
 
-export const createTopic = (subsectionId, title, text) => (
+export const createTopic = (subsectionId, title, text, redirect) => (
     dispatch => {
         const jwt = localStorage.getItem('jwt')
         const body = {
@@ -26,6 +26,7 @@ export const createTopic = (subsectionId, title, text) => (
             }
         }
         api(`subsections/${subsectionId}/topics`, jwt, 'POST', body)
-        .then(json => dispatch(fetchTopics()))
+        .then(json => redirect(json.data.id))
+        // .then(json => dispatch(fetchTopics()))
     }
 )

@@ -22,7 +22,6 @@ const LoginForm = ({ setCurrentUser }) => {
         event.preventDefault()
         api('login', null, 'POST', request_body())
         .then(json => {
-            console.log(json)
             if (json.jwt) {
                 localStorage.setItem('jwt', json.jwt)
                 setCurrentUser(json.user.data.attributes)
