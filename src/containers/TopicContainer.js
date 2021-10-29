@@ -43,6 +43,8 @@ const TopicContainer = ({
                     key={post.id}
                     user={getUser(post.attributes.user_id)}
                     text={post.attributes.text}
+                    tag={post.attributes.tag}
+                    createdAt={post.attributes.created_at}
                 />
             ))}
             <BottomPadding displayTextArea={displayTextArea} />
