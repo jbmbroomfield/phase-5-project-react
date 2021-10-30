@@ -27,12 +27,51 @@ const App = ({
 	fetchUsers,
 }) => {
 
+	const openConnection = () => {
+		return new WebSocket("ws://localhost:3000/cable")
+	}
+
+	// webSocket.onopen = event => {
+		
+	// 	console.log('fetching data')
+	// 	fetchData()
+	// 	const subscribeMsg = {
+	// 		"command": "subscribe",
+	// 		"identifier": '{"channel": "MainChannel"}'
+	// 	}
+	// 	webSocket.send(JSON.stringify(subscribeMsg))
+	// }
+
 	useEffect(() => {
-		fetchCurrentUser()
-		fetchSections()
-		fetchSubsections()
-		fetchTopics()
-		fetchUsers()
+
+		const fetchData = () => {
+			fetchCurrentUser()
+			fetchSections()
+			fetchSubsections()
+			fetchTopics()
+			fetchUsers()
+		}
+
+		console.log('fetching data')
+		fetchData()
+		const webSocket = openConnection()
+		// webSocket.addEventListener('open', () => {
+		// 	console.log('opened')
+		// 	webSocket.send('opened!!!')
+		// })
+		webSocket.addEventListener('message', event => {
+			const data = JSON.parse(event.data)
+			if (data.message && data.message.type === 'update') {
+				fetchData()
+			}
+		});
+		webSocket.onopen = event => {
+			const subscribeMsg = {
+				"command": "subscribe",
+				"identifier": '{"channel": "MainChannel"}'
+			}
+			webSocket.send(JSON.stringify(subscribeMsg))
+		}
 	}, [
 		fetchCurrentUser,
 		fetchSections,
