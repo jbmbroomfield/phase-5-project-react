@@ -6,36 +6,13 @@ import BottomPadding from '../components/BottomPadding'
 import Post from '../components/Post'
 import TopicReplyContainer from './TopicReplyContainer'
 
-import { fetchCurrentUser } from '../actions/currentUserActions'
-import { fetchSections } from '../actions/sectionsActions'
-import { fetchSubsections } from '../actions/subsectionsActions'
-import { fetchTopics } from '../actions/topicsActions'
-import { fetchUsers } from '../actions/usersActions'
+import createSocket from '../createSocket'
 
 const TopicContainer = ({
     match,
     subsections, topics, posts, users,
     fetchPosts,
-	fetchCurrentUser,
-	fetchSections,
-	fetchSubsections,
-	fetchTopics,
-	fetchUsers,
 }) => {
-
-	useEffect(() => {
-		fetchCurrentUser()
-		fetchSections()
-		fetchSubsections()
-		fetchTopics()
-		fetchUsers()
-	}, [
-		fetchCurrentUser,
-		fetchSections,
-		fetchSubsections,
-		fetchTopics,
-		fetchUsers,
-])
 
     const [displayTextArea, setDisplayTextArea] = useState(false)
     const [text, setText] = useState('')
@@ -45,7 +22,13 @@ const TopicContainer = ({
     const topic = topics.find(topic => parseInt(topic.id) === parseInt(topicId))
 
     useEffect(() => {
-        fetchPosts(topicId)
+        const params = {
+            channel: "TopicChannel",
+            topic_id: topicId,
+        }
+        const onUpdate = () => fetchPosts(topicId)
+        const socket = createSocket(params, onUpdate)
+        return () => socket.close(1000)
     }, [fetchPosts, topicId])
 
     const getUser = userId => users.find(user => parseInt(user.id) === parseInt(userId))
@@ -109,11 +92,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     fetchPosts: topicId => dispatch(fetchPosts(topicId)),
-	fetchCurrentUser: () => dispatch(fetchCurrentUser()),
-	fetchSections: () => dispatch(fetchSections()),
-	fetchSubsections: () => dispatch(fetchSubsections()),
-	fetchTopics: () => dispatch(fetchTopics()),
-	fetchUsers: () => dispatch(fetchUsers()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TopicContainer)
