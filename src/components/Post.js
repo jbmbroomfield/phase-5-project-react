@@ -3,7 +3,7 @@ import PostContent from './PostContent'
 import PostInfo from './PostInfo'
 import PostNotes from './PostNotes'
 
-const Post = ({ text, user, tag, createdAt, insertText }) => {
+const Post = ({ text, user, tag, createdAt, insertText, isVisible }) => {
 
     const insertPostText = () => insertText(`${user.attributes.username} said "${text}"\n`)
 
