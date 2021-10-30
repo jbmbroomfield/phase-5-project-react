@@ -1,4 +1,4 @@
-import api from "../api";
+import api from "./api";
 
 const addUsers = users => ({
     type: 'ADD_USERS',

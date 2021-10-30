@@ -1,4 +1,4 @@
-import api from '../api'
+import api from './api'
 
 const addTopics = topics => ({
     type: 'ADD_TOPICS',
@@ -25,7 +25,7 @@ export const createTopic = (subsectionId, title, text, redirect) => (
                 "text": text
             }
         }
-        api(`subsections/${subsectionId}/topics`, jwt, 'POST', body)
+        api(`subsections/${subsectionId}/topics`, body)
         .then(json => redirect(json.data.id))
         // .then(json => dispatch(fetchTopics()))
     }

@@ -1,4 +1,4 @@
-import api from "../api";
+import api from "./api";
 
 const addSections = sections => ({
     type: 'ADD_SECTIONS',

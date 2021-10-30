@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import api from '../api'
+import api from '../actions/api'
 
 const LoginForm = ({ setCurrentUser }) => {
 
@@ -20,7 +20,7 @@ const LoginForm = ({ setCurrentUser }) => {
 
     const handleSubmit = event => {
         event.preventDefault()
-        api('login', null, 'POST', request_body())
+        api('login', request_body())
         .then(json => {
             if (json.jwt) {
                 localStorage.setItem('jwt', json.jwt)

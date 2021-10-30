@@ -1,16 +1,19 @@
 const baseUrl = 'http://localhost:3000/api/v1/'
 
-const api = (url, jwt, method = 'GET', body) => {
+const api = (url, body) => {
     const configObject = {
-        method: method,
         headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
         },
     }
-    if (body && method === 'POST') {
+    if (body) {
         configObject['body'] = JSON.stringify(body)
+        configObject.headers['method'] = 'POST'
+    } else {
+        configObject['method'] = 'GET'
     }
+    const jwt = localStorage.getItem('jwt')
     if (jwt) {
         configObject.headers['Authorization'] = `Bearer ${jwt}`
     }

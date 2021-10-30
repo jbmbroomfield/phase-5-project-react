@@ -1,4 +1,4 @@
-import api from '../api'
+import api from './api'
 
 const addPosts = posts => ({
     type: 'ADD_POSTS',
@@ -16,13 +16,12 @@ export const fetchPosts = topicId => (
 
 export const createPost = (topicId, text) => (
     dispatch => {
-        const jwt = localStorage.getItem('jwt')
         const body = {
             "post": {
                 "text": text
             }
         }
-        api(`topics/${topicId}/posts`, jwt, 'POST', body)
+        api(`topics/${topicId}/posts`, body)
         .then(json => dispatch(fetchPosts(topicId)))
     }
 )
