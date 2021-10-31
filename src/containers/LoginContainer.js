@@ -15,12 +15,12 @@ const LoginContainer = ({ currentUser, setCurrentUser }) => {
     }
 
     return (
-        <main>
+        <div>
             <div className="page">
                 <h1>Login</h1>
                 <LoginForm setCurrentUser={setCurrentUser} />
             </div>
-        </main>
+        </div>
     )
 }
 

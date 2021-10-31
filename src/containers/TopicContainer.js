@@ -11,6 +11,9 @@ import createSocket from '../createSocket'
 import TrackVisibility from 'react-on-screen'
 import { fetchUserTopic } from '../actions/userTopicsActions'
 
+import AsideLeftContainer from './AsideLeftContainer'
+import AsideRightContainer from './AsideRightContainer'
+
 const TopicContainer = ({
     match,
     subsections, topics, posts, users,
@@ -59,22 +62,26 @@ const TopicContainer = ({
 
     return (
         <div>
-            <main>
-                <h1>Topic - {topic && topic.attributes.title}</h1>
-                {posts.map(post => (
-                    <TrackVisibility key={post.id}>
-                        <Post
-                            key={post.id}
-                            id={post.id}
-                            user={getUser(post.attributes.user_id)}
-                            text={post.attributes.text}
-                            tag={post.attributes.tag}
-                            createdAt={post.attributes.created_at}
-                            insertText={insertText}
-                        />
-                    </TrackVisibility>
-                ))}
-            </main>
+            <div className='content'>
+                <AsideLeftContainer />
+                <main>
+                    <h1>Topic - {topic && topic.attributes.title}</h1>
+                    {posts.map(post => (
+                        <TrackVisibility key={post.id}>
+                            <Post
+                                key={post.id}
+                                id={post.id}
+                                user={getUser(post.attributes.user_id)}
+                                text={post.attributes.text}
+                                tag={post.attributes.tag}
+                                createdAt={post.attributes.created_at}
+                                insertText={insertText}
+                            />
+                        </TrackVisibility>
+                    ))}
+                </main>
+                <AsideRightContainer />
+            </div>
             <BottomPadding displayTextArea={displayTextArea} />
             <TopicReplyContainer
                 topicId={topicId}

@@ -53,7 +53,6 @@ const App = ({
 		<Router>
 		<div className="App">
 			<NavbarContainer />
-			<CurrentUser />
 			<Route exact path="/"><SectionsContainer /></Route>
 			<Route exact path="/users"><UsersContainer /></Route>
 			<Route exact path="/login"><LoginContainer /></Route>

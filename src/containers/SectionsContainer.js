@@ -9,6 +9,9 @@ import { fetchSubsections } from '../actions/subsectionsActions'
 import { fetchTopics } from '../actions/topicsActions'
 import { fetchUsers } from '../actions/usersActions'
 
+import AsideLeftContainer from './AsideLeftContainer'
+import AsideRightContainer from './AsideRightContainer'
+
 const SectionsContainer = ({
     sections, subsections,
 	fetchCurrentUser,
@@ -49,7 +52,13 @@ const SectionsContainer = ({
     }
 
     return (
-        <main>{renderSections()}</main>
+        <div>
+            <div className="content">
+                <AsideLeftContainer />
+                <main>{renderSections()}</main>
+                <AsideRightContainer />
+            </div>
+        </div>
     )
 }
 

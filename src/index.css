@@ -123,9 +123,9 @@ button {
   width: 500px;
 }
 
-main {
-  padding-left: 400px;
-  padding-right: 400px;
+div.content {
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr;
 }
 
 .section,
