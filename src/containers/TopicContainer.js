@@ -38,9 +38,7 @@ const TopicContainer = ({
             topic_id: topicId,
         }
         const onUpdate = () => {
-            console.log('fetching posts', topicId)
             fetchPosts(topicId)
-            console.log('fetching user_topic')
             fetchUserTopic(topicId)
         }
         const socket = createSocket(params, onUpdate)

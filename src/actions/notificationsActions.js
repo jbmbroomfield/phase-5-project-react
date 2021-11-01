@@ -9,7 +9,7 @@ export const fetchNotifications = () => (
     dispatch => {
         api('notifications')
         .then(json => {
-            dispatch(addNotifications)
+            dispatch(addNotifications(json.data))
         })
     }
 )

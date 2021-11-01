@@ -17,6 +17,7 @@ import { fetchSections } from './actions/sectionsActions'
 import { fetchSubsections } from './actions/subsectionsActions'
 import { fetchTopics } from './actions/topicsActions'
 import { fetchUsers } from './actions/usersActions'
+import { fetchNotifications } from './actions/notificationsActions'
 import createSocket from './createSocket'
 
 const App = ({
@@ -25,27 +26,43 @@ const App = ({
 	fetchSubsections,
 	fetchTopics,
 	fetchUsers,
+	currentUser,
+	fetchNotifications
 }) => {
 
 	useEffect(() => {
-		const params = {
+		const mainSocketParams = {
 			channel: "MainChannel"
 		}
-		const onUpdate = () => {
+		const mainSocketOnUpdate = () => {
 			fetchCurrentUser()
 			fetchSections()
 			fetchSubsections()
 			fetchTopics()
 			fetchUsers()
 		}
-		const socket = createSocket(params, onUpdate)
-		return () => socket.close(1000)
+		const mainSocket = createSocket(mainSocketParams, mainSocketOnUpdate)
+
+		const notificationsSocketParams = {
+			channel: "NotificationsChannel",
+			user_id: currentUser.id
+		}
+		const notificationsSocketOnUpdate = () => {
+			fetchNotifications()
+		}
+		const notificationsSocket = createSocket(notificationsSocketParams, notificationsSocketOnUpdate)
+
+		return () => {
+			mainSocket.close(1000)
+			notificationsSocket.close(1000)
+		}
 	}, [
 		fetchCurrentUser,
 		fetchSections,
 		fetchSubsections,
 		fetchTopics,
 		fetchUsers,
+		currentUser.id
 	])
 
 	return (
@@ -78,6 +95,7 @@ const mapDispatchToProps = dispatch => ({
 	fetchSubsections: () => dispatch(fetchSubsections()),
 	fetchTopics: () => dispatch(fetchTopics()),
 	fetchUsers: () => dispatch(fetchUsers()),
+	fetchNotifications: () => dispatch(fetchNotifications())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
