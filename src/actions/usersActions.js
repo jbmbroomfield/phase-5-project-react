@@ -1,4 +1,4 @@
-import api from "./api";
+import API from "./API";
 
 const addUsers = users => ({
     type: 'ADD_USERS',
@@ -7,7 +7,7 @@ const addUsers = users => ({
 
 export const fetchUsers = () => (
     dispatch => {
-        api('users')
+        API.get('users')
         .then(json => {
             dispatch(addUsers(json.data))
         })

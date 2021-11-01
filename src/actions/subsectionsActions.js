@@ -1,4 +1,4 @@
-import api from './api'
+import API from './API'
 
 const addSubsections = subsections => ({
     type: 'ADD_SUBSECTIONS',
@@ -7,7 +7,7 @@ const addSubsections = subsections => ({
 
 export const fetchSubsections = () => (
     dispatch => {
-        api('subsections')
+        API.get('subsections')
         .then(json => {
             dispatch(addSubsections(json.data))
         })

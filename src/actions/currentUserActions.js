@@ -1,4 +1,4 @@
-import api from "./api"
+import API from "./API"
 import { setJwt } from "../jwt"
 
 export const setCurrentUser = currentUser => ({
@@ -14,7 +14,7 @@ export const fetchCurrentUser = () => (
     dispatch => {
         const jwt = localStorage.getItem('jwt')
         if (jwt) {
-            api('current_user')
+            API.get('current_user')
             .then(json => {
                 dispatch(setCurrentUser(json.data))
             })
@@ -26,8 +26,7 @@ export const fetchCurrentUser = () => (
 
 export const login = (username, password, redirect) => (
     dispatch => {
-        console.log('logging in')
-        api('login', loginBody(username, password))
+        API.post('login', loginBody(username, password))
         .then(json => {
             if (json.jwt) {
                 setJwt(json.jwt)

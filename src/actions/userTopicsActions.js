@@ -1,4 +1,4 @@
-import api from './api'
+import API from './API'
 
 const addUserTopic = userTopic => ({
     type: 'ADD_USER_TOPIC',
@@ -7,7 +7,7 @@ const addUserTopic = userTopic => ({
 
 export const fetchUserTopic = topicId => (
     dispatch => {
-        api(`user_topics/${topicId}`)
+        API.get(`user_topics/${topicId}`)
         .then(json => {
             dispatch(addUserTopic(json.data))
         })
@@ -16,16 +16,7 @@ export const fetchUserTopic = topicId => (
 
 export const subscribeToTopic = (topicId, subscribed) => (
     dispatch => {
-        api(`user_topics/${topicId}/subscribe`, {subscribed: subscribed})
-        .then(json => {
-            dispatch(addUserTopic(json.data))
-        })
-    }
-)
-
-export const unsubscribeToTopic = topicId => (
-    dispatch => {
-        api(`user_topics/${topicId}/unsubscribe`, {subscribed: true})
+        API.post(`user_topics/${topicId}/subscribe`, {subscribed: subscribed})
         .then(json => {
             dispatch(addUserTopic(json.data))
         })

@@ -1,4 +1,4 @@
-import api from './api'
+import API from './API'
 
 const addNotifications = notifications => ({
     type: 'ADD_NOTIFICATIONS',
@@ -7,7 +7,7 @@ const addNotifications = notifications => ({
 
 export const fetchNotifications = () => (
     dispatch => {
-        api('notifications')
+        API.get('notifications')
         .then(json => {
             dispatch(addNotifications(json.data))
         })
@@ -16,7 +16,7 @@ export const fetchNotifications = () => (
 
 export const deleteNotification = notificationId => (
     dispatch => {
-        api(`notifications/${notificationId}`, 'DELETE')
+        API.delete(`notifications/${notificationId}`)
         .then(() => dispatch(fetchNotifications()))
     }
 )

@@ -1,4 +1,4 @@
-import api from './api'
+import API from './API'
 
 const addPosts = posts => ({
     type: 'ADD_POSTS',
@@ -7,7 +7,7 @@ const addPosts = posts => ({
 
 export const fetchPosts = topicId => (
     dispatch => {
-        api(`topics/${topicId}/posts`)
+        API.get(`topics/${topicId}/posts`)
         .then(json => {
             dispatch(addPosts(json.data))
         })
@@ -21,7 +21,7 @@ export const createPost = (topicId, text) => (
                 "text": text
             }
         }
-        api(`topics/${topicId}/posts`, body)
+        API.post(`topics/${topicId}/posts`, body)
         .then(json => dispatch(fetchPosts(topicId)))
     }
 )
