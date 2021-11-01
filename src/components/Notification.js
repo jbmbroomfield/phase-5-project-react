@@ -1,4 +1,5 @@
 import React from 'react'
+import { useHistory } from 'react-router'
 
 const Notification = ({ category, objectId, number, createdAt, topics, deleteNotification }) => {
 
@@ -18,9 +19,20 @@ const Notification = ({ category, objectId, number, createdAt, topics, deleteNot
         }
     }
 
+    const history = useHistory()
+
+    const goToTopic = () => {
+        history.push(`/topics/${objectId}`)
+    }
+
     return (
         <div>
             { text() }
+            <i
+               class="fa fa-arrow-right clickable"
+               style={{color: 'green'}}
+               onClick={goToTopic}
+            ></i>
             <i
                 className="fa fa-times clickable"
                 style={{color: 'red'}}

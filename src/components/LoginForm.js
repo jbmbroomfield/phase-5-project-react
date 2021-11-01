@@ -10,33 +10,18 @@ const LoginForm = ({ login }) => {
 
     const history = useHistory()
 
-
     const handleChange = event => {
         setState({
             ...state,
             [event.target.name]: event.target.value
         })
     }
-
     
     const handleSubmit = event => {
         event.preventDefault()
         const redirect = () => history.push("/")
         login(state.username, state.password, redirect)
     }
-
-    // const handleSubmit = event => {
-    //     event.preventDefault()
-    //     api('login', request_body())
-    //     .then(json => {
-    //         if (json.jwt) {
-    //             localStorage.setItem('jwt', json.jwt)
-    //             setCurrentUser(json.user.data.attributes)
-    //             history.push("/")
-    //         }
-    //     })
-    // }
-
 
     return (
         <div>

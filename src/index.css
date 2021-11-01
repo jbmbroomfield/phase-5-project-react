@@ -140,3 +140,7 @@ div.content {
 .clickable {
   cursor: pointer;
 }
+
+.fa {
+  padding: 0 0 0 7px;
+}
