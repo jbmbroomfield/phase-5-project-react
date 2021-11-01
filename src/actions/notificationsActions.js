@@ -13,3 +13,10 @@ export const fetchNotifications = () => (
         })
     }
 )
+
+export const deleteNotification = notificationId => (
+    dispatch => {
+        api(`notifications/${notificationId}`, 'DELETE')
+        .then(() => dispatch(fetchNotifications()))
+    }
+)
