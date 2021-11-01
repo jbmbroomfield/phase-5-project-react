@@ -8,6 +8,7 @@ import topicsReducer from './topicsReducer'
 import postsReducer from "./postsReducer"
 import userTopicsReducer from "./userTopicsReducer"
 import notificationsReducer from "./notificationsReducer"
+import scrollIdReducer from "./scrollIdReducer"
 
 const rootReducer = combineReducers({
     currentUser: currentUserReducer,
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
     posts: postsReducer,
     userTopics: userTopicsReducer,
     notifications: notificationsReducer,
+    scrollId: scrollIdReducer
 })
 
 export default rootReducer

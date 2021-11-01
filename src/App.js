@@ -62,7 +62,8 @@ const App = ({
 		fetchSubsections,
 		fetchTopics,
 		fetchUsers,
-		currentUser.id
+		currentUser.id,
+		fetchNotifications,
 	])
 
 	return (

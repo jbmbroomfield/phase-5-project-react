@@ -10,6 +10,7 @@ import createSocket from '../createSocket'
 
 import TrackVisibility from 'react-on-screen'
 import { fetchUserTopic } from '../actions/userTopicsActions'
+import { setScrollId } from '../actions/scrollIdActions'
 
 import AsideLeftContainer from './AsideLeftContainer'
 import AsideRightTopicContainer from './AsideRightTopicContainer'
@@ -19,6 +20,7 @@ const TopicContainer = ({
     subsections, topics, posts, users,
     fetchPosts,
     userTopics, fetchUserTopic,
+    scrollId, setScrollId,
 }) => {
 
     const [displayTextArea, setDisplayTextArea] = useState(false)
@@ -62,8 +64,29 @@ const TopicContainer = ({
         const beginning = text.slice(0, selection[0])
         const end = text.slice(selection[1])
         setText(beginning + newText + end)
-
     }
+
+    const renderPosts = () => (
+        posts.map(post => {
+            const tag = post.attributes.tag
+            const scrollTo = tag === scrollId
+            return (
+                <TrackVisibility key={post.id}>
+                    <Post
+                        key={post.id}
+                        id={post.id}
+                        user={getUser(post.attributes.user_id)}
+                        text={post.attributes.text}
+                        tag={tag}
+                        createdAt={post.attributes.created_at}
+                        insertText={insertText}
+                        scrollTo={scrollTo}
+                        setScrollId={setScrollId}
+                    />
+                </TrackVisibility>
+            )
+        })
+    )
 
     return (
         <div>
@@ -71,19 +94,7 @@ const TopicContainer = ({
                 <AsideLeftContainer />
                 <main>
                     <h1>Topic - {topic && topic.attributes.title}</h1>
-                    {posts.map(post => (
-                        <TrackVisibility key={post.id}>
-                            <Post
-                                key={post.id}
-                                id={post.id}
-                                user={getUser(post.attributes.user_id)}
-                                text={post.attributes.text}
-                                tag={post.attributes.tag}
-                                createdAt={post.attributes.created_at}
-                                insertText={insertText}
-                            />
-                        </TrackVisibility>
-                    ))}
+                    {renderPosts()}
                 </main>
                 <AsideRightTopicContainer userTopic={userTopic} />
             </div>
@@ -108,12 +119,14 @@ const mapStateToProps = state => ({
     topics: state.topics,
     posts: state.posts,
     users: state.users,
-    userTopics: state.userTopics
+    userTopics: state.userTopics,
+    scrollId: state.scrollId,
 })
 
 const mapDispatchToProps = dispatch => ({
     fetchPosts: topicId => dispatch(fetchPosts(topicId)),
     fetchUserTopic: topicId => dispatch(fetchUserTopic(topicId)),
+    setScrollId: id => dispatch(setScrollId(id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TopicContainer)

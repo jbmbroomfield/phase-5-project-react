@@ -16,10 +16,6 @@ const createSocket = (params, onUpdate) => {
 	socket.onmessage = event => {
 		const data = JSON.parse(event.data)
 		if (data.message && data.message.type === 'update') {
-			console.log('socket message', data)
-		}
-		if (data.message && data.message.type === 'update') {
-			console.log('updating')
 			onUpdate()
 		}
 	}

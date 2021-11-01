@@ -1,7 +1,16 @@
 import React from 'react'
 import { useHistory } from 'react-router'
 
-const Notification = ({ category, objectId, number, createdAt, topics, deleteNotification }) => {
+const Notification = ({
+    category,
+    objectId,
+    number,
+    createdAt,
+    tag,
+    topics,
+    deleteNotification,
+    setScrollId,
+}) => {
 
     const replies = () => number === 1 ? '1 new reply' : `${number} new replies`
 
@@ -22,7 +31,9 @@ const Notification = ({ category, objectId, number, createdAt, topics, deleteNot
     const history = useHistory()
 
     const goToTopic = () => {
+        deleteNotification()
         history.push(`/topics/${objectId}`)
+        setScrollId(tag)
     }
 
     return (
