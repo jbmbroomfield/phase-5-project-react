@@ -3,7 +3,6 @@ import {
   BrowserRouter as Router,
   Route
 } from 'react-router-dom'
-import CurrentUser from './components/CurrentUser'
 import { connect } from 'react-redux'
 
 import UsersContainer from './containers/UsersContainer'

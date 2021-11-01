@@ -14,9 +14,9 @@ export const fetchUserTopic = topicId => (
     }
 )
 
-export const subscribeToTopic = topicId => (
+export const subscribeToTopic = (topicId, subscribed) => (
     dispatch => {
-        api(`user_topics/${topicId}/subscribe`)
+        api(`user_topics/${topicId}/subscribe`, {subscribed: subscribed})
         .then(json => {
             dispatch(addUserTopic(json.data))
         })
@@ -25,7 +25,7 @@ export const subscribeToTopic = topicId => (
 
 export const unsubscribeToTopic = topicId => (
     dispatch => {
-        api(`user_topics/${topicId}/unsubscribe`)
+        api(`user_topics/${topicId}/unsubscribe`, {subscribed: true})
         .then(json => {
             dispatch(addUserTopic(json.data))
         })

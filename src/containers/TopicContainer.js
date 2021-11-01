@@ -12,20 +12,25 @@ import TrackVisibility from 'react-on-screen'
 import { fetchUserTopic } from '../actions/userTopicsActions'
 
 import AsideLeftContainer from './AsideLeftContainer'
-import AsideRightContainer from './AsideRightContainer'
+import AsideRightTopicContainer from './AsideRightTopicContainer'
 
 const TopicContainer = ({
     match,
     subsections, topics, posts, users,
-    fetchPosts, fetchUserTopic
+    fetchPosts,
+    userTopics, fetchUserTopic,
 }) => {
 
     const [displayTextArea, setDisplayTextArea] = useState(false)
     const [text, setText] = useState('')
     const [selection, setSelection] = useState([0, 0])
 
-    const topicId = match.params.topicId
-    const topic = topics.find(topic => parseInt(topic.id) === parseInt(topicId))
+    const topicId = parseInt(match.params.topicId)
+    const topic = topics.find(topic => parseInt(topic.id) === topicId)
+
+    const userTopic = userTopics.find(
+        userTopic => parseInt(userTopic.attributes.topic_id) === topicId
+    )
 
     useEffect(() => {
         const params = {
@@ -33,7 +38,9 @@ const TopicContainer = ({
             topic_id: topicId,
         }
         const onUpdate = () => {
+            console.log('fetching posts', topicId)
             fetchPosts(topicId)
+            console.log('fetching user_topic')
             fetchUserTopic(topicId)
         }
         const socket = createSocket(params, onUpdate)
@@ -80,7 +87,7 @@ const TopicContainer = ({
                         </TrackVisibility>
                     ))}
                 </main>
-                <AsideRightContainer />
+                <AsideRightTopicContainer userTopic={userTopic} />
             </div>
             <BottomPadding displayTextArea={displayTextArea} />
             <TopicReplyContainer
@@ -103,6 +110,7 @@ const mapStateToProps = state => ({
     topics: state.topics,
     posts: state.posts,
     users: state.users,
+    userTopics: state.userTopics
 })
 
 const mapDispatchToProps = dispatch => ({

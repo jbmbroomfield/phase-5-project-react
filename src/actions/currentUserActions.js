@@ -1,4 +1,5 @@
 import api from "./api"
+import { setJwt } from "../jwt"
 
 export const setCurrentUser = currentUser => ({
     type: 'SET_CURRENT_USER',
@@ -22,3 +23,26 @@ export const fetchCurrentUser = () => (
         }
     }
 )
+
+export const login = (username, password, redirect) => (
+    dispatch => {
+        console.log('logging in')
+        api('login', loginBody(username, password))
+        .then(json => {
+            if (json.jwt) {
+                setJwt(json.jwt)
+                dispatch(setCurrentUser(json.user.data))
+                redirect()
+            }
+        })
+    }
+)
+
+const loginBody = (username, password) => ({
+    user: {
+        username: username,
+        password_authentication_attributes: {
+            password: password
+        }
+    }
+})

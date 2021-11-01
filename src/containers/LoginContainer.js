@@ -1,11 +1,12 @@
 import React from 'react'
 import LoginForm from '../components/LoginForm'
 import { connect } from 'react-redux'
-import { setCurrentUser } from '../actions/currentUserActions'
+
+import { login } from '../actions/currentUserActions'
 
 import { useHistory } from 'react-router'
 
-const LoginContainer = ({ currentUser, setCurrentUser }) => {
+const LoginContainer = ({ currentUser, login }) => {
 
     const history = useHistory()
 
@@ -18,7 +19,7 @@ const LoginContainer = ({ currentUser, setCurrentUser }) => {
         <div>
             <div className="page">
                 <h1>Login</h1>
-                <LoginForm setCurrentUser={setCurrentUser} />
+                <LoginForm login={login} />
             </div>
         </div>
     )
@@ -28,8 +29,8 @@ const mapStateToProps = state => ({
     currentUser: state.currentUser
 })
 
-const mapDispatchToProps = ({
-    setCurrentUser
+const mapDispatchToProps = dispatch => ({
+    login: (username, password, redirect) => dispatch(login(username, password, redirect))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer)
