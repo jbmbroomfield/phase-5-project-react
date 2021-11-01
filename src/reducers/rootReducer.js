@@ -7,6 +7,7 @@ import subsectionsReducer from "./subsectionsReducer"
 import topicsReducer from './topicsReducer'
 import postsReducer from "./postsReducer"
 import userTopicsReducer from "./userTopicsReducer"
+import notificationsReducer from "./notificationsReducer"
 
 const rootReducer = combineReducers({
     currentUser: currentUserReducer,
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
     topics: topicsReducer,
     posts: postsReducer,
     userTopics: userTopicsReducer,
+    notifications: notificationsReducer,
 })
 
 export default rootReducer

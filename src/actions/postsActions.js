@@ -10,7 +10,6 @@ export const fetchPosts = topicId => (
         api(`topics/${topicId}/posts`)
         .then(json => {
             dispatch(addPosts(json.data))
-            console.log('fetched posts', json.data)
         })
     }
 )
