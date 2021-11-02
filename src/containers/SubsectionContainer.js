@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import NewTopicContainer from './NewTopicContainer'
-import BottomPadding from '../components/BottomPadding'
 
 import { fetchCurrentUser } from '../actions/currentUserActions'
 import { fetchSections } from '../actions/sectionsActions'
@@ -65,7 +64,6 @@ const SubsectionContainer = ({
                 ))}
             </main>
             <AsideRightContainer />
-            <BottomPadding displayTextArea={displayTextArea} />
             <NewTopicContainer
                 subsectionId={subsectionId}
                 displayTextArea={displayTextArea}
