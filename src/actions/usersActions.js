@@ -9,7 +9,7 @@ export const fetchUsers = () => (
     dispatch => {
         API.get('users')
         .then(json => {
-            dispatch(addUsers(json.data))
+            json.data && dispatch(addUsers(json.data))
         })
     }
 )

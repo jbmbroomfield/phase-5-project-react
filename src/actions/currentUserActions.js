@@ -16,7 +16,7 @@ export const fetchCurrentUser = () => (
         if (jwt) {
             API.get('current_user')
             .then(json => {
-                dispatch(setCurrentUser(json.data))
+                json.data && dispatch(setCurrentUser(json.data))
             })
         } else {
             dispatch(removeCurrentUser())

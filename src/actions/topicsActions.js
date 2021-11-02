@@ -9,7 +9,7 @@ export const fetchTopics = () => (
     dispatch => {
         API.get('topics')
         .then(json => {
-            dispatch(addTopics(json.data))
+            json.data && dispatch(addTopics(json.data))
         })
     }
 )
@@ -25,6 +25,6 @@ export const createTopic = (subsectionId, title, text, redirect) => (
             }
         }
         API.post(`subsections/${subsectionId}/topics`, body)
-        .then(json => redirect(json.data.id))
+        .then(json => json.data && redirect(json.data.id))
     }
 )

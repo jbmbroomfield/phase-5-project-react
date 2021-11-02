@@ -9,7 +9,7 @@ export const fetchUserTopic = topicId => (
     dispatch => {
         API.get(`user_topics/${topicId}`)
         .then(json => {
-            dispatch(addUserTopic(json.data))
+            json.data && dispatch(addUserTopic(json.data))
         })
     }
 )
@@ -18,7 +18,7 @@ export const subscribeToTopic = (topicId, subscribed) => (
     dispatch => {
         API.post(`user_topics/${topicId}/subscribe`, {subscribed: subscribed})
         .then(json => {
-            dispatch(addUserTopic(json.data))
+            json.data && dispatch(addUserTopic(json.data))
         })
     }
 )

@@ -9,7 +9,7 @@ export const fetchSections = () => (
     dispatch => {
         API.get('sections')
         .then(json => {
-            dispatch(addSections(json.data))
+            json.data && dispatch(addSections(json.data))
         })
     }
 )

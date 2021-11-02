@@ -9,7 +9,7 @@ export const fetchSubsections = () => (
     dispatch => {
         API.get('subsections')
         .then(json => {
-            dispatch(addSubsections(json.data))
+            json.data && dispatch(addSubsections(json.data))
         })
     }
 )

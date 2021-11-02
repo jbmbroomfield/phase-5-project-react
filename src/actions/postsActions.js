@@ -9,7 +9,7 @@ export const fetchPosts = topicId => (
     dispatch => {
         API.get(`topics/${topicId}/posts`)
         .then(json => {
-            dispatch(addPosts(json.data))
+            json.data && dispatch(addPosts(json.data))
         })
     }
 )
