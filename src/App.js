@@ -1,17 +1,12 @@
 import React, { useEffect } from 'react'
-import {
-  BrowserRouter as Router,
-  Route
-} from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import UsersContainer from './containers/UsersContainer'
-import LoginContainer from './containers/LoginContainer.js'
+import { BrowserRouter as Router } from 'react-router-dom'
+
 import NavbarContainer from './containers/NavbarContainer'
-import SectionsContainer from './containers/SectionsContainer'
-import SubsectionContainer from './containers/SubsectionContainer'
-import TopicContainer from './containers/TopicContainer'
 import AsideLeftContainer from './containers/AsideLeftContainer'
+import MainContainer from './containers/MainContainer'
+import AsideRightContainer from './containers/AsideRightContainer'
 
 import { fetchCurrentUser } from './actions/currentUserActions'
 import { fetchSections } from './actions/sectionsActions'
@@ -71,27 +66,18 @@ const App = ({
 	const bottomBarHeight = bottomPopUp ? '309' : '50'
 
 	const style = {
-  		"grid-template-rows": `50px 1fr ${bottomBarHeight}px`
+  		gridTemplateRows: `50px 1fr ${bottomBarHeight}px`
 	}
 
 	return (
-		<Router>
 		<div className="App" style={style}>
-			<NavbarContainer />
-			<AsideLeftContainer />
-			<Route exact path="/"><SectionsContainer /></Route>
-			<Route exact path="/users"><UsersContainer /></Route>
-			<Route exact path="/login"><LoginContainer /></Route>
-			<Route
-				path="/subsections/:subsectionId"
-				render={routerProps => <SubsectionContainer {...routerProps}/>}
-			/>
-			<Route
-				path="/topics/:topicId"
-				render={routerProps => <TopicContainer {...routerProps}/>}
-			/>
+		    <Router>
+				<NavbarContainer />
+				<AsideLeftContainer />
+				<MainContainer />
+				<AsideRightContainer />
+		    </Router>
 		</div>
-		</Router>
 	);
 }
 
