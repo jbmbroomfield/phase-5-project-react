@@ -9,9 +9,6 @@ import { fetchSubsections } from '../actions/subsectionsActions'
 import { fetchTopics } from '../actions/topicsActions'
 import { fetchUsers } from '../actions/usersActions'
 
-import AsideLeftContainer from './AsideLeftContainer'
-import AsideRightContainer from './AsideRightContainer'
-
 const SubsectionContainer = ({ 
     match,
     subsections,
@@ -53,17 +50,14 @@ const SubsectionContainer = ({
 
     return (
         <>
-            <main>
-                <h1>{subsection && subsection.attributes.title}</h1>
-                {topics.map(topic => (
-                    <div key={topic.id} className="topic">
-                        <Link to={`/topics/${topic.id}`}>
-                            {topic.attributes.title}
-                        </Link>
-                    </div>
-                ))}
-            </main>
-            <AsideRightContainer />
+            <h1>{subsection && subsection.attributes.title}</h1>
+            {topics.map(topic => (
+                <div key={topic.id} className="topic">
+                    <Link to={`/topics/${topic.id}`}>
+                        {topic.attributes.title}
+                    </Link>
+                </div>
+            ))}
             <NewTopicContainer
                 subsectionId={subsectionId}
                 displayTextArea={displayTextArea}

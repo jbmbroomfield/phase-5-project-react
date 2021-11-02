@@ -11,8 +11,6 @@ import TrackVisibility from 'react-on-screen'
 import { fetchUserTopic } from '../actions/userTopicsActions'
 import { setScrollId } from '../actions/scrollIdActions'
 
-import AsideLeftContainer from './AsideLeftContainer'
-import AsideRightTopicContainer from './AsideRightTopicContainer'
 import { setBottomPopUp } from '../actions/bottomPopUpActions'
 
 const TopicContainer = ({
@@ -97,12 +95,8 @@ const TopicContainer = ({
 
     return (
         <>
-            <main>
-                <h1>Topic - {topic && topic.attributes.title}</h1>
-                {renderPosts()}
-            </main>
-            
-            <AsideRightTopicContainer userTopic={userTopic} />
+            <h1>Topic - {topic && topic.attributes.title}</h1>
+            {renderPosts()}
             <TopicReplyContainer
                 topicId={topicId}
                 displayTextArea={displayTextArea}
