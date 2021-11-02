@@ -1,0 +1,14 @@
+aside {
+  background-color: var(--aside-bg-color);
+  border: 2px solid black;
+  padding: 10px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+aside.aside-left div.notifications {
+  position: fixed;
+  padding: 10px;
+  background-color: var(--aside-fg-color);
+}

@@ -1,0 +1,40 @@
+div.navbar {
+  position: fixed;
+  width: 100%;
+}
+
+ul.navbar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: var(--navbar-color);
+}
+
+ul.navbar li {
+  float: left;
+}
+
+.nav-link {
+  background-color: var(--navbar-color);
+}
+
+ul.navbar li a,
+ul.navbar button,
+ul.navbar li span,
+.bottom-bar a,
+.bottom-bar button,
+.bottom-bar span {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  float: left;
+}
+
+.nav-link:hover {
+  background-color: var(--navbar-hover-color);
+}
