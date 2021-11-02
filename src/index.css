@@ -12,6 +12,15 @@ code {
     monospace;
 }
 
+div.navbar {
+  position: fixed;
+  width: 100%;
+}
+
+div.content {
+  padding: 60px 0 0 0;
+}
+
 ul.navbar {
   list-style-type: none;
   margin: 0;

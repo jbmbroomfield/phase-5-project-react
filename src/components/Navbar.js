@@ -16,8 +16,8 @@ const Navbar = ({ currentUser, removeCurrentUser }) => {
     }
 
     return (
-        <div>
-            <ul className='navbar'>
+        <div className="navbar">
+            <ul className="navbar">
                 <li><NavLink className="nav-link" to="/">Home</NavLink></li>
                 {renderAuthLinks()}
             </ul>
