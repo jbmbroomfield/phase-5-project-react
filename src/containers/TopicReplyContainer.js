@@ -22,7 +22,7 @@ const TopicReplyContainer = ({
     }
     
     return (
-        <div>
+        <>
             <BottomBar
                 toggleLabel="Reply"
                 displayTextArea={displayTextArea}
@@ -39,7 +39,7 @@ const TopicReplyContainer = ({
                     setSelection={setSelection}
                 />
              ) }
-        </div>
+        </>
     )
 }
 

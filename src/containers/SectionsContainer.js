@@ -52,13 +52,10 @@ const SectionsContainer = ({
     }
 
     return (
-        <div>
-            <div className="content">
-                <AsideLeftContainer />
-                <main>{renderSections()}</main>
-                <AsideRightContainer />
-            </div>
-        </div>
+        <>
+            <main>{renderSections()}</main>
+            <AsideRightContainer />
+        </>
     )
 }
 

@@ -1,6 +1,7 @@
 div.navbar {
   position: fixed;
   width: 100%;
+  grid-area: navbar;
 }
 
 ul.navbar {

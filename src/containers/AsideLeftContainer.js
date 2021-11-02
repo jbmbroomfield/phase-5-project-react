@@ -24,12 +24,14 @@ const AsideLeftContainer = ({ notifications, topics, deleteNotification, setScro
     )
 
     return (
-        <aside className="aside-left">
-            <div className="notifications">
-                Notifications
-                { renderNotifications() }
-            </div>
-        </aside>
+        <>
+            <aside className="aside-left">
+                <div className="notifications">
+                    Notifications
+                    { renderNotifications() }
+                </div>
+            </aside>
+        </>
     )
 }
 

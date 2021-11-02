@@ -53,21 +53,19 @@ const SubsectionContainer = ({
     ])
 
     return (
-        <div>
-            <div className='content'>
-                <AsideLeftContainer />
-                <main>
-                    <h1>{subsection && subsection.attributes.title}</h1>
-                    {topics.map(topic => (
-                        <div key={topic.id} className="topic">
-                            <Link to={`/topics/${topic.id}`}>
-                                {topic.attributes.title}
-                            </Link>
-                        </div>
-                    ))}
-                </main>
-                <AsideRightContainer />
-            </div>
+        <>
+            <main>
+                <h1>{subsection && subsection.attributes.title}</h1>
+                {topics.map(topic => (
+                    <div key={topic.id} className="topic">
+                        <Link to={`/topics/${topic.id}`}>
+                            {topic.attributes.title}
+                        </Link>
+                    </div>
+                ))}
+            </main>
+            <AsideRightContainer />
+            <BottomPadding displayTextArea={displayTextArea} />
             <NewTopicContainer
                 subsectionId={subsectionId}
                 displayTextArea={displayTextArea}
@@ -80,8 +78,7 @@ const SubsectionContainer = ({
                 setSelection={setSelection}
                 handleButtonClick={handleButtonClick}
             />
-            <BottomPadding displayTextArea={displayTextArea} />
-        </div>
+        </>
     )
 }
 

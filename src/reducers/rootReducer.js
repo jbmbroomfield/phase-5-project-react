@@ -9,6 +9,7 @@ import postsReducer from "./postsReducer"
 import userTopicsReducer from "./userTopicsReducer"
 import notificationsReducer from "./notificationsReducer"
 import scrollIdReducer from "./scrollIdReducer"
+import bottomPopUpReducer from "./bottomPopUpReducer"
 
 const rootReducer = combineReducers({
     currentUser: currentUserReducer,
@@ -19,7 +20,8 @@ const rootReducer = combineReducers({
     posts: postsReducer,
     userTopics: userTopicsReducer,
     notifications: notificationsReducer,
-    scrollId: scrollIdReducer
+    scrollId: scrollIdReducer,
+    bottomPopUp: bottomPopUpReducer,
 })
 
 export default rootReducer

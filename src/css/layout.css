@@ -1,0 +1,9 @@
+.App {
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr;
+  grid-template-rows: 50px 1fr 50px;
+  grid-template-areas:
+    "navbar navbar navbar"
+    "aside-left main aside-right"
+    "bottom-bar bottom-bar bottom-bar";
+}

@@ -5,12 +5,10 @@ import { removeCurrentUser } from '../actions/currentUserActions'
 
 const NavbarContainer = ({ currentUser, removeCurrentUser }) => {
     return (
-        <div>
-            <Navbar
-                currentUser={currentUser}
-                removeCurrentUser={removeCurrentUser}
-            />
-        </div>
+        <Navbar
+            currentUser={currentUser}
+            removeCurrentUser={removeCurrentUser}
+        />
     )
 }
 

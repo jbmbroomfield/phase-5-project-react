@@ -14,6 +14,7 @@ import { setScrollId } from '../actions/scrollIdActions'
 
 import AsideLeftContainer from './AsideLeftContainer'
 import AsideRightTopicContainer from './AsideRightTopicContainer'
+import { setBottomPopUp } from '../actions/bottomPopUpActions'
 
 const TopicContainer = ({
     match,
@@ -21,9 +22,16 @@ const TopicContainer = ({
     fetchPosts,
     userTopics, fetchUserTopic,
     scrollId, setScrollId,
+    setBottomPopUp,
 }) => {
 
     const [displayTextArea, setDisplayTextArea] = useState(false)
+
+    const setDisplayTextAreaAndBottomPopUp = bottomPopUp => {
+        setDisplayTextArea(bottomPopUp)
+        setBottomPopUp(bottomPopUp)
+    }
+
     const [text, setText] = useState('')
     const [selection, setSelection] = useState([0, 0])
 
@@ -60,7 +68,7 @@ const TopicContainer = ({
     }
 
     const insertText = newText => {
-        setDisplayTextArea(true)
+        setDisplayTextAreaAndBottomPopUp(true)
         const beginning = text.slice(0, selection[0])
         const end = text.slice(selection[1])
         setText(beginning + newText + end)
@@ -89,27 +97,26 @@ const TopicContainer = ({
     )
 
     return (
-        <div>
-            <div className='content'>
-                <AsideLeftContainer />
-                <main>
-                    <h1>Topic - {topic && topic.attributes.title}</h1>
-                    {renderPosts()}
-                </main>
-                <AsideRightTopicContainer userTopic={userTopic} />
-            </div>
+        <>
+            <main>
+                <h1>Topic - {topic && topic.attributes.title}</h1>
+                {renderPosts()}
+            </main>
+            
+            <AsideRightTopicContainer userTopic={userTopic} />
+            
             <BottomPadding displayTextArea={displayTextArea} />
             <TopicReplyContainer
                 topicId={topicId}
                 displayTextArea={displayTextArea}
-                setDisplayTextArea={setDisplayTextArea}
+                setDisplayTextArea={setDisplayTextAreaAndBottomPopUp}
                 text={text}
                 setText={setText}
                 selection={selection}
                 setSelection={setSelection}
                 handleButtonClick={handleButtonClick}
             />
-        </div>
+        </>
     )
 }
 
@@ -126,7 +133,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     fetchPosts: topicId => dispatch(fetchPosts(topicId)),
     fetchUserTopic: topicId => dispatch(fetchUserTopic(topicId)),
-    setScrollId: id => dispatch(setScrollId(id))
+    setScrollId: id => dispatch(setScrollId(id)),
+    setBottomPopUp: bottomPopUp => dispatch(setBottomPopUp(bottomPopUp))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TopicContainer)

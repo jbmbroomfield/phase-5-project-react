@@ -11,6 +11,7 @@ import NavbarContainer from './containers/NavbarContainer'
 import SectionsContainer from './containers/SectionsContainer'
 import SubsectionContainer from './containers/SubsectionContainer'
 import TopicContainer from './containers/TopicContainer'
+import AsideLeftContainer from './containers/AsideLeftContainer'
 
 import { fetchCurrentUser } from './actions/currentUserActions'
 import { fetchSections } from './actions/sectionsActions'
@@ -27,7 +28,8 @@ const App = ({
 	fetchTopics,
 	fetchUsers,
 	currentUser,
-	fetchNotifications
+	fetchNotifications,
+	bottomPopUp,
 }) => {
 
 	useEffect(() => {
@@ -66,10 +68,17 @@ const App = ({
 		fetchNotifications,
 	])
 
+	const bottomBarHeight = bottomPopUp ? '309' : '50'
+
+	const style = {
+  		"grid-template-rows": `50px 1fr ${bottomBarHeight}px`
+	}
+
 	return (
 		<Router>
-		<div className="App">
+		<div className="App" style={style}>
 			<NavbarContainer />
+			<AsideLeftContainer />
 			<Route exact path="/"><SectionsContainer /></Route>
 			<Route exact path="/users"><UsersContainer /></Route>
 			<Route exact path="/login"><LoginContainer /></Route>
@@ -87,7 +96,8 @@ const App = ({
 }
 
 const mapStateToProps = state => ({
-  	currentUser: state.currentUser
+  	currentUser: state.currentUser,
+	bottomPopUp: state.bottomPopUp,
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -34,7 +34,7 @@ const NewTopicContainer = ({
     }
 
     return (
-        <div>
+        <>
             <BottomBar
                 toggleLabel="New Topic"
                 displayTextArea={displayTextArea}
@@ -53,7 +53,7 @@ const NewTopicContainer = ({
                     setSelection={setSelection}
                 />
              ) }
-        </div>
+        </>
     )
 }
 
