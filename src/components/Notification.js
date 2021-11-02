@@ -40,7 +40,7 @@ const Notification = ({
         <div>
             { text() }
             <i
-               class="fa fa-arrow-right clickable"
+               className="fa fa-arrow-right clickable"
                style={{color: 'green'}}
                onClick={goToTopic}
             ></i>

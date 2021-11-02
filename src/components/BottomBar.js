@@ -33,9 +33,9 @@ const BottomBar = ({
                     onChange={event => setTitle(event.target.value)}
                 />
             )}
-            <span className="nav-link" onClick={toggleDisplayTextArea}>{replyCaret} {toggleLabel}</span>
+            <span className="nav-link float-right" onClick={toggleDisplayTextArea}>{replyCaret} {toggleLabel}</span>
             { displayTextArea && text.length > 0 && (toggleLabel === 'Reply' || title.length > 0) && (
-                <span className="nav-link" onClick={handlePost}>Post</span>
+                <span className="nav-link float-right" onClick={handlePost}>Post</span>
             ) }
         </div>
     )

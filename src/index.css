@@ -37,8 +37,10 @@ ul.navbar li {
 }
 
 ul.navbar li a,
+ul.navbar button,
 ul.navbar li span,
 .bottom-bar a,
+.bottom-bar button,
 .bottom-bar span {
   display: block;
   color: white;
@@ -50,7 +52,7 @@ ul.navbar li span,
   float: left;
 }
 
-.bottom-bar span {
+.bottom-bar span.float-right {
   float: right;
 }
 
@@ -58,7 +60,8 @@ ul.navbar li span,
   background-color: #111;
 }
 
-a {
+a,
+button {
   cursor: pointer;
 }
 
