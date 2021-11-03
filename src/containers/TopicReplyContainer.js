@@ -14,8 +14,6 @@ const TopicReplyContainer = ({
     drafts, setDraft, deleteDraft,
     focusTextArea, textAreaRef,
 }) => {
-
-    
     
     const topicId = match && parseInt(match.params.topicId)
     const draft = drafts && drafts.find(draft => parseInt(draft.attributes.topic_id) === topicId)
@@ -43,10 +41,6 @@ const TopicReplyContainer = ({
     
     const handleToggleClick = () => {
         setBottomPopUp(!bottomPopUp)
-
-        if (!bottomPopUp) {
-            focusTextArea()
-        }
     }
 
     return (

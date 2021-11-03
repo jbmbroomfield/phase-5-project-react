@@ -1,13 +1,16 @@
 import React, { useEffect } from 'react'
 
-// const TextArea = React.forwardRef((props, ref) => (
 const TextArea = React.forwardRef(({
-    text, onChange, onBlur
+    text, onChange, onBlur, setBottomPopUp
 }, ref) => {
     
     useEffect(() => {
         ref.current.focus()
-    }, [])
+        const cleanup = () => {
+            setBottomPopUp(false)
+        }
+        return cleanup
+    }, [ref, setBottomPopUp])
 
     return (
         <div className='text-area'>

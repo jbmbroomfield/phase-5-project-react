@@ -25,9 +25,22 @@ const TextContainer = ({
         textAreaRef.current.setSelectionRange(selection[0], selection[1])
     }, [text, selection, setBottomPopUp, textAreaRef])
 
+    // useEffect(() => {
+    //     const cleanup = () => {
+    //         setBottomPopUp(false)
+    //     }
+    //     return cleanup
+    // }, [setBottomPopUp])
+
     return (
         <div className='text-container'>
-            <TextArea ref={textAreaRef} text={text} onChange={handleTextAreaChange} onBlur={handleTextAreaBlur} />
+            <TextArea
+                ref={textAreaRef}
+                text={text}
+                onChange={handleTextAreaChange}
+                onBlur={handleTextAreaBlur}
+                setBottomPopUp={setBottomPopUp}
+            />
             <TextPreview text={text} bbCodeObjects={bbCodeObjects} />
         </div>
     )
