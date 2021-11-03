@@ -5,7 +5,7 @@ import TextInterface from '../textEditor/components/TextInterface'
 import { bbCodeObjects } from '../textEditor/bbCode/BBCodeObject'
 
 const BottomBar = ({
-    displayTextArea, toggleDisplayTextArea,
+    bottomPopUp, setBottomPopUp,
     handlePost,
     handleButtonClick,
     title, setTitle,
@@ -14,17 +14,17 @@ const BottomBar = ({
 }) => {
 
     const style = {
-        bottom: `${displayTextArea ? 250 : 0}px`
+        bottom: `${bottomPopUp ? 250 : 0}px`
     }
 
-    const replyCaret = displayTextArea ? <i className="fa fa-caret-down" aria-hidden="true"></i> : <i className="fa fa-caret-up" aria-hidden="true"></i>
+    const replyCaret = bottomPopUp ? <i className="fa fa-caret-down" aria-hidden="true"></i> : <i className="fa fa-caret-up" aria-hidden="true"></i>
 
     return (
         <div className="bottom-bar" style={style}>
-            { displayTextArea && (
+            { bottomPopUp && (
                 <TextInterface onButtonClick={handleButtonClick} bbCodeObjects={bbCodeObjects} />
             ) }
-            { displayTextArea && toggleLabel === 'New Topic' && (
+            { bottomPopUp && toggleLabel === 'New Topic' && (
                 <input
                     type="text"
                     className="topic-title-input"
@@ -33,8 +33,8 @@ const BottomBar = ({
                     onChange={event => setTitle(event.target.value)}
                 />
             )}
-            <span className="nav-link float-right" onClick={toggleDisplayTextArea}>{replyCaret} {toggleLabel}</span>
-            { displayTextArea && text.length > 0 && (toggleLabel === 'Reply' || title.length > 0) && (
+            <span className="nav-link float-right" onClick={() => setBottomPopUp(!bottomPopUp)}>{replyCaret} {toggleLabel}</span>
+            { bottomPopUp && text.length > 0 && (toggleLabel === 'Reply' || title.length > 0) && (
                 <span className="nav-link float-right" onClick={handlePost}>Post</span>
             ) }
         </div>

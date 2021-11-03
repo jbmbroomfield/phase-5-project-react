@@ -1,5 +1,11 @@
 .bottom-bar {
   grid-area: bottom-bar;
+  background-color: var(--navbar-color);
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
 }
 
 .text-interface-button {
@@ -39,14 +45,6 @@ div.sceditor-toolbar {
 
 textarea {
   padding: 20px;
-}
-
-.bottom-bar {
-  background-color: var(--navbar-color);
-  overflow: hidden;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
 }
 
 .bottom-bar span.float-right {

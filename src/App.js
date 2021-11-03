@@ -7,6 +7,7 @@ import NavbarContainer from './containers/NavbarContainer'
 import AsideLeftContainer from './containers/AsideLeftContainer'
 import MainContainer from './containers/MainContainer'
 import AsideRightContainer from './containers/AsideRightContainer'
+import BottomBarContainer from './containers/BottomBarContainer'
 
 import { fetchCurrentUser } from './actions/currentUserActions'
 import { fetchSections } from './actions/sectionsActions'
@@ -76,6 +77,7 @@ const App = ({
 				<AsideLeftContainer />
 				<MainContainer />
 				<AsideRightContainer />
+				<BottomBarContainer />
 		    </Router>
 		</div>
 	);

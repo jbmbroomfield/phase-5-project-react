@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 
 import { fetchPosts } from '../actions/postsActions'
 import Post from '../components/Post'
-import TopicReplyContainer from './TopicReplyContainer'
 
 import createSocket from '../createSocket'
 
@@ -12,6 +11,7 @@ import { fetchUserTopic } from '../actions/userTopicsActions'
 import { setScrollId } from '../actions/scrollIdActions'
 
 import { setBottomPopUp } from '../actions/bottomPopUpActions'
+import { setDraft, insertIntoDraft } from '../actions/draftsActions'
 
 const TopicContainer = ({
     match,
@@ -20,24 +20,23 @@ const TopicContainer = ({
     userTopics, fetchUserTopic,
     scrollId, setScrollId,
     setBottomPopUp,
+    drafts, setDraft, insertIntoDraft
 }) => {
-
-    const [displayTextArea, setDisplayTextArea] = useState(false)
-
-    const setDisplayTextAreaAndBottomPopUp = bottomPopUp => {
-        setDisplayTextArea(bottomPopUp)
-        setBottomPopUp(bottomPopUp)
-    }
-
-    const [text, setText] = useState('')
-    const [selection, setSelection] = useState([0, 0])
 
     const topicId = parseInt(match.params.topicId)
     const topic = topics.find(topic => parseInt(topic.id) === topicId)
+    // const draft = drafts && drafts.find(draft => parseInt(draft.attributes.topic_id) === topicId)
+    // const text = draft.attributes.text
+    // const setText = text => setDraft(topicId, text)
 
-    const userTopic = userTopics.find(
-        userTopic => parseInt(userTopic.attributes.topic_id) === topicId
-    )
+    const insertText = text => {
+        console.log('inserting into draft', topicId, text)
+        insertIntoDraft(topicId, text)
+    }
+
+    // const userTopic = userTopics.find(
+    //     userTopic => parseInt(userTopic.attributes.topic_id) === topicId
+    // )
 
     useEffect(() => {
         const params = {
@@ -57,19 +56,6 @@ const TopicContainer = ({
     posts = posts.filter(post => (
         parseInt(post.attributes.topic_id) === parseInt(topicId)
     ))
-
-    const handleButtonClick = insert => {
-        const [nextText, nextSelectionStart, nextSelectionEnd] = insert(text, selection[0], selection[1])
-        setText(nextText)
-        setSelection([nextSelectionStart, nextSelectionEnd])
-    }
-
-    const insertText = newText => {
-        setDisplayTextAreaAndBottomPopUp(true)
-        const beginning = text.slice(0, selection[0])
-        const end = text.slice(selection[1])
-        setText(beginning + newText + end)
-    }
 
     const renderPosts = () => (
         posts.map(post => {
@@ -97,7 +83,7 @@ const TopicContainer = ({
         <>
             <h1>Topic - {topic && topic.attributes.title}</h1>
             {renderPosts()}
-            <TopicReplyContainer
+            {/* <TopicReplyContainer
                 topicId={topicId}
                 displayTextArea={displayTextArea}
                 setDisplayTextArea={setDisplayTextAreaAndBottomPopUp}
@@ -106,7 +92,7 @@ const TopicContainer = ({
                 selection={selection}
                 setSelection={setSelection}
                 handleButtonClick={handleButtonClick}
-            />
+            /> */}
         </>
     )
 }
@@ -119,13 +105,16 @@ const mapStateToProps = state => ({
     users: state.users,
     userTopics: state.userTopics,
     scrollId: state.scrollId,
+    drafts: state.draft,
 })
 
 const mapDispatchToProps = dispatch => ({
     fetchPosts: topicId => dispatch(fetchPosts(topicId)),
     fetchUserTopic: topicId => dispatch(fetchUserTopic(topicId)),
     setScrollId: id => dispatch(setScrollId(id)),
-    setBottomPopUp: bottomPopUp => dispatch(setBottomPopUp(bottomPopUp))
+    setBottomPopUp: bottomPopUp => dispatch(setBottomPopUp(bottomPopUp)),
+    setDraft: (topicId, text, selection) => dispatch(setDraft(topicId, text, selection)),
+    insertIntoDraft: (topicId, text) => dispatch(insertIntoDraft(topicId, text))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TopicContainer)

@@ -10,6 +10,7 @@ import userTopicsReducer from "./userTopicsReducer"
 import notificationsReducer from "./notificationsReducer"
 import scrollIdReducer from "./scrollIdReducer"
 import bottomPopUpReducer from "./bottomPopUpReducer"
+import draftsReducer from "./draftsReducer"
 
 const rootReducer = combineReducers({
     currentUser: currentUserReducer,
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
     notifications: notificationsReducer,
     scrollId: scrollIdReducer,
     bottomPopUp: bottomPopUpReducer,
+    drafts: draftsReducer,
 })
 
 export default rootReducer

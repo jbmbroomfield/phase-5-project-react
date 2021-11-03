@@ -10,6 +10,7 @@ const postsReducer = (state = [], action) => {
 
         default:
             return state
+            
     }
 }
 
