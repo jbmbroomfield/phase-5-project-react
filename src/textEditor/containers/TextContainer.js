@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react'
+import React, {  useEffect } from 'react'
 
 import TextArea from '../components/TextArea'
 import TextPreview from '../components/TextPreview'
@@ -24,13 +24,6 @@ const TextContainer = ({
     useEffect(() => {
         textAreaRef.current.setSelectionRange(selection[0], selection[1])
     }, [text, selection, setBottomPopUp, textAreaRef])
-
-    // useEffect(() => {
-    //     const cleanup = () => {
-    //         setBottomPopUp(false)
-    //     }
-    //     return cleanup
-    // }, [setBottomPopUp])
 
     return (
         <div className='text-container'>
