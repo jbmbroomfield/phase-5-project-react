@@ -5,9 +5,12 @@ import TextPreview from '../components/TextPreview'
 
 import { bbCodeObjects } from '../bbCode/BBCodeObject'
 
-const TextContainer = ({ text, setText, selection, setSelection, unfocusDraft, draftFocused }) => {
-
-    const textArea = useRef(null)
+const TextContainer = ({
+    text, setText,
+    selection, setSelection,
+    setBottomPopUp,
+    textAreaRef
+}) => {
 
     const handleTextAreaChange = event => {
         const nextText = event.target.value
@@ -16,17 +19,15 @@ const TextContainer = ({ text, setText, selection, setSelection, unfocusDraft, d
 
     const handleTextAreaBlur = event => {
         setSelection([event.target.selectionStart, event.target.selectionEnd])
-        unfocusDraft()
     }
 
     useEffect(() => {
-        draftFocused && textArea.current.focus() && unfocusDraft()
-        textArea.current.setSelectionRange(selection[0], selection[1])
-    }, [text, selection, draftFocused, unfocusDraft])
+        textAreaRef.current.setSelectionRange(selection[0], selection[1])
+    }, [text, selection, setBottomPopUp, textAreaRef])
 
     return (
         <div className='text-container'>
-            <TextArea ref={textArea} text={text} onChange={handleTextAreaChange} onBlur={handleTextAreaBlur} />
+            <TextArea ref={textAreaRef} text={text} onChange={handleTextAreaChange} onBlur={handleTextAreaBlur} />
             <TextPreview text={text} bbCodeObjects={bbCodeObjects} />
         </div>
     )

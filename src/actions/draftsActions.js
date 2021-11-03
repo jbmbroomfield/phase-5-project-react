@@ -11,11 +11,6 @@ export const insertIntoDraft = (topicId, text) => ({
     text
 })
 
-export const unfocusDraft = topicId => ({
-    type: 'UNFOCUS_DRAFT',
-    topicId
-})
-
 export const deleteDraft = topicId => ({
     type: 'DELETE_DRAFT',
     topicId

@@ -3,9 +3,12 @@ import PostContent from './PostContent'
 import PostInfo from './PostInfo'
 import PostNotes from './PostNotes'
 
-const Post = ({ text, user, tag, createdAt, insertText, isVisible, scrollTo, setScrollId }) => {
+const Post = ({ text, user, tag, createdAt, insertText, isVisible, scrollTo, setScrollId, focusTextArea }) => {
 
-    const insertPostText = () => insertText(`${user.attributes.username} said "${text}"\n`)
+    const insertPostText = () =>{
+        insertText(`${user.attributes.username} said "${text}"\n`)
+        focusTextArea()
+    }
 
     const ref = useRef(null)
 

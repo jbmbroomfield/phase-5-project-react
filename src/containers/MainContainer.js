@@ -8,7 +8,7 @@ import SectionsContainer from './SectionsContainer'
 import SubsectionContainer from './SubsectionContainer'
 import TopicContainer from './TopicContainer'
 
-const MainContainer = () => {
+const MainContainer = ({ focusTextArea }) => {
     return (
         <main>
             <Route exact path="/"><SectionsContainer /></Route>
@@ -20,7 +20,12 @@ const MainContainer = () => {
             />
             <Route
                 exact path="/topics/:topicId"
-                render={routerProps => <TopicContainer {...routerProps}/>}
+                render={routerProps => (
+                    <TopicContainer
+                        {...routerProps}
+                        focusTextArea={focusTextArea}
+                    />
+                )}
             />
         </main>
     )

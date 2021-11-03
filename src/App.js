@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { connect } from 'react-redux'
 
 import { BrowserRouter as Router } from 'react-router-dom'
@@ -16,6 +16,7 @@ import { fetchTopics } from './actions/topicsActions'
 import { fetchUsers } from './actions/usersActions'
 import { fetchNotifications } from './actions/notificationsActions'
 import createSocket from './createSocket'
+import { setBottomPopUp } from './actions/bottomPopUpActions'
 
 const App = ({
 	fetchCurrentUser,
@@ -25,8 +26,15 @@ const App = ({
 	fetchUsers,
 	currentUser,
 	fetchNotifications,
-	bottomPopUp,
+	bottomPopUp, setBottomPopUp,
 }) => {
+
+	const textAreaRef = useRef(null)
+
+	const focusTextArea = () => {
+		setBottomPopUp(true)
+		textAreaRef && textAreaRef.current && textAreaRef.current.focus()
+	}
 
 	useEffect(() => {
 		const mainSocketParams = {
@@ -75,9 +83,9 @@ const App = ({
 		    <Router>
 				<NavbarContainer />
 				<AsideLeftContainer />
-				<MainContainer />
+				<MainContainer focusTextArea={focusTextArea} />
 				<AsideRightContainer />
-				<BottomBarContainer />
+				<BottomBarContainer focusTextArea={focusTextArea} textAreaRef={textAreaRef} />
 		    </Router>
 		</div>
 	);
@@ -94,7 +102,8 @@ const mapDispatchToProps = dispatch => ({
 	fetchSubsections: () => dispatch(fetchSubsections()),
 	fetchTopics: () => dispatch(fetchTopics()),
 	fetchUsers: () => dispatch(fetchUsers()),
-	fetchNotifications: () => dispatch(fetchNotifications())
+	fetchNotifications: () => dispatch(fetchNotifications()),
+	setBottomPopUp: bottomPopUp => dispatch(setBottomPopUp(bottomPopUp)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

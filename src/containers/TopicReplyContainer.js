@@ -1,19 +1,18 @@
-import React, { useState } from 'react'
+import React, { useRef } from 'react'
 import { connect } from 'react-redux'
 
 import TextContainer from '../textEditor/containers/TextContainer'
 import BottomBar from '../components/BottomBar'
 
 import { createPost } from '../actions/postsActions'
-import { setDraft, unfocusDraft, deleteDraft } from '../actions/draftsActions'
+import { setDraft, deleteDraft } from '../actions/draftsActions'
 
 const TopicReplyContainer = ({
     match,
     bottomPopUp, setBottomPopUp,
     createPost,
-    drafts, setDraft, unfocusDraft, deleteDraft,
-
-    // selection, setSelection,
+    drafts, setDraft, deleteDraft,
+    focusTextArea, textAreaRef,
 }) => {
 
     
@@ -36,19 +35,20 @@ const TopicReplyContainer = ({
         setSelection([nextSelectionStart, nextSelectionEnd])
     }
 
-    // const insertText = newText => {
-    //     setBottomPopUp(true)
-    //     const beginning = text.slice(0, selection[0])
-    //     const end = text.slice(selection[1])
-    //     setText(beginning + newText + end)
-    // }
-
     const handlePost = () => {
         createPost(topicId, text)
         setText('')
         setBottomPopUp(false)
     }
     
+    const handleToggleClick = () => {
+        setBottomPopUp(!bottomPopUp)
+
+        if (!bottomPopUp) {
+            focusTextArea()
+        }
+    }
+
     return (
         <>
             <BottomBar
@@ -58,6 +58,8 @@ const TopicReplyContainer = ({
                 handlePost={handlePost}
                 handleButtonClick={handleButtonClick}
                 text={text}
+                handleToggleClick={handleToggleClick}
+                focusTextArea={focusTextArea}
             />
             { bottomPopUp && (
                 <TextContainer
@@ -65,8 +67,9 @@ const TopicReplyContainer = ({
                     setText={setText}
                     selection={selection}
                     setSelection={setSelection}
-                    unfocusDraft={() => unfocusDraft(topicId)}
                     draftFocused={draftFocused}
+                    setBottomPopUp={setBottomPopUp}
+                    textAreaRef={textAreaRef}
                 />
              ) }
         </>
@@ -80,7 +83,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     setDraft: (topicId, text, selection) => dispatch(setDraft(topicId, text, selection)),
-    unfocusDraft: topicId => dispatch(unfocusDraft(topicId)),
     deleteDraft: topicId => dispatch(deleteDraft(topicId)),
     createPost: (topicId, text) => dispatch(createPost(topicId, text)),
 })

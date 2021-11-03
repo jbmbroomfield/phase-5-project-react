@@ -23,19 +23,8 @@ const draftsReducer = (state = [], action) => {
                 draft.attributes.text = beginning + action.text + end
                 const newSelection = beginning.length + action.text.length
                 draft.attributes.selection = [newSelection, newSelection]
-                draft.attributes.focus = true
             } else {
                 newState = [...newState, newDraft(action.topicId, action.text, [action.text.length, action.text.length])]
-            }
-            return newState
-
-        case 'UNFOCUS_DRAFT':
-            newState = [...state]
-            draft = newState.find(
-                draft => draft.attributes && parseInt(draft.attributes.topic_id) === action.topicId
-            )
-            if (draft) {
-                draft.attributes.focus = false
             }
             return newState
 
@@ -60,7 +49,6 @@ const newDraft = (topicId, text, selection) => ({
         topic_id: topicId,
         text,
         selection: selection || [text.length, text.length],
-        focus: true,
     }
 })
 

@@ -20,23 +20,16 @@ const TopicContainer = ({
     userTopics, fetchUserTopic,
     scrollId, setScrollId,
     setBottomPopUp,
-    drafts, setDraft, insertIntoDraft
+    drafts, setDraft, insertIntoDraft,
+    focusTextArea,
 }) => {
 
     const topicId = parseInt(match.params.topicId)
     const topic = topics.find(topic => parseInt(topic.id) === topicId)
-    // const draft = drafts && drafts.find(draft => parseInt(draft.attributes.topic_id) === topicId)
-    // const text = draft.attributes.text
-    // const setText = text => setDraft(topicId, text)
 
     const insertText = text => {
-        console.log('inserting into draft', topicId, text)
         insertIntoDraft(topicId, text)
     }
-
-    // const userTopic = userTopics.find(
-    //     userTopic => parseInt(userTopic.attributes.topic_id) === topicId
-    // )
 
     useEffect(() => {
         const params = {
@@ -49,7 +42,7 @@ const TopicContainer = ({
         }
         const socket = createSocket(params, onUpdate)
         return () => socket.close(1000)
-    }, [fetchPosts, fetchUserTopic, topicId])
+    }, [fetchPosts, fetchUserTopic, topicId, setBottomPopUp])
 
     const getUser = userId => users.find(user => parseInt(user.id) === parseInt(userId))
 
@@ -73,6 +66,7 @@ const TopicContainer = ({
                         insertText={insertText}
                         scrollTo={scrollTo}
                         setScrollId={setScrollId}
+                        focusTextArea={focusTextArea}
                     />
                 </TrackVisibility>
             )

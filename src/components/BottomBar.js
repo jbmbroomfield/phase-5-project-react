@@ -11,6 +11,7 @@ const BottomBar = ({
     title, setTitle,
     text,
     toggleLabel,
+    handleToggleClick
 }) => {
 
     const style = {
@@ -33,7 +34,7 @@ const BottomBar = ({
                     onChange={event => setTitle(event.target.value)}
                 />
             )}
-            <span className="nav-link float-right" onClick={() => setBottomPopUp(!bottomPopUp)}>{replyCaret} {toggleLabel}</span>
+            <span className="nav-link float-right" onClick={handleToggleClick}>{replyCaret} {toggleLabel}</span>
             { bottomPopUp && text.length > 0 && (toggleLabel === 'Reply' || title.length > 0) && (
                 <span className="nav-link float-right" onClick={handlePost}>Post</span>
             ) }

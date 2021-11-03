@@ -7,7 +7,8 @@ import TopicReplyContainer from './TopicReplyContainer'
 import { setBottomPopUp } from '../actions/bottomPopUpActions'
 
 const BottomBarContainer = ({
-    bottomPopUp, setBottomPopUp
+    bottomPopUp, setBottomPopUp,
+    focusTextArea, textAreaRef
 }) => {
     return (
         <div className="bottom-bar">
@@ -19,10 +20,12 @@ const BottomBarContainer = ({
                             {...routerProps}
                             bottomPopUp={bottomPopUp}
                             setBottomPopUp={setBottomPopUp}
+                            focusTextArea={focusTextArea}
+                            textAreaRef={textAreaRef}
                         />
                     )}
                 />
-                <span>Default Bottom Bar</span>
+                <Route><span>Default Bottom Bar</span></Route>
             </Switch>
         </div>
     )

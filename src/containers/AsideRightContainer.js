@@ -10,7 +10,7 @@ const AsideRightContainer = () => {
                     exact path="/topics/:topicId"
                     render={routerProps => <AsideRightTopicContainer {...routerProps}/>}
                 />
-                <div>Default Right Aside</div>
+                <Route><div>Default Right Aside</div></Route>
             </Switch>
         </aside>
     )
