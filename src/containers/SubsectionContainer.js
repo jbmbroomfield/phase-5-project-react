@@ -48,28 +48,36 @@ const SubsectionContainer = ({
 		fetchUsers,
     ])
 
+    const RenderTopics = () => (
+        topics.map(topic => (
+            <div key={topic.id} className="topic">
+                <Link to={`/topics/${topic.id}`}>
+                    {topic.attributes.title}
+                </Link>
+            </div>
+        ))
+    )
+
+    const RenderNewTopicContainer = () => (
+        <NewTopicContainer
+            subsectionId={subsectionId}
+            displayTextArea={displayTextArea}
+            setDisplayTextArea={setDisplayTextArea}
+            title={title}
+            setTitle={setTitle}
+            text={text}
+            setText={setText}
+            selection={selection}
+            setSelection={setSelection}
+            handleButtonClick={handleButtonClick}
+        />
+    )
+
     return (
         <>
             <h1>{subsection && subsection.attributes.title}</h1>
-            {topics.map(topic => (
-                <div key={topic.id} className="topic">
-                    <Link to={`/topics/${topic.id}`}>
-                        {topic.attributes.title}
-                    </Link>
-                </div>
-            ))}
-            <NewTopicContainer
-                subsectionId={subsectionId}
-                displayTextArea={displayTextArea}
-                setDisplayTextArea={setDisplayTextArea}
-                title={title}
-                setTitle={setTitle}
-                text={text}
-                setText={setText}
-                selection={selection}
-                setSelection={setSelection}
-                handleButtonClick={handleButtonClick}
-            />
+            <RenderTopics />
+            <RenderNewTopicContainer />
         </>
     )
 }

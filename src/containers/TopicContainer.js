@@ -50,25 +50,29 @@ const TopicContainer = ({
         parseInt(post.attributes.topic_id) === parseInt(topicId)
     ))
 
-    const renderPosts = () => (
+    const RenderPost = ({post, tag, scrollTo}) => (
+        <TrackVisibility key={post.id}>
+            <Post
+                key={post.id}
+                id={post.id}
+                user={post.attributes && getUser(post.attributes.user_id)}
+                text={post.attributes && post.attributes.text}
+                tag={tag}
+                createdAt={post.attributes && post.attributes.created_at}
+                insertText={insertText}
+                scrollTo={scrollTo}
+                setScrollId={setScrollId}
+                focusTextArea={focusTextArea}
+            />
+        </TrackVisibility>
+    )
+
+    const RenderPosts = () => (
         posts.map(post => {
             const tag = post.attributes.tag
             const scrollTo = tag === scrollId
             return (
-                <TrackVisibility key={post.id}>
-                    <Post
-                        key={post.id}
-                        id={post.id}
-                        user={getUser(post.attributes.user_id)}
-                        text={post.attributes.text}
-                        tag={tag}
-                        createdAt={post.attributes.created_at}
-                        insertText={insertText}
-                        scrollTo={scrollTo}
-                        setScrollId={setScrollId}
-                        focusTextArea={focusTextArea}
-                    />
-                </TrackVisibility>
+                <RenderPost key={post.id} post={post} tag={tag} scrollTo={scrollTo} />
             )
         })
     )
@@ -76,17 +80,7 @@ const TopicContainer = ({
     return (
         <>
             <h1>Topic - {topic && topic.attributes.title}</h1>
-            {renderPosts()}
-            {/* <TopicReplyContainer
-                topicId={topicId}
-                displayTextArea={displayTextArea}
-                setDisplayTextArea={setDisplayTextAreaAndBottomPopUp}
-                text={text}
-                setText={setText}
-                selection={selection}
-                setSelection={setSelection}
-                handleButtonClick={handleButtonClick}
-            /> */}
+            <RenderPosts />
         </>
     )
 }

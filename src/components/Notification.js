@@ -36,19 +36,31 @@ const Notification = ({
         setScrollId(tag)
     }
 
+    const RenderText = () => (
+        text()
+    )
+
+    const RenderGreenArrow = () => (
+        <i
+            className="fa fa-arrow-right clickable"
+            style={{color: 'green'}}
+            onClick={goToTopic}
+        ></i>
+    )
+
+    const RenderRedX = () => (
+        <i
+            className="fa fa-times clickable"
+            style={{color: 'red'}}
+            onClick={deleteNotification}
+        ></i>
+    )
+
     return (
         <div>
-            { text() }
-            <i
-               className="fa fa-arrow-right clickable"
-               style={{color: 'green'}}
-               onClick={goToTopic}
-            ></i>
-            <i
-                className="fa fa-times clickable"
-                style={{color: 'red'}}
-                onClick={deleteNotification}
-            ></i>
+            <RenderText />
+            <RenderGreenArrow />
+            <RenderRedX />            
         </div>
     )
 }

@@ -33,26 +33,34 @@ const NewTopicContainer = ({
         setDisplayTextArea(false)
     }
 
+    const RenderBottomBar = () => (
+        <BottomBar
+            toggleLabel="New Topic"
+            displayTextArea={displayTextArea}
+            toggleDisplayTextArea={toggleDisplayTextArea}
+            handlePost={handlePost}
+            handleButtonClick={handleButtonClick}
+            text={text}
+            title={title}
+            setTitle={setTitle}
+        />
+    )
+
+    const RenderTextContainer = () => (
+        displayTextArea ? (
+            <TextContainer
+                text={text}
+                setText={setText}
+                selection={selection}
+                setSelection={setSelection}
+            />
+        ) : null 
+    )
+
     return (
         <>
-            <BottomBar
-                toggleLabel="New Topic"
-                displayTextArea={displayTextArea}
-                toggleDisplayTextArea={toggleDisplayTextArea}
-                handlePost={handlePost}
-                handleButtonClick={handleButtonClick}
-                text={text}
-                title={title}
-                setTitle={setTitle}
-            />
-            { displayTextArea && (
-                <TextContainer
-                    text={text}
-                    setText={setText}
-                    selection={selection}
-                    setSelection={setSelection}
-                />
-             ) }
+            <RenderBottomBar />
+            <RenderTextContainer />
         </>
     )
 }

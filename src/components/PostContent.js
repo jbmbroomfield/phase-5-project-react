@@ -15,15 +15,26 @@ const PostContent = ({ text, tag, createdAt }) => {
         second: 'numeric',
     }
     const dateString = createdAt.toLocaleDateString("en-US", dateOptions)
-    return (
-        <div className="post-content">
+
+    const RenderPostHeader = () => (
+        <>
             <div>
                 <strong><em>
                     Reply #{tag} on {dateString} 
                 </em></strong>
             </div>
             <br />
-            {bbCodeParsing.parse(text, bbCodeObjects)}
+        </>
+    )
+
+    const RenderPostText = () => (
+        bbCodeParsing.parse(text, bbCodeObjects)
+    )
+
+    return (
+        <div className="post-content">
+            <RenderPostHeader />
+            <RenderPostText />
         </div>
     )
 }

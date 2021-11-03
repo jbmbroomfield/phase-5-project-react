@@ -11,13 +11,13 @@ const UsersContainer = ({ users, fetchUsers }) => {
         fetchUsers()
     }, [fetchUsers])
 
-    const renderUsers = () => (
+    const RenderUsers = () => (
         users.map(user => <User key={user.id} username={user.attributes.username} />)
     )
     console.log(users)
     return (
         <div>
-            {renderUsers()}
+            <RenderUsers />
         </div>
     )
 }

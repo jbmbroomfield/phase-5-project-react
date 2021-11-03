@@ -15,7 +15,7 @@ const LoginContainer = ({ currentUser, login }) => {
         return <div></div>
     }
 
-    return (
+    const RenderLoginContainer = () => (
         <div>
             <div className="page">
                 <h1>Login</h1>
@@ -23,6 +23,8 @@ const LoginContainer = ({ currentUser, login }) => {
             </div>
         </div>
     )
+
+    return <RenderLoginContainer />
 }
 
 const mapStateToProps = state => ({

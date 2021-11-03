@@ -23,25 +23,29 @@ const LoginForm = ({ login }) => {
         login(state.username, state.password, redirect)
     }
 
+    const RenderForm = () => (
+        <form onSubmit={handleSubmit}>
+            Username:<br />
+            <input
+                type="text"
+                name="username"
+                value={state.username}
+                onChange={handleChange}
+            /><br />
+            Password:<br />
+            <input
+                type="password"
+                name="password"
+                value={state.password}
+                onChange={handleChange}
+            />
+            <input type="submit" />
+        </form>
+    )
+
     return (
         <div>
-            <form onSubmit={handleSubmit}>
-                Username:<br />
-                <input
-                    type="text"
-                    name="username"
-                    value={state.username}
-                    onChange={handleChange}
-                /><br />
-                Password:<br />
-                <input
-                    type="password"
-                    name="password"
-                    value={state.password}
-                    onChange={handleChange}
-                />
-                <input type="submit" />
-            </form>
+            <RenderForm />
         </div>
     )
 }

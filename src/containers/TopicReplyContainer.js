@@ -24,9 +24,6 @@ const TopicReplyContainer = ({
 
     const setSelection = selection => setDraft(topicId, text, selection)
 
-    const draftFocused = draft && draft.attributes.focus
-   
-
     const handleButtonClick = insert => {
         const [nextText, nextSelectionStart, nextSelectionEnd] = insert(text, selection[0], selection[1])
         setText(nextText)
@@ -43,29 +40,36 @@ const TopicReplyContainer = ({
         setBottomPopUp(!bottomPopUp)
     }
 
+    const RenderBottomBar = () => (
+        <BottomBar
+            toggleLabel="Reply"
+            bottomPopUp={bottomPopUp}
+            setBottomPopUp={setBottomPopUp}
+            handlePost={handlePost}
+            handleButtonClick={handleButtonClick}
+            text={text}
+            handleToggleClick={handleToggleClick}
+            focusTextArea={focusTextArea}
+        />
+    )
+
+    const RenderTextContainer = () => (
+        bottomPopUp && (
+            <TextContainer
+                text={text}
+                setText={setText}
+                selection={selection}
+                setSelection={setSelection}
+                setBottomPopUp={setBottomPopUp}
+                textAreaRef={textAreaRef}
+            />
+        )
+    )
+
     return (
         <>
-            <BottomBar
-                toggleLabel="Reply"
-                bottomPopUp={bottomPopUp}
-                setBottomPopUp={setBottomPopUp}
-                handlePost={handlePost}
-                handleButtonClick={handleButtonClick}
-                text={text}
-                handleToggleClick={handleToggleClick}
-                focusTextArea={focusTextArea}
-            />
-            { bottomPopUp && (
-                <TextContainer
-                    text={text}
-                    setText={setText}
-                    selection={selection}
-                    setSelection={setSelection}
-                    draftFocused={draftFocused}
-                    setBottomPopUp={setBottomPopUp}
-                    textAreaRef={textAreaRef}
-                />
-             ) }
+            <RenderBottomBar />
+            <RenderTextContainer />
         </>
     )
 }

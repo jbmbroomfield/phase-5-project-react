@@ -10,23 +10,32 @@ const BottomBarContainer = ({
     bottomPopUp, setBottomPopUp,
     focusTextArea, textAreaRef
 }) => {
+
+    const TopicRoute = () => (
+        <Route
+            exact path="/topics/:topicId"
+            render={routerProps => (
+                <TopicReplyContainer
+                    {...routerProps}
+                    bottomPopUp={bottomPopUp}
+                    setBottomPopUp={setBottomPopUp}
+                    focusTextArea={focusTextArea}
+                    textAreaRef={textAreaRef}
+                />
+            )}
+        />
+    )
+
+    const RenderSwitch = () => (
+        <Switch>
+            <TopicRoute />
+            <Route><span>Default Bottom Bar</span></Route>
+        </Switch>
+    )
+
     return (
         <div className="bottom-bar">
-            <Switch>
-                <Route
-                    exact path="/topics/:topicId"
-                    render={routerProps => (
-                        <TopicReplyContainer
-                            {...routerProps}
-                            bottomPopUp={bottomPopUp}
-                            setBottomPopUp={setBottomPopUp}
-                            focusTextArea={focusTextArea}
-                            textAreaRef={textAreaRef}
-                        />
-                    )}
-                />
-                <Route><span>Default Bottom Bar</span></Route>
-            </Switch>
+            <RenderSwitch />
         </div>
     )
 }

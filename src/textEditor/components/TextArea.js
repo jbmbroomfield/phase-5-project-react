@@ -12,18 +12,22 @@ const TextArea = React.forwardRef(({
         return cleanup
     }, [ref, setBottomPopUp])
 
+    const RenderForm = () => (
+        <form>
+            <textarea
+                ref={ref}
+                id="textarea"
+                name="text"
+                value={text}
+                onChange={onChange}
+                onBlur={onBlur}
+            />
+        </form>
+    )
+
     return (
         <div className='text-area'>
-            <form>
-                <textarea
-                    ref={ref}
-                    id="textarea"
-                    name="text"
-                    value={text}
-                    onChange={onChange}
-                    onBlur={onBlur}
-                />
-            </form>
+            <RenderForm />
         </div>
 )})
 

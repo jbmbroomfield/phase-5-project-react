@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 
 const Navbar = ({ currentUser, removeCurrentUser }) => {
 
-    const renderAuthLinks = () => {
+    const RenderAuthLinks = () => {
         if (currentUser.attributes) {
             return (
                 <li><span className="nav-link" onClick={removeCurrentUser}>Logout</span></li>
@@ -15,12 +15,16 @@ const Navbar = ({ currentUser, removeCurrentUser }) => {
         }
     }
 
+    const RenderNavbar = () => (
+        <ul className="navbar">
+            <li><NavLink className="nav-link" to="/">Home</NavLink></li>
+            <RenderAuthLinks />
+        </ul>
+    )
+
     return (
         <div className="navbar">
-            <ul className="navbar">
-                <li><NavLink className="nav-link" to="/">Home</NavLink></li>
-                {renderAuthLinks()}
-            </ul>
+            <RenderNavbar />
         </div>
     )
 }

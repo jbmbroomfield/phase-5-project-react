@@ -25,16 +25,24 @@ const TextContainer = ({
         textAreaRef.current.setSelectionRange(selection[0], selection[1])
     }, [text, selection, setBottomPopUp, textAreaRef])
 
+    const RenderTextArea = () => (
+        <TextArea
+            ref={textAreaRef}
+            text={text}
+            onChange={handleTextAreaChange}
+            onBlur={handleTextAreaBlur}
+            setBottomPopUp={setBottomPopUp}
+        />
+    )
+    
+    const RenderTextPreview = () => (
+        <TextPreview text={text} bbCodeObjects={bbCodeObjects} />
+    )
+
     return (
         <div className='text-container'>
-            <TextArea
-                ref={textAreaRef}
-                text={text}
-                onChange={handleTextAreaChange}
-                onBlur={handleTextAreaBlur}
-                setBottomPopUp={setBottomPopUp}
-            />
-            <TextPreview text={text} bbCodeObjects={bbCodeObjects} />
+            <RenderTextArea />
+            <RenderTextPreview />
         </div>
     )
 }
