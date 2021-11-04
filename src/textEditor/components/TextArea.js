@@ -4,13 +4,12 @@ const TextArea = React.forwardRef(({
     text, onChange, onBlur, setBottomPopUp
 }, ref) => {
     
-    // useEffect(() => {
-    //     ref.current.focus()
-    //     // const cleanup = () => {
-    //     //     setBottomPopUp(false)
-    //     // }
-    //     // return cleanup
-    // }, [ref])
+    useEffect(() => {
+        const cleanup = () => {
+            setBottomPopUp(false)
+        }
+        return cleanup
+    }, [setBottomPopUp])
 
     const renderForm = () => (
         <form>

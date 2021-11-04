@@ -30,7 +30,6 @@ const TopicContainer = ({
     const draft = drafts.find(
         draft => parseInt(draft.attributes.topic_id) === topicId
     )
-    const selection = draft ? draft.attributes.selection : [0, 0]
 
     const insertText = text => {
         insertIntoDraft(topicId, text)

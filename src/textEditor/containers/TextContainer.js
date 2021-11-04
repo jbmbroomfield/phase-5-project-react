@@ -22,19 +22,6 @@ const TextContainer = ({
         setSelection([event.target.selectionStart, event.target.selectionEnd])
     }
 
-    // useEffect(() => {
-    //     textAreaRef.current.setSelectionRange(selection[0], selection[1])
-    //     focusTextArea()
-    // }, [selection, textAreaRef, focusTextArea])
-
-    // useEffect(() => {
-    //     setBottomPopUp(true)
-    //     const cleanup = () => {
-    //         setBottomPopUp(false)
-    //     }
-    //     // return cleanup
-    // }, [])
-
     const renderTextArea = () => (
         <TextArea
             key="text-area"
