@@ -22,6 +22,6 @@ export const createPost = (topicId, text) => (
             }
         }
         API.post(`topics/${topicId}/posts`, body)
-        .then(json => dispatch(fetchPosts(topicId)))
+        .then(() => dispatch(fetchPosts(topicId)))
     }
 )

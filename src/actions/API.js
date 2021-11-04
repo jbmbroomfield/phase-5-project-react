@@ -16,8 +16,8 @@ class API {
         return this.fetchFromAPI(url, 'POST', body)
     }
 
-    static delete(url) {
-        return this.fetchFromAPI(url, 'DELETE')
+    static delete(url, body) {
+        return this.fetchFromAPI(url, 'DELETE', body)
     }
 
     static headers = () => {
@@ -38,6 +38,8 @@ class API {
     }
 
     static async fetchFromAPI(url, method, body) {
+        console.log(this.#BASE_URL + url)
+        console.log(this.configObject(method, body))
         const response = await fetch(this.#BASE_URL + url, this.configObject(method, body))
         return await response.json()
     }

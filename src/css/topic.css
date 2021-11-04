@@ -4,5 +4,26 @@
   margin: 10px;
   border-radius: 20px;
   display: grid;
-  grid-template-columns: 2fr 17fr 1fr;
+  grid-template-columns: 2fr 10fr 2fr;
+}
+
+.thumbs {
+  margin: 0 20px 0 0;
+}
+
+.fa-thumbs-up,
+.fa-thumbs-down {
+  color: #777;
+  cursor: pointer;
+  font-size: 125%;
+}
+
+.fa-thumbs-up:hover,
+.fa-thumbs-up-liked {
+  color: lime;
+}
+
+.fa-thumbs-down:hover,
+.fa-thumbs-down-disliked {
+  color: red;
 }

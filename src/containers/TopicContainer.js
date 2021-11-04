@@ -12,6 +12,7 @@ import { setScrollId } from '../actions/scrollIdActions'
 
 import { setBottomPopUp } from '../actions/bottomPopUpActions'
 import { setDraft, insertIntoDraft } from '../actions/draftsActions'
+import { createFlag, deleteFlag } from '../actions/flagsActions'
 
 const TopicContainer = ({
     match,
@@ -22,6 +23,7 @@ const TopicContainer = ({
     setBottomPopUp,
     drafts, setDraft, insertIntoDraft,
     focusTextArea,
+    createFlag, deleteFlag,
 }) => {
 
     const topicId = parseInt(match.params.topicId)
@@ -71,6 +73,9 @@ const TopicContainer = ({
                     setScrollId={setScrollId}
                     focusTextArea={focusTextArea}
                     draft={draft}
+                    my_flags={post.attributes && post.attributes.my_flags}
+                    createFlag={category => createFlag(topicId, post.id, category)}
+                    deleteFlag={category => deleteFlag(topicId, post.id, category)}
                 />
         </TrackVisibility>
         })
@@ -101,7 +106,9 @@ const mapDispatchToProps = dispatch => ({
     setScrollId: id => dispatch(setScrollId(id)),
     setBottomPopUp: bottomPopUp => dispatch(setBottomPopUp(bottomPopUp)),
     setDraft: (topicId, text, selection) => dispatch(setDraft(topicId, text, selection)),
-    insertIntoDraft: (topicId, text) => dispatch(insertIntoDraft(topicId, text))
+    insertIntoDraft: (topicId, text) => dispatch(insertIntoDraft(topicId, text)),
+    createFlag: (topicId, postId, category) => dispatch(createFlag(topicId, postId, category)),
+    deleteFlag: (topicId, postId, category) => dispatch(deleteFlag(topicId, postId, category)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TopicContainer)

@@ -16,10 +16,12 @@ const postsReducer = (state = [], action) => {
 
 const appendNewPost = (state, newPost) => {
     const newState = [...state]
-    const existingPost = state.find(ep => (
+    const existingPost = newState.find(ep => (
         parseInt(ep.id) === parseInt(newPost.id)
     ))
-    if (!existingPost) {
+    if (existingPost) {
+        existingPost.attributes = {...newPost.attributes}
+    } else {
         newState.push(newPost)
     }
     return newState

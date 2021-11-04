@@ -12,7 +12,9 @@ const Post = ({
     isVisible,
     scrollTo, setScrollId,
     focusTextArea,
-    draft
+    draft,
+    my_flags,
+    createFlag, deleteFlag,
 }) => {
 
     const insertPostText = () =>{
@@ -29,11 +31,20 @@ const Post = ({
         }
     }, [scrollTo, setScrollId])
 
+    const liked = my_flags.includes('like')
+    const disliked = my_flags.includes('dislike')
+
     return (
         <div className="post" id={tag} ref={postRef}>
             <PostInfo username={user && user.attributes.username} />
             <PostContent text={text} tag={tag} createdAt={createdAt} />
-            <PostNotes insertPostText={insertPostText} />
+            <PostNotes
+                insertPostText={insertPostText}
+                liked={liked}
+                disliked={disliked}
+                createFlag={createFlag}
+                deleteFlag={deleteFlag}
+            />
         </div>
     )
 }
