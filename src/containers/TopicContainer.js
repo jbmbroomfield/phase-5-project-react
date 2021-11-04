@@ -27,6 +27,11 @@ const TopicContainer = ({
     const topicId = parseInt(match.params.topicId)
     const topic = topics.find(topic => parseInt(topic.id) === topicId)
 
+    const draft = drafts.find(
+        draft => parseInt(draft.attributes.topic_id) === topicId
+    )
+    const selection = draft ? draft.attributes.selection : [0, 0]
+
     const insertText = text => {
         insertIntoDraft(topicId, text)
     }
@@ -66,6 +71,7 @@ const TopicContainer = ({
                     scrollTo={scrollTo}
                     setScrollId={setScrollId}
                     focusTextArea={focusTextArea}
+                    draft={draft}
                 />
         </TrackVisibility>
         })
@@ -87,7 +93,7 @@ const mapStateToProps = state => ({
     users: state.users,
     userTopics: state.userTopics,
     scrollId: state.scrollId,
-    drafts: state.draft,
+    drafts: state.drafts,
 })
 
 const mapDispatchToProps = dispatch => ({

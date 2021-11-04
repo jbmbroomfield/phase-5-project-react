@@ -1,9 +1,17 @@
-:root {
+/* :root {
   --main-bg-color: #bbb;
   --main-fg-color: #eee;
   --navbar-color: #111;
   --navbar-hover-color: #333;
   --aside-bg-color: #eee;
+} */
+
+:root {
+  --main-bg-color: #ccc5b9;
+  --main-fg-color: #fffcf2;
+  --navbar-color: #403d39;
+  --navbar-hover-color: #eb5e28;
+  --aside-bg-color: #fffcf2;
 }
 
 body {

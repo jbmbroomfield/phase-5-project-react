@@ -43,7 +43,7 @@ const TopicReplyContainer = ({
         if (bottomPopUp) {
             setBottomPopUp(false)
         } else {
-            focusTextArea(selection)
+            focusTextArea(draft)
         }
         // setBottomPopUp(!bottomPopUp)
     }
