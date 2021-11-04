@@ -48,7 +48,7 @@ const SubsectionContainer = ({
 		fetchUsers,
     ])
 
-    const RenderTopics = () => (
+    const renderTopics = () => (
         topics.map(topic => (
             <div key={topic.id} className="topic">
                 <Link to={`/topics/${topic.id}`}>
@@ -58,7 +58,7 @@ const SubsectionContainer = ({
         ))
     )
 
-    const RenderNewTopicContainer = () => (
+    const renderNewTopicContainer = () => (
         <NewTopicContainer
             subsectionId={subsectionId}
             displayTextArea={displayTextArea}
@@ -76,8 +76,8 @@ const SubsectionContainer = ({
     return (
         <>
             <h1>{subsection && subsection.attributes.title}</h1>
-            <RenderTopics />
-            <RenderNewTopicContainer />
+            { renderTopics() }
+            { renderNewTopicContainer() }
         </>
     )
 }

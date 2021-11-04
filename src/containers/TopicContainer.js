@@ -50,37 +50,31 @@ const TopicContainer = ({
         parseInt(post.attributes.topic_id) === parseInt(topicId)
     ))
 
-    const RenderPost = ({post, tag, scrollTo}) => (
-        <TrackVisibility key={post.id}>
-            <Post
-                key={post.id}
-                id={post.id}
-                user={post.attributes && getUser(post.attributes.user_id)}
-                text={post.attributes && post.attributes.text}
-                tag={tag}
-                createdAt={post.attributes && post.attributes.created_at}
-                insertText={insertText}
-                scrollTo={scrollTo}
-                setScrollId={setScrollId}
-                focusTextArea={focusTextArea}
-            />
-        </TrackVisibility>
-    )
-
-    const RenderPosts = () => (
+    const renderPosts = () => (
         posts.map(post => {
             const tag = post.attributes.tag
             const scrollTo = tag === scrollId
-            return (
-                <RenderPost key={post.id} post={post} tag={tag} scrollTo={scrollTo} />
-            )
+            return <TrackVisibility key={post.id}>
+                <Post
+                    key={post.id}
+                    id={post.id}
+                    user={post.attributes && getUser(post.attributes.user_id)}
+                    text={post.attributes && post.attributes.text}
+                    tag={tag}
+                    createdAt={post.attributes && post.attributes.created_at}
+                    insertText={insertText}
+                    scrollTo={scrollTo}
+                    setScrollId={setScrollId}
+                    focusTextArea={focusTextArea}
+                />
+        </TrackVisibility>
         })
     )
 
     return (
         <>
             <h1>Topic - {topic && topic.attributes.title}</h1>
-            <RenderPosts />
+            { renderPosts() }
         </>
     )
 }

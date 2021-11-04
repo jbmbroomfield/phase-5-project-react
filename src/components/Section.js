@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const Section = ({ title, subsections }) => {
 
-    const RenderSubsections = () => (
+    const renderSubsections = () => (
         subsections.map(subsection => (
         <p key={subsection.id}>
             <Link to={`subsections/${subsection.id}`}>{subsection.attributes.title}</Link>
@@ -14,7 +14,7 @@ const Section = ({ title, subsections }) => {
     return (
         <div className='section'>
             <h1>{title}</h1>
-            <RenderSubsections />
+            { renderSubsections() }
         </div>
     )
 }

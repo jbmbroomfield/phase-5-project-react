@@ -11,7 +11,7 @@ const BottomBarContainer = ({
     focusTextArea, textAreaRef
 }) => {
 
-    const TopicRoute = () => (
+    const topicRoute = () => (
         <Route
             exact path="/topics/:topicId"
             render={routerProps => (
@@ -28,7 +28,7 @@ const BottomBarContainer = ({
 
     const RenderSwitch = () => (
         <Switch>
-            <TopicRoute />
+            { topicRoute() }
             <Route><span>Default Bottom Bar</span></Route>
         </Switch>
     )

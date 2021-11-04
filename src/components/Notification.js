@@ -36,11 +36,7 @@ const Notification = ({
         setScrollId(tag)
     }
 
-    const RenderText = () => (
-        text()
-    )
-
-    const RenderGreenArrow = () => (
+    const renderGreenArrow = () => (
         <i
             className="fa fa-arrow-right clickable"
             style={{color: 'green'}}
@@ -48,7 +44,7 @@ const Notification = ({
         ></i>
     )
 
-    const RenderRedX = () => (
+    const renderRedX = () => (
         <i
             className="fa fa-times clickable"
             style={{color: 'red'}}
@@ -58,9 +54,9 @@ const Notification = ({
 
     return (
         <div>
-            <RenderText />
-            <RenderGreenArrow />
-            <RenderRedX />            
+            { text() }
+            { renderGreenArrow() }
+            { renderRedX() }      
         </div>
     )
 }

@@ -15,7 +15,7 @@ const Navbar = ({ currentUser, removeCurrentUser }) => {
         }
     }
 
-    const RenderNavbar = () => (
+    const renderNavbar = () => (
         <ul className="navbar">
             <li><NavLink className="nav-link" to="/">Home</NavLink></li>
             <RenderAuthLinks />
@@ -24,7 +24,7 @@ const Navbar = ({ currentUser, removeCurrentUser }) => {
 
     return (
         <div className="navbar">
-            <RenderNavbar />
+            { renderNavbar() }
         </div>
     )
 }

@@ -11,7 +11,7 @@ const AsideRightContainer = () => {
         />
     )
 
-    const RenderSwitch = () => (
+    const renderSwitch = () => (
         <Switch>
             <TopicRoute />
             <Route><div>Default Right Aside</div></Route>
@@ -20,7 +20,7 @@ const AsideRightContainer = () => {
 
     return (
         <aside className="aside-right">
-            <RenderSwitch />
+            { renderSwitch() }
         </aside>
     )
 }

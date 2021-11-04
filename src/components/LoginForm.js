@@ -23,7 +23,7 @@ const LoginForm = ({ login }) => {
         login(state.username, state.password, redirect)
     }
 
-    const RenderForm = () => (
+    const renderForm = () => (
         <form onSubmit={handleSubmit}>
             Username:<br />
             <input
@@ -45,7 +45,7 @@ const LoginForm = ({ login }) => {
 
     return (
         <div>
-            <RenderForm />
+            { renderForm() }
         </div>
     )
 }

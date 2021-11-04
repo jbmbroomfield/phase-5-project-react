@@ -18,7 +18,7 @@ const AsideRightTopicContainer = ({
         subscribeToTopic(topicId, !subscribed)
     }
 
-    const RenderSubscribeButton = () => (
+    const renderSubscribeButton = () => (
         <button onClick={handleClick}>
             { subscribed ? 'Unsubscribe' : 'Subscribe' }
         </button>
@@ -26,7 +26,7 @@ const AsideRightTopicContainer = ({
 
     return (
         <>
-            <RenderSubscribeButton />
+            { renderSubscribeButton() }
         </>
     )
 }

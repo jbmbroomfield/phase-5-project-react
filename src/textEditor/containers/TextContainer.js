@@ -1,4 +1,4 @@
-import React, {  useEffect } from 'react'
+import React from 'react'
 
 import TextArea from '../components/TextArea'
 import TextPreview from '../components/TextPreview'
@@ -9,7 +9,8 @@ const TextContainer = ({
     text, setText,
     selection, setSelection,
     setBottomPopUp,
-    textAreaRef
+    textAreaRef,
+    focusTextArea,
 }) => {
 
     const handleTextAreaChange = event => {
@@ -21,12 +22,22 @@ const TextContainer = ({
         setSelection([event.target.selectionStart, event.target.selectionEnd])
     }
 
-    useEffect(() => {
-        textAreaRef.current.setSelectionRange(selection[0], selection[1])
-    }, [text, selection, setBottomPopUp, textAreaRef])
+    // useEffect(() => {
+    //     textAreaRef.current.setSelectionRange(selection[0], selection[1])
+    //     focusTextArea()
+    // }, [selection, textAreaRef, focusTextArea])
 
-    const RenderTextArea = () => (
+    // useEffect(() => {
+    //     setBottomPopUp(true)
+    //     const cleanup = () => {
+    //         setBottomPopUp(false)
+    //     }
+    //     // return cleanup
+    // }, [])
+
+    const renderTextArea = () => (
         <TextArea
+            key="text-area"
             ref={textAreaRef}
             text={text}
             onChange={handleTextAreaChange}
@@ -35,14 +46,14 @@ const TextContainer = ({
         />
     )
     
-    const RenderTextPreview = () => (
+    const renderTextPreview = () => (
         <TextPreview text={text} bbCodeObjects={bbCodeObjects} />
     )
 
     return (
         <div className='text-container'>
-            <RenderTextArea />
-            <RenderTextPreview />
+            { renderTextArea() }
+            { renderTextPreview() }
         </div>
     )
 }

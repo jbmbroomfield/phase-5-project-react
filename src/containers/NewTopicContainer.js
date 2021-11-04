@@ -33,7 +33,7 @@ const NewTopicContainer = ({
         setDisplayTextArea(false)
     }
 
-    const RenderBottomBar = () => (
+    const renderBottomBar = () => (
         <BottomBar
             toggleLabel="New Topic"
             displayTextArea={displayTextArea}
@@ -46,7 +46,7 @@ const NewTopicContainer = ({
         />
     )
 
-    const RenderTextContainer = () => (
+    const renderTextContainer = () => (
         displayTextArea ? (
             <TextContainer
                 text={text}
@@ -59,8 +59,8 @@ const NewTopicContainer = ({
 
     return (
         <>
-            <RenderBottomBar />
-            <RenderTextContainer />
+            { renderBottomBar() }
+            { renderTextContainer() }
         </>
     )
 }

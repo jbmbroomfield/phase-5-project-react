@@ -5,14 +5,14 @@ import { removeCurrentUser } from '../actions/currentUserActions'
 
 const NavbarContainer = ({ currentUser, removeCurrentUser }) => {
 
-    const RenderNavbar = () => (
+    const renderNavbar = () => (
         <Navbar
             currentUser={currentUser}
             removeCurrentUser={removeCurrentUser}
         />
     )
 
-    return <RenderNavbar />
+    return renderNavbar()
 
 }
 

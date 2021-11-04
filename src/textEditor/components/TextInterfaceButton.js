@@ -4,7 +4,7 @@ const TextInterfaceButton = ({ bbCodeObject, onClick }) => {
     const insertion = bbCodeObject.insertion
     const display = bbCodeObject.display
 
-    const RenderButton = () => (
+    const renderButton = () => (
         <span
             onClick={() => onClick(insertion.insert)}
             className={`sceditor-button sceditor-button-${display.value}`}
@@ -15,7 +15,7 @@ const TextInterfaceButton = ({ bbCodeObject, onClick }) => {
         </span>
     )
 
-    return <RenderButton />
+    return renderButton()
 }
 
 

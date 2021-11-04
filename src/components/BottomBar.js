@@ -20,13 +20,13 @@ const BottomBar = ({
 
     const replyCaret = bottomPopUp ? <i className="fa fa-caret-down" aria-hidden="true"></i> : <i className="fa fa-caret-up" aria-hidden="true"></i>
 
-    const RenderTextInterface = () => (
+    const renderTextInterface = () => (
         bottomPopUp ? (
             <TextInterface onButtonClick={handleButtonClick} bbCodeObjects={bbCodeObjects} />
         ) : null
     )
 
-    const RenderNewTopicTitleInput = () => (
+    const renderNewTopicTitleInput = () => (
         (bottomPopUp && toggleLabel === 'New Topic') ? (
             <input
                 type="text"
@@ -38,11 +38,11 @@ const BottomBar = ({
         ) : null
     )
 
-    const RenderToggler = () => (
+    const renderToggler = () => (
         <span className="nav-link float-right" onClick={handleToggleClick}>{replyCaret} {toggleLabel}</span>
     )
 
-    const RenderPostButton = () => (
+    const renderPostButton = () => (
         (bottomPopUp && text.length > 0) ? (toggleLabel === 'Reply' || title.length > 0) && (
             <span className="nav-link float-right" onClick={handlePost}>Post</span>
         ) : null
@@ -50,10 +50,10 @@ const BottomBar = ({
 
     return (
         <div className="bottom-bar" style={style}>
-            <RenderTextInterface />
-            <RenderNewTopicTitleInput />
-            <RenderToggler />
-            <RenderPostButton />
+            { renderTextInterface() }
+            { renderNewTopicTitleInput() }
+            { renderToggler() }
+            { renderPostButton() }
         </div>
     )
 }

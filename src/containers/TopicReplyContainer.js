@@ -20,7 +20,10 @@ const TopicReplyContainer = ({
     const text = draft ? draft.attributes.text : ''
     const selection = draft ? draft.attributes.selection : [0, 0]
 
-    const setText = (text, selection) => setDraft(topicId, text, selection)
+    const setText = (text, selection) => {
+        setDraft(topicId, text, selection)
+        focusTextArea(selection)
+    }
 
     const setSelection = selection => setDraft(topicId, text, selection)
 
@@ -37,10 +40,15 @@ const TopicReplyContainer = ({
     }
     
     const handleToggleClick = () => {
-        setBottomPopUp(!bottomPopUp)
+        if (bottomPopUp) {
+            setBottomPopUp(false)
+        } else {
+            focusTextArea(selection)
+        }
+        // setBottomPopUp(!bottomPopUp)
     }
 
-    const RenderBottomBar = () => (
+    const renderBottomBar = () => (
         <BottomBar
             toggleLabel="Reply"
             bottomPopUp={bottomPopUp}
@@ -53,23 +61,25 @@ const TopicReplyContainer = ({
         />
     )
 
-    const RenderTextContainer = () => (
+    const renderTextContainer = () => (
         bottomPopUp && (
             <TextContainer
+                key="text-area"
                 text={text}
                 setText={setText}
                 selection={selection}
                 setSelection={setSelection}
                 setBottomPopUp={setBottomPopUp}
                 textAreaRef={textAreaRef}
+                focusTextArea={focusTextArea}
             />
         )
     )
 
     return (
         <>
-            <RenderBottomBar />
-            <RenderTextContainer />
+            { renderBottomBar() }
+            { renderTextContainer() }
         </>
     )
 }

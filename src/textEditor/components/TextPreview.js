@@ -3,13 +3,13 @@ import React from 'react'
 
 const TextPreview = ({ text, bbCodeObjects}) => {
     
-    const RenderTextPreview = () => (
+    const renderTextPreview = () => (
         bbCodeParsing.parse(text, bbCodeObjects)
     )
 
     return (
         <div className="text-preview">
-            <RenderTextPreview />  
+            { renderTextPreview() }  
         </div>
     )
 }

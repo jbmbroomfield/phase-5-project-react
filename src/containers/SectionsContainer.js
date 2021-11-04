@@ -38,7 +38,7 @@ const SectionsContainer = ({
         ))
     ) 
 
-    const RenderSections = () => {
+    const renderSections = () => {
         return sections.map(section => (
             <Section
                 key={section.id}
@@ -48,7 +48,7 @@ const SectionsContainer = ({
         ))
     }
 
-    return <RenderSections />
+    return renderSections()
 }
 
 const mapStateToProps = state => ({

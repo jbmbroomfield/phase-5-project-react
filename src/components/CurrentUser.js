@@ -10,7 +10,7 @@ const CurrentUser = ({ currentUser }) => {
     }
 
     return (
-        <div>{renderCurrentUser()}</div>
+        <div>{ renderCurrentUser() }</div>
     )
 }
 

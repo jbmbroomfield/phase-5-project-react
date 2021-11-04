@@ -16,7 +16,7 @@ const PostContent = ({ text, tag, createdAt }) => {
     }
     const dateString = createdAt.toLocaleDateString("en-US", dateOptions)
 
-    const RenderPostHeader = () => (
+    const renderPostHeader = () => (
         <>
             <div>
                 <strong><em>
@@ -27,14 +27,14 @@ const PostContent = ({ text, tag, createdAt }) => {
         </>
     )
 
-    const RenderPostText = () => (
+    const renderPostText = () => (
         bbCodeParsing.parse(text, bbCodeObjects)
     )
 
     return (
         <div className="post-content">
-            <RenderPostHeader />
-            <RenderPostText />
+            { renderPostHeader() }
+            { renderPostText() }
         </div>
     )
 }

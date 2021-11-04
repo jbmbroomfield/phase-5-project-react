@@ -4,15 +4,15 @@ const TextArea = React.forwardRef(({
     text, onChange, onBlur, setBottomPopUp
 }, ref) => {
     
-    useEffect(() => {
-        ref.current.focus()
-        const cleanup = () => {
-            setBottomPopUp(false)
-        }
-        return cleanup
-    }, [ref, setBottomPopUp])
+    // useEffect(() => {
+    //     ref.current.focus()
+    //     // const cleanup = () => {
+    //     //     setBottomPopUp(false)
+    //     // }
+    //     // return cleanup
+    // }, [ref])
 
-    const RenderForm = () => (
+    const renderForm = () => (
         <form>
             <textarea
                 ref={ref}
@@ -27,7 +27,7 @@ const TextArea = React.forwardRef(({
 
     return (
         <div className='text-area'>
-            <RenderForm />
+            { renderForm() }
         </div>
 )})
 
