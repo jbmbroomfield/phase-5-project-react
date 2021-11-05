@@ -60,6 +60,7 @@ const TopicContainer = ({
         posts.map(post => {
             const tag = post.attributes.tag
             const scrollTo = tag === scrollId
+            console.log(post.attributes.public_flags.like.length)
             return <TrackVisibility key={post.id}>
                 <Post
                     key={post.id}
@@ -74,6 +75,7 @@ const TopicContainer = ({
                     focusTextArea={focusTextArea}
                     draft={draft}
                     my_flags={post.attributes && post.attributes.my_flags}
+                    publicFlags={post.attributes && post.attributes.public_flags}
                     createFlag={category => createFlag(topicId, post.id, category)}
                     deleteFlag={category => deleteFlag(topicId, post.id, category)}
                 />

@@ -13,7 +13,7 @@ const Post = ({
     scrollTo, setScrollId,
     focusTextArea,
     draft,
-    my_flags,
+    my_flags, publicFlags,
     createFlag, deleteFlag,
 }) => {
 
@@ -33,6 +33,9 @@ const Post = ({
 
     const liked = my_flags.includes('like')
     const disliked = my_flags.includes('dislike')
+    console.log(text, publicFlags)
+    const likeCount = publicFlags && publicFlags.like.length
+    const dislikeCount = publicFlags && publicFlags.dislike.length
 
     return (
         <div className="post" id={tag} ref={postRef}>
@@ -45,6 +48,8 @@ const Post = ({
                 insertPostText={insertPostText}
                 liked={liked}
                 disliked={disliked}
+                likeCount={likeCount}
+                dislikeCount={dislikeCount}
                 createFlag={createFlag}
                 deleteFlag={deleteFlag}
             />

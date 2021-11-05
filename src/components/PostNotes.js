@@ -3,6 +3,7 @@ import React from 'react'
 const PostNotes = ({
     insertPostText,
     liked, disliked,
+    likeCount, dislikeCount,
     createFlag, deleteFlag,
 }) => {
 
@@ -16,12 +17,22 @@ const PostNotes = ({
 
     const renderLike = () => {
         const className = "fa fa-thumbs-up" + (liked ? " fa-thumbs-up-liked" : "")
-        return <i className={className} onClick={handleLike}></i>
+        return (
+            <div>
+                <i className={className} onClick={handleLike}></i>
+                { Number.isInteger(likeCount) && likeCount > 0 && <span className='like-count'>({likeCount || 0})</span> }
+            </div>
+        )
     }
 
     const renderDislike = () => {
         const className = "fa fa-thumbs-down" + (disliked ? " fa-thumbs-down-disliked" : "")
-        return <i className={className} onClick={handleDislike}></i>
+        return (
+            <div>
+                <i className={className} onClick={handleDislike}></i>
+                { Number.isInteger(dislikeCount) && dislikeCount > 0 && <span className='dislike-count'>({dislikeCount || 0})</span> }
+            </div>
+        )
     }
 
     return (
