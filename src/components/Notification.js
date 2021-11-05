@@ -53,7 +53,7 @@ const Notification = ({
     )
 
     return (
-        <div>
+        <div className="notification">
             { text() }
             { renderGreenArrow() }
             { renderRedX() }      

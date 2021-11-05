@@ -14,19 +14,61 @@ const AsideRightTopicContainer = ({
         userTopic => parseInt(userTopic.attributes.topic_id) === topicId
     )
     const subscribed = userTopic && userTopic.attributes.subscribed
-    const handleClick = () => {
-        subscribeToTopic(topicId, !subscribed)
+    const handleSubscribe = () => {
+        console.log('subscribing')
+        subscribeToTopic(topicId, true)
+    }
+    const handleUnsubscribe = () => {
+        console.log('unssubscribing')
+        subscribeToTopic(topicId, false)
     }
 
-    const renderSubscribeButton = () => (
-        <button onClick={handleClick}>
-            { subscribed ? 'Unsubscribe' : 'Subscribe' }
-        </button>
-    )
+    const renderSubscribedStatus = () =>{
+        let style, value
+        if (subscribed) {
+            style = {
+                backgroundColor: 'blue'
+            }
+            value = 'Subscribed'
+        } else {
+            style = {
+                backgroundColor: 'orange'
+            }
+            value = 'Not Subscribed'
+        }
+        return (
+            <div className="aside-header" style={style}>
+                { value }
+            </div>
+        )
+    }
+
+    const renderSubscribeOptions = () => {
+        let style, value, handleClick
+        if (subscribed) {
+            style = {
+                backgroundColor: '#f2c65e'
+            }
+            value = 'Unubscribed'
+            handleClick = handleUnsubscribe
+        } else {
+            style = {
+                backgroundColor: '#849df0'
+            }
+            value = 'Subscribe'
+            handleClick = handleSubscribe
+        }
+        return ( 
+            <div className="aside-header btn" onClick={handleClick} style={style}>
+                { subscribed ? 'Unsubscribe' : 'Subscribe' }
+            </div>
+        )
+    }
 
     return (
-        <>
-            { renderSubscribeButton() }
+        <> 
+            { renderSubscribedStatus() }
+            { renderSubscribeOptions() }
         </>
     )
 }
