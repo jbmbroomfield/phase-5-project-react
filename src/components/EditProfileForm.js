@@ -11,12 +11,12 @@ const EditProfileForm = ({ uploadAvatar }) => {
 
     const history = useHistory()
 
-    const handleChange = event => {
-        setState({
-            ...state,
-            [event.target.name]: event.target.value
-        })
-    }
+    // const handleChange = event => {
+    //     setState({
+    //         ...state,
+    //         [event.target.name]: event.target.value
+    //     })
+    // }
 
     const handleImageChange = event => {
         setState({
@@ -28,7 +28,7 @@ const EditProfileForm = ({ uploadAvatar }) => {
     const handleSubmit = event => {
         event.preventDefault()
         uploadAvatar(state.avatarImage, getJwt())
-
+        history.push("/")
     }
 
     return (

@@ -7,6 +7,13 @@ import EditProfileForm from '../components/EditProfileForm'
 import { uploadAvatar } from '../actions/currentUserActions'
 
 const EditProfileContainer = ({ currentUser, uploadAvatar }) => {
+
+    const history = useHistory()
+
+    if (!(currentUser && currentUser.attributes)) {
+        history.push("/")
+        return null
+    }
     
     return (
         <div>
