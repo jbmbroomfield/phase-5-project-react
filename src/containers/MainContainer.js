@@ -4,6 +4,8 @@ import { Route } from 'react-router-dom'
 
 import UsersContainer from './UsersContainer'
 import LoginContainer from './LoginContainer'
+import SignupContainer from './SignupContainer'
+import EditProfileContainer from './EditProfileContainer'
 import SectionsContainer from './SectionsContainer'
 import SubsectionContainer from './SubsectionContainer'
 import TopicContainer from './TopicContainer'
@@ -33,6 +35,8 @@ const MainContainer = ({ focusTextArea }) => {
             <Route exact path="/"><SectionsContainer /></Route>
             <Route exact path="/users"><UsersContainer /></Route>
             <Route exact path="/login"><LoginContainer /></Route>
+            <Route exact path="/signup"><SignupContainer /></Route>
+            <Route exact path="/edit_profile"><EditProfileContainer /></Route>
             { subsectionRoute() }
             { topicRoute(focusTextArea) }
         </main>

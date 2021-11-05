@@ -1,18 +1,19 @@
 import React from 'react'
-import LoginForm from '../components/LoginForm'
+import { useHistory } from 'react-router'
 import { connect } from 'react-redux'
+
+import LoginForm from '../components/LoginForm'
 
 import { login } from '../actions/currentUserActions'
 
-import { useHistory } from 'react-router'
 
 const LoginContainer = ({ currentUser, login }) => {
 
     const history = useHistory()
 
-    if (currentUser.attributes) {
+    if (currentUser && currentUser.attributes) {
         history.push("/")
-        return <div></div>
+        return null
     }
 
     const renderLoginContainer = () => (

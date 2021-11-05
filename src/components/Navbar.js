@@ -10,7 +10,10 @@ const Navbar = ({ currentUser, removeCurrentUser }) => {
             )
         } else {
             return (
-                <li><NavLink className="nav-link" to="/login">Login</NavLink></li>
+                <>
+                    <li><NavLink className="nav-link" to="/login">Login</NavLink></li>
+                    <li><NavLink className="nav-link" to="/signup">Sign Up</NavLink></li>
+                </>
             )
         }
     }

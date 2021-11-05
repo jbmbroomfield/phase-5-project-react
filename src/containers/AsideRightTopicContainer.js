@@ -15,11 +15,9 @@ const AsideRightTopicContainer = ({
     )
     const subscribed = userTopic && userTopic.attributes.subscribed
     const handleSubscribe = () => {
-        console.log('subscribing')
         subscribeToTopic(topicId, true)
     }
     const handleUnsubscribe = () => {
-        console.log('unssubscribing')
         subscribeToTopic(topicId, false)
     }
 
@@ -49,7 +47,7 @@ const AsideRightTopicContainer = ({
             style = {
                 backgroundColor: '#f2c65e'
             }
-            value = 'Unubscribed'
+            value = 'Unsubscribe'
             handleClick = handleUnsubscribe
         } else {
             style = {
@@ -60,7 +58,7 @@ const AsideRightTopicContainer = ({
         }
         return ( 
             <div className="aside-header btn" onClick={handleClick} style={style}>
-                { subscribed ? 'Unsubscribe' : 'Subscribe' }
+                { value }
             </div>
         )
     }

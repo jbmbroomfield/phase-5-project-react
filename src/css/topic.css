@@ -27,3 +27,8 @@
 .fa-thumbs-down-disliked {
   color: red;
 }
+
+.avatar {
+  width: 75px;
+  height: 75px;
+}
