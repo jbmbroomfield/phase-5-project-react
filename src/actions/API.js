@@ -16,6 +16,26 @@ class API {
         return this.fetchFromAPI(url, 'POST', body)
     }
 
+    static postForm(url, body) {
+        const formData = new FormData()
+        for (const key in body) {
+            formData.append(key, body[key])
+        }
+        fetch(this.#BASE_URL + url, {
+            method: 'POST',
+            headers: {'Authorization': `Bearer ${getJwt()}`},
+            body: formData
+        })
+    }
+
+    static put(url, body) {
+        return this.fetchFromAPI(url, 'PUT', body)
+    }
+
+    static patch(url, body) {
+        return this.fetchFromAPI(url, 'PATCH', body)
+    }
+
     static delete(url, body) {
         return this.fetchFromAPI(url, 'DELETE', body)
     }
@@ -41,6 +61,8 @@ class API {
         const response = await fetch(this.#BASE_URL + url, this.configObject(method, body))
         return await response.json()
     }
+
+
 
 }
 

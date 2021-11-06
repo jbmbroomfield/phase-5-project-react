@@ -48,13 +48,8 @@ const loginBody = (username, password) => ({
 
 export const uploadAvatar = (avatarImage, jwt) => (
     dispatch => {
-        const formData = new FormData()
-        formData.append('avatar_image', avatarImage)
-        fetch('http://localhost:3000/api/v1/upload_avatar', {
-            method: 'POST',
-            headers: {'Authorization': `Bearer ${jwt}`},
-            body: formData
-        })
+        const body = {avatar_image: avatarImage}
+        API.postForm('upload_avatar', body)
     }
 )
 
