@@ -19,7 +19,11 @@ const EditProfileContainer = ({ currentUser, uploadAvatar }) => {
         <div>
             <div className="page">
                 <h1>Edit Profile</h1>
-                <EditProfileForm uploadAvatar={uploadAvatar} />
+                <EditProfileForm
+                    uploadAvatar={uploadAvatar}
+                    currentUser={currentUser}
+                    currentTimeZone={currentUser && currentUser.attributes && currentUser.attributes.time_zone}
+                />
             </div>
         </div>
     )   
