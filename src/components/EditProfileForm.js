@@ -15,19 +15,21 @@ const EditProfileForm = ({ uploadAvatar }) => {
     const [state, setState] = useState({
         timezone: {},
         avatarImage: null,
+        avatarFile: null,
     })
+
+    console.log(state.avatarImage)
 
     const history = useHistory()
 
-    const handleChange = event => {
-        setState({
-            ...state,
-            [event.target.name]: event.target.value
-        })
-    }
+    // const handleChange = event => {
+    //     setState({
+    //         ...state,
+    //         [event.target.name]: event.target.value
+    //     })
+    // }
 
     const handleTimezoneChange = timezone => {
-        console.log(timezone)
         setState({
             ...state,
             timezone: timezone.value
@@ -39,7 +41,8 @@ const EditProfileForm = ({ uploadAvatar }) => {
         console.log(typeof event)
         setState({
             ...state,
-            avatarImage: event.target.files[0]
+            avatarImage: event.target.files[0],
+            avatarFile: URL.createObjectURL(event.target.files[0])
         })
     }
 
@@ -52,12 +55,15 @@ const EditProfileForm = ({ uploadAvatar }) => {
     return (
         <div>
             <form onSubmit={handleSubmit}>
+                Avatar:<br />
+                { state.avatarFile && (<><img className='avatar' src={state.avatarFile} alt="?" /><br /></>) }
                 <input
                     type="file"
                     accept="image/*"
                     multiple={false}
                     onChange={handleImageChange}
                 /><br />
+                Time zone:<br />
                 <TimezoneSelect
                     name="timezone"
                     value={state.timezone}
