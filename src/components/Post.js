@@ -33,7 +33,6 @@ const Post = ({
 
     const liked = my_flags.includes('like')
     const disliked = my_flags.includes('dislike')
-    console.log(text, publicFlags)
     const likeCount = publicFlags && publicFlags.like.length
     const dislikeCount = publicFlags && publicFlags.dislike.length
 

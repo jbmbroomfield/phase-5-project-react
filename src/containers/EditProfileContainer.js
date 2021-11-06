@@ -10,10 +10,10 @@ const EditProfileContainer = ({ currentUser, uploadAvatar }) => {
 
     const history = useHistory()
 
-    if (!(currentUser && currentUser.attributes)) {
-        history.push("/")
-        return null
-    }
+    // if (!(currentUser && currentUser.attributes)) {
+    //     history.push("/")
+    //     return null
+    // }
     
     return (
         <div>
