@@ -1,5 +1,5 @@
 import React from 'react'
-import { useHistory } from 'react-router'
+// import { useHistory } from 'react-router'
 import { connect } from 'react-redux'
 
 import EditProfileForm from '../components/EditProfileForm'
@@ -8,7 +8,7 @@ import { uploadAvatar } from '../actions/currentUserActions'
 
 const EditProfileContainer = ({ currentUser, uploadAvatar }) => {
 
-    const history = useHistory()
+    // const history = useHistory()
 
     // if (!(currentUser && currentUser.attributes)) {
     //     history.push("/")

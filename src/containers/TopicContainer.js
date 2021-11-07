@@ -60,7 +60,6 @@ const TopicContainer = ({
         posts.map(post => {
             const tag = post.attributes.tag
             const scrollTo = tag === scrollId
-            console.log(post.attributes.public_flags.like.length)
             return <TrackVisibility key={post.id}>
                 <Post
                     key={post.id}

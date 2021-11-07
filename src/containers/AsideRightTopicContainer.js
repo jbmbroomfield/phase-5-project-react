@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { subscribeToTopic } from '../actions/userTopicsActions'
+import  PageControlContainer from './PageControlContainer'
 
 const AsideRightTopicContainer = ({
     match,
@@ -65,6 +66,7 @@ const AsideRightTopicContainer = ({
 
     return (
         <> 
+            <PageControlContainer />
             { renderSubscribedStatus() }
             { renderSubscribeOptions() }
         </>

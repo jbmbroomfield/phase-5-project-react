@@ -51,3 +51,23 @@ aside.aside-left div.notifications {
 .stats-header {
   background-color: #d0e5f5;
 }
+
+.page-control span,
+.page-control i {
+  font-size: 150%;
+  margin: 0 3px;
+}
+
+.page-control-input {
+  font-size: 150%;
+}
+
+.page-control {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
