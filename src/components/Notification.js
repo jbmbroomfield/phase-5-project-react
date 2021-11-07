@@ -32,8 +32,8 @@ const Notification = ({
 
     const goToTopic = () => {
         deleteNotification()
-        history.push(`/topics/${objectId}`)
         setScrollId(tag)
+        history.push(`/topics/${objectId}`)
     }
 
     const renderGreenArrow = () => (

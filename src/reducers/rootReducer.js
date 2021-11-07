@@ -8,7 +8,6 @@ import topicsReducer from './topicsReducer'
 import postsReducer from "./postsReducer"
 import userTopicsReducer from "./userTopicsReducer"
 import notificationsReducer from "./notificationsReducer"
-import scrollIdReducer from "./scrollIdReducer"
 import bottomPopUpReducer from "./bottomPopUpReducer"
 import draftsReducer from "./draftsReducer"
 import topicDisplayReducer from "./topicDisplayReducer"
@@ -22,7 +21,6 @@ const rootReducer = combineReducers({
     posts: postsReducer,
     userTopics: userTopicsReducer,
     notifications: notificationsReducer,
-    scrollId: scrollIdReducer,
     bottomPopUp: bottomPopUpReducer,
     drafts: draftsReducer,
     topicDisplay: topicDisplayReducer

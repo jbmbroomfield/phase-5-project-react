@@ -8,31 +8,53 @@ import createSocket from '../createSocket'
 
 import TrackVisibility from 'react-on-screen'
 import { fetchUserTopic } from '../actions/userTopicsActions'
-import { setScrollId } from '../actions/scrollIdActions'
 
 import { setBottomPopUp } from '../actions/bottomPopUpActions'
 import { setDraft, insertIntoDraft } from '../actions/draftsActions'
 import { createFlag, deleteFlag } from '../actions/flagsActions'
-import { resetTopicDisplay, setPages } from '../actions/topicDisplayActions'
+import { resetTopicDisplay, setPages, setScrollId, setPage, setTopicDisplay } from '../actions/topicDisplayActions'
 
 const TopicContainer = ({
     match,
     subsections, topics, posts, users,
     fetchPosts,
     userTopics, fetchUserTopic,
-    scrollId, setScrollId,
+    setScrollId,
     setBottomPopUp,
     drafts, setDraft, insertIntoDraft,
     focusTextArea,
     createFlag, deleteFlag,
-    topicDisplay, resetTopicDisplay, setPages,
+    topicDisplay, setPages, setPage, setTopicDisplay,
     currentUser,
 }) => {
 
     const topicId = parseInt(match.params.topicId)
     const topic = topics.find(topic => parseInt(topic.id) === topicId)
-    const page = topicDisplay.page
-    const page_size = (currentUser && currentUser.attributes && currentUser.attributes.page_size) || 25
+    // const page = topicDisplay.page
+    const pageSize = (currentUser && currentUser.attributes && currentUser.attributes.page_size) || 25
+    const scrollId = topicDisplay.scrollId
+
+    if (topicDisplay.topicId !== topicId) {
+        topicDisplay = {
+            topicId: topicId,
+            page: 1,
+            pages: null,
+            scrollId: scrollId,
+            users: {},
+            flags: {},
+        }
+    }
+
+    // topicDisplay = {
+    //     topicId: null,
+    //     page: 1,
+    //     pages: null,
+    //     scrollId: null,
+    //     users: {},
+    //     flags: {},
+    // }
+
+
     const draft = drafts.find(
         draft => parseInt(draft.attributes.topic_id) === topicId
     )
@@ -56,29 +78,54 @@ const TopicContainer = ({
 
     const getUser = userId => users.find(user => parseInt(user.id) === parseInt(userId))
 
+
+
+    // DETERMINING WHICH POSTS TO SHOW
+
     const topicPosts = posts.filter(post => (
         parseInt(post.attributes.topic_id) === parseInt(topicId)
     ))
 
-    const topicPostsLength = topicPosts.length
-    const toSetPages = Math.ceil(topicPostsLength / page_size)
+    const filterPosts = [...topicPosts]
 
-    useEffect(() => {
-        setPages(toSetPages)
-        const cleanup = () => {
-            resetTopicDisplay()
+    // let correctPage = page
+
+    if (scrollId) {
+        const scrollPostIndex = filterPosts.findIndex(post => post.attributes.tag === scrollId)
+        if (scrollPostIndex > -1) {
+            topicDisplay.page = Math.floor(scrollPostIndex / pageSize) + 1
         }
-        return cleanup
-    }, [resetTopicDisplay, toSetPages, setPages, page_size])
-
-    let postsToDisplay = topicPosts
-
-    if (page !== 'all') {
-        postsToDisplay = topicPosts.slice(page_size * (page - 1), page_size * page)
     }
 
+
+
+    const page = topicDisplay.page
+    topicDisplay.pages = Math.floor(filterPosts.length / pageSize) + 1
+
+    let pagePosts = [...filterPosts]
+
+    if (page !== 'all') {
+        pagePosts = pagePosts.slice(pageSize * (page - 1), pageSize * page)
+    }
+
+
+    // END 
+
+    useEffect(() => {
+        console.log('usingEffect')
+        console.log(topicDisplay.pages)
+        setTopicDisplay({
+            topicId: topicDisplay.topicId,
+            page: topicDisplay.page,
+            pages: topicDisplay.pages,
+            // scrollId: topicDisplay.scrollId,
+            users: topicDisplay.users,
+            flags: topicDisplay.flags,
+        })
+    }, [setTopicDisplay, topicDisplay.topicId, topicDisplay.page, topicDisplay.pages, topicDisplay.scrollId, topicDisplay.users, topicDisplay.flags,])
+
     const renderPosts = () => (
-        postsToDisplay.map(post => {
+        pagePosts.map(post => {
             const tag = post.attributes.tag
             const scrollTo = tag === scrollId
             return <TrackVisibility key={post.id}>
@@ -118,7 +165,6 @@ const mapStateToProps = state => ({
     posts: state.posts,
     users: state.users,
     userTopics: state.userTopics,
-    scrollId: state.scrollId,
     drafts: state.drafts,
     topicDisplay: state.topicDisplay,
     currentUser: state.currentUser,
@@ -133,8 +179,9 @@ const mapDispatchToProps = dispatch => ({
     insertIntoDraft: (topicId, text) => dispatch(insertIntoDraft(topicId, text)),
     createFlag: (topicId, postId, category) => dispatch(createFlag(topicId, postId, category)),
     deleteFlag: (topicId, postId, category) => dispatch(deleteFlag(topicId, postId, category)),
+    setPage: page => dispatch(setPage(page)),
     setPages: pages => dispatch(setPages(pages)),
-    resetTopicDisplay: () => dispatch(resetTopicDisplay()),
+    setTopicDisplay: topicDisplay => dispatch(setTopicDisplay(topicDisplay)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TopicContainer)
