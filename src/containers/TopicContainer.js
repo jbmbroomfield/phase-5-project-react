@@ -13,6 +13,7 @@ import { setScrollId } from '../actions/scrollIdActions'
 import { setBottomPopUp } from '../actions/bottomPopUpActions'
 import { setDraft, insertIntoDraft } from '../actions/draftsActions'
 import { createFlag, deleteFlag } from '../actions/flagsActions'
+import { resetTopicDisplay, setPages } from '../actions/topicDisplayActions'
 
 const TopicContainer = ({
     match,
@@ -24,11 +25,14 @@ const TopicContainer = ({
     drafts, setDraft, insertIntoDraft,
     focusTextArea,
     createFlag, deleteFlag,
+    topicDisplay, resetTopicDisplay, setPages,
+    currentUser,
 }) => {
 
     const topicId = parseInt(match.params.topicId)
     const topic = topics.find(topic => parseInt(topic.id) === topicId)
-
+    const page = topicDisplay.page
+    const page_size = (currentUser && currentUser.attributes && currentUser.attributes.page_size) || 25
     const draft = drafts.find(
         draft => parseInt(draft.attributes.topic_id) === topicId
     )
@@ -52,12 +56,29 @@ const TopicContainer = ({
 
     const getUser = userId => users.find(user => parseInt(user.id) === parseInt(userId))
 
-    posts = posts.filter(post => (
+    const topicPosts = posts.filter(post => (
         parseInt(post.attributes.topic_id) === parseInt(topicId)
     ))
 
+    const topicPostsLength = topicPosts.length
+    const toSetPages = Math.ceil(topicPostsLength / page_size)
+
+    useEffect(() => {
+        setPages(toSetPages)
+        const cleanup = () => {
+            resetTopicDisplay()
+        }
+        return cleanup
+    }, [resetTopicDisplay, toSetPages, setPages, page_size])
+
+    let postsToDisplay = topicPosts
+
+    if (page !== 'all') {
+        postsToDisplay = topicPosts.slice(page_size * (page - 1), page_size * page)
+    }
+
     const renderPosts = () => (
-        posts.map(post => {
+        postsToDisplay.map(post => {
             const tag = post.attributes.tag
             const scrollTo = tag === scrollId
             return <TrackVisibility key={post.id}>
@@ -99,6 +120,8 @@ const mapStateToProps = state => ({
     userTopics: state.userTopics,
     scrollId: state.scrollId,
     drafts: state.drafts,
+    topicDisplay: state.topicDisplay,
+    currentUser: state.currentUser,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -110,6 +133,8 @@ const mapDispatchToProps = dispatch => ({
     insertIntoDraft: (topicId, text) => dispatch(insertIntoDraft(topicId, text)),
     createFlag: (topicId, postId, category) => dispatch(createFlag(topicId, postId, category)),
     deleteFlag: (topicId, postId, category) => dispatch(deleteFlag(topicId, postId, category)),
+    setPages: pages => dispatch(setPages(pages)),
+    resetTopicDisplay: () => dispatch(resetTopicDisplay()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TopicContainer)

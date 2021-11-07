@@ -9,8 +9,8 @@ const PageControlContainer = ({
     topicDisplay,
     setPageDispatch,
 }) => {
-    const pages = 500
-    const page = topicDisplay.page
+    const pages = topicDisplay.pages || 1
+    const page = topicDisplay.page || 1
     const [textEmpty, setTextEmpty] = useState(false)
 
     const setPage = newPage => {
@@ -24,7 +24,7 @@ const PageControlContainer = ({
             newPage = parseInt(newPage)
         } 
         setTextEmpty(false)
-        if (newPage !== page && (newPage >= 1 || newPage <= pages)) {
+        if (newPage !== page && newPage >= 1 && newPage <= pages) {
             setPageDispatch(newPage)
         }
     }
