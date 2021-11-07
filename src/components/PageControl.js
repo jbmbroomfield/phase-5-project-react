@@ -1,36 +1,37 @@
 import React from 'react'
 
 const PageControl = ({
-    pages,
-    text, handleTextChange,
-    handleFirstPage, handleLastPage,
-    handlePageUp, handlePageDown,
+    pages, page, setPage,
+    textEmpty,
 }) => {
-
     return (
         <div className="aside-header page-control">
             <span
                 className="btn btn-page-control"
-                onClick={handleFirstPage}
+                onClick={() => setPage(1)}
             >1</span>
             <i
                 className="fa fa-chevron-left btn btn-page-control"
-                onClick={handlePageDown}
+                onClick={() => setPage(page - 1)}
             ></i>
             <textarea
                 className="page-control-input"
-                value={text}
-                onChange={handleTextChange}
+                value={textEmpty ? "" : page.toString()}
+                placeholder={page.toString()}
+                onChange={event => setPage(event.target.value)}
                 rows={1}
                 cols={pages.toString().length}
             />
             <i
                 className="fa fa-chevron-right btn btn-page-control"
-                onClick={handlePageUp}
+                onClick={() => {
+                    console.log('up one')
+                    setPage(page + 1)
+                }}
             ></i>
             <span
                 className="btn btn-page-control"
-                onClick={handleLastPage}
+                onClick={() => setPage(pages)}
             >{pages}</span>
         </div>
     )

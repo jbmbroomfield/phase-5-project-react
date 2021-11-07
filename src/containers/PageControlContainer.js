@@ -1,62 +1,50 @@
 import React, { useState } from 'react'
+import { connect } from 'react-redux'
 
 import PageControl from '../components/PageControl'
 
-const PageControlContainer = () => {
+import { setPage } from '../actions/topicDisplayActions'
+
+const PageControlContainer = ({
+    topicDisplay,
+    setPageDispatch,
+}) => {
     const pages = 500
+    const page = topicDisplay.page
+    const [textEmpty, setTextEmpty] = useState(false)
 
-    const [text, setText] = useState('1')
-    const [page, setPage] = useState(parseInt(text))
-
-    const setPageFromText = (newText) => {
-        if (text.length > 0) {
-            setPage(parseInt(newText))
+    const setPage = newPage => {
+        if (typeof newPage === 'string') {
+            newPage = newPage.replace(/\D/g, "")
+            if (newPage.length === 0) {
+                setTextEmpty(true)
+                return
+            }
+            setTextEmpty(false)
+            newPage = parseInt(newPage)
         } 
-    }
-
-    const handleTextChange = event => {
-        let newText = event.target.value.replace(/\D/g, "")
-        if (newText.length === 0 || parseInt(newText) <= pages) {
-            setText(newText)
-            setPageFromText(newText)
-        }
-    }
-
-    const handleFirstPage = () => {
-        setText("1")
-        setPage(1)
-    }
-
-    const handleLastPage = () => {
-        setText(pages.toString())
-        setPage(pages)
-    }
-
-    const handlePageUp = () => {
-        if (page < pages) {
-            setText((page + 1).toString())
-            setPage(page + 1)
-        }
-    }
-
-    const handlePageDown = () => {
-        if (page > 1) {
-            setText((page - 1).toString())
-            setPage(page - 1)
+        setTextEmpty(false)
+        if (newPage !== page && (newPage >= 1 || newPage <= pages)) {
+            setPageDispatch(newPage)
         }
     }
 
     return (
         <PageControl 
             pages={pages}
-            text={text}
-            handleTextChange={handleTextChange}
-            handleFirstPage={handleFirstPage}
-            handleLastPage={handleLastPage}
-            handlePageUp={handlePageUp}
-            handlePageDown={handlePageDown}
+            page={page}
+            setPage={setPage}
+            textEmpty={textEmpty}
         />
     )
 }
 
-export default PageControlContainer
+const mapStateToProps = state => ({
+    topicDisplay: state.topicDisplay,
+})
+
+const mapDispatchToProps = dispatch => ({
+    setPageDispatch: page => dispatch(setPage(page)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(PageControlContainer)
