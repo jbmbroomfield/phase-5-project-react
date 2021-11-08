@@ -5,34 +5,44 @@ import FilterUser from './FilterUser'
 const Filter = ({
     users,
     userFilter,
-    includeUser, excludeUser
+    toggleUserFilter, includeAllUsers, excludeAllUsers,
 }) => {
 
-    const userExclude = userFilter.exclude || []
+    let includedUsers
 
-    const handleChange = event => {
-        console.log(event.target)
-        console.log(event.target.name)
-        if (userExclude.includes(event.target.name)) {
-            includeUser(event.target.name)
-        } else {
-            excludeUser(event.target.name)
-        }
+    if (userFilter.exclude) {
+        includedUsers = users?.filter(user => !userFilter.exclude.includes(user))
+    } else {
+        includedUsers = userFilter.include
     }
 
     return (
         <div>
-            { users?.map(user => {
-                const exclude = userExclude.includes(user)
-                return (
-                    <FilterUser
-                        key={user}
-                        user={user}
-                        exclude={exclude}
-                        handleChange={handleChange}
-                    />
-                )
-            })}
+            <div className='filter-users'>
+                <div
+                    className={`btn filter-user${userFilter.include ? ' filter-user-exclude' : ''}`}
+                    onClick={includeAllUsers}
+                >
+                    All
+                </div>
+                <div
+                    className={`btn filter-user${userFilter.exclude ? ' filter-user-exclude' : ''}`}
+                    onClick={excludeAllUsers}
+                >
+                    None
+                </div>
+                { users?.map(user => {
+                    const include = includedUsers.includes(user)
+                    return (
+                        <FilterUser
+                            key={user}
+                            user={user}
+                            include={include}
+                            handleClick={() => toggleUserFilter(user)}
+                        />
+                    )
+                })}
+            </div>
         </div>
     )
 }

@@ -22,12 +22,15 @@ export const setScrollId = scrollId => ({
     scrollId
 })
 
-export const includeUser = user => ({
-    type: 'INCLUDE_USER',
+export const toggleUserFilter = user => ({
+    type: 'TOGGLE_USER_FILTER',
     user
 })
 
-export const excludeUser = user => ({
-    type: 'EXCLUDE_USER',
-    user
+export const excludeAllUsers = () => ({
+    type: 'EXCLUDE_ALL_USERS'
+})
+
+export const includeAllUsers = () => ({
+    type: 'INCLUDE_ALL_USERS'
 })

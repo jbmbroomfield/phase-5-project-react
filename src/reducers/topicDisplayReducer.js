@@ -3,12 +3,14 @@ const initialState = {
     page: 1,
     pages: null,
     scrollId: null,
-    users: {},
+    users: {
+        exclude: [],
+        include: null,
+    },
     flags: {},
 }
 
 const topicDisplayReducer = (state = {...initialState}, action) => {
-    let newUsersExclude
     switch(action.type) {
 
         case 'SET_TOPIC_ID':
@@ -28,30 +30,52 @@ const topicDisplayReducer = (state = {...initialState}, action) => {
                 ...state,
                 ...action.topicDisplay,
             }
-        
-        case 'INCLUDE_USER':
-            newUsersExclude = state.users.exclude || []
-            newUsersExclude = newUsersExclude.filter(user => user !== action.user)
+
+        case 'TOGGLE_USER_FILTER':
+            let newUsersExclude, newUsersInclude, array
+            if (state.users.include) {
+                newUsersInclude = state.users.include
+                array = newUsersInclude
+                newUsersExclude = null
+            } else {
+                newUsersExclude = state.users.exclude
+                array = newUsersExclude
+                newUsersInclude = null
+            }
+            // const newUsersExclude = state.users.exclude ? [...state.users.exclude] : []
+            const userIndex = array.indexOf(action.user)
+            if (userIndex === -1) {
+                array.push(action.user)
+            } else {
+                array.splice(userIndex, 1)
+            }
             return {
                 ...state,
                 page: 1,
                 users: {
                     ...state.users,
-                    exclude: newUsersExclude
+                    exclude: newUsersExclude,
+                    include: newUsersInclude,
+                }
+            }
+        
+        case 'EXCLUDE_ALL_USERS':
+            return {
+                ...state,
+                page: 1,
+                users: {
+                    exclude: null,
+                    include: [],
                 }
             }
 
-        case 'EXCLUDE_USER':
-            newUsersExclude = state.users.exclude || []
-            if (!newUsersExclude.includes(action.user)) {
-                newUsersExclude.push(action.user)
-            }
+        case 'INCLUDE_ALL_USERS':
             return {
                 ...state,
                 page: 1,
                 users: {
-                    ...state.users,
-                    exclude: newUsersExclude
+                    include: null,
+                    exclude: []
                 }
             }
 

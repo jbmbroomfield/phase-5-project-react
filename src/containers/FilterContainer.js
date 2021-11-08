@@ -2,12 +2,12 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Filter from '../components/Filter'
 
-import { includeUser, excludeUser } from '../actions/topicDisplayActions'
+import { excludeAllUsers, includeAllUsers, toggleUserFilter } from '../actions/topicDisplayActions'
 
 const FilterContainer = ({
     topicDisplay,
     topic,
-    includeUser, excludeUser
+    toggleUserFilter, includeAllUsers, excludeAllUsers,
 }) => {
 
     const users = topic?.attributes.posters
@@ -19,8 +19,9 @@ const FilterContainer = ({
             <Filter
                 users={users}
                 userFilter={userFilter}
-                includeUser={includeUser}
-                excludeUser={excludeUser}
+                toggleUserFilter={toggleUserFilter}
+                includeAllUsers={includeAllUsers}
+                excludeAllUsers={excludeAllUsers}
             />
         </>
     )
@@ -31,8 +32,9 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    includeUser: user => dispatch(includeUser(user)),
-    excludeUser: user => dispatch(excludeUser(user))
+    toggleUserFilter: user => dispatch(toggleUserFilter(user)),
+    includeAllUsers: () => dispatch(includeAllUsers()),
+    excludeAllUsers: () => dispatch(excludeAllUsers()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilterContainer)

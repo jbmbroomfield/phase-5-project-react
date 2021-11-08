@@ -1,18 +1,16 @@
 import React from 'react'
 
 const FilterUser = ({
-    user, exclude, handleChange
+    user, include, handleClick
 }) => {
     return (
-        <p>
-            <input
-                name={user}
-                type="checkbox"
-                checked={!exclude}
-                onChange={handleChange}
-            />
+        <div
+            className={`btn filter-user${!include ? ' filter-user-exclude' : ''}`}
+            name={user}
+            onClick={handleClick}
+        >
             {user}
-        </p>
+        </div>
     )
 }
 

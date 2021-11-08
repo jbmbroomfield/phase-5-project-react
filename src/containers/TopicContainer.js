@@ -39,7 +39,10 @@ const TopicContainer = ({
             page: 1,
             pages: null,
             scrollId: scrollId,
-            users: {},
+            users: {
+                exclude: [],
+                include: null,
+            },
             flags: {},
         }
     }
@@ -76,13 +79,17 @@ const TopicContainer = ({
         parseInt(post.attributes.topic_id) === parseInt(topicId)
     ))
 
-    const userExclude = topicDisplay.users.exclude || []
-    const userIdExclude = userExclude.map(
+    const exclude = !!topicDisplay.users.exclude
+    const array = exclude ? topicDisplay.users.exclude : topicDisplay.users.include
+    const userIdArray = array.map(
         username => parseInt(users.find(user => user.attributes.username === username)?.id)
     )
-
     const filterPosts = [...topicPosts.filter(
-        post => !userIdExclude.includes(parseInt(post.attributes.user_id))
+        post => {
+            const userId = parseInt(post.attributes.user_id)
+            const userPresent = userIdArray.includes(userId)
+            return exclude !== userPresent
+        }
     )]
 
 
