@@ -76,7 +76,14 @@ const TopicContainer = ({
         parseInt(post.attributes.topic_id) === parseInt(topicId)
     ))
 
-    const filterPosts = [...topicPosts]
+    const userExclude = topicDisplay.users.exclude || []
+    const userIdExclude = userExclude.map(
+        username => parseInt(users.find(user => user.attributes.username === username)?.id)
+    )
+
+    const filterPosts = [...topicPosts.filter(
+        post => !userIdExclude.includes(parseInt(post.attributes.user_id))
+    )]
 
 
     if (scrollId) {
@@ -100,13 +107,10 @@ const TopicContainer = ({
 
 
     useEffect(() => {
-        console.log('usingEffect')
-        console.log(topicDisplay.pages)
         setTopicDisplay({
             topicId: topicDisplay.topicId,
             page: topicDisplay.page,
             pages: topicDisplay.pages,
-            // scrollId: topicDisplay.scrollId,
             users: topicDisplay.users,
             flags: topicDisplay.flags,
         })

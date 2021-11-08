@@ -40,7 +40,6 @@ const PageControlContainer = ({
 }
 
 const mapStateToProps = state => ({
-    topicDisplay: state.topicDisplay,
 })
 
 const mapDispatchToProps = dispatch => ({

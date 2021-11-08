@@ -8,6 +8,7 @@ const initialState = {
 }
 
 const topicDisplayReducer = (state = {...initialState}, action) => {
+    let newUsersExclude
     switch(action.type) {
 
         case 'SET_TOPIC_ID':
@@ -27,7 +28,32 @@ const topicDisplayReducer = (state = {...initialState}, action) => {
                 ...state,
                 ...action.topicDisplay,
             }
+        
+        case 'INCLUDE_USER':
+            newUsersExclude = state.users.exclude || []
+            newUsersExclude = newUsersExclude.filter(user => user !== action.user)
+            return {
+                ...state,
+                page: 1,
+                users: {
+                    ...state.users,
+                    exclude: newUsersExclude
+                }
+            }
 
+        case 'EXCLUDE_USER':
+            newUsersExclude = state.users.exclude || []
+            if (!newUsersExclude.includes(action.user)) {
+                newUsersExclude.push(action.user)
+            }
+            return {
+                ...state,
+                page: 1,
+                users: {
+                    ...state.users,
+                    exclude: newUsersExclude
+                }
+            }
 
         case 'SET_PAGE':
             return {

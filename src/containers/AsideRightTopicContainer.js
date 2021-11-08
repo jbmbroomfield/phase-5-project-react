@@ -2,15 +2,19 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { subscribeToTopic } from '../actions/userTopicsActions'
-import  PageControlContainer from './PageControlContainer'
+import PageControlContainer from './PageControlContainer'
+import FilterContainer from './FilterContainer'
 
 const AsideRightTopicContainer = ({
     match,
     userTopics,
     subscribeToTopic,
+    topicDisplay,
+    topics,
 }) => {
     
-    const topicId = match && parseInt(match.params.topicId)    
+    const topicId = match && parseInt(match.params.topicId)
+    const topic = topics.find(topic => parseInt(topic.id) === topicId)
     const userTopic = userTopics.find(
         userTopic => parseInt(userTopic.attributes.topic_id) === topicId
     )
@@ -66,7 +70,8 @@ const AsideRightTopicContainer = ({
 
     return (
         <> 
-            <PageControlContainer />
+            <PageControlContainer topicDisplay={topicDisplay} />
+            <FilterContainer topicDisplay={topicDisplay} topic={topic} />
             { renderSubscribedStatus() }
             { renderSubscribeOptions() }
         </>
@@ -74,7 +79,9 @@ const AsideRightTopicContainer = ({
 }
 
 const mapStateToProps = state => ({
-    userTopics: state.userTopics
+    userTopics: state.userTopics,
+    topicDisplay: state.topicDisplay,
+    topics: state.topics,
 })
 
 const mapDispatchToProps = dispatch => ({

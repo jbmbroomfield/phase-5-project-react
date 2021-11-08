@@ -21,3 +21,13 @@ export const setScrollId = scrollId => ({
     type: 'SET_SCROLL_ID',
     scrollId
 })
+
+export const includeUser = user => ({
+    type: 'INCLUDE_USER',
+    user
+})
+
+export const excludeUser = user => ({
+    type: 'EXCLUDE_USER',
+    user
+})
