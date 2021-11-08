@@ -26,7 +26,7 @@ const BottomBarContainer = ({
         />
     )
 
-    const RenderSwitch = () => (
+    const renderSwitch = () => (
         <Switch>
             { topicRoute() }
             <Route><span>Default Bottom Bar</span></Route>
@@ -35,7 +35,7 @@ const BottomBarContainer = ({
 
     return (
         <div className="bottom-bar">
-            <RenderSwitch />
+            { renderSwitch() }
         </div>
     )
 }

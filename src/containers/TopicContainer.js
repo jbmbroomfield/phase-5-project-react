@@ -12,7 +12,7 @@ import { fetchUserTopic } from '../actions/userTopicsActions'
 import { setBottomPopUp } from '../actions/bottomPopUpActions'
 import { setDraft, insertIntoDraft } from '../actions/draftsActions'
 import { createFlag, deleteFlag } from '../actions/flagsActions'
-import { resetTopicDisplay, setPages, setScrollId, setPage, setTopicDisplay } from '../actions/topicDisplayActions'
+import { setPages, setScrollId, setPage, setTopicDisplay } from '../actions/topicDisplayActions'
 
 const TopicContainer = ({
     match,
@@ -30,7 +30,6 @@ const TopicContainer = ({
 
     const topicId = parseInt(match.params.topicId)
     const topic = topics.find(topic => parseInt(topic.id) === topicId)
-    // const page = topicDisplay.page
     const pageSize = (currentUser && currentUser.attributes && currentUser.attributes.page_size) || 25
     const scrollId = topicDisplay.scrollId
 
@@ -44,15 +43,6 @@ const TopicContainer = ({
             flags: {},
         }
     }
-
-    // topicDisplay = {
-    //     topicId: null,
-    //     page: 1,
-    //     pages: null,
-    //     scrollId: null,
-    //     users: {},
-    //     flags: {},
-    // }
 
 
     const draft = drafts.find(
@@ -88,7 +78,6 @@ const TopicContainer = ({
 
     const filterPosts = [...topicPosts]
 
-    // let correctPage = page
 
     if (scrollId) {
         const scrollPostIndex = filterPosts.findIndex(post => post.attributes.tag === scrollId)
@@ -109,7 +98,6 @@ const TopicContainer = ({
     }
 
 
-    // END 
 
     useEffect(() => {
         console.log('usingEffect')

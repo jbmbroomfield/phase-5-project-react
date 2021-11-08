@@ -40,12 +40,7 @@ const TopicReplyContainer = ({
     }
     
     const handleToggleClick = () => {
-        if (bottomPopUp) {
-            setBottomPopUp(false)
-        } else {
-            focusTextArea(draft)
-        }
-        // setBottomPopUp(!bottomPopUp)
+        bottomPopUp ? setBottomPopUp(false) : focusTextArea(draft)
     }
 
     const renderBottomBar = () => (

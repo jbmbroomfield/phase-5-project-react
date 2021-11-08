@@ -1,4 +1,5 @@
 import API from './API'
+import { setScrollId } from './topicDisplayActions'
 
 const addPosts = posts => ({
     type: 'ADD_POSTS',
@@ -22,6 +23,9 @@ export const createPost = (topicId, text) => (
             }
         }
         API.post(`topics/${topicId}/posts`, body)
-        .then(() => dispatch(fetchPosts(topicId)))
+        .then(json => {
+            dispatch(fetchPosts(topicId))
+            dispatch(setScrollId(json.data.attributes.tag))
+        })
     }
 )
