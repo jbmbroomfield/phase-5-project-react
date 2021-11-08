@@ -78,15 +78,38 @@ aside.aside-left div.notifications {
   grid-template-columns: 1fr 1fr;
 }
 
-.filter-user {
+.filter-user,
+.filter-flag {
   margin: 10px;
   padding: 2px;
   text-align: center;
+  /* background-color: #fce297; */
+  /* background-color: #ddd; */
   background-color: #97f7b4;
   border-radius: 10px;
+  /* border: 2px solid #ffca30; */
   border: 1px solid black;
+}
+
+.filter-flag {
+  padding: 10px 5px;
+  background-color: #ddd;
+}
+
+.filter-flag-include {
+  background-color: #97f7b4;
+}
+
+.filter-flag-exclude {
+  background-color: #faa2a2;
 }
 
 .filter-user-exclude {
   background-color: #ddd;
+  border: 1px solid black;
+}
+
+.filter-flags {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }

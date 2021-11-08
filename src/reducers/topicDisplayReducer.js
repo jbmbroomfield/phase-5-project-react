@@ -7,7 +7,10 @@ const initialState = {
         exclude: [],
         include: null,
     },
-    flags: {},
+    flags: {
+        exclude: [],
+        include: [],
+    },
 }
 
 const topicDisplayReducer = (state = {...initialState}, action) => {
@@ -56,6 +59,29 @@ const topicDisplayReducer = (state = {...initialState}, action) => {
                     ...state.users,
                     exclude: newUsersExclude,
                     include: newUsersInclude,
+                }
+            }
+
+        case 'TOGGLE_FLAG_FILTER':
+            const newFlagsExclude = [...state.flags.exclude]
+            const newFlagsInclude = [...state.flags.include]
+            let index
+            if (newFlagsExclude.includes(action.flag)) {
+                index = newFlagsExclude.indexOf(action.flag)
+                newFlagsExclude.splice(index, 1)
+            } else if (newFlagsInclude.includes(action.flag)) {
+                index = newFlagsInclude.indexOf(action.flag)
+                newFlagsInclude.splice(index, 1)
+                newFlagsExclude.push(action.flag)
+            } else {
+                newFlagsInclude.push(action.flag)
+            }
+            return {
+                ...state,
+                flags: {
+                    ...state.flags,
+                    exclude: newFlagsExclude,
+                    include: newFlagsInclude,
                 }
             }
         

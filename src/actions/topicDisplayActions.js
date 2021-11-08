@@ -34,3 +34,8 @@ export const excludeAllUsers = () => ({
 export const includeAllUsers = () => ({
     type: 'INCLUDE_ALL_USERS'
 })
+
+export const toggleFlagFilter = flag => ({
+    type: 'TOGGLE_FLAG_FILTER',
+    flag
+})

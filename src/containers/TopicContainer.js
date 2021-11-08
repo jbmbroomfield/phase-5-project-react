@@ -43,7 +43,10 @@ const TopicContainer = ({
                 exclude: [],
                 include: null,
             },
-            flags: {},
+            flags: {
+                exclude: [],
+                include: [],
+            },
         }
     }
 
@@ -86,9 +89,57 @@ const TopicContainer = ({
     )
     const filterPosts = [...topicPosts.filter(
         post => {
+
+            const flagsInclude = topicDisplay.flags.include
+            const flagsExclude = topicDisplay.flags.exclude
+
+            const myFlags = post.attributes.my_flags
+            let likeFlag, excludedFlag = false, includedFlag = false
+            if (myFlags.includes('like')) {
+                if (flagsInclude.includes('like')) {
+                    includedFlag = true
+                } else if (flagsExclude.includes('like')) {
+                    excludedFlag = true
+                }
+            } else if (myFlags.includes('dislike')) {
+                if (flagsInclude.includes('dislike')) {
+                    includedFlag = true
+                } else if (flagsExclude.includes('dislike')) {
+                    excludedFlag = true
+                }
+            } else {
+                if (flagsInclude.includes('nonlike')) {
+                    includedFlag = true
+                } else if (flagsExclude.includes('nonlike')) {
+                    excludedFlag = true
+                }
+            }
+
+            if (exclude && includedFlag) {
+                return true
+            }
+            if (!exclude && excludedFlag) {
+                return false
+            }
+            if (includedFlag) {
+                return true
+            }
+            if (excludedFlag) {
+                return false
+            }
+
             const userId = parseInt(post.attributes.user_id)
             const userPresent = userIdArray.includes(userId)
             return exclude !== userPresent
+            // if (exclude === userPresent) {
+            //     // NOT AN INCLUDED USER
+            //     return false
+            // }
+            // if (post.attributes.my_flags.includes('like')) {
+            //     if (flagsExclude.includes('like') || exclude && !flagsInclude.)
+            // }
+            // if (flagsExclude.includes)
+            // if (exclude && )
         }
     )]
 
