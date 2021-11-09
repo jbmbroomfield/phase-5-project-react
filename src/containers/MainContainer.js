@@ -9,11 +9,12 @@ import EditProfileContainer from './EditProfileContainer'
 import SectionsContainer from './SectionsContainer'
 import SubsectionContainer from './SubsectionContainer'
 import TopicContainer from './TopicContainer'
+import UserContainer from './UserContainer'
 
 const subsectionRoute = () => (
     <Route
         exact path="/subsections/:subsectionId"
-        render={routerProps => <SubsectionContainer {...routerProps}/>}
+        render={routerProps => <SubsectionContainer {...routerProps} />}
     />
 )
 
@@ -29,6 +30,13 @@ const topicRoute = focusTextArea => (
     />
 )
 
+const userRoute = () => (
+    <Route
+        exact path="/users/:userId"
+        render={routerProps => <UserContainer {...routerProps} />}
+    />
+)
+
 const MainContainer = ({ focusTextArea }) => {
     return (
         <main>
@@ -39,6 +47,7 @@ const MainContainer = ({ focusTextArea }) => {
             <Route exact path="/edit_profile"><EditProfileContainer /></Route>
             { subsectionRoute() }
             { topicRoute(focusTextArea) }
+            { userRoute() }
         </main>
     )
 }
