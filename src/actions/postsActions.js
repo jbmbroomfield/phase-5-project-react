@@ -34,8 +34,9 @@ export const createPost = (topicId, text) => (
         console.log(topicId)
         API.post(`topics/${topicId}/posts`, body)
         .then(json => {
-            dispatch(fetchPosts(topicId))
+            // dispatch(fetchPosts(topicId))
             console.log(json.data)
+            json.data && dispatch(fetchPost(json.data.id))
             json.data && dispatch(setScrollId(json.data.attributes.tag))
         })
     }

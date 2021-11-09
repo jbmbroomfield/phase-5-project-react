@@ -1,4 +1,4 @@
-import createSocket from '../createSocket'
+import createSocket from './createSocket'
 
 const mainChannel = (onUpdate) => {
 

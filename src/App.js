@@ -18,6 +18,7 @@ import { fetchNotifications } from './actions/notificationsActions'
 import { setBottomPopUp } from './actions/bottomPopUpActions'
 
 import mainChannel from './channels/mainChannel'
+import userChannel from './channels/userChannel'
 
 const App = ({
 	fetchCurrentUser,
@@ -52,9 +53,6 @@ const App = ({
 	}
 
 	useEffect(() => {
-		// const mainSocketParams = {
-		// 	channel: "MainChannel"
-		// }
 		const mainOnUpdate = () => {
 			fetchCurrentUser()
 			fetchSections()
@@ -62,31 +60,24 @@ const App = ({
 			fetchTopics()
 			fetchUsers()
 		}
-		// const mainSocket = createSocket(mainSocketParams, mainSocketOnUpdate)
-
-		// const notificationsSocketParams = {
-		// 	channel: "NotificationsChannel",
-		// 	user_id: currentUser.id
-		// }
-		// const notificationsSocketOnUpdate = () => {
-		// 	fetchNotifications()
-		// }
-		// const notificationsSocket = createSocket(notificationsSocketParams, notificationsSocketOnUpdate)
 		mainOnUpdate()
 		return mainChannel(mainOnUpdate)
-		// return () => {
-		// 	mainSocket.close(1000)
-		// 	// notificationsSocket.close(1000)
-		// }
 	}, [
 		fetchCurrentUser,
 		fetchSections,
 		fetchSubsections,
 		fetchTopics,
 		fetchUsers,
-		currentUser.id,
+		// currentUser.id,
 		fetchNotifications,
 	])
+
+	useEffect(() => {
+		if (currentUser) {
+			fetchNotifications()
+			return userChannel(currentUser.id, fetchNotifications)
+		}
+	}, [currentUser, fetchNotifications])
 
 	const bottomBarHeight = bottomPopUp ? '309' : '50'
 

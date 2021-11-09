@@ -1,15 +1,15 @@
 import createSocket from './createSocket'
 
-const topicChannel = (topicId, fetchPost) => {
+const userChannel = (userId, fetchNotifications) => {
 
     const params = {
-        channel: "TopicChannel",
-        topic_id: topicId,
+        channel: "UserChannel",
+        user_id: userId,
     }
 
     const messageFunctions = {
-        post_update: message => {
-            fetchPost(message.post_id)
+        notification_update: message => {
+            fetchNotifications()
         }
     }
 
@@ -18,4 +18,4 @@ const topicChannel = (topicId, fetchPost) => {
     return () => socket.close(1000)
 }
 
-export default topicChannel
+export default userChannel

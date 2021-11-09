@@ -5,7 +5,7 @@ const createSocket = (params, messageFunctions) => {
     const socket = new WebSocket(url)
 	
     socket.onopen = event => {
-		// onUpdate()
+		console.log('subscribing to', params)
 		const subscribeMsg = {
 			"command": "subscribe",
 			"identifier": JSON.stringify(params),
@@ -16,6 +16,10 @@ const createSocket = (params, messageFunctions) => {
 	socket.onmessage = event => {
 		const data = JSON.parse(event.data)
 		const message = data.message
+		console.log('received', data)
+		if (data.type && data.type !== 'welcome' && data.type !== 'ping') {
+			console.log('received', data)
+		}
 		if (message) {
 			const messageFunction = messageFunctions[message.type]
 			messageFunction && messageFunction(message)
