@@ -52,7 +52,7 @@ div.content {
 }
 
 .section,
-.topic,
+.topic-summary,
 .page {
   background-color: var(--main-fg-color);
   padding: 15px;
@@ -70,4 +70,21 @@ div.content {
 
 .btn {
   cursor: pointer;
+}
+
+.topic-summary {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 2fr;
+}
+
+.topic-summary div {
+  margin: 0 10px;
+}
+
+/* .number-col {
+  text-align: right;
+} */
+
+.center-align {
+  text-align: center;
 }

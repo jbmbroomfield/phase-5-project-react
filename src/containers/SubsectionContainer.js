@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+
 import NewTopicContainer from './NewTopicContainer'
+import TopicSummaryContainer from './TopicSummaryContainer'
+import TopicSummaryHeader from '../components/TopicSummaryHeader'
 
 import { fetchCurrentUser } from '../actions/currentUserActions'
 import { fetchSections } from '../actions/sectionsActions'
@@ -50,11 +52,7 @@ const SubsectionContainer = ({
 
     const renderTopics = () => (
         topics.map(topic => (
-            <div key={topic.id} className="topic">
-                <Link to={`/topics/${topic.id}`}>
-                    {topic.attributes.title}
-                </Link>
-            </div>
+            <TopicSummaryContainer key={topic.id} topic={topic} />
         ))
     )
 
@@ -76,6 +74,7 @@ const SubsectionContainer = ({
     return (
         <>
             <h1>{subsection && subsection.attributes.title}</h1>
+            <TopicSummaryHeader />
             { renderTopics() }
             { renderNewTopicContainer() }
         </>
