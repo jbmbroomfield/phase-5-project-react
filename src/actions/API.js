@@ -58,11 +58,10 @@ class API {
     }
 
     static async fetchFromAPI(url, method, body) {
+        // console.log(this.#BASE_URL + url, this.configObject(method, body))
         const response = await fetch(this.#BASE_URL + url, this.configObject(method, body))
         return await response.json()
     }
-
-
 
 }
 

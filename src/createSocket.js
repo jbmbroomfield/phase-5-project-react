@@ -1,22 +1,24 @@
 const url = "ws://localhost:3000/cable"
 
-const createSocket = (params, onUpdate) => {
+const createSocket = (params, messageFunctions) => {
     
     const socket = new WebSocket(url)
 	
     socket.onopen = event => {
-		onUpdate()
+		// onUpdate()
 		const subscribeMsg = {
 			"command": "subscribe",
-			"identifier": JSON.stringify(params)
+			"identifier": JSON.stringify(params),
 		}
 		socket.send(JSON.stringify(subscribeMsg))
 	}
 
 	socket.onmessage = event => {
 		const data = JSON.parse(event.data)
-		if (data.message && data.message.type === 'update') {
-			onUpdate()
+		const message = data.message
+		if (message) {
+			const messageFunction = messageFunctions[message.type]
+			messageFunction && messageFunction(message)
 		}
 	}
 

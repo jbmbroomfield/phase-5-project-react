@@ -1,10 +1,8 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 
-import { fetchPosts } from '../actions/postsActions'
+import { fetchPosts, fetchPost } from '../actions/postsActions'
 import Post from '../components/Post'
-
-import createSocket from '../createSocket'
 
 import TrackVisibility from 'react-on-screen'
 import { fetchUserTopic } from '../actions/userTopicsActions'
@@ -14,10 +12,12 @@ import { setDraft, insertIntoDraft } from '../actions/draftsActions'
 import { createFlag, deleteFlag } from '../actions/flagsActions'
 import { setPages, setScrollId, setPage, setTopicDisplay } from '../actions/topicDisplayActions'
 
+import topicChannel from '../channels/topicChannel'
+
 const TopicContainer = ({
     match,
     subsections, topics, posts, users,
-    fetchPosts,
+    fetchPosts, fetchPost,
     userTopics, fetchUserTopic,
     setScrollId,
     setBottomPopUp,
@@ -60,17 +60,20 @@ const TopicContainer = ({
     }
 
     useEffect(() => {
-        const params = {
-            channel: "TopicChannel",
-            topic_id: topicId,
-        }
-        const onUpdate = () => {
-            fetchPosts(topicId)
-            fetchUserTopic(topicId)
-        }
-        const socket = createSocket(params, onUpdate)
-        return () => socket.close(1000)
-    }, [fetchPosts, fetchUserTopic, topicId, setBottomPopUp])
+        fetchPosts(topicId)
+        fetchUserTopic(topicId)
+        // const params = {
+        //     channel: "TopicChannel",
+        //     topic_id: topicId,
+        // }
+        // const onUpdate = () => {
+        //     fetchPosts(topicId)
+        //     fetchUserTopic(topicId)
+        // }
+        // const socket = createSocket(params, onUpdate)
+        // return () => socket.close(1000)
+        return topicChannel(topicId, fetchPost)
+    }, [fetchPosts, fetchPost, fetchUserTopic, topicId, setBottomPopUp])
 
     const getUser = userId => users.find(user => parseInt(user.id) === parseInt(userId))
 
@@ -94,7 +97,7 @@ const TopicContainer = ({
             const flagsExclude = topicDisplay.flags.exclude
 
             const myFlags = post.attributes.my_flags
-            let likeFlag, excludedFlag = false, includedFlag = false
+            let excludedFlag = false, includedFlag = false
             if (myFlags.includes('like')) {
                 if (flagsInclude.includes('like')) {
                     includedFlag = true
@@ -222,6 +225,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     fetchPosts: topicId => dispatch(fetchPosts(topicId)),
+    fetchPost: postId => dispatch(fetchPost(postId)),
     fetchUserTopic: topicId => dispatch(fetchUserTopic(topicId)),
     setScrollId: id => dispatch(setScrollId(id)),
     setBottomPopUp: bottomPopUp => dispatch(setBottomPopUp(bottomPopUp)),

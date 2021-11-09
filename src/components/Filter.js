@@ -2,7 +2,7 @@ import React from 'react'
 
 import FilterUser from './FilterUser'
 import FilterFlag from './FilterFlag'
-import { toggleFlagFilter } from '../actions/topicDisplayActions'
+// import { toggleFlagFilter } from '../actions/topicDisplayActions'
 
 const Filter = ({
     users,

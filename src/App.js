@@ -15,8 +15,9 @@ import { fetchSubsections } from './actions/subsectionsActions'
 import { fetchTopics } from './actions/topicsActions'
 import { fetchUsers } from './actions/usersActions'
 import { fetchNotifications } from './actions/notificationsActions'
-import createSocket from './createSocket'
 import { setBottomPopUp } from './actions/bottomPopUpActions'
+
+import mainChannel from './channels/mainChannel'
 
 const App = ({
 	fetchCurrentUser,
@@ -51,31 +52,32 @@ const App = ({
 	}
 
 	useEffect(() => {
-		const mainSocketParams = {
-			channel: "MainChannel"
-		}
-		const mainSocketOnUpdate = () => {
+		// const mainSocketParams = {
+		// 	channel: "MainChannel"
+		// }
+		const mainOnUpdate = () => {
 			fetchCurrentUser()
 			fetchSections()
 			fetchSubsections()
 			fetchTopics()
 			fetchUsers()
 		}
-		const mainSocket = createSocket(mainSocketParams, mainSocketOnUpdate)
+		// const mainSocket = createSocket(mainSocketParams, mainSocketOnUpdate)
 
-		const notificationsSocketParams = {
-			channel: "NotificationsChannel",
-			user_id: currentUser.id
-		}
-		const notificationsSocketOnUpdate = () => {
-			fetchNotifications()
-		}
-		const notificationsSocket = createSocket(notificationsSocketParams, notificationsSocketOnUpdate)
-
-		return () => {
-			mainSocket.close(1000)
-			notificationsSocket.close(1000)
-		}
+		// const notificationsSocketParams = {
+		// 	channel: "NotificationsChannel",
+		// 	user_id: currentUser.id
+		// }
+		// const notificationsSocketOnUpdate = () => {
+		// 	fetchNotifications()
+		// }
+		// const notificationsSocket = createSocket(notificationsSocketParams, notificationsSocketOnUpdate)
+		mainOnUpdate()
+		return mainChannel(mainOnUpdate)
+		// return () => {
+		// 	mainSocket.close(1000)
+		// 	// notificationsSocket.close(1000)
+		// }
 	}, [
 		fetchCurrentUser,
 		fetchSections,

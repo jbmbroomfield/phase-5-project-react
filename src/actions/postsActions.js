@@ -15,6 +15,15 @@ export const fetchPosts = topicId => (
     }
 )
 
+export const fetchPost = postId => (
+    dispatch => {
+        API.get(`posts/${postId}`)
+        .then(json => {
+            json.data && dispatch(addPosts([json.data]))
+        })
+    }
+)
+
 export const createPost = (topicId, text) => (
     dispatch => {
         const body = {
@@ -22,10 +31,12 @@ export const createPost = (topicId, text) => (
                 "text": text
             }
         }
+        console.log(topicId)
         API.post(`topics/${topicId}/posts`, body)
         .then(json => {
             dispatch(fetchPosts(topicId))
-            dispatch(setScrollId(json.data.attributes.tag))
+            console.log(json.data)
+            json.data && dispatch(setScrollId(json.data.attributes.tag))
         })
     }
 )
