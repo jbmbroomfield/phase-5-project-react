@@ -40,6 +40,7 @@ const Post = ({
         <div className="post" id={tag} ref={postRef}>
             <PostInfo
                 username={user && user.attributes.username}
+                userId={user && user.id}
                 avatarUrl={user && user.attributes.get_avatar_image}
             />
             <PostContent text={text} tag={tag} createdAt={createdAt} />

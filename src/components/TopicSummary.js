@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import UserLink from './UserLink'
 
 const TopicSummary = ({
     topicId,
@@ -22,7 +23,7 @@ const TopicSummary = ({
         return (
             <>
                 <strong>{lastPostTimeS}</strong><br />
-                by {lastPoster}
+                by <UserLink userId={lastPosterId} username={lastPoster} />
             </>
         )
     }
@@ -32,7 +33,7 @@ const TopicSummary = ({
             <div>
                 { renderTitle() }
             </div>
-            <div>{firstPoster}</div>
+            <div><UserLink userId={firstPosterId} username={firstPoster} /></div>
             <div>{postCount}</div>
             <div>
                 { renderLastPost() }
