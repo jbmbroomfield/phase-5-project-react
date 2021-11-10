@@ -12,9 +12,7 @@ const sectionsChannel = fetchSubsection => {
         }
     }
 
-    const socket = createSocket(params, messageFunctions)
-
-    return () => socket.close(1000)
+    return createSocket(params, messageFunctions)
 
 }
 

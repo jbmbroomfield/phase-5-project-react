@@ -13,9 +13,7 @@ const subsectionChannel = (subsectionId, fetchTopic) => {
         }
     }
 
-    const socket = createSocket(params, messageFunctions)
-
-    return () => socket.close(1000)
+    return createSocket(params, messageFunctions)
 }
 
 export default subsectionChannel

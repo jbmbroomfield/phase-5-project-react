@@ -3,7 +3,7 @@ import createSocket from './createSocket'
 const userChannel = (userId, fetchNotifications) => {
 
     const params = {
-        channel: "UserChannel",
+        channel: 'UserChannel',
         user_id: userId,
     }
 
@@ -13,9 +13,7 @@ const userChannel = (userId, fetchNotifications) => {
         }
     }
 
-    const socket = createSocket(params, messageFunctions)
-    
-    return () => socket.close(1000)
+    return createSocket(params, messageFunctions)
 }
 
 export default userChannel

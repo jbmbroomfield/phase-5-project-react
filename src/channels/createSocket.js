@@ -26,7 +26,7 @@ const createSocket = (params, messageFunctions) => {
 		}
 	}
 
-    return socket
+    return () => socket.close(1000)
 
 }
 

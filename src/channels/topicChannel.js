@@ -3,7 +3,7 @@ import createSocket from './createSocket'
 const topicChannel = (topicId, fetchPost) => {
 
     const params = {
-        channel: "TopicChannel",
+        channel: 'TopicChannel',
         topic_id: topicId,
     }
 
@@ -13,9 +13,8 @@ const topicChannel = (topicId, fetchPost) => {
         }
     }
 
-    const socket = createSocket(params, messageFunctions)
+    return createSocket(params, messageFunctions)
     
-    return () => socket.close(1000)
 }
 
 export default topicChannel
