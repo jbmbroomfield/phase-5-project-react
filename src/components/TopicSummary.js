@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import UserLink from './UserLink'
 import TopicLink from './TopicLink'
 
@@ -10,7 +9,6 @@ const TopicSummary = ({
 }) => {
 
     const topicId = topic.id
-    const title = topic.attributes.title
     const lastPost = topic.attributes.last_post
     const lastPoster = lastPost.user
     const firstPoster = topic.attributes.first_poster
@@ -25,10 +23,10 @@ const TopicSummary = ({
 
     const renderLastPost = () => {
         return (
-            <>
+            <div>
                 <strong>{lastPost.created_at_s}</strong>{renderGreenArrow()}<br />
                 by <UserLink user={lastPoster} />
-            </>
+            </div>
         )
     }
 
@@ -37,9 +35,7 @@ const TopicSummary = ({
             <div><TopicLink topic={topic} /></div>
             <div><UserLink user={firstPoster} /></div>
             <div>{postCount}</div>
-            <div>
-                { renderLastPost() }
-            </div>
+            { renderLastPost() }
         </div>
     )
 }
