@@ -5,10 +5,11 @@ import UserLink from './UserLink'
 const TopicSummary = ({
     topicId,
     title,
-    lastPostTimeS, lastPostTag,
+    lastPostTimeS,
     postCount,
     firstPoster, firstPosterId,
     lastPoster, lastPosterId,
+    goToLastPost,
 }) => {
 
     const renderTitle = () => {
@@ -19,10 +20,18 @@ const TopicSummary = ({
         )
     }
 
+    const renderGreenArrow = () => (
+        <i
+            className="fa fa-arrow-right clickable"
+            style={{color: 'green'}}
+            onClick={goToLastPost}
+        ></i>
+    )
+
     const renderLastPost = () => {
         return (
             <>
-                <strong>{lastPostTimeS}</strong><br />
+                <strong>{lastPostTimeS}</strong>{renderGreenArrow()}<br />
                 by <UserLink userId={lastPosterId} username={lastPoster} />
             </>
         )
