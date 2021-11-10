@@ -22,7 +22,7 @@ const LastPost = ({
 
     const goToPost = () => {
         setScrollId(attributes.tag)
-        history.push(`/topics/${attributes.topic_id}`)
+        history.push(`/topics/${attributes.topic.id}`)
     }
 
     const renderGreenArrow = () => (
