@@ -1,53 +1,46 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import UserLink from './UserLink'
+import TopicLink from './TopicLink'
 
 const TopicSummary = ({
-    topicId,
-    title,
-    lastPostTimeS,
+    topic,
     postCount,
-    firstPoster, firstPosterId,
-    lastPoster, lastPosterId,
-    goToLastPost,
+    goToPost,
 }) => {
 
-    const renderTitle = () => {
-        return (
-            <Link to={`/topics/${topicId}`}>
-                {title}
-            </Link>
-        )
-    }
+    const topicId = topic.id
+    const title = topic.attributes.title
+    const lastPost = topic.attributes.last_post
+    const lastPoster = lastPost.user
+    const firstPoster = topic.attributes.first_poster
 
     const renderGreenArrow = () => (
         <i
             className="fa fa-arrow-right clickable"
             style={{color: 'green'}}
-            onClick={goToLastPost}
+            onClick={() => goToPost(topicId, lastPost.tag)}
         ></i>
     )
 
     const renderLastPost = () => {
         return (
             <>
-                <strong>{lastPostTimeS}</strong>{renderGreenArrow()}<br />
-                by <UserLink userId={lastPosterId} username={lastPoster} />
+                <strong>{lastPost.created_at_s}</strong>{renderGreenArrow()}<br />
+                by <UserLink user={lastPoster} />
             </>
         )
     }
 
     return (
-        <>
-            <div>
-                { renderTitle() }
-            </div>
-            <div><UserLink userId={firstPosterId} username={firstPoster} /></div>
+        <div className="topic-summary">
+            <div><TopicLink topic={topic} /></div>
+            <div><UserLink user={firstPoster} /></div>
             <div>{postCount}</div>
             <div>
                 { renderLastPost() }
             </div>
-        </>
+        </div>
     )
 }
 

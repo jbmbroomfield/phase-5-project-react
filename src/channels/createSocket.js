@@ -17,11 +17,7 @@ const createSocket = (params, messageFunctions) => {
 		const data = JSON.parse(event.data)
 		const message = data.message
 		// console.log('received', data)
-		if (data.type &&
-			data.type !== 'welcome' &&
-			data.type !== 'ping' &&
-			data.type !== 'confirm_subscription'
-		) {
+		if (!data.type) {
 			console.log('received', data)
 		}
 		if (message) {

@@ -1,10 +1,10 @@
 import React from 'react'
 import UserLink from './UserLink'
 
-const PostInfo = ({ username, userId, avatarUrl }) => {
+const PostInfo = ({ user, avatarUrl }) => {
     return (
         <div className="post-info">
-            <div><UserLink username={username} userId={userId} /></div>
+            <div><UserLink user={user} /></div>
             <div><img className="avatar" src={avatarUrl} alt="avatar" /></div>
         </div>
     )

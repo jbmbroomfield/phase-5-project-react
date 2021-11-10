@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router'
 import { connect } from 'react-redux'
 
 import NewTopicContainer from './NewTopicContainer'
-import TopicSummaryContainer from './TopicSummaryContainer'
+import TopicSummary from '../components/TopicSummary'
 import TopicSummaryHeader from '../components/TopicSummaryHeader'
 
 import { fetchCurrentUser } from '../actions/currentUserActions'
@@ -11,6 +12,8 @@ import { fetchSubsections } from '../actions/subsectionsActions'
 import { fetchTopics, fetchTopic } from '../actions/topicsActions'
 import { fetchUsers } from '../actions/usersActions'
 import subsectionChannel from '../channels/subsectionChannel'
+
+import { setScrollId } from '../actions/topicDisplayActions'
 
 const SubsectionContainer = ({ 
     match,
@@ -22,6 +25,7 @@ const SubsectionContainer = ({
 	fetchTopics, fetchTopic,
 	fetchUsers,
 }) => {
+
     const subsectionId = match.params.subsectionId
     const subsection = subsections.find(subsection => parseInt(subsection.id) === parseInt(subsectionId))
     topics = topics.filter(topic => parseInt(topic.attributes.subsection_id) === parseInt(subsectionId))
@@ -38,19 +42,12 @@ const SubsectionContainer = ({
         setSelection([nextSelectionStart, nextSelectionEnd])
     }
 
-	// useEffect(() => {
-	// 	fetchCurrentUser()
-	// 	fetchSections()
-	// 	fetchSubsections()
-	// 	fetchTopics()
-	// 	fetchUsers()
-	// }, [
-	// 	fetchCurrentUser,
-	// 	fetchSections,
-	// 	fetchSubsections,
-	// 	fetchTopics,
-	// 	fetchUsers,
-    // ])
+    const history = useHistory()
+
+    const goToPost = (topicId, tag) => {
+        setScrollId(tag)
+        history.push(`/topics/${topicId}`)
+    }
 
     useEffect(() => {
         fetchTopics(subsectionId)
@@ -59,7 +56,12 @@ const SubsectionContainer = ({
 
     const renderTopics = () => (
         topics.map(topic => (
-            <TopicSummaryContainer key={topic.id} topic={topic} />
+            <TopicSummary
+                key={topic.id}
+                topic={topic}
+                postCount={topic.attributes.post_count}
+                goToPost={goToPost}
+            />
         ))
     )
 
@@ -100,6 +102,7 @@ const mapDispatchToProps = dispatch => ({
 	fetchTopics: subsectionId => dispatch(fetchTopics(subsectionId)),
 	fetchTopic: topicId => dispatch(fetchTopic(topicId)),
 	fetchUsers: () => dispatch(fetchUsers()),
+    setScrollId: id => dispatch(setScrollId(id)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SubsectionContainer)

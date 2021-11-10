@@ -1,8 +1,5 @@
 import React from 'react'
-import { useHistory } from 'react-router'
 import { connect } from 'react-redux'
-
-import { setScrollId } from '../actions/topicDisplayActions'
 
 import TopicSummary from '../components/TopicSummary'
 
@@ -11,13 +8,6 @@ const TopicSummaryContainer = ({ topic, setScrollId }) => {
     const attributes = topic.attributes
     const lastPost = attributes.last_post
     const firstPoster = attributes.first_poster
-
-    const history = useHistory()
-
-    const goToLastPost = () => {
-        setScrollId(lastPost.tag)
-        history.push(`/topics/${topic.id}`)
-    }
 
     return (
         <div className="topic-summary">

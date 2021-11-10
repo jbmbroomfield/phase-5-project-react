@@ -1,26 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
 
-const UserLink = ({ users, userId, username }) => {
+const UserLink = ({ user }) => {
 
-    if (!username) {
-        const user = users.find(user => parseInt(userId) === parseInt(user.id))
-        if (!user) {
-            return null
-        }
-        username = user.attributes.username
+    if (!user) {
+        return null
     }
 
     return (
-        <Link to={`/users/${userId}`}>
-            {username}
+        <Link to={`/users/${user.id}`}>
+            {user.attributes.username}
         </Link>
     )
 }
 
-const mapStateToProps = state => ({
-    users: state.users
-})
-
-export default connect(mapStateToProps)(UserLink)
+export default UserLink
