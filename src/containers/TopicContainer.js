@@ -62,16 +62,6 @@ const TopicContainer = ({
     useEffect(() => {
         fetchPosts(topicId)
         fetchUserTopic(topicId)
-        // const params = {
-        //     channel: "TopicChannel",
-        //     topic_id: topicId,
-        // }
-        // const onUpdate = () => {
-        //     fetchPosts(topicId)
-        //     fetchUserTopic(topicId)
-        // }
-        // const socket = createSocket(params, onUpdate)
-        // return () => socket.close(1000)
         return topicChannel(topicId, fetchPost)
     }, [fetchPosts, fetchPost, fetchUserTopic, topicId, setBottomPopUp])
 

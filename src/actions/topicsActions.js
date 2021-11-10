@@ -5,11 +5,21 @@ const addTopics = topics => ({
     topics
 })
 
-export const fetchTopics = () => (
+export const fetchTopics = subsectionId => (
     dispatch => {
-        API.get('topics')
+        API.get(`subsections/${subsectionId}/topics`)
         .then(json => {
+            console.log(json)
             json.data && dispatch(addTopics(json.data))
+        })
+    }
+)
+
+export const fetchTopic = topicId => (
+    dispatch => {
+        API.get(`topics/${topicId}`)
+        .then(json => {
+            json.data && dispatch(addTopics([json.data]))
         })
     }
 )

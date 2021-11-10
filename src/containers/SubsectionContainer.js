@@ -8,8 +8,9 @@ import TopicSummaryHeader from '../components/TopicSummaryHeader'
 import { fetchCurrentUser } from '../actions/currentUserActions'
 import { fetchSections } from '../actions/sectionsActions'
 import { fetchSubsections } from '../actions/subsectionsActions'
-import { fetchTopics } from '../actions/topicsActions'
+import { fetchTopics, fetchTopic } from '../actions/topicsActions'
 import { fetchUsers } from '../actions/usersActions'
+import subsectionChannel from '../channels/subsectionChannel'
 
 const SubsectionContainer = ({ 
     match,
@@ -18,7 +19,7 @@ const SubsectionContainer = ({
 	fetchCurrentUser,
 	fetchSections,
 	fetchSubsections,
-	fetchTopics,
+	fetchTopics, fetchTopic,
 	fetchUsers,
 }) => {
     const subsectionId = match.params.subsectionId
@@ -36,19 +37,24 @@ const SubsectionContainer = ({
         setSelection([nextSelectionStart, nextSelectionEnd])
     }
 
-	useEffect(() => {
-		fetchCurrentUser()
-		fetchSections()
-		fetchSubsections()
-		fetchTopics()
-		fetchUsers()
-	}, [
-		fetchCurrentUser,
-		fetchSections,
-		fetchSubsections,
-		fetchTopics,
-		fetchUsers,
-    ])
+	// useEffect(() => {
+	// 	fetchCurrentUser()
+	// 	fetchSections()
+	// 	fetchSubsections()
+	// 	fetchTopics()
+	// 	fetchUsers()
+	// }, [
+	// 	fetchCurrentUser,
+	// 	fetchSections,
+	// 	fetchSubsections,
+	// 	fetchTopics,
+	// 	fetchUsers,
+    // ])
+
+    useEffect(() => {
+        fetchTopics(subsectionId)
+        return subsectionChannel(subsectionId, fetchTopic)
+    }, [fetchTopics, subsectionId, fetchTopic])
 
     const renderTopics = () => (
         topics.map(topic => (
@@ -90,7 +96,8 @@ const mapDispatchToProps = dispatch => ({
 	fetchCurrentUser: () => dispatch(fetchCurrentUser()),
 	fetchSections: () => dispatch(fetchSections()),
 	fetchSubsections: () => dispatch(fetchSubsections()),
-	fetchTopics: () => dispatch(fetchTopics()),
+	fetchTopics: subsectionId => dispatch(fetchTopics(subsectionId)),
+	fetchTopic: topicId => dispatch(fetchTopic(topicId)),
 	fetchUsers: () => dispatch(fetchUsers()),
 })
 
