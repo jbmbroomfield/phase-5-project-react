@@ -25,6 +25,7 @@ const SubsectionContainer = ({
     const subsectionId = match.params.subsectionId
     const subsection = subsections.find(subsection => parseInt(subsection.id) === parseInt(subsectionId))
     topics = topics.filter(topic => parseInt(topic.attributes.subsection_id) === parseInt(subsectionId))
+    topics.sort((a, b) => b.attributes.last_post.created_at_i - a.attributes.last_post.created_at_i)
 
     const [displayTextArea, setDisplayTextArea] = useState(false)
     const [title, setTitle] = useState('')

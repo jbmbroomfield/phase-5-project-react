@@ -8,6 +8,10 @@ const TopicSummaryContainer = ({ topic }) => {
     const lastPost = attributes.last_post
     const firstPoster = attributes.first_poster
 
+    if (lastPost) {
+        console.log(lastPost.created_at_i)
+    }
+
     return (
         <div className="topic-summary">
             <TopicSummary
