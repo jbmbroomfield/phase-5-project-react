@@ -14,28 +14,22 @@ const SectionsContainer = ({
     sections, subsections,
 	fetchCurrentUser,
 	fetchSections,
-	fetchSubsections,
+	fetchSubsections, fetchSubsection,
 	fetchTopics,
 	fetchUsers,
 }) => {
 
     useEffect(() => {
-		// fetchCurrentUser()
 		fetchSections()
 		fetchSubsections()
-		// fetchTopics()
-		// fetchUsers()
 	}, [
-		// fetchCurrentUser,
 		fetchSections,
 		fetchSubsections,
-		// fetchTopics,
-		// fetchUsers,
     ])
     
 	useEffect(() => {
 		return sectionsChannel(fetchSubsection)
-	}, [])
+	}, [fetchSubsection])
 
     const getSubsections = sectionId => (
         subsections.filter(subsection => (

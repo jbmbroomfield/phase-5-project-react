@@ -5,11 +5,7 @@ import NewTopicContainer from './NewTopicContainer'
 import TopicSummary from '../components/TopicSummary'
 import TopicSummaryHeader from '../components/TopicSummaryHeader'
 
-import { fetchCurrentUser } from '../actions/currentUserActions'
-import { fetchSections } from '../actions/sectionsActions'
-import { fetchSubsections } from '../actions/subsectionsActions'
 import { fetchTopics, fetchTopic } from '../actions/topicsActions'
-import { fetchUsers } from '../actions/usersActions'
 import subsectionChannel from '../channels/subsectionChannel'
 
 import { setScrollId } from '../actions/topicDisplayActions'
@@ -18,17 +14,13 @@ const SubsectionContainer = ({
     match,
     subsections,
     topics,
-	fetchCurrentUser,
-	fetchSections,
-	fetchSubsections,
 	fetchTopics, fetchTopic,
-	fetchUsers,
 }) => {
 
     const subsectionId = match.params.subsectionId
     const subsection = subsections.find(subsection => parseInt(subsection.id) === parseInt(subsectionId))
     topics = topics.filter(topic => parseInt(topic.attributes.subsection_id) === parseInt(subsectionId))
-    topics.sort((a, b) => b.attributes.last_post.created_at_i - a.attributes.last_post.created_at_i)
+    topics.sort((a, b) => b.attributes.last_post.attributes.created_at_i - a.attributes.last_post.attributes.created_at_i)
 
     const [displayTextArea, setDisplayTextArea] = useState(false)
     const [title, setTitle] = useState('')
@@ -87,12 +79,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-	fetchCurrentUser: () => dispatch(fetchCurrentUser()),
-	fetchSections: () => dispatch(fetchSections()),
-	fetchSubsections: () => dispatch(fetchSubsections()),
 	fetchTopics: subsectionId => dispatch(fetchTopics(subsectionId)),
 	fetchTopic: topicId => dispatch(fetchTopic(topicId)),
-	fetchUsers: () => dispatch(fetchUsers()),
     setScrollId: id => dispatch(setScrollId(id)),
 })
 
