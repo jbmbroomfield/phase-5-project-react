@@ -13,3 +13,12 @@ export const fetchSubsections = () => (
         })
     }
 )
+
+export const fetchSubsection = subsectionId => (
+    dispatch => {
+        API.get(`subsections/${subsectionId}`)
+        .then(json => {
+            json.data && dispatch(addSubsections([json.data]))
+        })
+    }
+)

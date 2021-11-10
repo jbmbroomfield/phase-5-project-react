@@ -5,9 +5,10 @@ import Section from '../components/Section'
 
 import { fetchCurrentUser } from '../actions/currentUserActions'
 import { fetchSections } from '../actions/sectionsActions'
-import { fetchSubsections } from '../actions/subsectionsActions'
+import { fetchSubsections, fetchSubsection } from '../actions/subsectionsActions'
 import { fetchTopics } from '../actions/topicsActions'
 import { fetchUsers } from '../actions/usersActions'
+import sectionsChannel from '../channels/sectionsChannel'
 
 const SectionsContainer = ({
     sections, subsections,
@@ -32,6 +33,10 @@ const SectionsContainer = ({
 		// fetchUsers,
     ])
     
+	useEffect(() => {
+		return sectionsChannel(fetchSubsection)
+	}, [])
+
     const getSubsections = sectionId => (
         subsections.filter(subsection => (
             parseInt(subsection.attributes.section_id) === parseInt(sectionId)
@@ -60,6 +65,7 @@ const mapDispatchToProps = dispatch => ({
 	fetchCurrentUser: () => dispatch(fetchCurrentUser()),
 	fetchSections: () => dispatch(fetchSections()),
 	fetchSubsections: () => dispatch(fetchSubsections()),
+	fetchSubsection: subsectionId => dispatch(fetchSubsection(subsectionId)),
 	fetchTopics: () => dispatch(fetchTopics()),
 	fetchUsers: () => dispatch(fetchUsers()),
 })
