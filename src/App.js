@@ -57,7 +57,6 @@ const App = ({
 			fetchCurrentUser()
 			fetchSections()
 			fetchSubsections()
-			fetchTopics()
 			fetchUsers()
 		}
 		mainOnUpdate()
@@ -66,10 +65,7 @@ const App = ({
 		fetchCurrentUser,
 		fetchSections,
 		fetchSubsections,
-		fetchTopics,
 		fetchUsers,
-		// currentUser.id,
-		fetchNotifications,
 	])
 
 	useEffect(() => {

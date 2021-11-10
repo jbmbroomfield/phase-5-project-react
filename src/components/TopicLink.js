@@ -1,13 +1,18 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const TopicLink = ({ topic }) => {
-    if (!topic) {
-        return null
+const TopicLink = ({ 
+    topic,
+    topicId,
+    title,
+}) => {
+    if (topic) {
+        topicId = topic.id
+        title = topic.attributes.title
     }
     return (
-        <Link to={`/topics/${topic.id}`}>
-            {topic.attributes.title}
+        <Link to={`/topics/${topicId}`}>
+            {title}
         </Link>
     )
 }

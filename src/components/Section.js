@@ -1,19 +1,23 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+
+import SubsectionSummary from './SubsectionSummary'
+import SubsectionSummaryHeader from './SubsectionSummaryHeader'
 
 const Section = ({ title, subsections }) => {
 
     const renderSubsections = () => (
         subsections.map(subsection => (
-        <p key={subsection.id}>
-            <Link to={`subsections/${subsection.id}`}>{subsection.attributes.title}</Link>
-        </p>
+            <SubsectionSummary
+                key={subsection.id}
+                subsection={subsection}
+            />
         ))
     )
 
     return (
         <div className='section'>
             <h1>{title}</h1>
+            <SubsectionSummaryHeader />
             { renderSubsections() }
         </div>
     )

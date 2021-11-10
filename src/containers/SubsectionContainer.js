@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory } from 'react-router'
 import { connect } from 'react-redux'
 
 import NewTopicContainer from './NewTopicContainer'
@@ -42,13 +41,6 @@ const SubsectionContainer = ({
         setSelection([nextSelectionStart, nextSelectionEnd])
     }
 
-    const history = useHistory()
-
-    const goToPost = (topicId, tag) => {
-        setScrollId(tag)
-        history.push(`/topics/${topicId}`)
-    }
-
     useEffect(() => {
         fetchTopics(subsectionId)
         return subsectionChannel(subsectionId, fetchTopic)
@@ -60,7 +52,6 @@ const SubsectionContainer = ({
                 key={topic.id}
                 topic={topic}
                 postCount={topic.attributes.post_count}
-                goToPost={goToPost}
             />
         ))
     )

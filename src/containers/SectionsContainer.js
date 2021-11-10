@@ -19,17 +19,17 @@ const SectionsContainer = ({
 }) => {
 
     useEffect(() => {
-		fetchCurrentUser()
+		// fetchCurrentUser()
 		fetchSections()
 		fetchSubsections()
-		fetchTopics()
-		fetchUsers()
+		// fetchTopics()
+		// fetchUsers()
 	}, [
-		fetchCurrentUser,
+		// fetchCurrentUser,
 		fetchSections,
 		fetchSubsections,
-		fetchTopics,
-		fetchUsers,
+		// fetchTopics,
+		// fetchUsers,
     ])
     
     const getSubsections = sectionId => (
