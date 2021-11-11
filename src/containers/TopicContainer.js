@@ -13,6 +13,7 @@ import { createFlag, deleteFlag } from '../actions/flagsActions'
 import { setPages, setScrollId, setPage, setTopicDisplay } from '../actions/topicDisplayActions'
 
 import topicChannel from '../channels/topicChannel'
+import { fetchTopic } from '../actions/topicsActions'
 
 const TopicContainer = ({
     match,
@@ -26,6 +27,7 @@ const TopicContainer = ({
     createFlag, deleteFlag,
     topicDisplay, setPages, setPage, setTopicDisplay,
     currentUser,
+    fetchTopic,
 }) => {
 
     const topicId = parseInt(match.params.topicId)
@@ -60,10 +62,11 @@ const TopicContainer = ({
     }
 
     useEffect(() => {
+        fetchTopic(topicId)
         fetchPosts(topicId)
         fetchUserTopic(topicId)
         return topicChannel(topicId, fetchPost)
-    }, [fetchPosts, fetchPost, fetchUserTopic, topicId, setBottomPopUp])
+    }, [fetchTopic, fetchPosts, fetchPost, fetchUserTopic, topicId])
 
     const getUser = userId => users.find(user => parseInt(user.id) === parseInt(userId))
 
@@ -226,6 +229,7 @@ const mapDispatchToProps = dispatch => ({
     setPage: page => dispatch(setPage(page)),
     setPages: pages => dispatch(setPages(pages)),
     setTopicDisplay: topicDisplay => dispatch(setTopicDisplay(topicDisplay)),
+    fetchTopic: topicId => dispatch(fetchTopic(topicId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TopicContainer)
