@@ -32,8 +32,8 @@ const mapStateToProps = state => ({
     currentUser: state.currentUser
 })
 
-const mapDispatchToProps = dispatch => ({
-    login: (username, password, redirect) => dispatch(login(username, password, redirect))
-})
+const mapDispatchToProps = {
+    login,
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer)

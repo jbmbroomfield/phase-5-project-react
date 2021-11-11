@@ -55,13 +55,13 @@ const mapStateToProps = state => ({
     subsections: state.subsections,
 })
 
-const mapDispatchToProps = dispatch => ({
-	fetchCurrentUser: () => dispatch(fetchCurrentUser()),
-	fetchSections: () => dispatch(fetchSections()),
-	fetchSubsections: () => dispatch(fetchSubsections()),
-	fetchSubsection: subsectionId => dispatch(fetchSubsection(subsectionId)),
-	fetchTopics: () => dispatch(fetchTopics()),
-	fetchUsers: () => dispatch(fetchUsers()),
-})
+const mapDispatchToProps = {
+	fetchCurrentUser,
+	fetchSections,
+	fetchSubsections,
+	fetchSubsection,
+	fetchTopics,
+	fetchUsers,
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(SectionsContainer)

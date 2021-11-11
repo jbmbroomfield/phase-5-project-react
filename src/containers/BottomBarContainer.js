@@ -44,9 +44,9 @@ const mapStateToProps = state => ({
     bottomPopUp: state.bottomPopUp
 })
 
-const mapDispatchToProps = dispatch => ({
-    setBottomPopUp: bottomPopUp => dispatch(setBottomPopUp(bottomPopUp))
-})
+const mapDispatchToProps = {
+    setBottomPopUp,
+}
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(BottomBarContainer)

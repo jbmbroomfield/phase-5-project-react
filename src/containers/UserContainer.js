@@ -26,8 +26,8 @@ const mapStateToProps = state => ({
     currentUser: state.currentUsers,
 })
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = {
 
-})
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserContainer)

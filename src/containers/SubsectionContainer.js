@@ -78,10 +78,10 @@ const mapStateToProps = state => ({
     topics: state.topics
 })
 
-const mapDispatchToProps = dispatch => ({
-	fetchTopics: subsectionId => dispatch(fetchTopics(subsectionId)),
-	fetchTopic: topicId => dispatch(fetchTopic(topicId)),
-    setScrollId: id => dispatch(setScrollId(id)),
-})
+const mapDispatchToProps = {
+	fetchTopics,
+	fetchTopic,
+    setScrollId,
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(SubsectionContainer)

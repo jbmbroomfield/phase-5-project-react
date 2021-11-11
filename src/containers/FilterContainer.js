@@ -34,11 +34,11 @@ const mapStateToProps = state => ({
 
 })
 
-const mapDispatchToProps = dispatch => ({
-    toggleUserFilter: user => dispatch(toggleUserFilter(user)),
-    toggleFlagFilter: flag => dispatch(toggleFlagFilter(flag)),
-    includeAllUsers: () => dispatch(includeAllUsers()),
-    excludeAllUsers: () => dispatch(excludeAllUsers()),
-})
+const mapDispatchToProps = {
+    toggleUserFilter,
+    toggleFlagFilter,
+    includeAllUsers,
+    excludeAllUsers,
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilterContainer)

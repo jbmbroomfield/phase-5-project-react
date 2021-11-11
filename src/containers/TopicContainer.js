@@ -7,27 +7,30 @@ import Post from '../components/Post'
 import TrackVisibility from 'react-on-screen'
 import { fetchUserTopic } from '../actions/userTopicsActions'
 
-import { setBottomPopUp } from '../actions/bottomPopUpActions'
-import { setDraft, insertIntoDraft } from '../actions/draftsActions'
+import { insertIntoDraft } from '../actions/draftsActions'
 import { createFlag, deleteFlag } from '../actions/flagsActions'
-import { setPages, setScrollId, setPage, setTopicDisplay } from '../actions/topicDisplayActions'
+import { setScrollId, setTopicDisplay } from '../actions/topicDisplayActions'
 
 import topicChannel from '../channels/topicChannel'
 import { fetchTopic } from '../actions/topicsActions'
 
 const TopicContainer = ({
     match,
-    subsections, topics, posts, users,
-    fetchPosts, fetchPost,
-    userTopics, fetchUserTopic,
-    setScrollId,
-    setBottomPopUp,
-    drafts, setDraft, insertIntoDraft,
     focusTextArea,
-    createFlag, deleteFlag,
-    topicDisplay, setPages, setPage, setTopicDisplay,
+    
+    topics,
+    posts,
+    users,
+    drafts,
+    topicDisplay,
     currentUser,
-    fetchTopic,
+
+    fetchTopic, fetchUserTopic,
+    fetchPosts, fetchPost,
+    setTopicDisplay,
+    setScrollId,
+    insertIntoDraft,
+    createFlag, deleteFlag,
 }) => {
 
     const topicId = parseInt(match.params.topicId)
@@ -69,8 +72,6 @@ const TopicContainer = ({
     }, [fetchTopic, fetchPosts, fetchPost, fetchUserTopic, topicId])
 
     const getUser = userId => users.find(user => parseInt(user.id) === parseInt(userId))
-
-
 
     // DETERMINING WHICH POSTS TO SHOW
 
@@ -127,15 +128,6 @@ const TopicContainer = ({
             const userId = parseInt(post.attributes.user_id)
             const userPresent = userIdArray.includes(userId)
             return exclude !== userPresent
-            // if (exclude === userPresent) {
-            //     // NOT AN INCLUDED USER
-            //     return false
-            // }
-            // if (post.attributes.my_flags.includes('like')) {
-            //     if (flagsExclude.includes('like') || exclude && !flagsInclude.)
-            // }
-            // if (flagsExclude.includes)
-            // if (exclude && )
         }
     )]
 
@@ -157,8 +149,6 @@ const TopicContainer = ({
     if (page !== 'all') {
         pagePosts = pagePosts.slice(pageSize * (page - 1), pageSize * page)
     }
-
-
 
     useEffect(() => {
         setTopicDisplay({
@@ -205,31 +195,21 @@ const TopicContainer = ({
 }
 
 const mapStateToProps = state => ({
-    sections: state.sections,
-    subsections: state.subsections,
     topics: state.topics,
     posts: state.posts,
     users: state.users,
-    userTopics: state.userTopics,
     drafts: state.drafts,
     topicDisplay: state.topicDisplay,
     currentUser: state.currentUser,
 })
 
-const mapDispatchToProps = dispatch => ({
-    fetchPosts: topicId => dispatch(fetchPosts(topicId)),
-    fetchPost: postId => dispatch(fetchPost(postId)),
-    fetchUserTopic: topicId => dispatch(fetchUserTopic(topicId)),
-    setScrollId: id => dispatch(setScrollId(id)),
-    setBottomPopUp: bottomPopUp => dispatch(setBottomPopUp(bottomPopUp)),
-    setDraft: (topicId, text, selection) => dispatch(setDraft(topicId, text, selection)),
-    insertIntoDraft: (topicId, text) => dispatch(insertIntoDraft(topicId, text)),
-    createFlag: (topicId, postId, category) => dispatch(createFlag(topicId, postId, category)),
-    deleteFlag: (topicId, postId, category) => dispatch(deleteFlag(topicId, postId, category)),
-    setPage: page => dispatch(setPage(page)),
-    setPages: pages => dispatch(setPages(pages)),
-    setTopicDisplay: topicDisplay => dispatch(setTopicDisplay(topicDisplay)),
-    fetchTopic: topicId => dispatch(fetchTopic(topicId))
-})
+const mapDispatchToProps = {
+    fetchTopic, fetchUserTopic,
+    fetchPosts, fetchPost,
+    setTopicDisplay,
+    setScrollId,
+    insertIntoDraft,
+    createFlag, deleteFlag,
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(TopicContainer)

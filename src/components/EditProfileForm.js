@@ -13,11 +13,6 @@ const DisplayAvatar = ({ src }) => (
 
 const EditProfileForm = ({ uploadAvatar, currentUser, currentTimeZone }) => {
 
-    // const convertTZ = (date, tzString) => {
-    //     date = typeof date === "string" ? new Date(date) : date
-    //     return new Date(date.toLocaleString("en-US", {timeZone: tzString}));   
-    // }
-
     const [state, setState] = useState({
         timezone: null,
         avatarImage: null,
@@ -25,13 +20,6 @@ const EditProfileForm = ({ uploadAvatar, currentUser, currentTimeZone }) => {
     })
 
     const history = useHistory()
-
-    // const handleChange = event => {
-    //     setState({
-    //         ...state,
-    //         [event.target.name]: event.target.value
-    //     })
-    // }
 
     const handleTimezoneChange = timezone => {
         setState({

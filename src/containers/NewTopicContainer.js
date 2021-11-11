@@ -65,12 +65,8 @@ const NewTopicContainer = ({
     )
 }
 
-const mapDispatchToProps = dispatch => ({
-    createTopic: (
-        subsectionId, title, text, redirect
-    ) => dispatch(createTopic(
-        subsectionId, title, text, redirect
-    ))
-})
+const mapDispatchToProps = {
+    createTopic,
+}
 
 export default connect(null, mapDispatchToProps)(NewTopicContainer)

@@ -84,8 +84,8 @@ const mapStateToProps = state => ({
     topics: state.topics,
 })
 
-const mapDispatchToProps = dispatch => ({
-    subscribeToTopic: (topicId, subscribed) => dispatch(subscribeToTopic(topicId, subscribed))
-})
+const mapDispatchToProps = {
+    subscribeToTopic,
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(AsideRightTopicContainer)

@@ -84,10 +84,10 @@ const mapStateToProps = state => ({
     drafts: state.drafts
 })
 
-const mapDispatchToProps = dispatch => ({
-    setDraft: (topicId, text, selection) => dispatch(setDraft(topicId, text, selection)),
-    deleteDraft: topicId => dispatch(deleteDraft(topicId)),
-    createPost: (topicId, text) => dispatch(createPost(topicId, text)),
-})
+const mapDispatchToProps = {
+    setDraft,
+    deleteDraft,
+    createPost,
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(TopicReplyContainer)

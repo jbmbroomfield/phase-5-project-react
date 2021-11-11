@@ -20,8 +20,8 @@ const mapStateToProps = state => ({
     currentUser: state.currentUser
 })
 
-const mapDispatchToProps = ({
+const mapDispatchToProps = {
     removeCurrentUser
-})
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavbarContainer)

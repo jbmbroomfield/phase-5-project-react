@@ -51,8 +51,8 @@ const LastPost = ({
 
 
 
-const mapDispatchToProps = dispatch => ({
-    setScrollId: id => dispatch(setScrollId(id)),
-})
+const mapDispatchToProps = {
+    setScrollId,
+}
 
 export default connect(null, mapDispatchToProps)(LastPost)

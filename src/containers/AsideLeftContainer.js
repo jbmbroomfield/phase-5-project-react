@@ -39,11 +39,9 @@ const mapStateToProps = state => ({
     topics: state.topics,
 })
 
-const mapDispatchToProps = dispatch => ({
-    deleteNotification: notificationId => dispatch(deleteNotification(notificationId)),
-    setScrollId: id => {
-        return dispatch(setScrollId(id))
-    }
-})
+const mapDispatchToProps = {
+    deleteNotification,
+    setScrollId
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(AsideLeftContainer)
