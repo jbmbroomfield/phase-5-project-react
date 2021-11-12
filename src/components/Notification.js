@@ -10,6 +10,7 @@ const Notification = ({
     topics,
     deleteNotification,
     setScrollId,
+    fetchTopic,
 }) => {
 
     const replies = () => number === 1 ? '1 new reply' : `${number} new replies`
@@ -21,6 +22,8 @@ const Notification = ({
                 if (topic) {
                     return `${topic.attributes.title} has ${replies()}.`
                 } else {
+                    console.log(objectId)
+                    fetchTopic(objectId)
                     return 'Topic not found.'
                 } 
             default:

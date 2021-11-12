@@ -2,10 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { deleteNotification } from '../actions/notificationsActions'
 import { setScrollId } from '../actions/topicDisplayActions'
+import { fetchTopic } from '../actions/topicsActions'
 
 import Notification from '../components/Notification'
 
-const AsideLeftContainer = ({ notifications, topics, deleteNotification, setScrollId }) => {
+const AsideLeftContainer = ({ notifications, topics, deleteNotification, setScrollId, fetchTopic }) => {
 
     const renderNotifications = () => (
         notifications.map(notification => (
@@ -19,6 +20,7 @@ const AsideLeftContainer = ({ notifications, topics, deleteNotification, setScro
                 topics={topics}
                 deleteNotification={() => deleteNotification(notification.id)}
                 setScrollId={setScrollId}
+                fetchTopic={fetchTopic}
             />
         ))
     )
@@ -41,7 +43,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
     deleteNotification,
-    setScrollId
+    setScrollId,
+    fetchTopic,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AsideLeftContainer)

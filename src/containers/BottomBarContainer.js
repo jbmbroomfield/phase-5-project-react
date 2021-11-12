@@ -29,7 +29,6 @@ const BottomBarContainer = ({
     const renderSwitch = () => (
         <Switch>
             { topicRoute() }
-            <Route><span>Default Bottom Bar</span></Route>
         </Switch>
     )
 
