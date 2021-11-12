@@ -1,10 +1,24 @@
 :root {
-  --main-bg-color: #bbb;
+  --main-bg-color: #ccc;
   --main-fg-color: #eee;
-  --navbar-color: #111;
-  --navbar-hover-color: #333;
-  --aside-bg-color: #eee;
+
+  --navbar-color: #012a4a;
+  --navbar-hover-color: #013a63;
+
+  --aside-bg-color: #ccc;
+  --aside-header-color: #013a63;
 }
+
+/* :root {
+  --main-bg-color: #219ebc;
+  --main-fg-color: #8ecae6;
+
+  --navbar-color: #023047;
+  --navbar-hover-color: #013a63;
+
+  --aside-bg-color: #126782;
+  --aside-header-color: #ffb703;
+} */
 
 /* :root {
   --main-bg-color: #ccc5b9;

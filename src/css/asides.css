@@ -1,7 +1,7 @@
 aside {
   background-color: var(--aside-bg-color);
-  border-left: 2px solid black;
-  border-right: 2px solid black;
+  /* border-left: 2px solid black;
+  border-right: 2px solid black; */
   overflow: hidden;
   position: fixed;
   top: 50px;
@@ -38,19 +38,22 @@ aside.aside-left div.notifications {
 }
 
 .aside-header {
-  width: 100%;
+  /* width: 100%; */
   padding: 10px;
   text-align: center;
   font-size: 150%;
+  background-color: var(--aside-header-color);
+  margin: 5px;
+  border-radius: 10px;
 }
 
-.notifications-header {
+/* .notifications-header {
   background-color: #ffdbdd;
-}
+} */
 
-.stats-header {
+/* .stats-header {
   background-color: #d0e5f5;
-}
+} */
 
 .page-control span,
 .page-control i {
@@ -61,6 +64,7 @@ aside.aside-left div.notifications {
 .page-control-input {
   font-size: 150%;
   text-align: center;
+  margin: 10px 10px 0 10px;
 }
 
 .page-control {
@@ -90,6 +94,11 @@ aside.aside-left div.notifications {
   /* border: 2px solid #ffca30; */
   border: 1px solid black;
 }
+
+/* .fa-chevron-left,
+.fa-chevron-right {
+  margin: 0 0 20px 0;
+} */
 
 .filter-flag {
   padding: 10px 5px;
