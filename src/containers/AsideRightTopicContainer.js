@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 
 import { subscribeToTopic } from '../actions/userTopicsActions'
@@ -12,7 +12,13 @@ const AsideRightTopicContainer = ({
     topicDisplay,
     topics,
 }) => {
-    
+
+    const [displayFilter, setDisplayFilter] = useState(false)
+
+    const toggleDisplayFilter = () => {
+        setDisplayFilter(!displayFilter)
+    }
+
     const topicId = match && parseInt(match.params.topicId)
     const topic = topics.find(topic => parseInt(topic.id) === topicId)
     const userTopic = userTopics.find(
@@ -71,7 +77,12 @@ const AsideRightTopicContainer = ({
     return (
         <> 
             <PageControlContainer topicDisplay={topicDisplay} />
-            <FilterContainer topicDisplay={topicDisplay} topic={topic} />
+            <FilterContainer
+                topicDisplay={topicDisplay}
+                topic={topic}
+                displayFilter={displayFilter}
+                toggleDisplayFilter={toggleDisplayFilter}
+            />
             { renderSubscribedStatus() }
             { renderSubscribeOptions() }
         </>

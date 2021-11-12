@@ -31,10 +31,11 @@ aside.aside-left div.notifications {
 }
 
 .notification {
-  background-color: var(--main-bg-color);
+  background-color: var(--main-fg-color);
   margin: 10px;
   padding: 5px 7px;
   border-radius: 10px;
+  box-shadow: 5px 5px 4px #888888;
 }
 
 .aside-header {

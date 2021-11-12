@@ -6,7 +6,9 @@
   --navbar-hover-color: #013a63;
 
   --aside-bg-color: #ccc;
-  --aside-header-color: #013a63;
+  --aside-header-color: #ccc;
+
+  --box-shadow: 10px 10px 8px #888888;
 }
 
 /* :root {
@@ -72,6 +74,7 @@ div.content {
   padding: 15px;
   margin: 10px;
   border-radius: 20px;
+  box-shadow: var(--box-shadow);
 }
 
 .clickable {

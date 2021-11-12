@@ -9,23 +9,30 @@ const FilterContainer = ({
     topic,
     toggleUserFilter, toggleFlagFilter,
     includeAllUsers, excludeAllUsers,
+    displayFilter, toggleDisplayFilter,
 }) => {
 
     const users = topic?.attributes.posters
     const userFilter = topicDisplay.users
     const flagFilter = topicDisplay.flags
 
+    
+    const replyCaret = displayFilter ?  <i className="fa fa-caret-up" aria-hidden="true"></i> : <i className="fa fa-caret-down" aria-hidden="true"></i>
+
     return (
         <>
-            <div className="aside-header">Filter</div>
-            <Filter
+            <div
+                className="aside-header btn"
+                onClick={toggleDisplayFilter}
+            > {replyCaret} Filter</div>
+            { displayFilter && <Filter
                 users={users}
                 userFilter={userFilter} flagFilter={flagFilter}
                 toggleUserFilter={toggleUserFilter}
                 toggleFlagFilter={toggleFlagFilter}
                 includeAllUsers={includeAllUsers}
                 excludeAllUsers={excludeAllUsers}
-            />
+            />}
         </>
     )
 }
