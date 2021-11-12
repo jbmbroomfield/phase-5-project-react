@@ -188,7 +188,7 @@ const TopicContainer = ({
 
     return (
         <>
-            <h1>Topic - {topic && topic.attributes.title}</h1>
+            <h1>{topic && topic.attributes.title}</h1>
             { renderPosts() }
         </>
     )
