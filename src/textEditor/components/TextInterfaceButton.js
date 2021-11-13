@@ -1,14 +1,11 @@
 import React from 'react'
 
-const TextInterfaceButton = ({ bbCodeObject, onClick }) => {
-    const insertion = bbCodeObject.insertion
-    const display = bbCodeObject.display
-
+const TextInterfaceButton = ({ onClick, tag }) => {
     const renderButton = () => (
         <span
-            onClick={() => onClick(insertion.insert)}
-            className={`sceditor-button sceditor-button-${display.value}`}
-            title={display.title}
+            onClick={() => onClick(tag.insert)}
+            className={`sceditor-button sceditor-button-${tag.value}`}
+            title={tag.title}
             unselectable="on"
         >
             <div unselectable="on"></div>

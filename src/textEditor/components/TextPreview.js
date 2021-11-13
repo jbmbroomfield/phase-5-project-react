@@ -1,10 +1,10 @@
-import bbCodeParsing from '../bbCode/BBCodeParsing.js'
+import parse from '../bbCode/parse.js'
 import React from 'react'
 
-const TextPreview = ({ text, bbCodeObjects}) => {
+const TextPreview = ({ text }) => {
     
     const renderTextPreview = () => (
-        bbCodeParsing.parse(text, bbCodeObjects)
+        parse(text)
     )
 
     return (

@@ -1,7 +1,6 @@
 import React from 'react'
 
-import { bbCodeObjects } from '../textEditor/bbCode/BBCodeObject'
-import bbCodeParsing from '../textEditor/bbCode/BBCodeParsing.js'
+import parse from '../textEditor/bbCode/parse.js'
 
 const PostContent = ({ text, tag, createdAt }) => {
 
@@ -17,7 +16,7 @@ const PostContent = ({ text, tag, createdAt }) => {
     )
 
     const renderPostText = () => (
-        bbCodeParsing.parse(text, bbCodeObjects)
+        parse(text)
     )
 
     return (

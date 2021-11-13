@@ -17,8 +17,9 @@ const Post = ({
     createFlag, deleteFlag,
 }) => {
 
-    const insertPostText = () =>{
-        insertText(`${user.attributes.username} said "${text}"\n`)
+    const insertQuote = () =>{
+        // insertText(`${user.attributes.username} said "${text}"\n`)
+        insertText(`[quote author=${user.attributes.username}]${text}[/quote]\n`)
         setTimeout(() => focusTextArea({draft}), 10)
     }
 
@@ -44,7 +45,7 @@ const Post = ({
             />
             <PostContent text={text} tag={tag} createdAt={createdAt} />
             <PostNotes
-                insertPostText={insertPostText}
+                insertQuote={insertQuote}
                 liked={liked}
                 disliked={disliked}
                 likeCount={likeCount}

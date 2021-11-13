@@ -21,18 +21,15 @@ const TopicReplyContainer = ({
     const selection = draft ? draft.attributes.selection : [0, 0]
 
     const setText = (text, selection) => {
-        console.log(selection)
         setDraft(topicId, text, selection)
         focusTextArea({selection})
     }
 
-    const setSelection = (selection, nextText) => {
-        console.log(text)        
+    const setSelection = (selection, nextText) => {     
         setDraft(topicId, nextText || text, selection)}
 
     const handleButtonClick = insert => {
         const [nextText, nextSelectionStart, nextSelectionEnd] = insert(text, selection[0], selection[1])
-        console.log(nextText)
         setText(nextText, [nextSelectionStart, nextSelectionEnd])
         // setSelection([nextSelectionStart, nextSelectionEnd], nextText)
     }

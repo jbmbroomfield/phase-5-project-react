@@ -27,7 +27,7 @@ ul.navbar button,
 ul.navbar li span,
 .bottom-bar a,
 .bottom-bar button,
-.bottom-bar span {
+.bottom-bar .bottom-bar span {
   display: block;
   color: white;
   text-align: center;

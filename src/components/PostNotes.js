@@ -1,7 +1,7 @@
 import React from 'react'
 
 const PostNotes = ({
-    insertPostText,
+    insertQuote,
     liked, disliked,
     likeCount, dislikeCount,
     createFlag, deleteFlag,
@@ -41,7 +41,7 @@ const PostNotes = ({
                 { renderLike() }
                 { renderDislike() }
             </span>
-            <button onClick={insertPostText}>Quote</button>
+            <button onClick={insertQuote}>Quote</button>
         </div>
     )
 }

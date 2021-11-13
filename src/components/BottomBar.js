@@ -2,7 +2,7 @@ import React from 'react'
 
 import TextInterface from '../textEditor/components/TextInterface'
 
-import { bbCodeObjects } from '../textEditor/bbCode/BBCodeObject'
+import allTags from '../textEditor/bbCode/tags/allTags'
 
 const BottomBar = ({
     bottomPopUp, setBottomPopUp,
@@ -22,7 +22,7 @@ const BottomBar = ({
 
     const renderTextInterface = () => (
         bottomPopUp ? (
-            <TextInterface onButtonClick={handleButtonClick} bbCodeObjects={bbCodeObjects} />
+            <TextInterface onButtonClick={handleButtonClick} tags={allTags}/>
         ) : null
     )
 

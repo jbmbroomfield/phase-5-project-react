@@ -34,7 +34,6 @@ const App = ({
 	const textAreaRef = useRef(null)
 
 	const tryToFocusTextArea = (draft, selection, attempt) => {
-		console.log(selection)
 		setTimeout(() => {
 			if (textAreaRef && textAreaRef.current) {
 				textAreaRef.current.focus()

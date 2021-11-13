@@ -3,8 +3,6 @@ import React from 'react'
 import TextArea from '../components/TextArea'
 import TextPreview from '../components/TextPreview'
 
-import { bbCodeObjects } from '../bbCode/BBCodeObject'
-
 const TextContainer = ({
     text, setText,
     selection, setSelection,
@@ -34,7 +32,7 @@ const TextContainer = ({
     )
     
     const renderTextPreview = () => (
-        <TextPreview text={text} bbCodeObjects={bbCodeObjects} />
+        <TextPreview text={text} />
     )
 
     return (
