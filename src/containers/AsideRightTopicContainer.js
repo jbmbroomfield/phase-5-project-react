@@ -19,8 +19,12 @@ const AsideRightTopicContainer = ({
         setDisplayFilter(!displayFilter)
     }
 
+    // const subsectionSlug = match.params.subsectionSlug
+    const topicSlug = match.params.topicSlug
+    const topic = topics.find(topic => {
+        return topic.attributes?.slug === topicSlug
+    })
     const topicId = match && parseInt(match.params.topicId)
-    const topic = topics.find(topic => parseInt(topic.id) === topicId)
     const userTopic = userTopics.find(
         userTopic => parseInt(userTopic.attributes.topic_id) === topicId
     )
