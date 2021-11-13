@@ -88,9 +88,9 @@ const signupBody = (
     return rv
 }
 
-export const editProfile = (userId, attributes) => {
+export const editProfile = attributes => {
     const body = {
         user: attributes
     }
-    API.patch(`users/${userId}`, body)
+    API.patch(`current_user`, body)
 }

@@ -42,7 +42,7 @@ const EditProfileForm = ({ uploadAvatar, currentUser, currentTimeZone }) => {
             avatar_image: state.avatarImage,
             time_zone: state.timezone
         }
-        editProfile(currentUser.id, attributes)
+        editProfile(attributes)
         uploadAvatar(state.avatarImage, getJwt())
         history.push("/")
     }
