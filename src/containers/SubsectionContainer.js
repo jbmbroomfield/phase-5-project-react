@@ -17,8 +17,9 @@ const SubsectionContainer = ({
 	fetchTopics, fetchTopic,
 }) => {
 
-    const subsectionId = match.params.subsectionId
-    const subsection = subsections.find(subsection => parseInt(subsection.id) === parseInt(subsectionId))
+    const subsectionSlug = match.params.subsectionSlug
+    const subsection = subsections.find(subsection => subsection.attributes.slug === subsectionSlug)
+    const subsectionId = subsection && parseInt(subsection.id)
     topics = topics.filter(topic => parseInt(topic.attributes.subsection_id) === parseInt(subsectionId))
     topics.sort((a, b) => b.attributes.last_post.attributes.created_at_i - a.attributes.last_post.attributes.created_at_i)
 

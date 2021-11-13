@@ -15,9 +15,9 @@ export const fetchTopics = subsectionId => (
     }
 )
 
-export const fetchTopic = topicId => (
+export const fetchTopic = (subsectionSlug, topicSlug) => (
     dispatch => {
-        API.get(`topics/${topicId}`)
+        API.get(`forum/${subsectionSlug}/${topicSlug}`)
         .then(json => {
             json.data && dispatch(addTopics([json.data]))
         })

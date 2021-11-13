@@ -13,14 +13,14 @@ import UserContainer from './UserContainer'
 
 const subsectionRoute = () => (
     <Route
-        exact path="/subsections/:subsectionId"
+        exact path="/forum/:subsectionSlug"
         render={routerProps => <SubsectionContainer {...routerProps} />}
     />
 )
 
 const topicRoute = focusTextArea => (
     <Route
-        exact path="/topics/:topicId"
+        exact path="/forum/:subsectionSlug/:topicSlug"
         render={routerProps => (
             <TopicContainer
                 {...routerProps}

@@ -8,7 +8,7 @@ import UserLink from './UserLink'
 import TopicLink from './TopicLink'
 
 const LastPost = ({
-    lastPost, setScrollId, topic
+    lastPost, setScrollId, showTopic, subsections,
 }) => {
 
 
@@ -18,11 +18,17 @@ const LastPost = ({
         return null
     }
 
+    const topic = lastPost.attributes.topic
+    const topicSlug = topic.attributes.slug
+    const subsectionId = parseInt(topic.attributes.subsection_id)
+    const subsection = subsections.find(subsection => parseInt(subsection.id) === subsectionId)
+    const subsectionSlug = subsection?.attributes.slug
+
     const attributes = lastPost.attributes
 
     const goToPost = () => {
         setScrollId(attributes.tag)
-        history.push(`/topics/${attributes.topic.id}`)
+        history.push(`/forum/${subsectionSlug}/${topicSlug}`)
     }
 
     const renderGreenArrow = () => (
@@ -34,7 +40,7 @@ const LastPost = ({
     )
 
     const renderTopic = () => {
-        if (!topic) {
+        if (!showTopic) {
             return null
         }
         return <>in <TopicLink topic={topic} /><br /></>
@@ -49,10 +55,12 @@ const LastPost = ({
     )
 }
 
-
+const mapStateToProps = state => ({
+    subsections: state.subsections,
+})
 
 const mapDispatchToProps = {
     setScrollId,
 }
 
-export default connect(null, mapDispatchToProps)(LastPost)
+export default connect(mapStateToProps, mapDispatchToProps)(LastPost)

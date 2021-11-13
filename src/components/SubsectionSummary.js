@@ -15,7 +15,7 @@ const SubsectionSummary = ({
     return (
         <div className="subsection-summary">
             <div>
-                <Link to={`subsections/${subsection.id}`}>
+                <Link to={`forum/${subsection.attributes.slug}`}>
                     {subsection.attributes.title}
                 </Link>
             </div>
@@ -26,7 +26,7 @@ const SubsectionSummary = ({
                 {attributes.post_count}
             </div>
             <div>
-                <div><LastPost lastPost={lastPost} topic={lastPost.attributes.topic} /></div>
+                <div><LastPost lastPost={lastPost} showTopic={true} /></div>
             </div>
         </div>
     )

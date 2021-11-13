@@ -18,6 +18,7 @@ const TopicContainer = ({
     match,
     focusTextArea,
     
+    subsections,
     topics,
     posts,
     users,
@@ -33,8 +34,13 @@ const TopicContainer = ({
     createFlag, deleteFlag,
 }) => {
 
-    const topicId = parseInt(match.params.topicId)
-    const topic = topics.find(topic => parseInt(topic.id) === topicId)
+    const subsectionSlug = match.params.subsectionSlug
+    // const subsection = subsections.find(subsection => subsection.attributes?.slug === subsectionSlug)
+    const topicSlug = match.params.topicSlug
+    const topic = topics.find(topic1 => {
+        return topic1.attributes?.slug === topicSlug
+    })
+    const topicId = topic && parseInt(topic.id)
     const pageSize = (currentUser && currentUser.attributes && currentUser.attributes.page_size) || 25
     const scrollId = topicDisplay.scrollId
 
@@ -65,11 +71,11 @@ const TopicContainer = ({
     }
 
     useEffect(() => {
-        fetchTopic(topicId)
+        fetchTopic(subsectionSlug, topicSlug)
         fetchPosts(topicId)
         fetchUserTopic(topicId)
         return topicChannel(topicId, fetchPost)
-    }, [fetchTopic, fetchPosts, fetchPost, fetchUserTopic, topicId])
+    }, [fetchTopic, subsectionSlug, topicSlug, fetchPosts, fetchPost, fetchUserTopic, topicId])
 
     const getUser = userId => users.find(user => parseInt(user.id) === parseInt(userId))
 
@@ -195,6 +201,7 @@ const TopicContainer = ({
 }
 
 const mapStateToProps = state => ({
+    subsections: state.subsections,
     topics: state.topics,
     posts: state.posts,
     users: state.users,
