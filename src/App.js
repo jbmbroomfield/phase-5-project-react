@@ -33,12 +33,15 @@ const App = ({
 
 	const textAreaRef = useRef(null)
 
-	const tryToFocusTextArea = (draft, attempt) => {
+	const tryToFocusTextArea = (draft, selection, attempt) => {
+		console.log(selection)
 		setTimeout(() => {
 			if (textAreaRef && textAreaRef.current) {
 				textAreaRef.current.focus()
-				if (draft && draft.attributes) {
-					const selection = draft.attributes.selection
+				if (!selection && draft && draft.attributes) {
+					selection = draft.attributes.selection
+				}
+				if (selection) {
 					textAreaRef.current.setSelectionRange(...selection)
 				}
 			} else if (attempt < 1000) {
@@ -47,9 +50,9 @@ const App = ({
 		}, 10)		
 	}
 
-	const focusTextArea = (draft) => {
+	const focusTextArea = ({draft, selection} = {}) => {
 		setBottomPopUp(true)
-		tryToFocusTextArea(draft, 0)
+		tryToFocusTextArea(draft, selection, 0)
 	}
 
 	useEffect(() => {

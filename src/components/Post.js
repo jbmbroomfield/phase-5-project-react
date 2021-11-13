@@ -19,7 +19,7 @@ const Post = ({
 
     const insertPostText = () =>{
         insertText(`${user.attributes.username} said "${text}"\n`)
-        setTimeout(() => focusTextArea(draft), 10)
+        setTimeout(() => focusTextArea({draft}), 10)
     }
 
     const postRef = useRef(null)
