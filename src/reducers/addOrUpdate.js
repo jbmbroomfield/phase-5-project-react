@@ -1,4 +1,7 @@
 const addOrUpdate = (state, newObjects) => {
+    if (!Array.isArray(newObjects)) {
+        newObjects = [newObjects]
+    }
     let newState = [...state]
     for (const newObject of newObjects) {
         newState = addOrUpdateObject(newState, newObject)
@@ -18,10 +21,15 @@ const addOrUpdateObject = (state, newObject) => {
     return newState
 }
 
-const findObject = (state, newObject) => (
-    state.find(object => (
-        parseInt(object.id) === parseInt(newObject.id)
-    ))
-)
+const findObject = (state, newObject) => {
+    const newSlug = newObject.slug || newObject.attributes?.slug
+    return state.find(object => {
+        const objectSlug = object.slug || object.attributes?.slug
+        if (newSlug) {
+            return newSlug === objectSlug
+        }
+        return parseInt(object.id) === parseInt(newObject.id)
+    })
+}
 
 export default addOrUpdate

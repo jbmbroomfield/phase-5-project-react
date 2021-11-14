@@ -1,38 +1,23 @@
-const initialState = {
-    topicId: null,
-    page: 1,
-    pages: null,
-    scrollId: null,
-    users: {
-        exclude: [],
-        include: null,
-    },
-    flags: {
-        exclude: [],
-        include: [],
-    },
-}
+import addOrUpdate from "./addOrUpdate"
 
-const topicDisplayReducer = (state = {...initialState}, action) => {
+
+const topicDisplayReducer = (state = [], action) => {
     switch(action.type) {
 
-        case 'SET_TOPIC_ID':
-            if (state.topicId !== null && state.topicId !== action.topicId) {
-                return {
-                    ...initialState,
-                    topicId: action.topicId,
-                }
-            }
-            return {
-                ...state,
-                topicId: action.topicId,
-            }
+        // case 'SET_TOPIC_ID':
+        //     if (state.topicId !== null && state.topicId !== action.topicId) {
+        //         return {
+        //             ...initialTopicDisplay(null),
+        //             topicId: action.topicId,
+        //         }
+        //     }
+        //     return {
+        //         ...state,
+        //         topicId: action.topicId,
+        //     }
         
         case 'SET_TOPIC_DISPLAY':
-            return {
-                ...state,
-                ...action.topicDisplay,
-            }
+            return addOrUpdate(state, action.topicDisplay)
 
         case 'TOGGLE_USER_FILTER':
             let newUsersExclude, newUsersInclude, array
@@ -117,15 +102,15 @@ const topicDisplayReducer = (state = {...initialState}, action) => {
                 pages: action.pages,
             }
 
-        case 'SET_SCROLL_ID':
-            console.log(action.scrollId)
-            return {
-                ...state,
-                scrollId: action.scrollId,
-            }
+        // case 'SET_SCROLL_ID':
+        //     console.log(action.scrollId)
+        //     return {
+        //         ...state,
+        //         scrollId: action.scrollId,
+            // }
 
-        case 'RESET_TOPIC_DISPLAY':
-            return {...initialState}
+        // case 'RESET_TOPIC_DISPLAY':
+        //     return {...initialTopicDisplay(null)}
 
         default:
             return state

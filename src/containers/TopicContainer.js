@@ -13,6 +13,7 @@ import { setScrollId, setTopicDisplay } from '../actions/topicDisplayActions'
 
 import topicChannel from '../channels/topicChannel'
 import { fetchTopic } from '../actions/topicsActions'
+import filterPosts from '../filterPosts'
 
 const TopicContainer = ({
     match,
@@ -23,8 +24,9 @@ const TopicContainer = ({
     posts,
     users,
     drafts,
-    topicDisplay,
+    topicDisplays,
     currentUser,
+    scrollId,
 
     fetchTopic, fetchUserTopic,
     fetchPosts, fetchPost,
@@ -40,26 +42,10 @@ const TopicContainer = ({
     const topic = topics.find(topic1 => {
         return topic1.attributes?.slug === topicSlug
     })
+
     const topicId = topic && parseInt(topic.id)
     const pageSize = (currentUser && currentUser.attributes && currentUser.attributes.page_size) || 25
-    const scrollId = topicDisplay.scrollId
 
-    if (topicDisplay.topicId !== topicId) {
-        topicDisplay = {
-            topicId: topicId,
-            page: 1,
-            pages: null,
-            scrollId: scrollId,
-            users: {
-                exclude: [],
-                include: null,
-            },
-            flags: {
-                exclude: [],
-                include: [],
-            },
-        }
-    }
 
 
     const draft = drafts.find(
@@ -79,95 +65,59 @@ const TopicContainer = ({
 
     const getUser = userId => users.find(user => parseInt(user.id) === parseInt(userId))
 
-    // DETERMINING WHICH POSTS TO SHOW
-
-    const topicPosts = posts.filter(post => (
-        parseInt(post.attributes.topic_id) === parseInt(topicId)
-    ))
-
-    const exclude = !!topicDisplay.users.exclude
-    const array = exclude ? topicDisplay.users.exclude : topicDisplay.users.include
-    const userIdArray = array.map(
-        username => parseInt(users.find(user => user.attributes.username === username)?.id)
+    
+    let topicDisplay = topicDisplays.find(
+        topicDisplay => topicDisplay.slug === topicSlug
     )
-    const filterPosts = [...topicPosts.filter(
-        post => {
-
-            const flagsInclude = topicDisplay.flags.include
-            const flagsExclude = topicDisplay.flags.exclude
-
-            const myFlags = post.attributes.my_flags
-            let excludedFlag = false, includedFlag = false
-            if (myFlags.includes('like')) {
-                if (flagsInclude.includes('like')) {
-                    includedFlag = true
-                } else if (flagsExclude.includes('like')) {
-                    excludedFlag = true
-                }
-            } else if (myFlags.includes('dislike')) {
-                if (flagsInclude.includes('dislike')) {
-                    includedFlag = true
-                } else if (flagsExclude.includes('dislike')) {
-                    excludedFlag = true
-                }
-            } else {
-                if (flagsInclude.includes('nonlike')) {
-                    includedFlag = true
-                } else if (flagsExclude.includes('nonlike')) {
-                    excludedFlag = true
-                }
-            }
-
-            if (exclude && includedFlag) {
-                return true
-            }
-            if (!exclude && excludedFlag) {
-                return false
-            }
-            if (includedFlag) {
-                return true
-            }
-            if (excludedFlag) {
-                return false
-            }
-
-            const userId = parseInt(post.attributes.user_id)
-            const userPresent = userIdArray.includes(userId)
-            return exclude !== userPresent
+    let toSetTopicDisplay
+    if (topicDisplay) {
+        toSetTopicDisplay = false
+    } else {
+        topicDisplay = {
+            slug: topicSlug,
+            page: 1,
+            pages: null,
+            scrollId: scrollId,
+            users: {
+                exclude: [],
+                include: null,
+            },
+            flags: {
+                exclude: [],
+                include: [],
+            },
         }
-    )]
-
-
-    if (scrollId) {
-        const scrollPostIndex = filterPosts.findIndex(post => post.attributes.tag === scrollId)
-        if (scrollPostIndex > -1) {
-            topicDisplay.page = Math.floor(scrollPostIndex / pageSize) + 1
-        }
+        toSetTopicDisplay = true
     }
 
+    const filteredPosts = filterPosts(
+        posts,
+        topicSlug,
+        topicDisplay,
+        users,
+        scrollId,
+        pageSize,
+    )
+    
+    console.log('-------------------------')
+    console.log(topicDisplay, toSetTopicDisplay)
 
+    toSetTopicDisplay && setTopicDisplay(topicDisplay)
 
-    const page = topicDisplay.page
-    topicDisplay.pages = Math.floor(filterPosts.length / pageSize) + 1
-
-    let pagePosts = [...filterPosts]
-
-    if (page !== 'all') {
-        pagePosts = pagePosts.slice(pageSize * (page - 1), pageSize * page)
-    }
-
-    useEffect(() => {
-        setTopicDisplay({
-            topicId: topicDisplay.topicId,
-            page: topicDisplay.page,
-            pages: topicDisplay.pages,
-            users: topicDisplay.users,
-            flags: topicDisplay.flags,
-        })
-    }, [setTopicDisplay, topicDisplay.topicId, topicDisplay.page, topicDisplay.pages, topicDisplay.scrollId, topicDisplay.users, topicDisplay.flags,])
+    // useEffect(() => {
+    //     console.log('EFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFECT')
+    //     console.log(topicDisplay.topicId, topicDisplay.page, topicDisplay.pages, topicDisplay.scrollId, topicDisplay.users, topicDisplay.flags,)
+    //     setTopicDisplay({
+    //         topicId: topicDisplay.topicId,
+    //         page: topicDisplay.page,
+    //         pages: topicDisplay.pages,
+    //         users: topicDisplay.users,
+    //         flags: topicDisplay.flags,
+    //     })
+    // }, [setTopicDisplay, topicDisplay.topicId, topicDisplay.page, topicDisplay.pages, topicDisplay.scrollId, topicDisplay.users, topicDisplay.flags,])
 
     const renderPosts = () => (
-        pagePosts.map(post => {
+        filteredPosts.map(post => {
             const tag = post.attributes.tag
             const scrollTo = tag === scrollId
             return <TrackVisibility key={post.id}>
@@ -206,8 +156,9 @@ const mapStateToProps = state => ({
     posts: state.posts,
     users: state.users,
     drafts: state.drafts,
-    topicDisplay: state.topicDisplay,
+    topicDisplays: state.topicDisplays,
     currentUser: state.currentUser,
+    scrollId: state.scrollId
 })
 
 const mapDispatchToProps = {
