@@ -7,8 +7,8 @@ const UserContainer = ({
     currentUser,
 }) => {
 
-    const userId = parseInt(match.params.userId)
-    const user = users.find(user => parseInt(user.id) === userId )
+    const userSlug = match.params.userSlug
+    const user = users.find(user => user.attributes.slug === userSlug)
 
     if (!user) {
         return null

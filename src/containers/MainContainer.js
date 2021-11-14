@@ -32,7 +32,7 @@ const topicRoute = focusTextArea => (
 
 const userRoute = () => (
     <Route
-        exact path="/users/:userId"
+        exact path="/users/:userSlug"
         render={routerProps => <UserContainer {...routerProps} />}
     />
 )
