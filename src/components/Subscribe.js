@@ -5,8 +5,6 @@ const Subscribe = ({
     handleSubscribe, handleUnsubscribe
 }) => {
 
-    console.log(subscribed)
-
     const renderSubscribedStatus = () =>{
         let style, value
         if (subscribed) {

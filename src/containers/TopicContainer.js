@@ -43,8 +43,11 @@ const TopicContainer = ({
     const subsectionSlug = match.params.subsectionSlug
     // const subsection = subsections.find(subsection => subsection.attributes?.slug === subsectionSlug)
     const topicSlug = match.params.topicSlug
-    const topic = topics.find(topic1 => {
-        return topic1.attributes?.slug === topicSlug
+    const topic = topics.find(topic => {
+        if (!topic.attributes) {
+            return null
+        }
+        return topic.attributes.slug === topicSlug && topic.attributes.subsection_slug === subsectionSlug
     })
     const topicId = topic && parseInt(topic.id)
     const pageSize = (currentUser && currentUser.attributes && currentUser.attributes.page_size) || 25

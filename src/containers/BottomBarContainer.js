@@ -13,7 +13,7 @@ const BottomBarContainer = ({
 
     const topicRoute = () => (
         <Route
-            exact path="/topics/:topicId"
+            exact path="/forum/:subsectionSlug/:topicSlug"
             render={routerProps => (
                 <TopicReplyContainer
                     {...routerProps}

@@ -13,9 +13,20 @@ const TopicReplyContainer = ({
     createPost,
     drafts, setDraft, deleteDraft,
     focusTextArea, textAreaRef,
+    topics,
 }) => {
+
+    const subsectionSlug = match.params.subsectionSlug
+    // const subsection = subsections.find(subsection => subsection.attributes?.slug === subsectionSlug)
+    const topicSlug = match.params.topicSlug
+    const topic = topics.find(topic => {
+        if (!topic.attributes) {
+            return null
+        }
+        return topic.attributes.slug === topicSlug && topic.attributes.subsection_slug === subsectionSlug
+    })
+    const topicId = topic && parseInt(topic.id)
     
-    const topicId = match && parseInt(match.params.topicId)
     const draft = drafts && drafts.find(draft => parseInt(draft.attributes.topic_id) === topicId)
     const text = draft ? draft.attributes.text : ''
     const selection = draft ? draft.attributes.selection : [0, 0]
@@ -82,7 +93,8 @@ const TopicReplyContainer = ({
 
 const mapStateToProps = state => ({
     bottomPopUp: state.bottomPopUp,
-    drafts: state.drafts
+    drafts: state.drafts,
+    topics: state.topics,
 })
 
 const mapDispatchToProps = {
