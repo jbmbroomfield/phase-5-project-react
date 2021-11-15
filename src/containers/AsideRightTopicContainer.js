@@ -6,6 +6,8 @@ import PageControlContainer from './PageControlContainer'
 import FilterContainer from './FilterContainer'
 import getTopicDisplay from '../getTopicDisplay'
 
+import Subscribe from '../components/Subscribe'
+
 const AsideRightTopicContainer = ({
     match,
     userTopics,
@@ -37,49 +39,6 @@ const AsideRightTopicContainer = ({
     const handleUnsubscribe = () => {
         subscribeToTopic(topicId, false)
     }
-
-    const renderSubscribedStatus = () =>{
-        let style, value
-        if (subscribed) {
-            style = {
-                backgroundColor: 'blue'
-            }
-            value = 'Subscribed'
-        } else {
-            style = {
-                backgroundColor: 'orange'
-            }
-            value = 'Not Subscribed'
-        }
-        return (
-            <div className="aside-header" style={style}>
-                { value }
-            </div>
-        )
-    }
-
-    const renderSubscribeOptions = () => {
-        let style, value, handleClick
-        if (subscribed) {
-            style = {
-                backgroundColor: '#f2c65e'
-            }
-            value = 'Unsubscribe'
-            handleClick = handleUnsubscribe
-        } else {
-            style = {
-                backgroundColor: '#849df0'
-            }
-            value = 'Subscribe'
-            handleClick = handleSubscribe
-        }
-        return ( 
-            <div className="aside-header btn" onClick={handleClick} style={style}>
-                { value }
-            </div>
-        )
-    }
-
     const {page, pages} = topicDisplay
 
     return (
@@ -91,8 +50,11 @@ const AsideRightTopicContainer = ({
                 displayFilter={displayFilter}
                 toggleDisplayFilter={toggleDisplayFilter}
             />
-            { renderSubscribedStatus() }
-            { renderSubscribeOptions() }
+            <Subscribe
+                subscribed={subscribed}
+                handleSubscribe={handleSubscribe}
+                handleUnsubscribe={handleUnsubscribe}
+            />
         </>
     )
 }
