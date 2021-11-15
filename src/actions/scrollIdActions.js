@@ -1,4 +1,4 @@
-export const setScrollId = scrollId => ({
+export const setScrollId = id => ({
     type: 'SET_SCROLL_ID',
-    scrollId
+    id
 })
