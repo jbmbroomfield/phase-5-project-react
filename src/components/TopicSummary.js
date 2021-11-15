@@ -7,7 +7,6 @@ import LastPost from './LastPost'
 const TopicSummary = ({
     topic,
     postCount,
-    goToPost,
 }) => {
 
     const lastPost = topic.attributes.last_post
