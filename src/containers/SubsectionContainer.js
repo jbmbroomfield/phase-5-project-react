@@ -20,7 +20,7 @@ const SubsectionContainer = ({
     const subsectionSlug = match.params.subsectionSlug
     const subsection = subsections.find(subsection => subsection.attributes.slug === subsectionSlug)
     const subsectionId = subsection && parseInt(subsection.id)
-    topics = topics.filter(topic => parseInt(topic.attributes.subsection_id) === parseInt(subsectionId))
+    topics = topics.filter(topic => topic.attributes.subsection_slug === subsectionSlug)
     topics.sort((a, b) => b.attributes.last_post.attributes.created_at_i - a.attributes.last_post.attributes.created_at_i)
 
     const [displayTextArea, setDisplayTextArea] = useState(false)
@@ -35,7 +35,7 @@ const SubsectionContainer = ({
     }
 
     useEffect(() => {
-        fetchTopics(subsectionId)
+        fetchTopics(subsectionSlug)
         return subsectionChannel(subsectionId, fetchTopic)
     }, [fetchTopics, subsectionId, fetchTopic])
 
