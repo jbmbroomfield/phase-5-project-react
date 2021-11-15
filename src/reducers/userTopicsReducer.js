@@ -5,14 +5,6 @@ const userTopicsReducer = (state = [], action) => {
 
         case 'ADD_USER_TOPIC':
             return addOrUpdate(state, action.userTopic)
-            // return [
-            //     ...state.filter(userTopic => (
-            //         userTopic && (
-            //             parseInt(userTopic.attributes.topic_id) !== parseInt(action.userTopic.attributes.topic_id)
-            //         )
-            //     )),
-            //     action.userTopic
-            // ]
 
         default:
             return state
