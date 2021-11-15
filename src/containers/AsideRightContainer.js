@@ -4,16 +4,16 @@ import AsideRightTopicContainer from './AsideRightTopicContainer'
 
 const AsideRightContainer = () => {
 
-    const TopicRoute = () => (
+    const topicRoute = () => (
         <Route
-            exact path="/topics/:topicId"
+            exact path="/forum/:subsectionSlug/:topicSlug"
             render={routerProps => <AsideRightTopicContainer {...routerProps}/>}
         />
     )
 
     const renderSwitch = () => (
         <Switch>
-            <TopicRoute />
+            {topicRoute() }
             <Route><div>Default Right Aside</div></Route>
         </Switch>
     )

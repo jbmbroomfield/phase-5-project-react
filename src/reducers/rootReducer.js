@@ -10,7 +10,7 @@ import userTopicsReducer from "./userTopicsReducer"
 import notificationsReducer from "./notificationsReducer"
 import bottomPopUpReducer from "./bottomPopUpReducer"
 import draftsReducer from "./draftsReducer"
-import topicDisplayReducer from "./topicDisplayReducer"
+import topicDisplaysReducer from "./topicDisplaysReducer"
 import scrollIdReducer from "./scrollIdReducer"
 
 const rootReducer = combineReducers({
@@ -24,7 +24,7 @@ const rootReducer = combineReducers({
     notifications: notificationsReducer,
     bottomPopUp: bottomPopUpReducer,
     drafts: draftsReducer,
-    topicDisplays: topicDisplayReducer,
+    topicDisplays: topicDisplaysReducer,
     scrollId: scrollIdReducer,
 })
 

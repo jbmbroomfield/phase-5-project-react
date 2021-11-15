@@ -3,14 +3,13 @@ import { connect } from 'react-redux'
 
 import PageControl from '../components/PageControl'
 
-import { setPage } from '../actions/topicDisplayActions'
+import { setPage } from '../actions/topicDisplaysActions'
 
 const PageControlContainer = ({
     topicDisplay,
+    page, pages,
     setPageDispatch,
 }) => {
-    const pages = topicDisplay.pages || 1
-    const page = topicDisplay.page || 1
     const [textEmpty, setTextEmpty] = useState(false)
 
     const setPage = newPage => {
@@ -25,7 +24,7 @@ const PageControlContainer = ({
         } 
         setTextEmpty(false)
         if (newPage !== page && newPage >= 1 && newPage <= pages) {
-            setPageDispatch(newPage)
+            setPageDispatch(topicDisplay.slug, newPage)
         }
     }
 
@@ -43,7 +42,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    setPageDispatch: page => dispatch(setPage(page)),
+    setPageDispatch: (slug, page) => dispatch(setPage(slug, page)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PageControlContainer)

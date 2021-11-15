@@ -8,7 +8,7 @@ import TopicSummaryHeader from '../components/TopicSummaryHeader'
 import { fetchTopics, fetchTopic } from '../actions/topicsActions'
 import subsectionChannel from '../channels/subsectionChannel'
 
-import { setScrollId } from '../actions/topicDisplayActions'
+import { setScrollId } from '../actions/scrollIdActions'
 
 const SubsectionContainer = ({ 
     match,

@@ -4,12 +4,13 @@ import { connect } from 'react-redux'
 import { subscribeToTopic } from '../actions/userTopicsActions'
 import PageControlContainer from './PageControlContainer'
 import FilterContainer from './FilterContainer'
+import getTopicDisplay from '../getTopicDisplay'
 
 const AsideRightTopicContainer = ({
     match,
     userTopics,
     subscribeToTopic,
-    topicDisplay,
+    topicDisplays,
     topics,
 }) => {
 
@@ -24,9 +25,10 @@ const AsideRightTopicContainer = ({
     const topic = topics.find(topic => {
         return topic.attributes?.slug === topicSlug
     })
-    const topicId = match && parseInt(match.params.topicId)
+    const topicId = topic && parseInt(topic.id)
+    const topicDisplay = getTopicDisplay(topicDisplays, topicSlug)
     const userTopic = userTopics.find(
-        userTopic => parseInt(userTopic.attributes.topic_id) === topicId
+        userTopic => userTopic.attributes.topic_slug === topicSlug
     )
     const subscribed = userTopic && userTopic.attributes.subscribed
     const handleSubscribe = () => {
@@ -78,9 +80,11 @@ const AsideRightTopicContainer = ({
         )
     }
 
+    const {page, pages} = topicDisplay
+
     return (
         <> 
-            <PageControlContainer topicDisplay={topicDisplay} />
+            <PageControlContainer topicDisplay={topicDisplay} page={page} pages={pages} />
             <FilterContainer
                 topicDisplay={topicDisplay}
                 topic={topic}
@@ -95,7 +99,7 @@ const AsideRightTopicContainer = ({
 
 const mapStateToProps = state => ({
     userTopics: state.userTopics,
-    topicDisplay: state.topicDisplay,
+    topicDisplays: state.topicDisplays,
     topics: state.topics,
 })
 

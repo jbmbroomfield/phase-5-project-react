@@ -63,9 +63,12 @@ const filterPosts = (
     users,
     scrollId,
     pageSize,
+    setPages, setPage,
 ) => {
     const topicPosts = posts.filter(post => (
         post.attributes.topic_slug === topicSlug
+    )).sort((a, b) => (
+        parseInt(a.id) - parseInt(b.id)
     ))
     const filteredPosts = filterByFlagsAndUsers(
         topicPosts,
@@ -77,8 +80,10 @@ const filterPosts = (
         const scrollPostIndex = filteredPosts.findIndex(post => post.attributes.tag === scrollId)
         if (scrollPostIndex > -1) {
             topicDisplay.page = Math.floor(scrollPostIndex / pageSize) + 1
-        }
+        } 
     }
+
+    topicDisplay.page = topicDisplay.page || 1
 
     const page = topicDisplay.page
     topicDisplay.pages = Math.floor(filteredPosts.length / pageSize) + 1

@@ -9,11 +9,14 @@ import { fetchUserTopic } from '../actions/userTopicsActions'
 
 import { insertIntoDraft } from '../actions/draftsActions'
 import { createFlag, deleteFlag } from '../actions/flagsActions'
-import { setScrollId, setTopicDisplay } from '../actions/topicDisplayActions'
+import { setPages, setPage } from '../actions/topicDisplaysActions'
+import { setScrollId } from '../actions/scrollIdActions'
 
 import topicChannel from '../channels/topicChannel'
 import { fetchTopic } from '../actions/topicsActions'
 import filterPosts from '../filterPosts'
+
+import getTopicDisplay from '../getTopicDisplay'
 
 const TopicContainer = ({
     match,
@@ -34,6 +37,7 @@ const TopicContainer = ({
     setScrollId,
     insertIntoDraft,
     createFlag, deleteFlag,
+    setPages, setPage,
 }) => {
 
     const subsectionSlug = match.params.subsectionSlug
@@ -42,7 +46,6 @@ const TopicContainer = ({
     const topic = topics.find(topic1 => {
         return topic1.attributes?.slug === topicSlug
     })
-
     const topicId = topic && parseInt(topic.id)
     const pageSize = (currentUser && currentUser.attributes && currentUser.attributes.page_size) || 25
 
@@ -65,30 +68,7 @@ const TopicContainer = ({
 
     const getUser = userId => users.find(user => parseInt(user.id) === parseInt(userId))
 
-    
-    let topicDisplay = topicDisplays.find(
-        topicDisplay => topicDisplay.slug === topicSlug
-    )
-    let toSetTopicDisplay
-    if (topicDisplay) {
-        toSetTopicDisplay = false
-    } else {
-        topicDisplay = {
-            slug: topicSlug,
-            page: 1,
-            pages: null,
-            scrollId: scrollId,
-            users: {
-                exclude: [],
-                include: null,
-            },
-            flags: {
-                exclude: [],
-                include: [],
-            },
-        }
-        toSetTopicDisplay = true
-    }
+    const topicDisplay = getTopicDisplay(topicDisplays, topicSlug)
 
     const filteredPosts = filterPosts(
         posts,
@@ -98,11 +78,16 @@ const TopicContainer = ({
         scrollId,
         pageSize,
     )
-    
-    console.log('-------------------------')
-    console.log(topicDisplay, toSetTopicDisplay)
 
-    toSetTopicDisplay && setTopicDisplay(topicDisplay)
+    useEffect(() => {
+        topicDisplay.pages && setPages(topicSlug, topicDisplay.pages)
+        topicDisplay.page && setPage(topicSlug, topicDisplay.page)
+    }, [setPages, setPage, topicSlug, topicDisplay.pages, topicDisplay.page])
+    
+    // console.log('-------------------------')
+    // console.log(topicDisplay, toSetTopicDisplay)
+
+    // toSetTopicDisplay && setTopicDisplay(topicDisplay)
 
     // useEffect(() => {
     //     console.log('EFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFECT')
@@ -164,10 +149,11 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
     fetchTopic, fetchUserTopic,
     fetchPosts, fetchPost,
-    setTopicDisplay,
+    // setTopicDisplay,
     setScrollId,
     insertIntoDraft,
     createFlag, deleteFlag,
+    setPages, setPage,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TopicContainer)

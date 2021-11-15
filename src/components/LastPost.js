@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { useHistory } from 'react-router'
 
-import { setScrollId } from '../actions/topicDisplayActions'
+import { setScrollId } from '../actions/scrollIdActions'
 
 import UserLink from './UserLink'
 import TopicLink from './TopicLink'

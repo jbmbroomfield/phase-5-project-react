@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Filter from '../components/Filter'
 
-import { excludeAllUsers, includeAllUsers, toggleFlagFilter, toggleUserFilter } from '../actions/topicDisplayActions'
+import { excludeAllUsers, includeAllUsers, toggleFlagFilter, toggleUserFilter } from '../actions/topicDisplaysActions'
 
 const FilterContainer = ({
     topicDisplay,
@@ -15,23 +15,23 @@ const FilterContainer = ({
     const users = topic?.attributes.posters
     const userFilter = topicDisplay.users
     const flagFilter = topicDisplay.flags
-
+    const topicSlug = topic?.attributes.slug
     
-    const replyCaret = displayFilter ?  <i className="fa fa-caret-up" aria-hidden="true"></i> : <i className="fa fa-caret-down" aria-hidden="true"></i>
+    const filterCaret = displayFilter ?  <i className="fa fa-caret-up" aria-hidden="true"></i> : <i className="fa fa-caret-down" aria-hidden="true"></i>
 
     return (
         <>
             <div
                 className="aside-header btn"
                 onClick={toggleDisplayFilter}
-            > {replyCaret} Filter</div>
+            > {filterCaret} Filter</div>
             { displayFilter && <Filter
                 users={users}
                 userFilter={userFilter} flagFilter={flagFilter}
-                toggleUserFilter={toggleUserFilter}
-                toggleFlagFilter={toggleFlagFilter}
-                includeAllUsers={includeAllUsers}
-                excludeAllUsers={excludeAllUsers}
+                toggleUserFilter={user => toggleUserFilter(topicSlug, user)}
+                toggleFlagFilter={flag => toggleFlagFilter(topicSlug, flag)}
+                includeAllUsers={() => includeAllUsers(topicSlug)}
+                excludeAllUsers={() => excludeAllUsers(topicSlug)}
             />}
         </>
     )
