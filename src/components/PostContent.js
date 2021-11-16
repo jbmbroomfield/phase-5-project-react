@@ -2,7 +2,7 @@ import React from 'react'
 
 import parse from '../textEditor/bbCode/parse.js'
 
-const PostContent = ({ text, tag, createdAt }) => {
+const PostContent = ({ text, tag, createdAt, timezone }) => {
 
     const renderPostHeader = () => (
         <>
@@ -16,7 +16,7 @@ const PostContent = ({ text, tag, createdAt }) => {
     )
 
     const renderPostText = () => (
-        parse(text)
+        parse(text, timezone)
     )
 
     return (

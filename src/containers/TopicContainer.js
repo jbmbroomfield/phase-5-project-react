@@ -40,6 +40,8 @@ const TopicContainer = ({
     setPages, setPage,
 }) => {
 
+    const timezone = currentUser?.attributes.time_zone
+
     const subsectionSlug = match.params.subsectionSlug
     // const subsection = subsections.find(subsection => subsection.attributes?.slug === subsectionSlug)
     const topicSlug = match.params.topicSlug
@@ -125,6 +127,7 @@ const TopicContainer = ({
                     publicFlags={post.attributes && post.attributes.public_flags}
                     createFlag={category => createFlag(topicId, post.id, category)}
                     deleteFlag={category => deleteFlag(topicId, post.id, category)}
+                    timezone={timezone}
                 />
         </TrackVisibility>
         })

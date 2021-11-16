@@ -12,7 +12,7 @@ const TopicLink = ({
     if (!topic) {
         topic = topics.find(topic => parseInt(topic.id) === topicId)
     }
-    const subsectionId = parseInt(topic.attributes.subsection_id)
+    // const subsectionId = parseInt(topic.attributes.subsection_id)
     // const subsection = subsections.find(subsection => parseInt(subsection.id) === subsectionId)
     const subsectionSlug = topic.attributes.subsection_slug
     const topicSlug = topic?.attributes.slug

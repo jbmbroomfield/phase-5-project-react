@@ -14,6 +14,7 @@ const TopicReplyContainer = ({
     drafts, setDraft, deleteDraft,
     focusTextArea, textAreaRef,
     topics,
+    currentUser,
 }) => {
 
     const subsectionSlug = match.params.subsectionSlug
@@ -65,6 +66,8 @@ const TopicReplyContainer = ({
             text={text}
             handleToggleClick={handleToggleClick}
             focusTextArea={focusTextArea}
+            timezone={currentUser?.attributes.time_zone}
+            topicId={topicId}
         />
     )
 
@@ -95,6 +98,7 @@ const mapStateToProps = state => ({
     bottomPopUp: state.bottomPopUp,
     drafts: state.drafts,
     topics: state.topics,
+    currentUser: state.currentUser,
 })
 
 const mapDispatchToProps = {

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import TextInterface from '../textEditor/components/TextInterface'
+import TextInterfaceContainer from '../containers/TextInterfaceContainer'
 
 import allTags from '../textEditor/bbCode/tags/allTags'
 
@@ -11,7 +11,10 @@ const BottomBar = ({
     title, setTitle,
     text,
     toggleLabel,
-    handleToggleClick
+    handleToggleClick,
+    timezone,
+    topicId,
+    focusTextArea,
 }) => {
 
     const style = {
@@ -22,7 +25,13 @@ const BottomBar = ({
 
     const renderTextInterface = () => (
         bottomPopUp ? (
-            <TextInterface onButtonClick={handleButtonClick} tags={allTags}/>
+            <TextInterfaceContainer
+                onButtonClick={handleButtonClick}
+                tags={allTags}
+                timezone={timezone}
+                topicId={topicId}
+                focusTextArea={focusTextArea}
+            />
         ) : null
     )
 

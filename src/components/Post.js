@@ -15,6 +15,7 @@ const Post = ({
     draft,
     my_flags, publicFlags,
     createFlag, deleteFlag,
+    timezone,
 }) => {
 
     const insertQuote = () =>{
@@ -43,7 +44,7 @@ const Post = ({
                 user={user}
                 avatarUrl={user && user.attributes.get_avatar_image}
             />
-            <PostContent text={text} tag={tag} createdAt={createdAt} />
+            <PostContent text={text} tag={tag} createdAt={createdAt} timezone={timezone} />
             <PostNotes
                 insertQuote={insertQuote}
                 liked={liked}

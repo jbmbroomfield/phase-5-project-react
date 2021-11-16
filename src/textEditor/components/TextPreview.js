@@ -1,10 +1,10 @@
 import parse from '../bbCode/parse.js'
 import React from 'react'
 
-const TextPreview = ({ text }) => {
+const TextPreview = ({ text, timezone }) => {
     
     const renderTextPreview = () => (
-        parse(text)
+        parse(text, timezone)
     )
 
     return (

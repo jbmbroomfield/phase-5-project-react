@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
 import TextArea from '../components/TextArea'
 import TextPreview from '../components/TextPreview'
@@ -9,7 +10,10 @@ const TextContainer = ({
     setBottomPopUp,
     textAreaRef,
     focusTextArea,
+    currentUser,
 }) => {
+
+    const timezone = currentUser?.attributes.time_zone
 
     const handleTextAreaChange = event => {
         const nextText = event.target.value
@@ -32,7 +36,7 @@ const TextContainer = ({
     )
     
     const renderTextPreview = () => (
-        <TextPreview text={text} />
+        <TextPreview text={text} timezone={timezone} />
     )
 
     return (
@@ -43,4 +47,8 @@ const TextContainer = ({
     )
 }
 
-export default TextContainer
+const mapStateToProps = state => ({
+    currentUser: state.currentUser,
+})
+
+export default connect(mapStateToProps)(TextContainer)
