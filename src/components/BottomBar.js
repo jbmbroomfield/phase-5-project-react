@@ -15,6 +15,7 @@ const BottomBar = ({
     timezone,
     topicId,
     focusTextArea,
+    handleNewTopic,
 }) => {
 
     const style = {
@@ -47,9 +48,12 @@ const BottomBar = ({
         ) : null
     )
 
-    const renderToggler = () => (
-        <span className="nav-link float-right" onClick={handleToggleClick}>{replyCaret} {toggleLabel}</span>
-    )
+    const renderToggler = () => {
+        if (toggleLabel === 'New Topic') {
+            return <span className="nav-link float-right" onClick={handleNewTopic}>{toggleLabel}</span>
+        }
+        return <span className="nav-link float-right" onClick={handleToggleClick}>{replyCaret} {toggleLabel}</span>
+    }
 
     const renderPostButton = () => (
         (bottomPopUp && text.length > 0) ? (toggleLabel === 'Reply' || title.length > 0) && (

@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import TopicReplyContainer from './TopicReplyContainer'
+import SubsectionBottomBarContainer from './SubsectionBottomBarContainer'
 
 import { setBottomPopUp } from '../actions/bottomPopUpActions'
 
@@ -25,10 +26,25 @@ const BottomBarContainer = ({
             )}
         />
     )
+    
+    const subsectionRoute = () => (
+        <Route
+            exact path="/forum/:subsectionSlug"
+            render={routerProps => (
+                <SubsectionBottomBarContainer
+                    {...routerProps}
+                    // setBottomPopUp={setBottomPopUp}
+                    // focusTextArea={focusTextArea}
+                    // textAreaRef={textAreaRef}
+                />
+            )}
+        />
+    )
 
     const renderSwitch = () => (
         <Switch>
             { topicRoute() }
+            { subsectionRoute() }
         </Switch>
     )
 

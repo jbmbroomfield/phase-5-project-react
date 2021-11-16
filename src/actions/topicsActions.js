@@ -24,17 +24,14 @@ export const fetchTopic = (subsectionSlug, topicSlug) => (
     }
 )
 
-export const createTopic = (subsectionId, title, text, redirect) => (
+export const createTopic = (subsectionSlug, title, redirect) => (
     dispatch => {
         const body = {
             "topic": {
                 "title": title
             },
-            "post": {
-                "text": text
-            }
         }
-        API.post(`subsections/${subsectionId}/topics`, body)
-        .then(json => json.data && redirect(json.data.id))
+        API.post(`forum/${subsectionSlug}/topics`, body)
+        .then(json => json.data && redirect(json.data))
     }
 )
