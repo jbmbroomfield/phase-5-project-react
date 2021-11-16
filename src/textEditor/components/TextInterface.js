@@ -15,8 +15,8 @@ const TextInterface = ({ onButtonClick, tags, datetime, handleDatetimeChange, ha
             <div className="sceditor-toolbar" unselectable="on">
                 <TextInterfaceGroup buttons={buttons} />
             </div>
-            <input type="datetime-local" onChange={handleDatetimeChange} value={datetime} />
-            <span onClick={handleInputDate}>Input Date</span>
+            <span><input type="datetime-local" onChange={handleDatetimeChange} value={datetime} /></span>
+            <span className="nav-link" onClick={handleInputDate}>Insert Datetime</span>
         </>
     )
 }

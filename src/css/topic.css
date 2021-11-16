@@ -46,10 +46,7 @@
   padding: 0 0 0 5px;
 }
 
-.quote {
-  background-color: white;
-  border: 1px solid black;
-  padding: 5px 10px;
-  margin: 5px 0;
-  /* position: absolute; */
+.post-content {
+  overflow: auto;
+  overflow-wrap: break-word;
 }

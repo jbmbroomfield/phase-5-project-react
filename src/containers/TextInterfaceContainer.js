@@ -11,7 +11,6 @@ const TextInterfaceContainer = ({ onButtonClick, tags, timezone, insertIntoDraft
     const [datetime, setDatetime] = useState(now)
 
     const handleDatetimeChange = event => {
-        console.log(event.target.value)
         const iso = `${event.target.value} ${timezone}` 
         setDatetime(dtFromIso(iso))
     }

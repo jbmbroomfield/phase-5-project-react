@@ -11,23 +11,15 @@ const TextArea = React.forwardRef(({
         return cleanup
     }, [setBottomPopUp])
 
-    const renderForm = () => (
-        <form>
-            <textarea
-                ref={ref}
-                id="textarea"
-                name="text"
-                value={text}
-                onChange={onChange}
-                onBlur={onBlur}
-            />
-        </form>
-    )
-
     return (
-        <div className='text-area'>
-            { renderForm() }
-        </div>
+        <textarea
+            ref={ref}
+            id="textarea"
+            name="text"
+            value={text}
+            onChange={onChange}
+            onBlur={onBlur}
+        />
 )})
 
 export default TextArea

@@ -28,6 +28,8 @@ div.sceditor-toolbar {
 .text-preview {
   background-color: var(--main-fg-color);
   padding: 20px;
+  overflow: auto;
+  overflow-wrap: break-word;
 }
 
 .topic-title-input {
@@ -36,8 +38,7 @@ div.sceditor-toolbar {
   width: 500px;
 }
 
-.text-area textarea,
-.text-area form {
+.text-area {
   width: 100%;
   height: 100%;
 }
@@ -61,4 +62,13 @@ textarea {
   height: 250px;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-auto-columns: 1fr;
+}
+
+.quote {
+  background-color: white;
+  border: 1px solid black;
+  padding: 5px 10px;
+  margin: 5px 0;
+  /* position: absolute; */
 }
