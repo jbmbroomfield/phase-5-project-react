@@ -6,9 +6,9 @@ const addPosts = posts => ({
     posts
 })
 
-export const fetchPosts = topicId => (
+export const fetchPosts = (subsectionSlug, topicSlug) => (
     dispatch => {
-        API.get(`topics/${topicId}/posts`)
+        API.get(`forum/${subsectionSlug}/${topicSlug}/posts`)
         .then(json => {
             json.data && dispatch(addPosts(json.data))
         })
@@ -24,15 +24,14 @@ export const fetchPost = postId => (
     }
 )
 
-export const createPost = (topicId, text) => (
+export const createPost = (subsectionSlug, topicSlug, text) => (
     dispatch => {
         const body = {
             "post": {
                 "text": text
             }
         }
-        console.log(topicId)
-        API.post(`topics/${topicId}/posts`, body)
+        API.post(`forum/${subsectionSlug}/${topicSlug}/posts`, body)
         .then(json => {
             // dispatch(fetchPosts(topicId))
             json.data && dispatch(fetchPost(json.data.id))

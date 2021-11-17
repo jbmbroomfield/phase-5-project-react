@@ -1,11 +1,11 @@
-import { fetchTopic } from '../actions/topicsActions'
 import createSocket from './createSocket'
 
-const topicChannel = (topicId, fetchPost) => {
+const topicChannel = (subsectionSlug, topicSlug, fetchPost, fetchTopic) => {
 
     const params = {
         channel: 'TopicChannel',
-        topic_id: topicId,
+        subsection_slug: subsectionSlug,
+        topic_slug: topicSlug,
     }
 
     const messageFunctions = {
@@ -13,7 +13,7 @@ const topicChannel = (topicId, fetchPost) => {
             fetchPost(message.post_id)
         },
         topic_update: message => {
-            fetchTopic(message.topic_id)
+            fetchTopic(subsectionSlug, topicSlug)
         },
     }
 

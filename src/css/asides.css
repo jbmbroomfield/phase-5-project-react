@@ -86,7 +86,7 @@ aside.aside-left div.notifications {
 
 .filter-user,
 .filter-flag {
-  margin: 10px;
+  margin: 8px 5px;
   padding: 2px;
   text-align: center;
   /* background-color: #fce297; */
@@ -124,4 +124,9 @@ aside.aside-left div.notifications {
 .filter-flags {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+}
+
+.option-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }

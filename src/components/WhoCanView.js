@@ -9,30 +9,42 @@ const WhoCanView = ({
 
     return (
         <>
-            <div
-                className={`btn filter-user${whoCanView === 'all' ? '' : ' filter-user-exclude' }`}
-                onClick={() => setWhoCanView('all')}
-            >
-                Everyone, including guests
+            <div className="option-row">
+                <div
+                    className={`btn filter-user${whoCanView === 'all' || whoCanView === 'users' ? '' : ' filter-user-exclude' }`}
+                    onClick={() => setWhoCanView('users')}
+                >
+                    Members
+                </div>
+                <div
+                    className={`btn filter-user${whoCanView === 'all' ? '' : ' filter-user-exclude' }`}
+                    onClick={() => setWhoCanView(whoCanView === 'all' ? 'users' : 'all')}
+                >
+                    Guests
+                </div>
             </div>
-            <div
-                className={`btn filter-user${whoCanView === 'users' ? '' : ' filter-user-exclude' }`}
-                onClick={() => setWhoCanView('users')}
-            >
-                Members
+
+            <div className="option-row">
+                <div
+                    className={`btn filter-user${whoCanView === 'url' || whoCanView === 'url_all' ? '' : ' filter-user-exclude' }`}
+                    onClick={() => setWhoCanView('url')}
+                >
+                    URL
+                </div>
+                <div
+                    className={`btn filter-user${whoCanView === 'url_all' ? '' : ' filter-user-exclude' }`}
+                    onClick={() => setWhoCanView(whoCanView === 'url_all' ? 'url' : 'url_all')}
+                >
+                    Guests
+                </div>
             </div>
-            <div
-                className={`btn filter-user${whoCanView === 'url' ? '' : ' filter-user-exclude' }`}
-                onClick={() => setWhoCanView('url')}
-            >
-                Anyone with the URL
-            </div>
+
             <div
                 className={`btn filter-user${whoCanView === 'add' ? '' : ' filter-user-exclude' }`}
                 // name={user}
-                onClick={setWhoCanView('add')}
+                onClick={() => setWhoCanView('add')}
             >
-                Only those I add as a viewer
+                Only added
             </div>
         </>
     )

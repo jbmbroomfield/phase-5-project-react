@@ -8,7 +8,7 @@ const sectionsChannel = fetchSubsection => {
 
     const messageFunctions = {
         subsection_update: message => {
-            fetchSubsection(message.subsection_id)
+            fetchSubsection(message.subsection_slug)
         }
     }
 

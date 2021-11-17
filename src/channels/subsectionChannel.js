@@ -1,18 +1,18 @@
 import createSocket from './createSocket'
 
-const subsectionChannel = (subsectionId, fetchTopic, fetchSubsection) => {
+const subsectionChannel = (subsectionSlug, fetchTopic, fetchSubsection) => {
 
     const params = {
         channel: 'SubsectionChannel',
-        subsection_id: subsectionId,
+        subsection_slug: subsectionSlug,
     }
 
     const messageFunctions = {
         topic_update: message => {
-            fetchTopic(message.topic_id)
+            fetchTopic(subsectionSlug, message.topic_slug)
         },
         subsection_update: message => {
-            fetchSubsection(message.subsection_id)
+            fetchSubsection(subsectionSlug)
         },
     }
 

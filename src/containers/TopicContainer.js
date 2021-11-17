@@ -66,9 +66,9 @@ const TopicContainer = ({
 
     useEffect(() => {
         fetchTopic(subsectionSlug, topicSlug)
-        fetchPosts(topicId)
-        fetchUserTopic(topicId)
-        return topicChannel(topicId, fetchPost)
+        fetchPosts(subsectionSlug, topicSlug)
+        fetchUserTopic(subsectionSlug, topicSlug)
+        return topicChannel(subsectionSlug, topicSlug, fetchPost, fetchTopic)
     }, [fetchTopic, subsectionSlug, topicSlug, fetchPosts, fetchPost, fetchUserTopic, topicId])
 
     const getUser = userId => users.find(user => parseInt(user.id) === parseInt(userId))

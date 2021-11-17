@@ -36,7 +36,7 @@ const SubsectionContainer = ({
 
     useEffect(() => {
         fetchTopics(subsectionSlug)
-        return subsectionChannel(subsectionId, fetchTopic)
+        return subsectionChannel(subsectionSlug, fetchTopic)
     }, [fetchTopics, subsectionSlug, subsectionId, fetchTopic])
 
     const renderTopics = () => (
