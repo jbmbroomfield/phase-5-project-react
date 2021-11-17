@@ -35,3 +35,12 @@ export const createTopic = (subsectionSlug, title, redirect) => (
         .then(json => json.data && redirect(json.data))
     }
 )
+
+export const editTopic = (subsectionSlug, topicSlug, attributes) => (
+    dispatch => {
+        const body = {
+            topic: attributes
+        }
+        API.patch(`forum/${subsectionSlug}/${topicSlug}`, body)
+    }
+)

@@ -77,15 +77,13 @@ const signupBody = (
     username,
     password, passwordConfirmation,
 ) => {
-    const rv = {user: {
+    return {user: {
         username: username,
         password_authentication_attributes: {
             password: password,
             password_confirmation: passwordConfirmation
         }, 
     }}
-    console.log(rv)
-    return rv
 }
 
 export const editProfile = attributes => {

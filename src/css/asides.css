@@ -68,7 +68,8 @@ aside.aside-left div.notifications {
   margin: 10px 10px 0 10px;
 }
 
-.page-control {
+.page-control,
+.btn {
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
   -khtml-user-select: none; /* Konqueror HTML */
