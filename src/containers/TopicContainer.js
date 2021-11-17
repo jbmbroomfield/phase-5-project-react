@@ -17,6 +17,7 @@ import { fetchTopic } from '../actions/topicsActions'
 import filterPosts from '../filterPosts'
 
 import getTopicDisplay from '../getTopicDisplay'
+import UnpublishedPost from '../components/UnpublishedPost'
 
 const TopicContainer = ({
     match,
@@ -54,6 +55,7 @@ const TopicContainer = ({
     const topicId = topic && parseInt(topic.id)
     const pageSize = (currentUser && currentUser.attributes && currentUser.attributes.page_size) || 25
 
+    const topicAttributes = topic ? topic.attributes : {}
 
 
     const draft = drafts.find(
@@ -89,25 +91,15 @@ const TopicContainer = ({
         topicDisplay.page && setPage(topicSlug, topicDisplay.page)
     }, [setPages, setPage, topicSlug, topicDisplay.pages, topicDisplay.page])
     
-    // console.log('-------------------------')
-    // console.log(topicDisplay, toSetTopicDisplay)
 
-    // toSetTopicDisplay && setTopicDisplay(topicDisplay)
-
-    // useEffect(() => {
-    //     console.log('EFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFECT')
-    //     console.log(topicDisplay.topicId, topicDisplay.page, topicDisplay.pages, topicDisplay.scrollId, topicDisplay.users, topicDisplay.flags,)
-    //     setTopicDisplay({
-    //         topicId: topicDisplay.topicId,
-    //         page: topicDisplay.page,
-    //         pages: topicDisplay.pages,
-    //         users: topicDisplay.users,
-    //         flags: topicDisplay.flags,
-    //     })
-    // }, [setTopicDisplay, topicDisplay.topicId, topicDisplay.page, topicDisplay.pages, topicDisplay.scrollId, topicDisplay.users, topicDisplay.flags,])
-
-    const renderPosts = () => (
-        filteredPosts.map(post => {
+    const renderPosts = () => {
+        if (topicAttributes.status === 'unpublished') {
+            return <UnpublishedPost
+                whoCanView={topicAttributes.who_can_view}
+                whoCanPost={topicAttributes.who_can_post}
+            />
+        }
+        return filteredPosts.map(post => {
             const tag = post.attributes.tag
             const scrollTo = tag === scrollId
             return <TrackVisibility key={post.id}>
@@ -131,7 +123,7 @@ const TopicContainer = ({
                 />
         </TrackVisibility>
         })
-    )
+    }
 
     return (
         <>

@@ -56,8 +56,8 @@ const WhoCanPost = ({
 
     const renderAdded = () => (
         <div
-            className={`btn filter-user${whoCanPost === 'added' ? '' : ' filter-user-exclude' }`}
-            onClick={() => setWhoCanPost('added')}
+            className={`btn filter-user${whoCanPost === 'add' ? '' : ' filter-user-exclude' }`}
+            onClick={() => setWhoCanPost('add')}
         >
             Added
         </div>

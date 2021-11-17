@@ -44,7 +44,7 @@ const WhoCanView = ({
                 // name={user}
                 onClick={() => setWhoCanView('add')}
             >
-                Only added
+                Added
             </div>
         </>
     )
