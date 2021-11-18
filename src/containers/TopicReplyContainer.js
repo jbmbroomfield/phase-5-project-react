@@ -47,7 +47,7 @@ const TopicReplyContainer = ({
     }
 
     const handlePost = () => {
-        createPost(topicId, text)
+        createPost(subsectionSlug, topicSlug, text)
         setText('')
         setBottomPopUp(false)
     }

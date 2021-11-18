@@ -36,10 +36,10 @@ const UnpublishedPost = ({
         },
     }[whoCanView][whoCanPost]
 
-    const text = [
-        <>{accessText}<br /><br /></>,
-        <>Post a reply to publish the thread.</>,
-    ]
+    const text = <>
+        {accessText}<br /><br />
+        Post a reply to publish the thread.
+    </>
 
     return <div className="post">
         <div className="post-info"></div>
