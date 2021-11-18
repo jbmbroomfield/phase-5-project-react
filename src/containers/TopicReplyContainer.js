@@ -73,7 +73,7 @@ const TopicReplyContainer = ({
     }
 
     const renderBottomBar = () => (
-        <BottomBar
+        topicAttributes.can_post ? <BottomBar
             toggleLabel="Reply"
             bottomPopUp={bottomPopUp}
             setBottomPopUp={setBottomPopUp}
@@ -84,7 +84,7 @@ const TopicReplyContainer = ({
             focusTextArea={focusTextArea}
             timezone={currentUser?.attributes.time_zone}
             topicId={topicId}
-        />
+        /> : <div className="bottom-bar"></div>
     )
 
     const renderTextContainer = () => (
