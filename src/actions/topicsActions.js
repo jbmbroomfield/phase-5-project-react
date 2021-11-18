@@ -5,6 +5,12 @@ const addTopics = topics => ({
     topics
 })
 
+export const updateSlug = (oldSlug, newSlug) => ({
+    type: 'UPDATE_SLUG',
+    oldSlug,
+    newSlug,
+})
+
 export const fetchTopics = subsectionSlug => (
     dispatch => {
         API.get(`forum/${subsectionSlug}/topics`)

@@ -1,3 +1,4 @@
+import { compareDocumentPosition } from 'domutils'
 import API from './API'
 import { setScrollId } from './scrollIdActions'
 
@@ -24,7 +25,7 @@ export const fetchPost = postId => (
     }
 )
 
-export const createPost = (subsectionSlug, topicSlug, text) => (
+export const createPost = (subsectionSlug, topicSlug, text, then = () => {}) => (
     dispatch => {
         const body = {
             "post": {
@@ -34,8 +35,12 @@ export const createPost = (subsectionSlug, topicSlug, text) => (
         API.post(`forum/${subsectionSlug}/${topicSlug}/posts`, body)
         .then(json => {
             // dispatch(fetchPosts(topicId))
-            json.data && dispatch(fetchPost(json.data.id))
-            json.data && dispatch(setScrollId(json.data.attributes.tag))
+            if (json.data) {
+                const post = json.data
+                dispatch(fetchPost(post.id))
+                dispatch(setScrollId(post.attributes.tag))
+                then(post)
+            }
         })
     }
 )
