@@ -93,7 +93,7 @@ const AsideRightTopicContainer = ({
                 topicAttributes.status === 'unpublished' &&
                 renderOwnerSettings()
             }
-            { topic?.attributes.status === 'published' && renderPublished() }
+            { topicAttributes.status !== 'unpublished' && renderPublished() }
         </>
     )
 }

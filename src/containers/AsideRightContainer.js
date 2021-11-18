@@ -14,7 +14,7 @@ const AsideRightContainer = () => {
     const renderSwitch = () => (
         <Switch>
             {topicRoute() }
-            <Route></Route>
+            <Route><div>Hi</div></Route>
         </Switch>
     )
 
