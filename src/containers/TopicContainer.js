@@ -125,6 +125,7 @@ const TopicContainer = ({
                     createFlag={category => createFlag(topicId, post.id, category)}
                     deleteFlag={category => deleteFlag(topicId, post.id, category)}
                     timezone={timezone}
+                    canPost={topicAttributes.can_post}
                 />
         </TrackVisibility>
         })

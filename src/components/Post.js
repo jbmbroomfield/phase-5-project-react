@@ -16,6 +16,7 @@ const Post = ({
     my_flags, publicFlags,
     createFlag, deleteFlag,
     timezone,
+    canPost
 }) => {
 
     const insertQuote = () =>{
@@ -53,6 +54,7 @@ const Post = ({
                 dislikeCount={dislikeCount}
                 createFlag={createFlag}
                 deleteFlag={deleteFlag}
+                canPost={canPost}
             />
         </div>
     )

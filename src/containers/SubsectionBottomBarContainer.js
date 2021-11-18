@@ -21,11 +21,7 @@ const SubsectionBottomBarContainer = ({ match, currentUser, createTopic}) => {
         createTopic(subsectionSlug, title, redirect)
     }
 
-    return (
-        <>
-            <SubsectionBottomBar handleNewTopic={handleNewTopic} />
-        </>
-    )
+    return currentUser ? <SubsectionBottomBar handleNewTopic={handleNewTopic} /> : <div className="bottom-bar"></div>
 }
 
 const mapStateToProps = state => ({

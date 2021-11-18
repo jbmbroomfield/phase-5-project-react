@@ -1,4 +1,4 @@
-import React from 'react'
+import React , { useEffect } from 'react'
 import { useHistory } from 'react-router'
 import { connect } from 'react-redux'
 
@@ -11,8 +11,14 @@ const LoginContainer = ({ currentUser, login }) => {
 
     const history = useHistory()
 
-    if (currentUser && currentUser.attributes) {
-        history.push("/")
+    useEffect(() => {
+        if (currentUser) {
+            history.push('/')
+        }
+    }, [currentUser, history])
+
+    if (currentUser) {
+        // history.push("/")
         return null
     }
 

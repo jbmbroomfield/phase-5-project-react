@@ -1,12 +1,12 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-const Navbar = ({ currentUser, removeCurrentUser }) => {
+const Navbar = ({ currentUser, logout }) => {
 
     const RenderAuthLinks = () => {
         if (currentUser) {
             return (
-                <li><span className="nav-link" onClick={removeCurrentUser}>Logout</span></li>
+                <li><span className="nav-link" onClick={logout}>Logout</span></li>
             )
         } else {
             return (

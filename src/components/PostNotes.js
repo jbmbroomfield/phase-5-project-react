@@ -5,6 +5,7 @@ const PostNotes = ({
     liked, disliked,
     likeCount, dislikeCount,
     createFlag, deleteFlag,
+    canPost,
 }) => {
 
     const handleLike = () => {
@@ -37,11 +38,11 @@ const PostNotes = ({
 
     return (
         <div className="post-notes">
-            <span className="thumbs">
+            { canPost && <span className="thumbs">
                 { renderLike() }
                 { renderDislike() }
-            </span>
-            <button onClick={insertQuote}>Quote</button>
+            </span> }
+            { canPost && <button onClick={insertQuote}>Quote</button> }
         </div>
     )
 }
