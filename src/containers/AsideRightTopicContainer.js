@@ -11,6 +11,7 @@ import Subscribe from '../components/Subscribe'
 import WhoCanPostContainer from './WhoCanPostContainer'
 
 import { editTopic } from '../actions/topicsActions'
+import TopicSettingsContainer from './TopicSettingsContainer'
 
 const AsideRightTopicContainer = ({
     match,
@@ -71,17 +72,27 @@ const AsideRightTopicContainer = ({
                 topicDisplay={topicDisplay}
                 topic={topic}
                 displayFilter={displayFilter}
-                toggleDisplayFilter={toggleDisplayFilter} />
+                toggleDisplayFilter={toggleDisplayFilter}
+            />
             <Subscribe
                 subscribed={subscribed}
                 handleSubscribe={handleSubscribe}
-                handleUnsubscribe={handleUnsubscribe} />
+                handleUnsubscribe={handleUnsubscribe}
+            />
+            <TopicSettingsContainer 
+                whoCanView={topicAttributes.who_can_view}
+                whoCanPost={topicAttributes.who_can_post}
+            />
         </>
     )
 
     return (
         <>
-            { currentUser?.attributes.slug === topicAttributes.user_slug && renderOwnerSettings() }
+            {   
+                currentUser?.attributes.slug === topicAttributes.user_slug &&
+                topicAttributes.status === 'unpublished' &&
+                renderOwnerSettings()
+            }
             { topic?.attributes.status === 'published' && renderPublished() }
         </>
     )

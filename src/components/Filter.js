@@ -61,14 +61,12 @@ const Filter = ({
                 </div>
                 { users?.map(user => {
                     const include = includedUsers.includes(user)
-                    return (
-                        <FilterUser
-                            key={user}
-                            user={user}
-                            include={include}
-                            handleClick={() => toggleUserFilter(user)}
-                        />
-                    )
+                    return <FilterUser
+                        key={user}
+                        username={user.username}
+                        include={include}
+                        handleClick={() => toggleUserFilter(user)}
+                    />
                 })}
             </div>
             <div className="filter-flags">

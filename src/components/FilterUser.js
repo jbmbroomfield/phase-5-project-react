@@ -1,15 +1,15 @@
 import React from 'react'
 
 const FilterUser = ({
-    user, include, handleClick
+    username, include, handleClick
 }) => {
     return (
         <div
             className={`btn filter-user${!include ? ' filter-user-exclude' : ''}`}
-            name={user}
+            name={username}
             onClick={handleClick}
         >
-            {user}
+            {username}
         </div>
     )
 }
