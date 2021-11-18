@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 
 import { fetchPosts, fetchPost } from '../actions/postsActions'
@@ -18,6 +18,8 @@ import filterPosts from '../filterPosts'
 
 import getTopicDisplay from '../getTopicDisplay'
 import UnpublishedPost from '../components/UnpublishedPost'
+
+import { editTopic } from '../actions/topicsActions'
 
 const TopicContainer = ({
     match,
@@ -39,7 +41,9 @@ const TopicContainer = ({
     insertIntoDraft,
     createFlag, deleteFlag,
     setPages, setPage,
+    editTopic,
 }) => {
+
 
     const timezone = currentUser?.attributes.time_zone
 
@@ -57,6 +61,7 @@ const TopicContainer = ({
 
     const topicAttributes = topic ? topic.attributes : {}
 
+    const [titleInput, setTitleInput] = useState('')
 
     const draft = drafts.find(
         draft => parseInt(draft.attributes.topic_id) === topicId
@@ -125,9 +130,38 @@ const TopicContainer = ({
         })
     }
 
+
+    const editTitle = event => {
+        const title = event.target.value
+        if (title.length > 0) {
+            editTopic(subsectionSlug, topicSlug, {title: event.target.value})
+        }
+    }
+
+    const handleTitleInputChange = event => {
+        const title = event.target.value
+        if (title.length <= 32) {
+            setTitleInput(title)
+        }
+    }
+
+    const renderEditTitle = () => {
+        return <input
+            type="text"
+            value={titleInput}
+            onChange={handleTitleInputChange}
+            onBlur={editTitle}
+            placeholder={'Choose a title'}
+        />
+    }
+
+    if (!topic) {
+        return null
+    }
     return (
         <>
-            <h1>{topic && topic.attributes.title}</h1>
+            <h1>{topicAttributes.title}</h1>
+            { topicAttributes.status === 'unpublished' && renderEditTitle() }
             { renderPosts() }
         </>
     )
@@ -152,6 +186,7 @@ const mapDispatchToProps = {
     insertIntoDraft,
     createFlag, deleteFlag,
     setPages, setPage,
+    editTopic,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TopicContainer)

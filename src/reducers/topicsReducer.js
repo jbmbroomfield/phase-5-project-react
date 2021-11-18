@@ -10,7 +10,7 @@ const topicsReducer = (state = [], action) => {
             const newState = [...state]
             const topic = newState.find(topic => topic.attributes.slug = action.oldSlug)
             topic.attributes.slug = action.newSlug
-            return newState
+            return newState .filter(topic => topic.attributes.slug !== action.oldSlug)
 
         default:
             return state

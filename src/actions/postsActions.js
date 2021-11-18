@@ -1,4 +1,3 @@
-import { compareDocumentPosition } from 'domutils'
 import API from './API'
 import { setScrollId } from './scrollIdActions'
 

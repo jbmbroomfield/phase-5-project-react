@@ -14,7 +14,7 @@ const AsideRightContainer = () => {
     const renderSwitch = () => (
         <Switch>
             {topicRoute() }
-            <Route><div>Default Right Aside</div></Route>
+            <Route></Route>
         </Switch>
     )
 
