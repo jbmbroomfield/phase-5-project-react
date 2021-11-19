@@ -30,8 +30,8 @@ const topicAccessDescription = (whoCanView, whoCanPost) => ({
     add: {
         all: 'Only members added can view and post.',
         users: 'Only members added can view and post.',
-        password_all: 'Only members added as a viewer can view the thread. Only members added as a viewer and have the password can post. Members can also be added as a poster.',
-        password: 'Only members added as a viewer can view the thread. Only members added as a viewer and have the password can post. Members can also be added as a poster.',
+        password_all: 'Only members added as a viewer can view the thread. Only members added as a viewer and who have the password can post. Members can also be added as a poster.',
+        password: 'Only members added as a viewer can view the thread. Only members added as a viewer and who have the password can post. Members can also be added as a poster.',
         add: 'Only members added as a viewer can view the thread. Only members added as a poster can post.',
     },
 }[whoCanView][whoCanPost])
