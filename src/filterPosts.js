@@ -6,7 +6,7 @@ const filterByFlagsAndUsers = (
     const exclude = !!topicDisplay.users.exclude
     const array = exclude ? topicDisplay.users.exclude : topicDisplay.users.include
     const userIdArray = array.map(
-        username => parseInt(users.find(user => user.attributes.username === username)?.id)
+        arrayUser => parseInt(users.find(user => user.attributes.username === arrayUser.attributes.username)?.id)
     )
     return posts.filter(
         post => {
@@ -63,7 +63,6 @@ const filterPosts = (
     users,
     scrollId,
     pageSize,
-    setPages, setPage,
 ) => {
     const topicPosts = posts.filter(post => (
         post.attributes.topic_slug === topicSlug

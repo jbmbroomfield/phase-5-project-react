@@ -12,6 +12,8 @@ import WhoCanPostContainer from './WhoCanPostContainer'
 
 import { editTopic } from '../actions/topicsActions'
 import TopicSettingsContainer from './TopicSettingsContainer'
+import ViewersContainer from './ViewersContainer'
+import PostersContainer from './PostersContainer'
 
 const AsideRightTopicContainer = ({
     match,
@@ -74,15 +76,19 @@ const AsideRightTopicContainer = ({
                 displayFilter={displayFilter}
                 toggleDisplayFilter={toggleDisplayFilter}
             />
-            <Subscribe
+            { topicAttributes.can_post && <Subscribe
                 subscribed={subscribed}
                 handleSubscribe={handleSubscribe}
                 handleUnsubscribe={handleUnsubscribe}
-            />
+            /> }
             <TopicSettingsContainer 
                 whoCanView={topicAttributes.who_can_view}
                 whoCanPost={topicAttributes.who_can_post}
             />
+            { !['all', 'users'].includes(topicAttributes.who_can_view) && 
+                <ViewersContainer viewers={topicAttributes.viewers} />
+            }
+            <PostersContainer posters={topicAttributes.posters} />
         </>
     )
 

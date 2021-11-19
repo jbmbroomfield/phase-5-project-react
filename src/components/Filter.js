@@ -63,7 +63,7 @@ const Filter = ({
                     const include = includedUsers.includes(user)
                     return <FilterUser
                         key={user}
-                        username={user.username}
+                        username={user.attributes.username}
                         include={include}
                         handleClick={() => toggleUserFilter(user)}
                     />

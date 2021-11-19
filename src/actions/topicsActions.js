@@ -50,3 +50,12 @@ export const editTopic = (subsectionSlug, topicSlug, attributes) => (
         API.patch(`forum/${subsectionSlug}/${topicSlug}`, body)
     }
 )
+
+export const addViewer = (subsectionSlug, topicSlug, viewerSlug) => (
+    dispatch => {
+        const body = {
+            viewer_slug: viewerSlug
+        }
+        API.patch(`forum/${subsectionSlug}/${topicSlug}/add-viewer`, body)
+    }
+)
