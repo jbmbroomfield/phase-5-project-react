@@ -7,7 +7,7 @@ import NavbarContainer from '../navbar/containers/NavbarContainer'
 import AsideLeftContainer from '../asideLeft/containers/AsideLeftContainer'
 import MainContainer from '../main/containers/MainContainer'
 import AsideRightContainer from '../asideRight/containers/AsideRightContainer'
-import BottomBarContainer from './BottomBarContainer'
+import BottomBarContainer from '../bottom/containers/BottomBarContainer'
 
 import { fetchCurrentUser } from 'redux/actions/currentUserActions'
 import { fetchSections } from 'redux/actions/sectionsActions'

@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router'
 
-import TextContainer from '../textEditor/containers/TextContainer'
+import TextContainer from '../../textEditor/containers/TextContainer'
 import BottomBar from '../components/BottomBar'
 
 import { createPost } from 'redux/actions/postsActions'

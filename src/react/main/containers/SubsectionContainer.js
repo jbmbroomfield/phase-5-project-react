@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import NewTopicContainer from '../../containers/NewTopicContainer'
+import NewTopicContainer from '../../bottom/containers/NewTopicContainer'
 import TopicSummary from '../components/TopicSummary'
 import TopicSummaryHeader from '../components/TopicSummaryHeader'
 
