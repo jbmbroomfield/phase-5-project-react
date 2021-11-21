@@ -4,8 +4,8 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import Section from '../components/Section'
 
-import {  fetchSubsection } from '../actions/subsectionsActions'
-import sectionsChannel from '../channels/sectionsChannel'
+import {  fetchSubsection } from '../../actions/subsectionsActions'
+import sectionsChannel from '../../channels/sectionsChannel'
 
 
 

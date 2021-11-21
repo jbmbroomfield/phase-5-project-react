@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { subscribeToTopic } from '../actions/userTopicsActions'
+import { subscribeToTopic } from '../../actions/userTopicsActions'
 import PageControlContainer from './PageControlContainer'
 import FilterContainer from './FilterContainer'
-import getTopicDisplay from '../getTopicDisplay'
+import getTopicDisplay from '../../getTopicDisplay'
 import WhoCanViewContainer from './WhoCanViewContainer'
 
 import Subscribe from '../components/Subscribe'
 import WhoCanPostContainer from './WhoCanPostContainer'
 
-import { editTopic } from '../actions/topicsActions'
+import { editTopic } from '../../actions/topicsActions'
 import TopicSettingsContainer from './TopicSettingsContainer'
 import ViewersContainer from './ViewersContainer'
 import PostersContainer from './PostersContainer'

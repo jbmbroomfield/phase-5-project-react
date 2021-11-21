@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 
 import PageControl from '../components/PageControl'
 
-import { setPage } from '../actions/topicDisplaysActions'
+import { setPage } from '../../actions/topicDisplaysActions'
 
 const PageControlContainer = ({
     topicDisplay,

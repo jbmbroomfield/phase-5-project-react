@@ -6,8 +6,8 @@ import NewTopicContainer from './NewTopicContainer'
 import TopicSummary from '../components/TopicSummary'
 import TopicSummaryHeader from '../components/TopicSummaryHeader'
 
-import { fetchTopics, fetchTopic } from '../actions/topicsActions'
-import subsectionChannel from '../channels/subsectionChannel'
+import { fetchTopics, fetchTopic } from '../../actions/topicsActions'
+import subsectionChannel from '../../channels/subsectionChannel'
 
 
 const SubsectionContainer = ({ 

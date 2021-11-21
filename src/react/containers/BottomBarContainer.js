@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import TopicReplyContainer from './TopicReplyContainer'
 import SubsectionBottomBarContainer from './SubsectionBottomBarContainer'
 
-import { setBottomPopUp } from '../actions/bottomPopUpActions'
+import { setBottomPopUp } from '../../actions/bottomPopUpActions'
 
 const BottomBarContainer = ({
     focusTextArea, textAreaRef

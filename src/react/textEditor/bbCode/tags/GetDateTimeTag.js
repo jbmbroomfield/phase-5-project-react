@@ -1,6 +1,6 @@
 import React from 'react'
 import { Tag } from 'bbcode-to-react'
-import { dtStringFromIso } from '../../../DateTime'
+import { dtStringFromIso } from '../../../../DateTime'
 
 const GetDateTimeTag = timezone => {
 

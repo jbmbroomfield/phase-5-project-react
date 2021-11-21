@@ -3,9 +3,9 @@ import { useHistory } from 'react-router-dom'
 
 import TimezoneSelect from 'react-timezone-select'
 
-import { getJwt } from "../jwt"
+import { getJwt } from "../../jwt"
 
-import { editProfile } from '../actions/currentUserActions'
+import { editProfile } from '../../actions/currentUserActions'
 
 const DisplayAvatar = ({ src }) => (
     <><img className='avatar' src={src} alt="avatar" /><br /></>

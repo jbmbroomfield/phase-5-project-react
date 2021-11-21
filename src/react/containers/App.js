@@ -3,21 +3,21 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { BrowserRouter as Router } from 'react-router-dom'
 
-import NavbarContainer from './containers/NavbarContainer'
-import AsideLeftContainer from './containers/AsideLeftContainer'
-import MainContainer from './containers/MainContainer'
-import AsideRightContainer from './containers/AsideRightContainer'
-import BottomBarContainer from './containers/BottomBarContainer'
+import NavbarContainer from './NavbarContainer'
+import AsideLeftContainer from './AsideLeftContainer'
+import MainContainer from './MainContainer'
+import AsideRightContainer from './AsideRightContainer'
+import BottomBarContainer from './BottomBarContainer'
 
-import { fetchCurrentUser } from './actions/currentUserActions'
-import { fetchSections } from './actions/sectionsActions'
-import { fetchSubsections } from './actions/subsectionsActions'
-import { fetchUsers } from './actions/usersActions'
-import { fetchNotifications } from './actions/notificationsActions'
-import { setBottomPopUp } from './actions/bottomPopUpActions'
+import { fetchCurrentUser } from '../../actions/currentUserActions'
+import { fetchSections } from '../../actions/sectionsActions'
+import { fetchSubsections } from '../../actions/subsectionsActions'
+import { fetchUsers } from '../../actions/usersActions'
+import { fetchNotifications } from '../../actions/notificationsActions'
+import { setBottomPopUp } from '../../actions/bottomPopUpActions'
 
-import mainChannel from './channels/mainChannel'
-import userChannel from './channels/userChannel'
+import mainChannel from '../../channels/mainChannel'
+import userChannel from '../../channels/userChannel'
 
 const App = () => {
 

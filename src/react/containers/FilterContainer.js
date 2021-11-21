@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import Filter from '../components/Filter'
 
-import { excludeAllUsers, includeAllUsers, toggleFlagFilter, toggleUserFilter } from '../actions/topicDisplaysActions'
+import { excludeAllUsers, includeAllUsers, toggleFlagFilter, toggleUserFilter } from '../../actions/topicDisplaysActions'
 
 const FilterContainer = ({
     topicDisplay,

@@ -3,7 +3,7 @@ import UserLink from './UserLink'
 
 const PostInfo = ({ user, avatarUrl }) => {
 
-    const avatarSrc = avatarUrl || require('../default_avatar.png')
+    const avatarSrc = avatarUrl || require('../../default_avatar.png')
 
     return (
         <div className="post-info">

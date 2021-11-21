@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router'
 
 import SubsectionBottomBar from '../components/SubsectionBottomBar'
-import { createTopic } from '../actions/topicsActions'
+import { createTopic } from '../../actions/topicsActions'
 
 const SubsectionBottomBarContainer = ({ match }) => {
 

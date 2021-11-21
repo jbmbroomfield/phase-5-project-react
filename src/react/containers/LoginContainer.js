@@ -4,7 +4,7 @@ import { useHistory } from 'react-router'
 
 import LoginForm from '../components/LoginForm'
 
-import { login } from '../actions/currentUserActions'
+import { login } from '../../actions/currentUserActions'
 
 
 const LoginContainer = () => {

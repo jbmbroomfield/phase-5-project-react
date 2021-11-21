@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import EditProfileForm from '../components/EditProfileForm'
 
-import { uploadAvatar } from '../actions/currentUserActions'
+import { uploadAvatar } from '../../actions/currentUserActions'
 
 const EditProfileContainer = () => {
 

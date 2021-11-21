@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { fetchPosts, fetchPost } from '../actions/postsActions'
+import { fetchPosts, fetchPost } from '../../actions/postsActions'
 import Post from '../components/Post'
 
 import TrackVisibility from 'react-on-screen'
-import { fetchUserTopic } from '../actions/userTopicsActions'
+import { fetchUserTopic } from '../../actions/userTopicsActions'
 
-import { insertIntoDraft } from '../actions/draftsActions'
-import { createFlag, deleteFlag } from '../actions/flagsActions'
-import { setPages, setPage } from '../actions/topicDisplaysActions'
-import { setScrollId } from '../actions/scrollIdActions'
+import { insertIntoDraft } from '../../actions/draftsActions'
+import { createFlag, deleteFlag } from '../../actions/flagsActions'
+import { setPages, setPage } from '../../actions/topicDisplaysActions'
+import { setScrollId } from '../../actions/scrollIdActions'
 
-import topicChannel from '../channels/topicChannel'
-import { fetchTopic } from '../actions/topicsActions'
-import filterPosts from '../filterPosts'
+import topicChannel from '../../channels/topicChannel'
+import { fetchTopic } from '../../actions/topicsActions'
+import filterPosts from '../../filterPosts'
 
-import getTopicDisplay from '../getTopicDisplay'
+import getTopicDisplay from '../../getTopicDisplay'
 import UnpublishedPost from '../components/UnpublishedPost'
 
-import { editTopic } from '../actions/topicsActions'
+import { editTopic } from '../../actions/topicsActions'
 
 const TopicContainer = ({
     match,
