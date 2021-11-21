@@ -1,6 +1,6 @@
 import React from 'react'
 
-import topicAccessDescription from '../../topicAccessDescription'
+import topicAccessDescription from 'topicAccessDescription'
 
 const UnpublishedPost = ({
     whoCanView, whoCanPost,

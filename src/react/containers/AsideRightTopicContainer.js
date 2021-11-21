@@ -1,19 +1,19 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { subscribeToTopic } from '../../actions/userTopicsActions'
+import { subscribeToTopic } from 'redux/actions/userTopicsActions'
+import { editTopic } from 'redux/actions/topicsActions'
+
 import PageControlContainer from './PageControlContainer'
 import FilterContainer from './FilterContainer'
-import getTopicDisplay from '../../getTopicDisplay'
 import WhoCanViewContainer from './WhoCanViewContainer'
-
-import Subscribe from '../components/Subscribe'
-import WhoCanPostContainer from './WhoCanPostContainer'
-
-import { editTopic } from '../../actions/topicsActions'
 import TopicSettingsContainer from './TopicSettingsContainer'
 import ViewersContainer from './ViewersContainer'
 import PostersContainer from './PostersContainer'
+import WhoCanPostContainer from './WhoCanPostContainer'
+import Subscribe from '../components/Subscribe'
+
+import getTopicDisplay from 'getTopicDisplay'
 
 const AsideRightTopicContainer = ({
     match,

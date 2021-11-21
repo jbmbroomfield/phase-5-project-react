@@ -1,4 +1,4 @@
-import getTopicDisplay from "../getTopicDisplay"
+import getTopicDisplay from "getTopicDisplay"
 
 const topicDisplaysReducer = (state = [], action) => {
     let newState, topicDisplay

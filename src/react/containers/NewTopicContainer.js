@@ -1,11 +1,11 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 
 import BottomBar from '../components/BottomBar'
 import TextContainer from '../textEditor/containers/TextContainer'
-import { useHistory } from 'react-router-dom'
 
-import { createTopic } from '../../actions/topicsActions'
+import { createTopic } from 'redux/actions/topicsActions'
 
 const NewTopicContainer = ({
     handleButtonClick,

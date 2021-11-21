@@ -1,4 +1,4 @@
-import { getJwt } from "../jwt"
+import { getJwt } from "jwt"
 
 class API {
 

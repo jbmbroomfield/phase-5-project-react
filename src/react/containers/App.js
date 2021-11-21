@@ -9,15 +9,15 @@ import MainContainer from './MainContainer'
 import AsideRightContainer from './AsideRightContainer'
 import BottomBarContainer from './BottomBarContainer'
 
-import { fetchCurrentUser } from 'actions/currentUserActions'
-import { fetchSections } from '../../actions/sectionsActions'
-import { fetchSubsections } from '../../actions/subsectionsActions'
-import { fetchUsers } from '../../actions/usersActions'
-import { fetchNotifications } from '../../actions/notificationsActions'
-import { setBottomPopUp } from '../../actions/bottomPopUpActions'
+import { fetchCurrentUser } from 'redux/actions/currentUserActions'
+import { fetchSections } from 'redux/actions/sectionsActions'
+import { fetchSubsections } from 'redux/actions/subsectionsActions'
+import { fetchUsers } from 'redux/actions/usersActions'
+import { fetchNotifications } from 'redux/actions/notificationsActions'
+import { setBottomPopUp } from 'redux/actions/bottomPopUpActions'
 
-import mainChannel from '../../channels/mainChannel'
-import userChannel from '../../channels/userChannel'
+import mainChannel from 'channels/mainChannel'
+import userChannel from 'channels/userChannel'
 
 const App = () => {
 

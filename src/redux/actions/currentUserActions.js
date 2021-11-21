@@ -1,5 +1,5 @@
 import API from "./API"
-import { setJwt } from "../jwt"
+import { setJwt } from "jwt"
 
 export const setCurrentUser = currentUser => ({
     type: 'SET_CURRENT_USER',

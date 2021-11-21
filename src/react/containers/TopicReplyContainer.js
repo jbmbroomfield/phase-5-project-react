@@ -5,9 +5,9 @@ import { useHistory } from 'react-router'
 import TextContainer from '../textEditor/containers/TextContainer'
 import BottomBar from '../components/BottomBar'
 
-import { createPost } from '../../actions/postsActions'
-import { setDraft } from '../../actions/draftsActions'
-import { updateSlug } from '../../actions/topicsActions'
+import { createPost } from 'redux/actions/postsActions'
+import { setDraft } from 'redux/actions/draftsActions'
+import { updateSlug } from 'redux/actions/topicsActions'
 
 const TopicReplyContainer = ({
     match,

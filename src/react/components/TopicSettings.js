@@ -1,5 +1,5 @@
 import React from 'react'
-import topicAccessDescription from '../../topicAccessDescription'
+import topicAccessDescription from 'topicAccessDescription'
 
 const TopicSettings = ({
     whoCanView, whoCanPost

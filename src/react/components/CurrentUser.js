@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 
 const CurrentUser = () => {
 
-    currentUser = useSelector(state => state.currentUser)
+    const currentUser = useSelector(state => state.currentUser)
     const renderCurrentUser = () => {
         if (currentUser.attributes) {
             return `Logged in as ${currentUser.attributes.username}.`

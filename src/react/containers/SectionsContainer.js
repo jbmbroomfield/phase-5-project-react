@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-// import { createSelector } from 'reselect'
 
 import Section from '../components/Section'
 
-import {  fetchSubsection } from '../../actions/subsectionsActions'
-import sectionsChannel from '../../channels/sectionsChannel'
+import { fetchSubsection } from 'redux/actions/subsectionsActions'
+
+import sectionsChannel from 'channels/sectionsChannel'
 
 
 

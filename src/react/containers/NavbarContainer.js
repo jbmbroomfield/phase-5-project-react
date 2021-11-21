@@ -1,8 +1,10 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router'
+
 import Navbar from '../components/Navbar'
-import { removeCurrentUser } from '../../actions/currentUserActions'
+
+import { removeCurrentUser } from 'redux/actions/currentUserActions'
 
 const NavbarContainer = () => {
 

@@ -1,25 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-
-import { fetchPosts, fetchPost } from '../../actions/postsActions'
-import Post from '../components/Post'
-
 import TrackVisibility from 'react-on-screen'
-import { fetchUserTopic } from '../../actions/userTopicsActions'
 
-import { insertIntoDraft } from '../../actions/draftsActions'
-import { createFlag, deleteFlag } from '../../actions/flagsActions'
-import { setPages, setPage } from '../../actions/topicDisplaysActions'
-import { setScrollId } from '../../actions/scrollIdActions'
-
-import topicChannel from '../../channels/topicChannel'
-import { fetchTopic } from '../../actions/topicsActions'
-import filterPosts from '../../filterPosts'
-
-import getTopicDisplay from '../../getTopicDisplay'
+import Post from '../components/Post'
 import UnpublishedPost from '../components/UnpublishedPost'
 
-import { editTopic } from '../../actions/topicsActions'
+import { fetchPosts, fetchPost } from 'redux/actions/postsActions'
+import { fetchUserTopic } from 'redux/actions/userTopicsActions'
+import { insertIntoDraft } from 'redux/actions/draftsActions'
+import { createFlag, deleteFlag } from 'redux/actions/flagsActions'
+import { setPages, setPage } from 'redux/actions/topicDisplaysActions'
+import { setScrollId } from 'redux/actions/scrollIdActions'
+import { fetchTopic } from 'redux/actions/topicsActions'
+import { editTopic } from 'redux/actions/topicsActions'
+
+import topicChannel from '../../channels/topicChannel'
+
+import filterPosts from 'filterPosts'
+import getTopicDisplay from 'getTopicDisplay'
 
 const TopicContainer = ({
     match,

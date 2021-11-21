@@ -1,8 +1,9 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { deleteNotification } from '../../actions/notificationsActions'
-import { setScrollId } from '../../actions/scrollIdActions'
-import { fetchTopic } from '../../actions/topicsActions'
+
+import { deleteNotification } from 'redux/actions/notificationsActions'
+import { setScrollId } from 'redux/actions/scrollIdActions'
+import { fetchTopic } from 'redux/actions/topicsActions'
 
 import Notification from '../components/Notification'
 

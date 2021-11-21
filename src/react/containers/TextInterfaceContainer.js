@@ -3,8 +3,9 @@ import { useDispatch } from 'react-redux'
 
 import TextInterface from '../textEditor/components/TextInterface'
 
-import { insertIntoDraft } from '../../actions/draftsActions'
-import { dtFromIso, isoFromDt, now } from '../../DateTime'
+import { insertIntoDraft } from 'redux/actions/draftsActions'
+
+import { dtFromIso, isoFromDt, now } from 'DateTime'
 
 const TextInterfaceContainer = ({ onButtonClick, tags, timezone, topicId, focusTextArea }) => {
 
