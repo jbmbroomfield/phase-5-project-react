@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
-import TextInterface from '../../textEditor/components/TextInterface'
+import TextInterface from '../components/TextInterface'
 
 import { insertIntoDraft } from 'redux/actions/draftsActions'
 
