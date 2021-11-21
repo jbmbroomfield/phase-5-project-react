@@ -1,9 +1,9 @@
 import React from 'react'
-import UserLink from './UserLink'
+import UserLink from '../../components/UserLink'
 
 const PostInfo = ({ user, avatarUrl }) => {
 
-    const avatarSrc = avatarUrl || require('../../default_avatar.png')
+    const avatarSrc = avatarUrl || require('default_avatar.png')
 
     return (
         <div className="post-info">

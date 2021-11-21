@@ -1,7 +1,7 @@
 import React from 'react'
 
-import UserLink from './UserLink'
-import TopicLink from './TopicLink'
+import UserLink from '../../components/UserLink'
+import TopicLink from '../../components/TopicLink'
 import LastPost from './LastPost'
 
 const TopicSummary = ({

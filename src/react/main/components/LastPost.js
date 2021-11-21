@@ -4,8 +4,8 @@ import { useHistory } from 'react-router'
 
 import { setScrollId } from 'redux/actions/scrollIdActions'
 
-import UserLink from './UserLink'
-import TopicLink from './TopicLink'
+import UserLink from '../../components/UserLink'
+import TopicLink from '../../components/TopicLink'
 
 const LastPost = ({
     lastPost, showTopic,

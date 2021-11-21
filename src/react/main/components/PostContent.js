@@ -1,6 +1,6 @@
 import React from 'react'
 
-import parse from '../textEditor/bbCode/parse.js'
+import parse from '../../textEditor/bbCode/parse.js'
 
 const PostContent = ({ text, tag, createdAt, timezone }) => {
 

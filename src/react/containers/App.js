@@ -5,7 +5,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 
 import NavbarContainer from '../navbar/containers/NavbarContainer'
 import AsideLeftContainer from '../asideLeft/containers/AsideLeftContainer'
-import MainContainer from './MainContainer'
+import MainContainer from '../main/containers/MainContainer'
 import AsideRightContainer from '../asideRight/containers/AsideRightContainer'
 import BottomBarContainer from './BottomBarContainer'
 

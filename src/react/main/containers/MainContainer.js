@@ -1,14 +1,14 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
 
-import UsersContainer from './UsersContainer'
+import UsersContainer from '../containers/UsersContainer'
 import LoginContainer from './LoginContainer'
 import SignupContainer from './SignupContainer'
 import EditProfileContainer from './EditProfileContainer'
 import SectionsContainer from './SectionsContainer'
 import SubsectionContainer from './SubsectionContainer'
 import TopicContainer from './TopicContainer'
-import UserContainer from './UserContainer'
+import UserContainer from '../../containers/UserContainer'
 
 const subsectionRoute = () => (
     <Route

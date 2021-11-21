@@ -14,7 +14,7 @@ import { setScrollId } from 'redux/actions/scrollIdActions'
 import { fetchTopic } from 'redux/actions/topicsActions'
 import { editTopic } from 'redux/actions/topicsActions'
 
-import topicChannel from '../../channels/topicChannel'
+import topicChannel from '../../../channels/topicChannel'
 
 import filterPosts from 'filterPosts'
 import getTopicDisplay from 'getTopicDisplay'
