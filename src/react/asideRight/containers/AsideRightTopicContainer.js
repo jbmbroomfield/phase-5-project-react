@@ -87,9 +87,17 @@ const AsideRightTopicContainer = ({
                 whoCanPost={topicAttributes.who_can_post}
             />
             { !['all', 'users'].includes(topicAttributes.who_can_view) && 
-                <ViewersContainer viewers={topicAttributes.viewers} />
+                <ViewersContainer
+                    viewers={topicAttributes.viewers}
+                    subsectionSlug={subsectionSlug}
+                    topicSlug={topicSlug}
+                />
             }
-            <PostersContainer posters={topicAttributes.posters} />
+            <PostersContainer
+                posters={topicAttributes.posters}
+                subsectionSlug={subsectionSlug}
+                topicSlug={topicSlug}
+            />
         </>
     )
 

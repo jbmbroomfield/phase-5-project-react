@@ -5,8 +5,6 @@ const WhoCanView = ({
     setWhoCanView,
 }) => {
 
-
-
     return (
         <>
             <div className="option-row">

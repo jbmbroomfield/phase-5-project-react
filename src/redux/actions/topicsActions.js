@@ -57,5 +57,16 @@ export const addViewer = (subsectionSlug, topicSlug, viewerSlug) => (
             viewer_slug: viewerSlug
         }
         API.patch(`forum/${subsectionSlug}/${topicSlug}/add-viewer`, body)
+        .then(json => dispatch(fetchTopic(subsectionSlug, topicSlug)))
+    }
+)
+
+export const addPoster = (subsectionSlug, topicSlug, posterSlug) => (
+    dispatch => {
+        const body = {
+            poster_slug: posterSlug
+        }
+        API.patch(`forum/${subsectionSlug}/${topicSlug}/add-poster`, body)
+        .then(json => dispatch(fetchTopic(subsectionSlug, topicSlug)))
     }
 )

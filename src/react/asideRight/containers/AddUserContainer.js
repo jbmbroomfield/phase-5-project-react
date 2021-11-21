@@ -1,19 +1,23 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 
 import AddUser from '../components/AddUser'
 
 const AddUserContainer = ({
-    allUsers, excludedUsers,
+    exclude, placeholder,
+    handleAdd,
 }) => {
+
+    const allUsers = useSelector(state => state.users)
+
+    const excludeHasSlug = slug => (
+        !!exclude.find(user => user.attributes.slug === slug)
+    )
+
+    const users = allUsers.filter(user => !excludeHasSlug(user.attributes.slug))
 
     const [text, setText] = useState('')
     const [selectedUser, setSelectedUser] = useState(null)
-
-    const users = [
-        {id: "0", attributes: {username: "Jim"}},
-        {id: "1", attributes: {username: "Alice"}},
-        {id: "2", attributes: {username: "Bob"}},
-    ]
 
     const handleOnSelect = item => {
         const newText = item.name
@@ -28,22 +32,22 @@ const AddUserContainer = ({
         setSelectedUser(user)
     }
 
-    const handleAdd = () => {
+    const handleClick = () => {
         if (selectedUser) {
-            console.log('adding', selectedUser)
+            handleAdd(selectedUser.attributes.slug)
+            setText('')
         }
-    }
-
-    console.log(selectedUser)
+   }
 
     return <AddUser
         users={users}
         selectedUser={selectedUser}
         handleOnSelect={handleOnSelect}
         handleOnSearch={handleOnSearch}
-        handleAdd={handleAdd}
+        handleClick={handleClick}
         text={text}
         setText={setText}
+        placeholder={placeholder}
     />
 }
 
