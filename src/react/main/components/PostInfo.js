@@ -1,5 +1,5 @@
 import React from 'react'
-import UserLink from '../../components/UserLink'
+import UserLink from 'react/sharedComponents/UserLink'
 
 const PostInfo = ({ user, avatarUrl }) => {
 

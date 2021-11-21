@@ -2,7 +2,7 @@ import React from 'react'
 import { Tag } from 'bbcode-to-react'
 import BBCodeInsertion from '../BBCodeInsertion'
 
-import Quote from 'react/components/Quote'
+import Quote from 'react/sharedComponents/Quote'
 
 class QuoteTag extends Tag {
 

@@ -8,7 +8,7 @@ import EditProfileContainer from './EditProfileContainer'
 import SectionsContainer from './SectionsContainer'
 import SubsectionContainer from './SubsectionContainer'
 import TopicContainer from './TopicContainer'
-import UserContainer from '../../containers/UserContainer'
+import UserContainer from './UserContainer'
 
 const subsectionRoute = () => (
     <Route
