@@ -9,7 +9,7 @@ import MainContainer from './MainContainer'
 import AsideRightContainer from './AsideRightContainer'
 import BottomBarContainer from './BottomBarContainer'
 
-import { fetchCurrentUser } from '../../actions/currentUserActions'
+import { fetchCurrentUser } from 'actions/currentUserActions'
 import { fetchSections } from '../../actions/sectionsActions'
 import { fetchSubsections } from '../../actions/subsectionsActions'
 import { fetchUsers } from '../../actions/usersActions'
