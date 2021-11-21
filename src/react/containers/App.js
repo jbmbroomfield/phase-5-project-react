@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
 
 import NavbarContainer from '../navbar/containers/NavbarContainer'
-import AsideLeftContainer from './AsideLeftContainer'
+import AsideLeftContainer from '../asideLeft/containers/AsideLeftContainer'
 import MainContainer from './MainContainer'
 import AsideRightContainer from './AsideRightContainer'
 import BottomBarContainer from './BottomBarContainer'
