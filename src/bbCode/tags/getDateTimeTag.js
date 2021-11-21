@@ -1,8 +1,8 @@
 import React from 'react'
 import { Tag } from 'bbcode-to-react'
-import { dtStringFromIso } from '../../../../DateTime'
+import { dtStringFromIso } from 'DateTime'
 
-const GetDateTimeTag = timezone => {
+const getDateTimeTag = timezone => {
 
     class DateTimeTag extends Tag {
 
@@ -20,4 +20,4 @@ const GetDateTimeTag = timezone => {
     return DateTimeTag
 }
 
-export default GetDateTimeTag
+export default getDateTimeTag

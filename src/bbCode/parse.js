@@ -3,13 +3,13 @@ import { renderToString } from 'react-dom/server';
 import htmlParse from 'html-react-parser'
 
 import allTags from './tags/allTags';
-import GetDateTimeTag from './tags/GetDateTimeTag';
+import getDateTimeTag from './tags/getDateTimeTag';
 
 // console.log(reactParser.tags)
 reactParser.tags = {}
 
 const parse = (text, timezone, tags = allTags) => {
-    const DateTimeTag = GetDateTimeTag(timezone)
+    const DateTimeTag = getDateTimeTag(timezone)
     tags.push(DateTimeTag)
     for (const Tag of tags) {
         reactParser.registerTag(Tag.tag, Tag)

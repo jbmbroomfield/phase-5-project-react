@@ -1,4 +1,4 @@
-import parse from '../bbCode/parse.js'
+import parse from 'bbCode/parse.js'
 import React from 'react'
 
 const TextPreview = ({ text, timezone }) => {

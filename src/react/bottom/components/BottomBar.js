@@ -2,7 +2,7 @@ import React from 'react'
 
 import TextInterfaceContainer from '../containers/TextInterfaceContainer'
 
-import allTags from '../../textEditor/bbCode/tags/allTags'
+import allTags from 'bbCode/tags/allTags'
 
 const BottomBar = ({
     bottomPopUp, setBottomPopUp,
