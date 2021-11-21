@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
-import { connect } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import TextInterface from '../textEditor/components/TextInterface'
 
 import { insertIntoDraft } from '../actions/draftsActions'
 import { dtFromIso, isoFromDt, now } from '../DateTime'
 
-const TextInterfaceContainer = ({ onButtonClick, tags, timezone, insertIntoDraft, topicId, focusTextArea }) => {
+const TextInterfaceContainer = ({ onButtonClick, tags, timezone, topicId, focusTextArea }) => {
+
+	const dispatch = useDispatch()
 
     const [datetime, setDatetime] = useState(now)
 
@@ -18,7 +20,7 @@ const TextInterfaceContainer = ({ onButtonClick, tags, timezone, insertIntoDraft
     const handleInputDate = () => {
         const dateText = isoFromDt(datetime, timezone, true)
         const text = `[datetime]${dateText}[/datetime]\n`
-        insertIntoDraft(topicId, text)
+        dispatch(insertIntoDraft(topicId, text))
         focusTextArea()
     }
 
@@ -36,8 +38,4 @@ const TextInterfaceContainer = ({ onButtonClick, tags, timezone, insertIntoDraft
     )
 }
 
-const mapDispatchToProps = {
-    insertIntoDraft,
-}
-
-export default connect(null, mapDispatchToProps)(TextInterfaceContainer)
+export default TextInterfaceContainer

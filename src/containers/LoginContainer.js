@@ -1,13 +1,17 @@
 import React , { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router'
-import { connect } from 'react-redux'
 
 import LoginForm from '../components/LoginForm'
 
 import { login } from '../actions/currentUserActions'
 
 
-const LoginContainer = ({ currentUser, login }) => {
+const LoginContainer = () => {
+
+    const dispatch = useDispatch()
+
+    const currentUser = useSelector(state => state.currentUser)
 
     const history = useHistory()
 
@@ -26,7 +30,7 @@ const LoginContainer = ({ currentUser, login }) => {
         <div>
             <div className="page">
                 <h1>Login</h1>
-                <LoginForm login={login} />
+                <LoginForm login={(username, password, redirect) => dispatch(login(username, password, redirect))} />
             </div>
         </div>
     )
@@ -34,12 +38,4 @@ const LoginContainer = ({ currentUser, login }) => {
     return renderLoginContainer()
 }
 
-const mapStateToProps = state => ({
-    currentUser: state.currentUser
-})
-
-const mapDispatchToProps = {
-    login,
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer)
+export default LoginContainer

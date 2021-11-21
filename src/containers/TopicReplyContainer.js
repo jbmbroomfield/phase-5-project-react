@@ -1,25 +1,27 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router'
 
 import TextContainer from '../textEditor/containers/TextContainer'
 import BottomBar from '../components/BottomBar'
 
 import { createPost } from '../actions/postsActions'
-import { setDraft, deleteDraft } from '../actions/draftsActions'
+import { setDraft } from '../actions/draftsActions'
 import { updateSlug } from '../actions/topicsActions'
 
 const TopicReplyContainer = ({
     match,
-    bottomPopUp, setBottomPopUp,
-    createPost,
-    drafts, setDraft, deleteDraft,
+    setBottomPopUp,
     focusTextArea, textAreaRef,
-    topics,
-    currentUser,
-    updateSlug,
 }) => {
 
+	const dispatch = useDispatch()
+
+    const bottomPopUp = useSelector(state => state.bottomPopUp)
+    const drafts = useSelector(state => state.drafts)
+    const topics = useSelector(state => state.topics)
+    const currentUser = useSelector(state => state.currentUser)
+    
     const history = useHistory()
 
     const subsectionSlug = match.params.subsectionSlug
@@ -39,12 +41,13 @@ const TopicReplyContainer = ({
     const selection = draft ? draft.attributes.selection : [0, 0]
 
     const setText = (text, selection) => {
-        setDraft(topicId, text, selection)
+        dispatch(setDraft(topicId, text, selection))
         focusTextArea({selection})
     }
 
     const setSelection = (selection, nextText) => {     
-        setDraft(topicId, nextText || text, selection)}
+        dispatch(setDraft(topicId, nextText || text, selection))
+    }
 
     const handleButtonClick = insert => {
         const [nextText, nextSelectionStart, nextSelectionEnd] = insert(text, selection[0], selection[1])
@@ -58,12 +61,12 @@ const TopicReplyContainer = ({
             then = post => {
                 const newTopicSlug = post.attributes.topic_slug
                 if (topicSlug !== newTopicSlug) {
-                    updateSlug(topicSlug, newTopicSlug)
+                    dispatch(updateSlug(topicSlug, newTopicSlug))
                     history.push(`/forum/${subsectionSlug}/${newTopicSlug}`)
                 }
             }
         }
-        createPost(subsectionSlug, topicSlug, text, then)
+        dispatch(createPost(subsectionSlug, topicSlug, text, then))
         setText('')
         setBottomPopUp(false)
     }
@@ -110,18 +113,4 @@ const TopicReplyContainer = ({
     )
 }
 
-const mapStateToProps = state => ({
-    bottomPopUp: state.bottomPopUp,
-    drafts: state.drafts,
-    topics: state.topics,
-    currentUser: state.currentUser,
-})
-
-const mapDispatchToProps = {
-    setDraft,
-    deleteDraft,
-    createPost,
-    updateSlug,
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(TopicReplyContainer)
+export default TopicReplyContainer

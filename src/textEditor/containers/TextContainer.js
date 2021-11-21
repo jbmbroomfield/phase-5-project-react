@@ -1,5 +1,5 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import TextArea from '../components/TextArea'
 import TextPreview from '../components/TextPreview'
@@ -10,8 +10,9 @@ const TextContainer = ({
     setBottomPopUp,
     textAreaRef,
     focusTextArea,
-    currentUser,
 }) => {
+    
+    const currentUser = useSelector(state => state.currentUser)
 
     const timezone = currentUser?.attributes.time_zone
 
@@ -47,8 +48,4 @@ const TextContainer = ({
     )
 }
 
-const mapStateToProps = state => ({
-    currentUser: state.currentUser,
-})
-
-export default connect(mapStateToProps)(TextContainer)
+export default TextContainer

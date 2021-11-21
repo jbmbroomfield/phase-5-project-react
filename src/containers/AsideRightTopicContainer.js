@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import { subscribeToTopic } from '../actions/userTopicsActions'
 import PageControlContainer from './PageControlContainer'
@@ -17,13 +17,14 @@ import PostersContainer from './PostersContainer'
 
 const AsideRightTopicContainer = ({
     match,
-    userTopics,
-    subscribeToTopic,
-    topicDisplays,
-    topics,
-    currentUser,
-    editTopic,
 }) => {
+
+    const dispatch = useDispatch()
+
+    const userTopics = useSelector(state => state.userTopics)
+    const topicDisplays = useSelector(state => state.topicDisplays)
+    const topics = useSelector(state => state.topics)
+    const currentUser = useSelector(state => state.currentUser)
 
     const [displayFilter, setDisplayFilter] = useState(false)
 
@@ -44,10 +45,10 @@ const AsideRightTopicContainer = ({
     )
     const subscribed = userTopic && userTopic.attributes.subscribed
     const handleSubscribe = () => {
-        subscribeToTopic(topicId, true)
+        dispatch(subscribeToTopic(topicId, true))
     }
     const handleUnsubscribe = () => {
-        subscribeToTopic(topicId, false)
+        dispatch(subscribeToTopic(topicId, false))
     }
     const {page, pages} = topicDisplay
 
@@ -56,12 +57,12 @@ const AsideRightTopicContainer = ({
             <>
                 <WhoCanViewContainer
                     whoCanView={topicAttributes.who_can_view}
-                    editTopic={attributes => editTopic(subsectionSlug, topicSlug, attributes)}
+                    editTopic={attributes => dispatch(editTopic(subsectionSlug, topicSlug, attributes))}
                 />
                 <WhoCanPostContainer
                     whoCanView={topicAttributes.who_can_view}
                     whoCanPost={topicAttributes.who_can_post}
-                    editTopic={attributes => editTopic(subsectionSlug, topicSlug, attributes)}
+                    editTopic={attributes => dispatch(editTopic(subsectionSlug, topicSlug, attributes))}
                 />
             </>
         )
@@ -104,16 +105,4 @@ const AsideRightTopicContainer = ({
     )
 }
 
-const mapStateToProps = state => ({
-    userTopics: state.userTopics,
-    topicDisplays: state.topicDisplays,
-    topics: state.topics,
-    currentUser: state.currentUser,
-})
-
-const mapDispatchToProps = {
-    subscribeToTopic,
-    editTopic,
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(AsideRightTopicContainer)
+export default AsideRightTopicContainer

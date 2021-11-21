@@ -1,5 +1,5 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import BottomBar from '../components/BottomBar'
 import TextContainer from '../textEditor/containers/TextContainer'
@@ -8,7 +8,6 @@ import { useHistory } from 'react-router-dom'
 import { createTopic } from '../actions/topicsActions'
 
 const NewTopicContainer = ({
-    createTopic,
     handleButtonClick,
     subsectionId,
     displayTextArea, setDisplayTextArea,
@@ -17,6 +16,7 @@ const NewTopicContainer = ({
     selection, setSelection,
 }) => {
 
+	const dispatch = useDispatch()
     
     const history = useHistory()
 
@@ -27,7 +27,7 @@ const NewTopicContainer = ({
     }
 
     const handlePost = () => {
-        createTopic(subsectionId, title, text, redirect)
+        dispatch(createTopic(subsectionId, title, text, redirect))
         setText('')
         setTitle('')
         setDisplayTextArea(false)
@@ -65,8 +65,4 @@ const NewTopicContainer = ({
     )
 }
 
-const mapDispatchToProps = {
-    createTopic,
-}
-
-export default connect(null, mapDispatchToProps)(NewTopicContainer)
+export default NewTopicContainer

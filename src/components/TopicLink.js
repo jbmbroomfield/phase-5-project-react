@@ -1,13 +1,14 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
 
 const TopicLink = ({ 
-    subsections,
-    topics,
     topic,
     topicId,
 }) => {
+
+    // const subsections = useSelector(state => state.subsections)
+    const topics = useSelector(state => state.topics)
     
     if (!topic) {
         topic = topics.find(topic => parseInt(topic.id) === topicId)
@@ -25,9 +26,4 @@ const TopicLink = ({
     )
 }
 
-const mapStateToProps = state => ({
-    subsections: state.subsections,
-    topics: state.topics,
-})
-
-export default connect(mapStateToProps)(TopicLink)
+export default TopicLink

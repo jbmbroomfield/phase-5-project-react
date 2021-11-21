@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import TopicReplyContainer from './TopicReplyContainer'
 import SubsectionBottomBarContainer from './SubsectionBottomBarContainer'
@@ -8,9 +8,12 @@ import SubsectionBottomBarContainer from './SubsectionBottomBarContainer'
 import { setBottomPopUp } from '../actions/bottomPopUpActions'
 
 const BottomBarContainer = ({
-    bottomPopUp, setBottomPopUp,
     focusTextArea, textAreaRef
 }) => {
+
+    const dispatch = useDispatch()
+
+    const bottomPopUp = useSelector(state => state.bottomPopUp)
 
     const topicRoute = () => (
         <Route
@@ -19,7 +22,7 @@ const BottomBarContainer = ({
                 <TopicReplyContainer
                     {...routerProps}
                     bottomPopUp={bottomPopUp}
-                    setBottomPopUp={setBottomPopUp}
+                    setBottomPopUp={bottomPopUp => dispatch(setBottomPopUp(bottomPopUp))}
                     focusTextArea={focusTextArea}
                     textAreaRef={textAreaRef}
                 />
@@ -55,13 +58,4 @@ const BottomBarContainer = ({
     )
 }
 
-const mapStateToProps = state => ({
-    bottomPopUp: state.bottomPopUp
-})
-
-const mapDispatchToProps = {
-    setBottomPopUp,
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(BottomBarContainer)
+export default BottomBarContainer

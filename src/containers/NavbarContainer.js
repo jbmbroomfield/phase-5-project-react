@@ -1,15 +1,19 @@
 import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router'
 import Navbar from '../components/Navbar'
-import { connect } from 'react-redux'
 import { removeCurrentUser } from '../actions/currentUserActions'
 
-const NavbarContainer = ({ currentUser, removeCurrentUser }) => {
+const NavbarContainer = () => {
 
+	const dispatch = useDispatch()
+
+    const currentUser = useSelector(state => state.currentUser)
+    
     const history = useHistory()
 
     const logout = () => {
-        removeCurrentUser()
+        dispatch(removeCurrentUser())
         history.push("/")
     }
 
@@ -24,12 +28,4 @@ const NavbarContainer = ({ currentUser, removeCurrentUser }) => {
 
 }
 
-const mapStateToProps = state => ({
-    currentUser: state.currentUser
-})
-
-const mapDispatchToProps = {
-    removeCurrentUser
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(NavbarContainer)
+export default NavbarContainer

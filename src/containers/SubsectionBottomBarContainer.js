@@ -1,12 +1,16 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router'
 
 import SubsectionBottomBar from '../components/SubsectionBottomBar'
 import { createTopic } from '../actions/topicsActions'
 
-const SubsectionBottomBarContainer = ({ match, currentUser, createTopic}) => {
+const SubsectionBottomBarContainer = ({ match }) => {
 
+	const dispatch = useDispatch()
+
+    const currentUser = useSelector(state => state.currentUser)
+    
     const history = useHistory(null)
 
     const subsectionSlug = match.params.subsectionSlug
@@ -18,18 +22,10 @@ const SubsectionBottomBarContainer = ({ match, currentUser, createTopic}) => {
 
     const handleNewTopic = () => {
         const title = `${username}'s New Thread`
-        createTopic(subsectionSlug, title, redirect)
+        dispatch(createTopic(subsectionSlug, title, redirect))
     }
 
     return currentUser ? <SubsectionBottomBar handleNewTopic={handleNewTopic} /> : <div className="bottom-bar"></div>
 }
 
-const mapStateToProps = state => ({
-    currentUser: state.currentUser,
-})
-
-const mapDispatchToProps = {
-    createTopic,
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(SubsectionBottomBarContainer)
+export default SubsectionBottomBarContainer

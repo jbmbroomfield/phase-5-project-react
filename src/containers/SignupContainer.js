@@ -1,12 +1,16 @@
 import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router'
-import { connect } from 'react-redux'
 
 import SignupForm from '../components/SignupForm'
 
 import { signup } from '../actions/currentUserActions'
 
-const SignupContainer = ({ currentUser, signup }) => {
+const SignupContainer = () => {
+
+	const dispatch = useDispatch()
+    
+    const currentUser = useSelector(state => state.currentUser)
 
     const history = useHistory()
 
@@ -19,7 +23,7 @@ const SignupContainer = ({ currentUser, signup }) => {
         <div>
             <div className="page">
                 <h1>Sign Up</h1>
-                <SignupForm signup={signup} />
+                <SignupForm signup={(...args) => dispatch(signup(...args))} />
             </div>
         </div>
     )
@@ -27,12 +31,4 @@ const SignupContainer = ({ currentUser, signup }) => {
     return renderSignupContainer()
 }
 
-const mapStateToProps = state => ({
-    currentUser: state.currentUser
-})
-
-const mapDispatchToProps = {
-    signup,
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(SignupContainer)
+export default SignupContainer

@@ -1,33 +1,29 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
+import { createSelector } from 'reselect'
+
+const selectUser = createSelector(
+    state => state.users,
+    (_, userSlug) => userSlug,
+    (users, userSlug) => users.find(user => user.attributes.slug === userSlug)
+)
 
 const UserContainer = ({
     match,
-    users,
-    currentUser,
 }) => {
 
     const userSlug = match.params.userSlug
-    const user = users.find(user => user.attributes.slug === userSlug)
+    const user = useSelector(state => selectUser(state, userSlug))
 
-    if (!user) {
-        return null
-    }
+    if (!user) return null
+
+    const userAttributes = user.attributes
 
     return (
         <div>
-            <h1>{user.attributes.username}</h1>
+            <h1>{userAttributes.username}</h1>
         </div>
     )
 }
 
-const mapStateToProps = state => ({
-    users: state.users,
-    currentUser: state.currentUsers,
-})
-
-const mapDispatchToProps = {
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(UserContainer)
+export default UserContainer

@@ -1,8 +1,9 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 
-const CurrentUser = ({ currentUser }) => {
+const CurrentUser = () => {
 
+    currentUser = useSelector(state => state.currentUser)
     const renderCurrentUser = () => {
         if (currentUser.attributes) {
             return `Logged in as ${currentUser.attributes.username}.`
@@ -14,8 +15,4 @@ const CurrentUser = ({ currentUser }) => {
     )
 }
 
-const mapStateToProps = state => ({
-    currentUser: state.currentUser
-})
-
-export default connect(mapStateToProps)(CurrentUser)
+export default CurrentUser

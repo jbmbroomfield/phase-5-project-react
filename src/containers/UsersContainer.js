@@ -1,20 +1,15 @@
-import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
-
-import { fetchUsers } from '../actions/usersActions'
+import React from 'react'
+import { useSelector } from 'react-redux'
 
 import User from '../components/User'
 
-const UsersContainer = ({ users, fetchUsers }) => {
+const UsersContainer = () => {
 
-    useEffect(() => {
-        fetchUsers()
-    }, [fetchUsers])
+    const users = useSelector(state => state.users)
 
     const renderUsers = () => (
         users.map(user => <User key={user.id} username={user.attributes.username} />)
     )
-    console.log(users)
     return (
         <div>
             { renderUsers() }
@@ -22,12 +17,4 @@ const UsersContainer = ({ users, fetchUsers }) => {
     )
 }
 
-const mapStateToProps = state => ({
-    users: state.users
-})
-
-const mapDispatchToProps = {
-    fetchUsers,
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer)
+export default UsersContainer

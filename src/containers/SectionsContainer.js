@@ -1,35 +1,24 @@
 import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+// import { createSelector } from 'reselect'
 
 import Section from '../components/Section'
 
-import { fetchCurrentUser } from '../actions/currentUserActions'
-import { fetchSections } from '../actions/sectionsActions'
-import { fetchSubsections, fetchSubsection } from '../actions/subsectionsActions'
-import { fetchTopics } from '../actions/topicsActions'
-import { fetchUsers } from '../actions/usersActions'
+import {  fetchSubsection } from '../actions/subsectionsActions'
 import sectionsChannel from '../channels/sectionsChannel'
 
-const SectionsContainer = ({
-    sections, subsections,
-	fetchCurrentUser,
-	fetchSections,
-	fetchSubsections, fetchSubsection,
-	fetchTopics,
-	fetchUsers,
-}) => {
 
-    useEffect(() => {
-		fetchSections()
-		fetchSubsections()
-	}, [
-		fetchSections,
-		fetchSubsections,
-    ])
+
+const SectionsContainer = () => {
+
+    const dispatch = useDispatch()
     
 	useEffect(() => {
-		return sectionsChannel(fetchSubsection)
-	}, [fetchSubsection])
+		return sectionsChannel(subsectionSlug => dispatch(fetchSubsection(subsectionSlug)))
+	}, [dispatch])
+
+    const sections = useSelector(state => state.sections)
+    const subsections = useSelector(state => state.subsections)
 
     const getSubsections = sectionId => (
         subsections.filter(subsection => (
@@ -50,18 +39,4 @@ const SectionsContainer = ({
     return renderSections()
 }
 
-const mapStateToProps = state => ({
-    sections: state.sections,
-    subsections: state.subsections,
-})
-
-const mapDispatchToProps = {
-	fetchCurrentUser,
-	fetchSections,
-	fetchSubsections,
-	fetchSubsection,
-	fetchTopics,
-	fetchUsers,
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(SectionsContainer)
+export default SectionsContainer

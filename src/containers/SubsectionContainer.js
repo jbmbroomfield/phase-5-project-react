@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+// import { createSelector } from 'reselect'
 
 import NewTopicContainer from './NewTopicContainer'
 import TopicSummary from '../components/TopicSummary'
@@ -8,14 +9,15 @@ import TopicSummaryHeader from '../components/TopicSummaryHeader'
 import { fetchTopics, fetchTopic } from '../actions/topicsActions'
 import subsectionChannel from '../channels/subsectionChannel'
 
-import { setScrollId } from '../actions/scrollIdActions'
 
 const SubsectionContainer = ({ 
     match,
-    subsections,
-    topics,
-	fetchTopics, fetchTopic,
 }) => {
+
+    const subsections = useSelector(state => state.subsections)
+    let topics = useSelector(state => state.topics)
+
+    const dispatch = useDispatch()
 
     const subsectionSlug = match.params.subsectionSlug
     const subsection = subsections.find(subsection => subsection.attributes.slug === subsectionSlug)
@@ -35,9 +37,10 @@ const SubsectionContainer = ({
     }
 
     useEffect(() => {
-        fetchTopics(subsectionSlug)
-        return subsectionChannel(subsectionSlug, fetchTopic)
-    }, [fetchTopics, subsectionSlug, subsectionId, fetchTopic])
+        dispatch(fetchTopics(subsectionSlug))
+        const fetchTopicFunction = (subsectionSlug, topicSlug) => dispatch(fetchTopic(subsectionSlug, topicSlug))
+        return subsectionChannel(subsectionSlug, fetchTopicFunction)
+    }, [dispatch, subsectionSlug])
 
     const renderTopics = () => (
         topics.map(topic => (
@@ -74,15 +77,4 @@ const SubsectionContainer = ({
     )
 }
 
-const mapStateToProps = state => ({
-    subsections: state.subsections,
-    topics: state.topics
-})
-
-const mapDispatchToProps = {
-	fetchTopics,
-	fetchTopic,
-    setScrollId,
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(SubsectionContainer)
+export default SubsectionContainer

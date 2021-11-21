@@ -1,5 +1,5 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router'
 
 import { setScrollId } from '../actions/scrollIdActions'
@@ -8,9 +8,12 @@ import UserLink from './UserLink'
 import TopicLink from './TopicLink'
 
 const LastPost = ({
-    lastPost, setScrollId, showTopic, subsections,
+    lastPost, showTopic,
 }) => {
 
+	const dispatch = useDispatch()
+
+    const subsections = useSelector(state => state.subsections)
 
     const history = useHistory()
 
@@ -27,7 +30,7 @@ const LastPost = ({
     const attributes = lastPost.attributes
 
     const goToPost = () => {
-        setScrollId(attributes.tag)
+        dispatch(setScrollId(attributes.tag))
         history.push(`/forum/${subsectionSlug}/${topicSlug}`)
     }
 
@@ -55,12 +58,4 @@ const LastPost = ({
     )
 }
 
-const mapStateToProps = state => ({
-    subsections: state.subsections,
-})
-
-const mapDispatchToProps = {
-    setScrollId,
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(LastPost)
+export default LastPost

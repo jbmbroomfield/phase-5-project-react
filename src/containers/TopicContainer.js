@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import { fetchPosts, fetchPost } from '../actions/postsActions'
 import Post from '../components/Post'
@@ -24,25 +24,18 @@ import { editTopic } from '../actions/topicsActions'
 const TopicContainer = ({
     match,
     focusTextArea,
-    
-    subsections,
-    topics,
-    posts,
-    users,
-    drafts,
-    topicDisplays,
-    currentUser,
-    scrollId,
-
-    fetchTopic, fetchUserTopic,
-    fetchPosts, fetchPost,
-    setTopicDisplay,
-    setScrollId,
-    insertIntoDraft,
-    createFlag, deleteFlag,
-    setPages, setPage,
-    editTopic,
 }) => {
+
+    const dispatch = useDispatch()
+    
+    // const subsections = useSelector(state => state.subsections)
+    const topics = useSelector(state => state.topics)
+    const posts = useSelector(state => state.posts)
+    const users = useSelector(state => state.users)
+    const drafts = useSelector(state => state.drafts)
+    const topicDisplays = useSelector(state => state.topicDisplays)
+    const currentUser = useSelector(state => state.currentUser)
+    const scrollId = useSelector(state => state.scrollId)
 
 
     const timezone = currentUser?.attributes.time_zone
@@ -68,15 +61,17 @@ const TopicContainer = ({
     )
 
     const insertText = text => {
-        insertIntoDraft(topicId, text)
+        dispatch(insertIntoDraft(topicId, text))
     }
 
     useEffect(() => {
-        fetchTopic(subsectionSlug, topicSlug)
-        fetchPosts(subsectionSlug, topicSlug)
-        fetchUserTopic(subsectionSlug, topicSlug)
-        return topicChannel(subsectionSlug, topicSlug, fetchPost, fetchTopic)
-    }, [fetchTopic, subsectionSlug, topicSlug, fetchPosts, fetchPost, fetchUserTopic, topicId])
+        dispatch(fetchTopic(subsectionSlug, topicSlug))
+        dispatch(fetchPosts(subsectionSlug, topicSlug))
+        dispatch(fetchUserTopic(subsectionSlug, topicSlug))
+        const fetchPostFunc = postId => dispatch(fetchPost(postId))
+        const fetchTopicFunc = (subsectionSlug, topicSlug) => dispatch(fetchTopic(subsectionSlug, topicSlug))
+        return topicChannel(subsectionSlug, topicSlug, fetchPostFunc, fetchTopicFunc)
+    }, [dispatch, subsectionSlug, topicSlug])
 
     const getUser = userId => users.find(user => parseInt(user.id) === parseInt(userId))
 
@@ -92,9 +87,9 @@ const TopicContainer = ({
     )
 
     useEffect(() => {
-        topicDisplay.pages && setPages(topicSlug, topicDisplay.pages)
-        topicDisplay.page && setPage(topicSlug, topicDisplay.page)
-    }, [setPages, setPage, topicSlug, topicDisplay.pages, topicDisplay.page])
+        topicDisplay.pages && dispatch(setPages(topicSlug, topicDisplay.pages))
+        topicDisplay.page && dispatch(setPage(topicSlug, topicDisplay.page))
+    }, [dispatch, topicSlug, topicDisplay.pages, topicDisplay.page])
     
 
     const renderPosts = () => {
@@ -117,13 +112,13 @@ const TopicContainer = ({
                     createdAt={post.attributes && post.attributes.created_at_s}
                     insertText={insertText}
                     scrollTo={scrollTo}
-                    setScrollId={setScrollId}
+                    setScrollId={scrollId => dispatch(setScrollId(scrollId))}
                     focusTextArea={focusTextArea}
                     draft={draft}
                     my_flags={post.attributes && post.attributes.my_flags}
                     publicFlags={post.attributes && post.attributes.public_flags}
-                    createFlag={category => createFlag(topicId, post.id, category)}
-                    deleteFlag={category => deleteFlag(topicId, post.id, category)}
+                    createFlag={category => dispatch(createFlag(topicId, post.id, category))}
+                    deleteFlag={category => dispatch(deleteFlag(topicId, post.id, category))}
                     timezone={timezone}
                     canPost={topicAttributes.can_post}
                 />
@@ -135,7 +130,7 @@ const TopicContainer = ({
     const editTitle = event => {
         const title = event.target.value
         if (title.length > 0) {
-            editTopic(subsectionSlug, topicSlug, {title: event.target.value})
+            dispatch(editTopic(subsectionSlug, topicSlug, {title: event.target.value}))
         }
     }
 
@@ -168,26 +163,4 @@ const TopicContainer = ({
     )
 }
 
-const mapStateToProps = state => ({
-    subsections: state.subsections,
-    topics: state.topics,
-    posts: state.posts,
-    users: state.users,
-    drafts: state.drafts,
-    topicDisplays: state.topicDisplays,
-    currentUser: state.currentUser,
-    scrollId: state.scrollId
-})
-
-const mapDispatchToProps = {
-    fetchTopic, fetchUserTopic,
-    fetchPosts, fetchPost,
-    // setTopicDisplay,
-    setScrollId,
-    insertIntoDraft,
-    createFlag, deleteFlag,
-    setPages, setPage,
-    editTopic,
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(TopicContainer)
+export default TopicContainer

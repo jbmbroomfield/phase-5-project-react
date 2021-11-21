@@ -1,12 +1,17 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { deleteNotification } from '../actions/notificationsActions'
 import { setScrollId } from '../actions/scrollIdActions'
 import { fetchTopic } from '../actions/topicsActions'
 
 import Notification from '../components/Notification'
 
-const AsideLeftContainer = ({ notifications, topics, deleteNotification, setScrollId, fetchTopic }) => {
+const AsideLeftContainer = () => {
+
+    const dispatch = useDispatch()
+
+    const notifications = useSelector(state => state.notifications)
+    const topics = useSelector(state => state.topics)
 
     const renderNotifications = () => (
         notifications.map(notification => (
@@ -18,9 +23,9 @@ const AsideLeftContainer = ({ notifications, topics, deleteNotification, setScro
                 createdAt={notification.attributes.createdAt}
                 tag={notification.attributes.tag}
                 topics={topics}
-                deleteNotification={() => deleteNotification(notification.id)}
-                setScrollId={setScrollId}
-                fetchTopic={fetchTopic}
+                deleteNotification={() => dispatch(deleteNotification(notification.id))}
+                setScrollId={() => dispatch(setScrollId)}
+                fetchTopic={() => dispatch(fetchTopic)}
             />
         ))
     )
@@ -36,15 +41,4 @@ const AsideLeftContainer = ({ notifications, topics, deleteNotification, setScro
     )
 }
 
-const mapStateToProps = state => ({
-    notifications: state.notifications,
-    topics: state.topics,
-})
-
-const mapDispatchToProps = {
-    deleteNotification,
-    setScrollId,
-    fetchTopic,
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(AsideLeftContainer)
+export default AsideLeftContainer

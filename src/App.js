@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import { BrowserRouter as Router } from 'react-router-dom'
 
@@ -12,7 +12,6 @@ import BottomBarContainer from './containers/BottomBarContainer'
 import { fetchCurrentUser } from './actions/currentUserActions'
 import { fetchSections } from './actions/sectionsActions'
 import { fetchSubsections } from './actions/subsectionsActions'
-import { fetchTopics } from './actions/topicsActions'
 import { fetchUsers } from './actions/usersActions'
 import { fetchNotifications } from './actions/notificationsActions'
 import { setBottomPopUp } from './actions/bottomPopUpActions'
@@ -20,16 +19,23 @@ import { setBottomPopUp } from './actions/bottomPopUpActions'
 import mainChannel from './channels/mainChannel'
 import userChannel from './channels/userChannel'
 
-const App = ({
-	fetchCurrentUser,
-	fetchSections,
-	fetchSubsections,
-	fetchTopics,
-	fetchUsers,
-	currentUser,
-	fetchNotifications,
-	bottomPopUp, setBottomPopUp,
-}) => {
+const App = () => {
+
+	const dispatch = useDispatch()
+
+	const currentUser = useSelector(state => state.currentUser)
+	const bottomPopUp = useSelector(state => state.bottomPopUp)
+
+	useEffect(() => {
+		const mainOnUpdate = () => {
+			dispatch(fetchCurrentUser())
+			dispatch(fetchSections())
+			dispatch(fetchSubsections())
+			dispatch(fetchUsers())
+		}
+		mainOnUpdate()
+		return mainChannel(mainOnUpdate)
+	}, [dispatch])
 
 	const textAreaRef = useRef(null)
 
@@ -50,32 +56,16 @@ const App = ({
 	}
 
 	const focusTextArea = ({draft, selection} = {}) => {
-		setBottomPopUp(true)
+		dispatch(setBottomPopUp(true))
 		tryToFocusTextArea(draft, selection, 0)
 	}
 
 	useEffect(() => {
-		const mainOnUpdate = () => {
-			fetchCurrentUser()
-			fetchSections()
-			fetchSubsections()
-			fetchUsers()
-		}
-		mainOnUpdate()
-		return mainChannel(mainOnUpdate)
-	}, [
-		fetchCurrentUser,
-		fetchSections,
-		fetchSubsections,
-		fetchUsers,
-	])
-
-	useEffect(() => {
 		if (currentUser) {
-			fetchNotifications()
-			return userChannel(currentUser.id, fetchNotifications)
+			dispatch(fetchNotifications())
+			return userChannel(currentUser.id, () => dispatch(fetchNotifications()))
 		}
-	}, [currentUser, fetchNotifications])
+	}, [currentUser, dispatch])
 
 	const bottomBarHeight = bottomPopUp ? '309' : '50'
 
@@ -96,19 +86,4 @@ const App = ({
 	);
 }
 
-const mapStateToProps = state => ({
-  	currentUser: state.currentUser,
-	bottomPopUp: state.bottomPopUp,
-})
-
-const mapDispatchToProps = dispatch => ({
-	fetchCurrentUser: () => dispatch(fetchCurrentUser()),
-	fetchSections: () => dispatch(fetchSections()),
-	fetchSubsections: () => dispatch(fetchSubsections()),
-	fetchTopics: () => dispatch(fetchTopics()),
-	fetchUsers: () => dispatch(fetchUsers()),
-	fetchNotifications: () => dispatch(fetchNotifications()),
-	setBottomPopUp: bottomPopUp => dispatch(setBottomPopUp(bottomPopUp)),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default (App);
