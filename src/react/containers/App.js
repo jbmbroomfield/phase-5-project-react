@@ -6,7 +6,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import NavbarContainer from '../navbar/containers/NavbarContainer'
 import AsideLeftContainer from '../asideLeft/containers/AsideLeftContainer'
 import MainContainer from './MainContainer'
-import AsideRightContainer from './AsideRightContainer'
+import AsideRightContainer from '../asideRight/containers/AsideRightContainer'
 import BottomBarContainer from './BottomBarContainer'
 
 import { fetchCurrentUser } from 'redux/actions/currentUserActions'
