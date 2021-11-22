@@ -9,10 +9,11 @@ import { addViewer, addPoster } from 'redux/actions/topicsActions'
 import PageControlContainer from './PageControlContainer'
 import FilterContainer from './FilterContainer'
 import WhoCanViewContainer from './WhoCanViewContainer'
-import TopicSettingsContainer from './TopicSettingsContainer'
 import WhoCanPostContainer from './WhoCanPostContainer'
 import Subscribe from '../components/Subscribe'
 import TopicUsersContainer from './TopicUsersContainer'
+import MenuItemContainer from './MenuItemContainer'
+import TopicSettings from '../components/TopicSettings'
 
 import getTopicDisplay from 'getTopicDisplay'
 
@@ -101,6 +102,18 @@ const AsideRightTopicContainer = ({
 
     }
 
+    const renderTopicSettings = () => {
+        const heading = 'Thread Settings'
+        const renderContent = () => <TopicSettings 
+            whoCanView={topicAttributes.who_can_view}
+            whoCanPost={topicAttributes.who_can_post}
+        />
+        return <MenuItemContainer
+            heading={heading}
+            renderContent={renderContent}
+        />
+    }
+
     const renderPublished = () => (
         <>
             <PageControlContainer topicDisplay={topicDisplay} page={page} pages={pages} />
@@ -115,10 +128,7 @@ const AsideRightTopicContainer = ({
                 handleSubscribe={handleSubscribe}
                 handleUnsubscribe={handleUnsubscribe}
             /> }
-            <TopicSettingsContainer 
-                whoCanView={topicAttributes.who_can_view}
-                whoCanPost={topicAttributes.who_can_post}
-            />
+            { renderTopicSettings() }
             { renderTopicUsers() }
         </>
     )
