@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { subscribeToTopic } from 'redux/actions/userTopicsActions'
@@ -7,13 +7,15 @@ import { addViewer, addPoster } from 'redux/actions/topicsActions'
 
 
 import PageControlContainer from './PageControlContainer'
-import FilterContainer from './FilterContainer'
 import WhoCanViewContainer from './WhoCanViewContainer'
 import WhoCanPostContainer from './WhoCanPostContainer'
 import Subscribe from '../components/Subscribe'
 import TopicUsersContainer from './TopicUsersContainer'
 import MenuItemContainer from './MenuItemContainer'
 import TopicSettings from '../components/TopicSettings'
+import Filter from '../components/Filter'
+
+import { excludeAllUsers, includeAllUsers, toggleFlagFilter, toggleUserFilter } from 'redux/actions/topicDisplaysActions'
 
 import getTopicDisplay from 'getTopicDisplay'
 
@@ -27,12 +29,6 @@ const AsideRightTopicContainer = ({
     const topicDisplays = useSelector(state => state.topicDisplays)
     const topics = useSelector(state => state.topics)
     const currentUser = useSelector(state => state.currentUser)
-
-    const [displayFilter, setDisplayFilter] = useState(false)
-
-    const toggleDisplayFilter = () => {
-        setDisplayFilter(!displayFilter)
-    }
 
     const subsectionSlug = match.params.subsectionSlug
     const topicSlug = match.params.topicSlug
@@ -114,15 +110,26 @@ const AsideRightTopicContainer = ({
         />
     }
 
+    const renderFilter = () => {
+        const heading = 'Filter'
+        const renderContent = () => <Filter
+            users={topicAttributes.posters}
+            userFilter={topicDisplay.users} flagFilter={topicDisplay.flags}
+            toggleUserFilter={user => dispatch(toggleUserFilter(topicSlug, user))}
+            toggleFlagFilter={flag => dispatch(toggleFlagFilter(topicSlug, flag))}
+            includeAllUsers={() => dispatch(includeAllUsers(topicSlug))}
+            excludeAllUsers={() => dispatch(excludeAllUsers(topicSlug))}
+        />
+        return <MenuItemContainer
+            heading={heading}
+            renderContent={renderContent}
+        />
+    }
+
     const renderPublished = () => (
         <>
             <PageControlContainer topicDisplay={topicDisplay} page={page} pages={pages} />
-            <FilterContainer
-                topicDisplay={topicDisplay}
-                topic={topic}
-                displayFilter={displayFilter}
-                toggleDisplayFilter={toggleDisplayFilter}
-            />
+            { renderFilter() }
             { topicAttributes.can_post && <Subscribe
                 subscribed={subscribed}
                 handleSubscribe={handleSubscribe}
