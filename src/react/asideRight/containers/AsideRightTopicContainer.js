@@ -10,10 +10,10 @@ import PageControlContainer from './PageControlContainer'
 import WhoCanViewContainer from './WhoCanViewContainer'
 import WhoCanPostContainer from './WhoCanPostContainer'
 import Subscribe from '../components/Subscribe'
-import TopicUsersContainer from './TopicUsersContainer'
 import MenuItemContainer from './MenuItemContainer'
 import TopicSettings from '../components/TopicSettings'
 import Filter from '../components/Filter'
+import TopicUsers from '../components/TopicUsers'
 
 import { excludeAllUsers, includeAllUsers, toggleFlagFilter, toggleUserFilter } from 'redux/actions/topicDisplaysActions'
 
@@ -66,34 +66,31 @@ const AsideRightTopicContainer = ({
         )
     }
     
-    const renderUsersContainer = () => <TopicUsersContainer
-        users={topicAttributes.viewers}
-        handleAdd={userSlug => dispatch(addViewer(subsectionSlug, topicSlug, userSlug))}
-        userType="User"
-    />
-
-    const renderViewersContainer = () => <TopicUsersContainer
-        users={topicAttributes.viewers}
-        handleAdd={userSlug => dispatch(addViewer(subsectionSlug, topicSlug, userSlug))}
-        userType="Viewer"
-    />
-
-    const renderPostersContainer = () => <TopicUsersContainer
-        users={topicAttributes.posters}
-        handleAdd={userSlug => dispatch(addPoster(subsectionSlug, topicSlug, userSlug))}
-        userType="Poster"
-    />
+    const renderUsersContainer = (userType) => {
+        const heading = `${userType}s`
+        const users = topicAttributes[userType === 'Posters' ? 'posters' : 'viewers']
+        const action = userType === 'Posters' ? addPoster : addViewer
+        const renderContent = () => <TopicUsers
+            userType={userType}
+            users={users}
+            handleAdd={userSlug => dispatch(action(subsectionSlug, topicSlug, userSlug))}
+        />
+        return <MenuItemContainer
+            heading={heading}
+            renderContent={renderContent}
+        />
+    }
 
     const renderTopicUsers = () => {
         if (['all', 'users'].includes(topicAttributes.who_can_view)) {
-            return renderPostersContainer()
+            return renderUsersContainer('Poster')
         }
         if (['all', 'users'].includes(topicAttributes.who_can_post)) {
-            return renderUsersContainer()
+            return renderUsersContainer('User')
         }
         return <>
-            { renderViewersContainer() }
-            { renderPostersContainer() }
+            { renderUsersContainer('Viewer') }
+            { renderUsersContainer('Poster') }
         </>
 
     }
