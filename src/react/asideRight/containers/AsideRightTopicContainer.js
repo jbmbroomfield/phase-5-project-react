@@ -3,15 +3,16 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { subscribeToTopic } from 'redux/actions/userTopicsActions'
 import { editTopic } from 'redux/actions/topicsActions'
+import { addViewer, addPoster } from 'redux/actions/topicsActions'
+
 
 import PageControlContainer from './PageControlContainer'
 import FilterContainer from './FilterContainer'
 import WhoCanViewContainer from './WhoCanViewContainer'
 import TopicSettingsContainer from './TopicSettingsContainer'
-import ViewersContainer from './ViewersContainer'
-import PostersContainer from './PostersContainer'
 import WhoCanPostContainer from './WhoCanPostContainer'
 import Subscribe from '../components/Subscribe'
+import TopicUsersContainer from './TopicUsersContainer'
 
 import getTopicDisplay from 'getTopicDisplay'
 
@@ -67,6 +68,38 @@ const AsideRightTopicContainer = ({
             </>
         )
     }
+    
+    const renderUsersContainer = () => <TopicUsersContainer
+        users={topicAttributes.viewers}
+        handleAdd={userSlug => dispatch(addViewer(subsectionSlug, topicSlug, userSlug))}
+        userType="User"
+    />
+
+    const renderViewersContainer = () => <TopicUsersContainer
+        users={topicAttributes.viewers}
+        handleAdd={userSlug => dispatch(addViewer(subsectionSlug, topicSlug, userSlug))}
+        userType="Viewer"
+    />
+
+    const renderPostersContainer = () => <TopicUsersContainer
+        users={topicAttributes.posters}
+        handleAdd={userSlug => dispatch(addPoster(subsectionSlug, topicSlug, userSlug))}
+        userType="Poster"
+    />
+
+    const renderTopicUsers = () => {
+        if (['all', 'users'].includes(topicAttributes.who_can_view)) {
+            return renderPostersContainer()
+        }
+        if (['all', 'users'].includes(topicAttributes.who_can_post)) {
+            return renderUsersContainer()
+        }
+        return <>
+            { renderViewersContainer() }
+            { renderPostersContainer() }
+        </>
+
+    }
 
     const renderPublished = () => (
         <>
@@ -86,18 +119,7 @@ const AsideRightTopicContainer = ({
                 whoCanView={topicAttributes.who_can_view}
                 whoCanPost={topicAttributes.who_can_post}
             />
-            { !['all', 'users'].includes(topicAttributes.who_can_view) && 
-                <ViewersContainer
-                    viewers={topicAttributes.viewers}
-                    subsectionSlug={subsectionSlug}
-                    topicSlug={topicSlug}
-                />
-            }
-            <PostersContainer
-                posters={topicAttributes.posters}
-                subsectionSlug={subsectionSlug}
-                topicSlug={topicSlug}
-            />
+            { renderTopicUsers() }
         </>
     )
 

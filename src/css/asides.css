@@ -23,6 +23,7 @@ aside.aside-left {
 aside.aside-right {
   grid-area: aside-right;
   right: 0px;
+  overflow: auto;
 }
 
 aside.aside-left div.notifications {
