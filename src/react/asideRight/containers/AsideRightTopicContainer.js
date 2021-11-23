@@ -7,8 +7,6 @@ import { addViewer, addPoster } from 'redux/actions/topicsActions'
 
 
 import PageControlContainer from './PageControlContainer'
-import WhoCanViewContainer from './WhoCanViewContainer'
-import WhoCanPostContainer from './WhoCanPostContainer'
 import Subscribe from '../components/Subscribe'
 import MenuItemContainer from './MenuItemContainer'
 import TopicSettings from '../components/TopicSettings'
@@ -18,6 +16,7 @@ import TopicUsers from '../components/TopicUsers'
 import { excludeAllUsers, includeAllUsers, toggleFlagFilter, toggleUserFilter } from 'redux/actions/topicDisplaysActions'
 
 import getTopicDisplay from 'getTopicDisplay'
+import WhoCanContainer from './WhoCanContainer'
 
 const AsideRightTopicContainer = ({
     match,
@@ -53,11 +52,13 @@ const AsideRightTopicContainer = ({
     const renderOwnerSettings = () => {
         return (
             <>
-                <WhoCanViewContainer
+                <WhoCanContainer
+                    viewOrPost="View"
                     whoCanView={topicAttributes.who_can_view}
                     editTopic={attributes => dispatch(editTopic(subsectionSlug, topicSlug, attributes))}
                 />
-                <WhoCanPostContainer
+                <WhoCanContainer
+                    viewOrPost="Post"
                     whoCanView={topicAttributes.who_can_view}
                     whoCanPost={topicAttributes.who_can_post}
                     editTopic={attributes => dispatch(editTopic(subsectionSlug, topicSlug, attributes))}

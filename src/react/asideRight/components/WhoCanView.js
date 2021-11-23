@@ -1,5 +1,7 @@
 import React from 'react'
 
+import MenuPill from './MenuPill'
+
 const WhoCanView = ({
     whoCanView,
     setWhoCanView,
@@ -8,42 +10,36 @@ const WhoCanView = ({
     return (
         <>
             <div className="option-row">
-                <div
-                    className={`btn filter-user${whoCanView === 'all' || whoCanView === 'users' ? '' : ' filter-user-exclude' }`}
+                <MenuPill
+                    value="Members"
+                    highlighted={whoCanView === 'all' || whoCanView === 'users'}
                     onClick={() => setWhoCanView('users')}
-                >
-                    Members
-                </div>
-                <div
-                    className={`btn filter-user${whoCanView === 'all' ? '' : ' filter-user-exclude' }`}
+                />
+                <MenuPill
+                    value="Guests"
+                    highlighted={whoCanView === 'all'}
                     onClick={() => setWhoCanView(whoCanView === 'all' ? 'users' : 'all')}
-                >
-                    Guests
-                </div>
+                />
             </div>
 
             <div className="option-row">
-                <div
-                    className={`btn filter-user${whoCanView === 'url' || whoCanView === 'url_all' ? '' : ' filter-user-exclude' }`}
+                <MenuPill
+                    value="URL"
+                    highlighted={whoCanView === 'url' || whoCanView === 'url_all'}
                     onClick={() => setWhoCanView('url')}
-                >
-                    URL
-                </div>
-                <div
-                    className={`btn filter-user${whoCanView === 'url_all' ? '' : ' filter-user-exclude' }`}
+                />
+                <MenuPill
+                    value="Guests"
+                    highlighted={whoCanView === 'url_all'}
                     onClick={() => setWhoCanView(whoCanView === 'url_all' ? 'url' : 'url_all')}
-                >
-                    Guests
-                </div>
+                />
             </div>
 
-            <div
-                className={`btn filter-user${whoCanView === 'add' ? '' : ' filter-user-exclude' }`}
-                // name={user}
+            <MenuPill
+                value="Added"
+                highlighted={whoCanView === 'add'}
                 onClick={() => setWhoCanView('add')}
-            >
-                Added
-            </div>
+            />
         </>
     )
 }

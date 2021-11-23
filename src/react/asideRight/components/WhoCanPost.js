@@ -1,25 +1,25 @@
 import React from 'react'
 
+import MenuPill from './MenuPill'
+
 const WhoCanPost = ({
-    display, toggleDisplay, whoCanView, whoCanPost, setWhoCanPost
+    whoCanView, whoCanPost, setWhoCanPost
 }) => {
 
     const renderMembers = () => (
-        <div
-            className={`btn filter-user${whoCanPost === 'all' || whoCanPost === 'users' ? '' : ' filter-user-exclude' }`}
+        <MenuPill
+            value="Members"
+            highlighted={whoCanPost === 'all' || whoCanPost === 'users'}
             onClick={() => setWhoCanPost('users')}
-        >
-            Members
-        </div>
+        />
     )
 
     const renderAllGuests = () => (
-        <div
-            className={`btn filter-user${whoCanPost === 'all' ? '' : ' filter-user-exclude' }`}
+        <MenuPill
+            value="Guests"
+            highlighted={whoCanPost === 'all'}
             onClick={() => setWhoCanPost(whoCanPost === 'all' ? 'users' : 'all')}
-        >
-            Guests
-        </div>
+        />
     )
 
     const renderMembersAndGuests = () => (
@@ -30,21 +30,19 @@ const WhoCanPost = ({
     )
 
     const renderPassword = () => (
-        <div
-            className={`btn filter-user${whoCanPost === 'password_all' || whoCanPost === 'password' ? '' : ' filter-user-exclude' }`}
+        <MenuPill
+            value="Password"
+            highlighted={whoCanPost === 'password_all' || whoCanPost === 'password'}
             onClick={() => setWhoCanPost('password')}
-        >
-            Password
-        </div>
+        />
     )
 
     const renderPasswordGuests = () => (
-        <div
-            className={`btn filter-user${whoCanPost === 'password_all' ? '' : ' filter-user-exclude' }`}
+        <MenuPill
+            value="Guests"
+            highlighted={whoCanPost === 'password_all'}
             onClick={() => setWhoCanPost(whoCanPost === 'password_all' ? 'password' : 'password_all')}
-        >
-            Guests
-        </div>
+        />
     )
 
     const renderPasswordAndGuests = () => (
@@ -55,12 +53,11 @@ const WhoCanPost = ({
     )
 
     const renderAdded = () => (
-        <div
-            className={`btn filter-user${whoCanPost === 'add' ? '' : ' filter-user-exclude' }`}
+        <MenuPill
+            value="Added"
+            highlighted={whoCanPost === 'add'}
             onClick={() => setWhoCanPost('add')}
-        >
-            Added
-        </div>
+        />
     )
     
     const renderOptions = () => {
