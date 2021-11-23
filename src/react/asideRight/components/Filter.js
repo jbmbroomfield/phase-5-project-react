@@ -1,7 +1,8 @@
 import React from 'react'
 
-import FilterUser from './FilterUser'
 import FilterFlag from './FilterFlag'
+
+import MenuPill from './MenuPill'
 
 const Filter = ({
     users,
@@ -47,27 +48,21 @@ const Filter = ({
     return (
         <div>
             <div className='filter-users'>
-                <div
-                    className={`btn filter-user${userFilter.include ? ' filter-user-exclude' : ''}`}
+                <MenuPill
+                    value="All"
+                    highlighted={!userFilter.include}
                     onClick={includeAllUsers}
-                >
-                    All
-                </div>
-                <div
-                    className={`btn filter-user${userFilter.exclude ? ' filter-user-exclude' : ''}`}
+                />
+                <MenuPill
+                    value="None"
+                    highlighted={!userFilter.exclude}
                     onClick={excludeAllUsers}
-                >
-                    None
-                </div>
-                { users?.map(user => {
-                    const include = includedUsers.includes(user)
-                    return <FilterUser
-                        key={user}
-                        username={user.attributes.username}
-                        include={include}
-                        handleClick={() => toggleUserFilter(user)}
-                    />
-                })}
+                />
+                { users?.map(user => <MenuPill
+                    value={user.attributes.username}
+                    highlighted={includedUsers.includes(user)}
+                    onClick={() => toggleUserFilter(user)}
+                />) }
             </div>
             <div className="filter-flags">
                 { renderFlags() }
