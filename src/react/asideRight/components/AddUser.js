@@ -6,7 +6,7 @@ const AddUser = ({
     placeholder,
 }) => {
 
-    const formatResult = (item) => {
+    const formatResult = item => {
         return item;
     }
 

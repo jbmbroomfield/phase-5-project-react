@@ -63,7 +63,7 @@ const App = () => {
 	useEffect(() => {
 		if (currentUser) {
 			dispatch(fetchNotifications())
-			return userChannel(currentUser.id, () => dispatch(fetchNotifications()))
+			return userChannel(currentUser.attributes.slug, () => dispatch(fetchNotifications()))
 		}
 	}, [currentUser, dispatch])
 

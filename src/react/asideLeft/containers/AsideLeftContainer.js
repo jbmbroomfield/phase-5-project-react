@@ -5,7 +5,7 @@ import { deleteNotification } from 'redux/actions/notificationsActions'
 import { setScrollId } from 'redux/actions/scrollIdActions'
 import { fetchTopic } from 'redux/actions/topicsActions'
 
-import Notification from '../components/Notification'
+import NotificationContainer from './NotificationContainer'
 
 const AsideLeftContainer = () => {
 
@@ -16,13 +16,9 @@ const AsideLeftContainer = () => {
 
     const renderNotifications = () => (
         notifications.map(notification => (
-            <Notification
+            <NotificationContainer
                 key={notification.id}
-                category={notification.attributes.category}
-                objectId={parseInt(notification.attributes.object_id)}
-                number={notification.attributes.number}
-                createdAt={notification.attributes.createdAt}
-                tag={notification.attributes.tag}
+                notification={notification}
                 topics={topics}
                 deleteNotification={() => dispatch(deleteNotification(notification.id))}
                 setScrollId={() => dispatch(setScrollId)}

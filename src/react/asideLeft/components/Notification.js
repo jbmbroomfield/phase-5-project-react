@@ -11,23 +11,48 @@ const Notification = ({
     deleteNotification,
     setScrollId,
     fetchTopic,
+    object,
+    subsectionSlug, topicSlug
 }) => {
 
     const replies = () => number === 1 ? '1 new reply' : `${number} new replies`
 
+    const objectAttributes = object ? object.attributes : {}
+
     const text = () => {
+
         switch(category) {
-            case 'replies':
-                const topic = topics.find(topic => parseInt(topic.id) === objectId)
-                if (topic) {
-                    return `${topic.attributes.title} has ${replies()}.`
+
+            case 'topic_replies':
+                if (object) {
+                    return `${objectAttributes.title} has ${replies()}.`
                 } else {
-                    console.log(objectId)
-                    fetchTopic(objectId)
                     return 'Topic not found.'
-                } 
+                }
+            
+            case 'topic_added_user':
+                if (object) {
+                    return `You have been added to ${objectAttributes.title}.`
+                } else {
+                    return 'Topic not found.'
+                }
+            
+            case 'topic_added_viewer':
+                if (object) {
+                    return `You have been added to ${objectAttributes.title} as a viewer.`
+                } else {
+                    return 'Topic not found.'
+                }
+            
+            case 'topic_added_poster':
+                if (object) {
+                    return `You have been added to ${objectAttributes.title} as a poster.`
+                } else {
+                    return 'Topic not found.'
+                }
+
             default:
-                return 'Unknown notification.'
+                return ''
         }
     }
 
@@ -36,7 +61,7 @@ const Notification = ({
     const goToTopic = () => {
         deleteNotification()
         setScrollId(tag)
-        history.push(`/topics/${objectId}`)
+        history.push(`/forum/${subsectionSlug}/${topicSlug}`)
     }
 
     const renderGreenArrow = () => (

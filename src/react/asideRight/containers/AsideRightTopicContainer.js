@@ -50,27 +50,25 @@ const AsideRightTopicContainer = ({
     const {page, pages} = topicDisplay
 
     const renderOwnerSettings = () => {
-        return (
-            <>
-                <WhoCanContainer
-                    viewOrPost="View"
-                    whoCanView={topicAttributes.who_can_view}
-                    editTopic={attributes => dispatch(editTopic(subsectionSlug, topicSlug, attributes))}
-                />
-                <WhoCanContainer
-                    viewOrPost="Post"
-                    whoCanView={topicAttributes.who_can_view}
-                    whoCanPost={topicAttributes.who_can_post}
-                    editTopic={attributes => dispatch(editTopic(subsectionSlug, topicSlug, attributes))}
-                />
-            </>
-        )
+        return <>
+            <WhoCanContainer
+                viewOrPost="View"
+                whoCanView={topicAttributes.who_can_view}
+                editTopic={attributes => dispatch(editTopic(subsectionSlug, topicSlug, attributes))}
+            />
+            <WhoCanContainer
+                viewOrPost="Post"
+                whoCanView={topicAttributes.who_can_view}
+                whoCanPost={topicAttributes.who_can_post}
+                editTopic={attributes => dispatch(editTopic(subsectionSlug, topicSlug, attributes))}
+            />
+        </>
     }
     
     const renderUsersContainer = (userType) => {
         const heading = `${userType}s`
-        const users = topicAttributes[userType === 'Posters' ? 'posters' : 'viewers']
-        const action = userType === 'Posters' ? addPoster : addViewer
+        const users = topicAttributes[userType === 'Poster' ? 'posters' : 'viewers']
+        const action = userType === 'Poster' ? addPoster : addViewer
         const renderContent = () => <TopicUsers
             userType={userType}
             users={users}
@@ -128,11 +126,11 @@ const AsideRightTopicContainer = ({
         <>
             <PageControlContainer topicDisplay={topicDisplay} page={page} pages={pages} />
             { renderFilter() }
-            { topicAttributes.can_post && <Subscribe
+            <Subscribe
                 subscribed={subscribed}
                 handleSubscribe={handleSubscribe}
                 handleUnsubscribe={handleUnsubscribe}
-            /> }
+            />
             { renderTopicSettings() }
             { renderTopicUsers() }
         </>
