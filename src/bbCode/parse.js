@@ -5,7 +5,6 @@ import htmlParse from 'html-react-parser'
 import allTags from './tags/allTags';
 import getDateTimeTag from './tags/getDateTimeTag';
 
-// console.log(reactParser.tags)
 reactParser.tags = {}
 
 const parse = (text, timezone, tags = allTags) => {
