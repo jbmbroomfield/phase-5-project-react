@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useHistory } from 'react-router'
 import { useSelector, useDispatch } from 'react-redux'
 import TrackVisibility from 'react-on-screen'
 
@@ -25,6 +26,8 @@ const TopicContainer = ({
 }) => {
 
     const dispatch = useDispatch()
+
+    const history = useHistory()
     
     // const subsections = useSelector(state => state.subsections)
     const topics = useSelector(state => state.topics)
@@ -63,13 +66,14 @@ const TopicContainer = ({
     }
 
     useEffect(() => {
-        dispatch(fetchTopic(subsectionSlug, topicSlug))
+        const errorRedirect = () => history.push('/')
+        dispatch(fetchTopic(subsectionSlug, topicSlug, errorRedirect))
         dispatch(fetchPosts(subsectionSlug, topicSlug))
         dispatch(fetchUserTopic(subsectionSlug, topicSlug))
         const fetchPostFunc = postId => dispatch(fetchPost(postId))
         const fetchTopicFunc = (subsectionSlug, topicSlug) => dispatch(fetchTopic(subsectionSlug, topicSlug))
         return topicChannel(subsectionSlug, topicSlug, fetchPostFunc, fetchTopicFunc)
-    }, [dispatch, subsectionSlug, topicSlug])
+    }, [dispatch, subsectionSlug, topicSlug, history])
 
     const getUser = userId => users.find(user => parseInt(user.id) === parseInt(userId))
 
@@ -93,6 +97,7 @@ const TopicContainer = ({
     const renderPosts = () => {
         if (topicAttributes.status === 'unpublished') {
             return <UnpublishedPost
+                guestAccess={topicAttributes.guest_access}
                 whoCanView={topicAttributes.who_can_view}
                 whoCanPost={topicAttributes.who_can_post}
             />
@@ -100,25 +105,27 @@ const TopicContainer = ({
         return filteredPosts.map(post => {
             const tag = post.attributes.tag
             const scrollTo = tag === scrollId
+            const postAttributes = post.attributes
             return <TrackVisibility key={post.id}>
                 <Post
                     key={post.id}
                     id={post.id}
-                    user={post.attributes && getUser(post.attributes.user_id)}
-                    text={post.attributes && post.attributes.text}
+                    user={postAttributes && getUser(postAttributes.user_id)}
+                    text={postAttributes && postAttributes.text}
                     tag={tag}
-                    createdAt={post.attributes && post.attributes.created_at_s}
+                    createdAt={postAttributes && postAttributes.created_at_s}
                     insertText={insertText}
                     scrollTo={scrollTo}
                     setScrollId={scrollId => dispatch(setScrollId(scrollId))}
                     focusTextArea={focusTextArea}
                     draft={draft}
-                    my_flags={post.attributes && post.attributes.my_flags}
-                    publicFlags={post.attributes && post.attributes.public_flags}
+                    my_flags={postAttributes && postAttributes.my_flags}
+                    publicFlags={postAttributes && postAttributes.public_flags}
                     createFlag={category => dispatch(createFlag(topicId, post.id, category))}
                     deleteFlag={category => dispatch(deleteFlag(topicId, post.id, category))}
                     timezone={timezone}
                     canPost={topicAttributes.can_post}
+                    guestName={postAttributes.guest_name}
                 />
         </TrackVisibility>
         })
@@ -128,7 +135,7 @@ const TopicContainer = ({
     const editTitle = event => {
         const title = event.target.value
         if (title.length > 0) {
-            dispatch(editTopic(subsectionSlug, topicSlug, {title: event.target.value}))
+            dispatch(editTopic(subsectionSlug, topicSlug, {title}))
         }
     }
 

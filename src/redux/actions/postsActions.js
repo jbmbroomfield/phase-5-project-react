@@ -1,6 +1,8 @@
 import API from './API'
 import { setScrollId } from './scrollIdActions'
 
+import { getJwt } from 'jwt'
+
 const addPosts = posts => ({
     type: 'ADD_POSTS',
     posts
@@ -29,7 +31,13 @@ export const createPost = (subsectionSlug, topicSlug, text, then = () => {}) => 
         const body = {
             "post": {
                 "text": text
-            }
+            },
+            "passwords": []
+        }
+        const guestName = localStorage.getItem('guestName')
+        if (!getJwt()) {
+            body.post.guest_name = guestName
+            body.passwords = localStorage
         }
         API.post(`forum/${subsectionSlug}/${topicSlug}/posts`, body)
         .then(json => {

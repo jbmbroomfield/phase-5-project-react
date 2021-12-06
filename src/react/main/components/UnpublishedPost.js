@@ -3,13 +3,21 @@ import React from 'react'
 import topicAccessDescription from 'topicAccessDescription'
 
 const UnpublishedPost = ({
-    whoCanView, whoCanPost,
+    guestAccess, whoCanView, whoCanPost,
 }) => {
     
-    const text = <>
-        {topicAccessDescription(whoCanView, whoCanPost)}<br /><br />
-        Post a reply to publish the thread.
-    </>
+    console.log(guestAccess, whoCanView, whoCanPost)
+
+    let text
+
+    // if (!guestAccess || !whoCanView || !whoCanPost) {
+    //     text = `${guestAccess} - ${whoCanView} - ${whoCanPost}`
+    // } else {
+        text = <>
+            {topicAccessDescription(guestAccess, whoCanView, whoCanPost)}<br /><br />
+            Post a reply to publish the thread.
+        </>
+    // }
 
     return <div className="post">
         <div className="post-info"></div>

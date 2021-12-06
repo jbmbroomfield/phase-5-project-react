@@ -16,7 +16,8 @@ const Post = ({
     my_flags, publicFlags,
     createFlag, deleteFlag,
     timezone,
-    canPost
+    canPost,
+    guestName,
 }) => {
 
     const insertQuote = () =>{
@@ -44,6 +45,7 @@ const Post = ({
             <PostInfo
                 user={user}
                 avatarUrl={user && user.attributes.get_avatar_image}
+                guestName={guestName}
             />
             <PostContent text={text} tag={tag} createdAt={createdAt} timezone={timezone} />
             <PostNotes

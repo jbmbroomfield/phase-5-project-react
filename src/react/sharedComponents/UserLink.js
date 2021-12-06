@@ -7,14 +7,17 @@ const UserLink = ({
     username
 }) => {
 
-    if (user) {
-        userId = user.id
-        username = user.attributes.username
+    if (!user) {
+        return null
+    }
+
+    if (user.type === 'guest') {
+        return <u>{user.attributes.username}</u>
     }
 
     return (
-        <Link to={`/users/${userId}`}>
-            {username}
+        <Link to={`/users/${user.id}`}>
+            {user.attributes.username}
         </Link>
     )
 }

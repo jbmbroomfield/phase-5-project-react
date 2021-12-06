@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import TextInterface from '../components/TextInterface'
 
@@ -7,15 +7,44 @@ import { insertIntoDraft } from 'redux/actions/draftsActions'
 
 import { dtFromIso, isoFromDt, now } from 'DateTime'
 
-const TextInterfaceContainer = ({ onButtonClick, tags, timezone, topicId, focusTextArea }) => {
+const TextInterfaceContainer = ({
+    onButtonClick, tags, timezone, topicId, focusTextArea, canPost, password,
+    subsectionSlug, topicSlug,
+}) => {
 
 	const dispatch = useDispatch()
+    
+    const currentUser = useSelector(state => state.currentUser)
 
     const [datetime, setDatetime] = useState(now)
+    const [guestName, setGuestName] = useState(localStorage.getItem('guestName') || '')    
+    const [enteredPassword, setEnteredPassword] = useState('')
+
+    const submitPassword = () => {
+        if (enteredPassword === password) {
+            if (currentUser) {
+
+            } else {
+                localStorage.setItem(`forum/${subsectionSlug}/${topicSlug}`, enteredPassword)
+            }
+        } else {
+            setEnteredPassword('')
+        }
+    }
 
     const handleDatetimeChange = event => {
         const iso = `${event.target.value} ${timezone}` 
         setDatetime(dtFromIso(iso))
+    }
+
+    const handleGuestNameChange = event => {
+        const newGuestName = event.target.value
+        localStorage.setItem('guestName', newGuestName)
+        setGuestName(newGuestName)
+    }
+
+    const handleEnteredPasswordChange = event => {
+        setEnteredPassword(event.target.value)
     }
 
     const handleInputDate = () => {
@@ -34,6 +63,11 @@ const TextInterfaceContainer = ({ onButtonClick, tags, timezone, topicId, focusT
                 datetime={isoFromDt(datetime, timezone)}
                 handleDatetimeChange={handleDatetimeChange}
                 handleInputDate={handleInputDate}
+                guestName={guestName} handleGuestNameChange={handleGuestNameChange}
+                enteredPassword={enteredPassword} handleEnteredPasswordChange={handleEnteredPasswordChange}
+                currentUser={currentUser}
+                canPost={canPost} password={password}
+                submitPassword={submitPassword}
             />
         </>
     )

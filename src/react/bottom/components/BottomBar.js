@@ -16,6 +16,10 @@ const BottomBar = ({
     topicId,
     focusTextArea,
     handleNewTopic,
+    canPost,
+    password,
+    subsectionSlug,
+    topicSlug,
 }) => {
 
     const style = {
@@ -32,6 +36,10 @@ const BottomBar = ({
                 timezone={timezone}
                 topicId={topicId}
                 focusTextArea={focusTextArea}
+                canPost={canPost}
+                password={password}
+                subsectionSlug={subsectionSlug}
+                topicSlug={topicSlug}
             />
         ) : null
     )
@@ -52,11 +60,15 @@ const BottomBar = ({
         if (toggleLabel === 'New Topic') {
             return <span className="nav-link float-right" onClick={handleNewTopic}>{toggleLabel}</span>
         }
-        return <span className="nav-link float-right" onClick={handleToggleClick}>{replyCaret} {toggleLabel}</span>
+        const style={}
+        if (!canPost) {
+            style.color = '#999'
+        }
+        return <span className="nav-link float-right" style={style} onClick={handleToggleClick}>{replyCaret} {toggleLabel}</span>
     }
 
     const renderPostButton = () => (
-        (bottomPopUp && text.length > 0) ? (toggleLabel === 'Reply' || title.length > 0) && (
+        (bottomPopUp && text.length > 0 && canPost) ? (toggleLabel === 'Reply' || title.length > 0) && (
             <span className="nav-link float-right" onClick={handlePost}>Post</span>
         ) : null
     )

@@ -1,4 +1,5 @@
 import API from './API'
+import { getJwt } from 'jwt'
 
 const addTopics = topics => ({
     type: 'ADD_TOPICS',
@@ -21,11 +22,28 @@ export const fetchTopics = subsectionSlug => (
     }
 )
 
-export const fetchTopic = (subsectionSlug, topicSlug) => (
+export const fetchTopic = (subsectionSlug, topicSlug, errorRedirect = null) => (
     dispatch => {
         API.get(`forum/${subsectionSlug}/${topicSlug}`)
         .then(json => {
-            json.data && dispatch(addTopics([json.data]))
+            if (json.data) {
+                const topic = json.data
+                const topicAttributes = topic.attributes
+                const url = `forum/${subsectionSlug}/${topicSlug}`
+                const storedUrlValue = localStorage.getItem(url)
+                if (!getJwt()) {
+                    topicAttributes.can_view = true
+                    if (topicAttributes.who_can_view === 'url' && !storedUrlValue) {
+                        localStorage.setItem(url, "__canView__")
+                    }
+                    if (topicAttributes.who_can_post === 'password' && storedUrlValue === topicAttributes.password) {
+                        topicAttributes.can_post = true
+                    }
+                }
+                dispatch(addTopics([topic]))
+            } else if (errorRedirect) {
+                errorRedirect()
+            }
         })
     }
 )

@@ -12,15 +12,17 @@ export const removeCurrentUser = () => ({
 
 export const fetchCurrentUser = () => (
     dispatch => {
-        const jwt = localStorage.getItem('jwt')
-        if (jwt) {
-            API.get('current_user')
-            .then(json => {
-                json.data && dispatch(setCurrentUser(json.data))
-            })
-        } else {
-            dispatch(removeCurrentUser())
-        }
+        API.get('current_user')
+        .then(json => {
+            let user
+            if (json.jwt) {
+                setJwt(json.jwt)
+                user = json.user.data
+            } else {
+                user = json.data
+            }
+            user && dispatch(setCurrentUser(user))
+        })
     }
 )
 
@@ -36,6 +38,19 @@ export const login = (username, password, redirect) => (
         })
     }
 )
+
+// export const guestLogin = (redirect) => (
+//     dispatch => {
+//         API.post('guest-login')
+//         .then(json => {
+//             if (json.jwt) {
+//                 setJwt(json.jwt)
+//                 dispatch(setCurrentUser(json.user.data))
+//                 redirect(json.jwt)
+//             }
+//         })
+//     }
+// )
 
 const loginBody = (username, password) => ({
     user: {

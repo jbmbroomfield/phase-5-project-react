@@ -76,7 +76,7 @@ const TopicReplyContainer = ({
     }
 
     const renderBottomBar = () => (
-        topicAttributes.can_post ? <BottomBar
+        topicAttributes.can_post || topicAttributes.who_can_post === 'password' ? <BottomBar
             toggleLabel="Reply"
             bottomPopUp={bottomPopUp}
             setBottomPopUp={setBottomPopUp}
@@ -87,6 +87,10 @@ const TopicReplyContainer = ({
             focusTextArea={focusTextArea}
             timezone={currentUser?.attributes.time_zone}
             topicId={topicId}
+            canPost={topicAttributes.can_post}
+            password={topicAttributes.password}
+            subsectionSlug={subsectionSlug}
+            topicSlug={topicSlug}
         /> : <div className="bottom-bar"></div>
     )
 

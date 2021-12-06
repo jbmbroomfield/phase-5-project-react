@@ -2,10 +2,10 @@ import React from 'react'
 import topicAccessDescription from 'topicAccessDescription'
 
 const TopicSettings = ({
-    whoCanView, whoCanPost
+    guestAccess, whoCanView, whoCanPost
 }) => {
 
-    const text = topicAccessDescription(whoCanView, whoCanPost)
+    const text = topicAccessDescription(guestAccess, whoCanView, whoCanPost)
     
     return <>
         {text}

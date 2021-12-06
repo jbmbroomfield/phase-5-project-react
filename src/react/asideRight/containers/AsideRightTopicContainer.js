@@ -29,6 +29,8 @@ const AsideRightTopicContainer = ({
     const topics = useSelector(state => state.topics)
     const currentUser = useSelector(state => state.currentUser)
 
+    const currentUserAttributes = currentUser ? currentUser.attributes : {}
+
     const subsectionSlug = match.params.subsectionSlug
     const topicSlug = match.params.topicSlug
     const topic = topics.find(topic => {
@@ -53,26 +55,31 @@ const AsideRightTopicContainer = ({
         return <>
             <WhoCanContainer
                 viewOrPost="View"
-                whoCanView={topicAttributes.who_can_view}
                 editTopic={attributes => dispatch(editTopic(subsectionSlug, topicSlug, attributes))}
+                topic={topic}
             />
             <WhoCanContainer
                 viewOrPost="Post"
                 whoCanView={topicAttributes.who_can_view}
                 whoCanPost={topicAttributes.who_can_post}
+                guestAccess={topicAttributes.guest_access}
                 editTopic={attributes => dispatch(editTopic(subsectionSlug, topicSlug, attributes))}
+                topic={topic}
             />
         </>
     }
     
-    const renderUsersContainer = (userType) => {
+    const renderUsersContainer = (userType, canAdd) => {
         const heading = `${userType}s`
         const users = topicAttributes[userType === 'Poster' ? 'posters' : 'viewers']
         const action = userType === 'Poster' ? addPoster : addViewer
+        canAdd = canAdd && currentUserAttributes.slug === topicAttributes.user_slug
+        const handleAdd = canAdd ? userSlug => dispatch(action(subsectionSlug, topicSlug, userSlug)) : () => {}
         const renderContent = () => <TopicUsers
             userType={userType}
             users={users}
-            handleAdd={userSlug => dispatch(action(subsectionSlug, topicSlug, userSlug))}
+            handleAdd={handleAdd}
+            canAdd={canAdd}
         />
         return <MenuItemContainer
             heading={heading}
@@ -81,22 +88,38 @@ const AsideRightTopicContainer = ({
     }
 
     const renderTopicUsers = () => {
-        if (['all', 'users'].includes(topicAttributes.who_can_view)) {
-            return renderUsersContainer('Poster')
+
+        if (topicAttributes.who_can_view === 'anyone') {
+            if (topicAttributes.who_can_post === 'anyone') {
+                return renderUsersContainer('Poster', false)
+            }
+            return renderUsersContainer('Poster', true)
         }
-        if (['all', 'users'].includes(topicAttributes.who_can_post)) {
-            return renderUsersContainer('User')
+        if (topicAttributes.who_can_post === 'anyone') {
+            return renderUsersContainer('User', true)
         }
         return <>
-            { renderUsersContainer('Viewer') }
-            { renderUsersContainer('Poster') }
+            { renderUsersContainer('Viewer', true) }
+            { renderUsersContainer('Poster', true) }
         </>
+
+        // if (['all', 'users'].includes(topicAttributes.who_can_view)) {
+        //     return renderUsersContainer('Poster')
+        // }
+        // if (['all', 'users'].includes(topicAttributes.who_can_post)) {
+        //     return renderUsersContainer('User')
+        // }
+        // return <>
+        //     { renderUsersContainer('Viewer') }
+        //     { renderUsersContainer('Poster') }
+        // </>
 
     }
 
     const renderTopicSettings = () => {
         const heading = 'Thread Settings'
-        const renderContent = () => <TopicSettings 
+        const renderContent = () => <TopicSettings
+            guestAccess={topicAttributes.guest_access}
             whoCanView={topicAttributes.who_can_view}
             whoCanPost={topicAttributes.who_can_post}
         />
