@@ -4,18 +4,16 @@ import { NavLink } from 'react-router-dom'
 const Navbar = ({ currentUser, logout }) => {
 
     const RenderAuthLinks = () => {
-        if (currentUser) {
-            return (
-                <li><span className="nav-link" onClick={logout}>Logout</span></li>
-            )
-        } else {
-            return (
-                <>
-                    <li><NavLink className="nav-link" to="/login">Login</NavLink></li>
-                    <li><NavLink className="nav-link" to="/signup">Sign Up</NavLink></li>
-                </>
-            )
+        if (!currentUser) {
+            return null
         }
+        if (currentUser.attributes.account_level === 'guest') {
+            return <>
+                <li><NavLink className="nav-link" to="/login">Login</NavLink></li>
+                <li><NavLink className="nav-link" to="/signup">Sign Up</NavLink></li>
+            </>
+        }
+        return <li><span className="nav-link" onClick={logout}>Logout</span></li>
     }
 
     const renderNavbar = () => (
