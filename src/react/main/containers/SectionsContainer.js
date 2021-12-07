@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+// import { Link } from 'react-router-dom'
 
 import Section from '../components/Section'
 
@@ -36,7 +37,13 @@ const SectionsContainer = () => {
         ))
     }
 
-    return renderSections()
+    return <>
+        <br /><br />
+        {/* <Link to='/'>
+            Home
+        </Link> */}
+        {renderSections()}
+    </>
 }
 
 export default SectionsContainer

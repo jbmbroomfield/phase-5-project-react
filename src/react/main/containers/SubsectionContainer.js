@@ -8,6 +8,8 @@ import TopicSummaryHeader from '../components/TopicSummaryHeader'
 import { fetchTopics, fetchTopic } from 'redux/actions/topicsActions'
 
 import subsectionChannel from 'channels/subsectionChannel'
+// import SubsectionLink from 'react/sharedComponents/SubsectionLink'
+import { Link } from 'react-router-dom'
 
 
 const SubsectionContainer = ({ 
@@ -69,6 +71,12 @@ const SubsectionContainer = ({
 
     return (
         <>
+            <br />
+            <Link to='/'>
+                Home
+            </Link>
+            {/* { subsection && <>{' > '}<SubsectionLink subsection={subsection} /></> } */}
+
             <h1>{subsection && subsection.attributes.title}</h1>
             <TopicSummaryHeader />
             { renderTopics() }

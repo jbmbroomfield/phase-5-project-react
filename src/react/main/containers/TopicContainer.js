@@ -19,6 +19,9 @@ import topicChannel from '../../../channels/topicChannel'
 
 import filterPosts from 'filterPosts'
 import getTopicDisplay from 'getTopicDisplay'
+import { Link } from 'react-router-dom'
+// import TopicLink from 'react/sharedComponents/TopicLink'
+import SubsectionLink from 'react/sharedComponents/SubsectionLink'
 
 const TopicContainer = ({
     match,
@@ -29,7 +32,7 @@ const TopicContainer = ({
 
     const history = useHistory()
     
-    // const subsections = useSelector(state => state.subsections)
+    const subsections = useSelector(state => state.subsections)
     const topics = useSelector(state => state.topics)
     const posts = useSelector(state => state.posts)
     const users = useSelector(state => state.users)
@@ -43,7 +46,7 @@ const TopicContainer = ({
     const timezone = currentUserAttributes.time_zone
 
     const subsectionSlug = match.params.subsectionSlug
-    // const subsection = subsections.find(subsection => subsection.attributes?.slug === subsectionSlug)
+    const subsection = subsections.find(subsection => subsection.attributes?.slug === subsectionSlug)
     const topicSlug = match.params.topicSlug
     const topic = topics.find(topic => {
         if (!topic.attributes) {
@@ -162,6 +165,13 @@ const TopicContainer = ({
     }
     return (
         <>
+            <br />
+            <Link to='/'>
+                Home
+            </Link>
+            { subsection && <>{' > '}<SubsectionLink subsection={subsection} /></> }
+            {/* { topic && <>{' >  '}<TopicLink topic={topic} /></>} */}
+
             <h1>{topicAttributes.title}</h1>
             { topicAttributes.status === 'unpublished' && renderEditTitle() }
             { renderPosts() }

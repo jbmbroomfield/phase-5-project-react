@@ -33,7 +33,7 @@ const AsideLeftContainer = () => {
                 <div className="aside-header notifications-header">Notifications</div>
                 { renderNotifications() }
             </div>
-            <div className="aside-header stats-header">Stats</div>
+            {/* <div className="aside-header stats-header">Stats</div> */}
         </aside>
     )
 }
