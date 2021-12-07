@@ -22,7 +22,8 @@ const Post = ({
 
     const insertQuote = () =>{
         // insertText(`${user.attributes.username} said "${text}"\n`)
-        insertText(`[quote author=${user.attributes.username}]${text}[/quote]\n`)
+        const authorName = user && user.attributes && user.attributes.username ? user.attributes.username : guestName
+        insertText(`[quote author=${authorName}]${text}[/quote]\n`)
         setTimeout(() => focusTextArea({draft}), 10)
     }
 
