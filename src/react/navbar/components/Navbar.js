@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 const Navbar = ({ currentUser, logout }) => {
 
     const RenderAuthLinks = () => {
-        if (!currentUser) {
+        if (!currentUser || !currentUser.attributes) {
             return null
         }
         if (currentUser.attributes.account_level === 'guest') {

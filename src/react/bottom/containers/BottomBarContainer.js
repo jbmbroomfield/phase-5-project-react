@@ -44,16 +44,12 @@ const BottomBarContainer = ({
         />
     )
 
-    const renderSwitch = () => (
-        <Switch>
-            { topicRoute() }
-            { subsectionRoute() }
-        </Switch>
-    )
-
     return (
         <div className="bottom-bar">
-            { renderSwitch() }
+            <Switch>
+                { topicRoute() }
+                { subsectionRoute() }
+            </Switch>
         </div>
     )
 }

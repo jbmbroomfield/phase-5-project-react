@@ -69,12 +69,18 @@ export const addViewer = (subsectionSlug, topicSlug, viewerSlug) => (
     }
 )
 
-export const addPoster = (subsectionSlug, topicSlug, posterSlug) => (
+export const addPoster = (subsectionSlug, topicSlug, posterSlug, password, then) => (
     dispatch => {
         const body = {
-            poster_slug: posterSlug
+            poster_slug: posterSlug,
+            password: password,
         }
         API.patch(`forum/${subsectionSlug}/${topicSlug}/add-poster`, body)
-        .then(json => dispatch(fetchTopic(subsectionSlug, topicSlug)))
+        .then(json => {
+            dispatch(fetchTopic(subsectionSlug, topicSlug))
+            if (then) {
+                then()
+            }
+        })
     }
 )

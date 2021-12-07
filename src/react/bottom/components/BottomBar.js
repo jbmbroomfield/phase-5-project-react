@@ -20,13 +20,28 @@ const BottomBar = ({
     password,
     subsectionSlug,
     topicSlug,
+    showPasswordEntry,
+    enteredPassword, handleEnteredPasswordChange,
+    submitPassword,
+    guestName, setGuestName,
 }) => {
 
     const style = {
         bottom: `${bottomPopUp ? 250 : 0}px`
     }
 
-    const replyCaret = bottomPopUp ? <i className="fa fa-caret-down" aria-hidden="true"></i> : <i className="fa fa-caret-up" aria-hidden="true"></i>
+    const renderReplyCaret = () => {
+        if (bottomPopUp) {
+            return <i className="fa fa-caret-down" aria-hidden="true"></i>
+        }
+        if (!canPost) {
+            if (showPasswordEntry) {
+                return <i className="fa fa-caret-right" aria-hidden="true"></i>
+            }
+            return <i className="fa fa-caret-left" aria-hidden="true"></i>
+        }
+        return <i className="fa fa-caret-up" aria-hidden="true"></i>
+    }
 
     const renderTextInterface = () => (
         bottomPopUp ? (
@@ -40,6 +55,7 @@ const BottomBar = ({
                 password={password}
                 subsectionSlug={subsectionSlug}
                 topicSlug={topicSlug}
+                guestName={guestName} setGuestName={setGuestName}
             />
         ) : null
     )
@@ -56,6 +72,16 @@ const BottomBar = ({
         ) : null
     )
 
+    const renderPasswordEntry = () => <>
+        <span className="nav-link float-right" onClick={submitPassword} >Submit Password</span>
+        <span className="float-right"><input 
+            type="text"
+            placeholder="Password required"
+            value={enteredPassword}
+            onChange={handleEnteredPasswordChange}
+        /></span>
+    </>
+
     const renderToggler = () => {
         if (toggleLabel === 'New Topic') {
             return <span className="nav-link float-right" onClick={handleNewTopic}>{toggleLabel}</span>
@@ -64,7 +90,7 @@ const BottomBar = ({
         if (!canPost) {
             style.color = '#999'
         }
-        return <span className="nav-link float-right" style={style} onClick={handleToggleClick}>{replyCaret} {toggleLabel}</span>
+        return <span className="nav-link float-right" style={style} onClick={handleToggleClick}>{renderReplyCaret()} {toggleLabel}</span>
     }
 
     const renderPostButton = () => (
@@ -78,6 +104,7 @@ const BottomBar = ({
             { renderTextInterface() }
             { renderNewTopicTitleInput() }
             { renderToggler() }
+            { showPasswordEntry && renderPasswordEntry() }
             { renderPostButton() }
         </div>
     )

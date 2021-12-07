@@ -10,14 +10,15 @@ import { dtFromIso, isoFromDt, now } from 'DateTime'
 const TextInterfaceContainer = ({
     onButtonClick, tags, timezone, topicId, focusTextArea, canPost, password,
     subsectionSlug, topicSlug,
+    guestName, setGuestName
 }) => {
 
 	const dispatch = useDispatch()
     
     const currentUser = useSelector(state => state.currentUser)
+    const currentUserAttributes = currentUser ? currentUser.attributes : {}
 
     const [datetime, setDatetime] = useState(now)
-    const [guestName, setGuestName] = useState(localStorage.getItem('guestName') || '')    
     const [enteredPassword, setEnteredPassword] = useState('')
 
     const submitPassword = () => {
@@ -65,7 +66,7 @@ const TextInterfaceContainer = ({
                 handleInputDate={handleInputDate}
                 guestName={guestName} handleGuestNameChange={handleGuestNameChange}
                 enteredPassword={enteredPassword} handleEnteredPasswordChange={handleEnteredPasswordChange}
-                currentUser={currentUser}
+                currentUserAttributes={currentUserAttributes}
                 canPost={canPost} password={password}
                 submitPassword={submitPassword}
             />
