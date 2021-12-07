@@ -24,6 +24,7 @@ const BottomBar = ({
     enteredPassword, handleEnteredPasswordChange,
     submitPassword,
     guestName, setGuestName,
+    currentUserAttributes,
 }) => {
 
     const style = {
@@ -94,7 +95,9 @@ const BottomBar = ({
     }
 
     const renderPostButton = () => (
-        (bottomPopUp && text.length > 0 && canPost) ? (toggleLabel === 'Reply' || title.length > 0) && (
+        (bottomPopUp && text.length > 0 && canPost &&
+            (currentUserAttributes.account_level !== 'guest' || (guestName && guestName.length > 0))    
+        ) ? (toggleLabel === 'Reply' || title.length > 0) && (
             <span className="nav-link float-right" onClick={handlePost}>Post</span>
         ) : null
     )

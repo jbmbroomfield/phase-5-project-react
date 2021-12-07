@@ -31,7 +31,7 @@ const TopicReplyContainer = ({
     const drafts = useSelector(state => state.drafts)
     const topics = useSelector(state => state.topics)
     const currentUser = useSelector(state => state.currentUser)
-    const currentUserAttributes = currentUser ? currentUser.attributes : {}
+    const currentUserAttributes = currentUser && currentUser.attributes ? currentUser.attributes : {}
 
     
     const [guestName, setGuestName] = useState(currentUserAttributes.username)
@@ -131,6 +131,7 @@ const TopicReplyContainer = ({
             enteredPassword={enteredPassword} handleEnteredPasswordChange={handleEnteredPasswordChange}
             submitPassword={submitPassword}
             guestName={guestName} setGuestName={setGuestName}
+            currentUserAttributes={currentUserAttributes}
         /> : <div className="bottom-bar"></div>
     )
 

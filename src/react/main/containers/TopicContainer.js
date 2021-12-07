@@ -38,8 +38,9 @@ const TopicContainer = ({
     const currentUser = useSelector(state => state.currentUser)
     const scrollId = useSelector(state => state.scrollId)
 
+    const currentUserAttributes = currentUser && currentUser.attributes ? currentUser.attributes : {}
 
-    const timezone = currentUser?.attributes.time_zone
+    const timezone = currentUserAttributes.time_zone
 
     const subsectionSlug = match.params.subsectionSlug
     // const subsection = subsections.find(subsection => subsection.attributes?.slug === subsectionSlug)

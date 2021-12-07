@@ -16,7 +16,7 @@ const TextInterfaceContainer = ({
 	const dispatch = useDispatch()
     
     const currentUser = useSelector(state => state.currentUser)
-    const currentUserAttributes = currentUser ? currentUser.attributes : {}
+    const currentUserAttributes = currentUser && currentUser.attributes ? currentUser.attributes : {}
 
     const [datetime, setDatetime] = useState(now)
     const [enteredPassword, setEnteredPassword] = useState('')

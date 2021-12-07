@@ -27,7 +27,7 @@ const TextInterface = ({
         { currentUserAttributes.account_level === 'guest' && <span><input
             type="text"
             placeholder="Name"
-            value={guestName}
+            value={guestName || ''}
             onChange={handleGuestNameChange}
         /></span> }
     </>

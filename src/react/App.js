@@ -65,6 +65,10 @@ const App = () => {
 	const style = {
   		gridTemplateRows: `50px 1fr ${bottomBarHeight}px`
 	}
+	
+	if (!currentUser || !currentUser.attributes) {
+		return null
+	}
 
 	return (
 		<div className="App" style={style}>

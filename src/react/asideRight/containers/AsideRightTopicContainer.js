@@ -29,7 +29,7 @@ const AsideRightTopicContainer = ({
     const topics = useSelector(state => state.topics)
     const currentUser = useSelector(state => state.currentUser)
 
-    const currentUserAttributes = currentUser ? currentUser.attributes : {}
+    const currentUserAttributes = currentUser && currentUser.attributes ? currentUser.attributes : {}
 
     const subsectionSlug = match.params.subsectionSlug
     const topicSlug = match.params.topicSlug
@@ -158,16 +158,14 @@ const AsideRightTopicContainer = ({
         </>
     )
 
-    return (
-        <>
-            {   
-                currentUser?.attributes.slug === topicAttributes.user_slug &&
-                topicAttributes.status === 'unpublished' &&
-                renderOwnerSettings()
-            }
-            { topicAttributes.status !== 'unpublished' && renderPublished() }
-        </>
-    )
+    return <>
+        {   
+            currentUserAttributes.slug === topicAttributes.user_slug &&
+            topicAttributes.status === 'unpublished' &&
+            renderOwnerSettings()
+        }
+        { topicAttributes.status !== 'unpublished' && renderPublished() }
+    </>
 }
 
 export default AsideRightTopicContainer

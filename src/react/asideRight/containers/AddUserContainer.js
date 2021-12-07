@@ -28,7 +28,7 @@ const AddUserContainer = ({
     
     const handleOnSearch = newText => {
         setText(newText)
-        const user = users.find(user => user.attributes.username.toLowerCase() === newText.toLowerCase())
+        const user = users.find(user => user.attributes.account_level !== 'guest' && user.attributes.username.toLowerCase() === newText.toLowerCase())
         setSelectedUser(user)
     }
 
