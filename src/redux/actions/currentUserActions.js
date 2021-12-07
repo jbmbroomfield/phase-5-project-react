@@ -102,3 +102,7 @@ export const editProfile = attributes => {
     }
     API.patch(`current_user`, body)
 }
+
+export const setGuestData = () => ({
+    type: 'SET_GUEST_DATA'
+})

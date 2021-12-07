@@ -37,17 +37,16 @@ const AsideRightTopicContainer = ({
         return topic.attributes?.slug === topicSlug
     })
     const topicAttributes = topic ? topic.attributes : {}
-    const topicId = topic && parseInt(topic.id)
     const topicDisplay = getTopicDisplay(topicDisplays, topicSlug)
     const userTopic = userTopics.find(
         userTopic => userTopic.attributes.topic_slug === topicSlug
     )
     const subscribed = userTopic && userTopic.attributes.subscribed
     const handleSubscribe = () => {
-        dispatch(subscribeToTopic(topicId, true))
+        dispatch(subscribeToTopic(subsectionSlug, topicSlug, true))
     }
     const handleUnsubscribe = () => {
-        dispatch(subscribeToTopic(topicId, false))
+        dispatch(subscribeToTopic(subsectionSlug, topicSlug, false))
     }
     const {page, pages} = topicDisplay
 

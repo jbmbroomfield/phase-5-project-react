@@ -12,6 +12,7 @@ import BottomBarContainer from './bottom/containers/BottomBarContainer'
 import { fetchData } from 'redux/actions/dataActions'
 import { fetchNotifications } from 'redux/actions/notificationsActions'
 import { setBottomPopUp } from 'redux/actions/bottomPopUpActions'
+import { fetchCurrentUser } from 'redux/actions/currentUserActions'
 
 import mainChannel from 'channels/mainChannel'
 import userChannel from 'channels/userChannel'
@@ -55,7 +56,7 @@ const App = () => {
 	useEffect(() => {
 		if (currentUser) {
 			dispatch(fetchNotifications())
-			return userChannel(currentUser.attributes.slug, () => dispatch(fetchNotifications()))
+			return userChannel(currentUser.attributes.slug, () => dispatch(fetchNotifications()), () => dispatch(fetchCurrentUser()))
 		}
 	}, [currentUser, dispatch])
 

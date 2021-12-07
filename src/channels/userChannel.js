@@ -1,6 +1,6 @@
 import createSocket from './createSocket'
 
-const userChannel = (userSlug, fetchNotifications) => {
+const userChannel = (userSlug, fetchNotifications, fetchCurrentUser) => {
 
     const params = {
         channel: 'UserChannel',
@@ -10,7 +10,10 @@ const userChannel = (userSlug, fetchNotifications) => {
     const messageFunctions = {
         notification_update: message => {
             fetchNotifications()
-        }
+        },
+        user_update: message => {
+            fetchCurrentUser()
+        },
     }
 
     return createSocket(params, messageFunctions)
