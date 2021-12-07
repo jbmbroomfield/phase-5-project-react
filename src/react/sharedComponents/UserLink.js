@@ -1,25 +1,21 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const UserLink = ({
-    user,
-    userId,
-    username
-}) => {
+const UserLink = ({ user }) => {
 
-    if (!user) {
+    if (!user || !user.attributes) {
         return null
     }
 
-    if (user.type === 'guest') {
-        return <u>{user.attributes.username}</u>
+    const { account_level, username, slug } = user.attributes
+
+    if (account_level === 'guest') {
+        return <u>{username}</u>
     }
 
-    return (
-        <Link to={`/users/${user.id}`}>
-            {user.attributes.username}
-        </Link>
-    )
+    return <Link to={`/users/${slug}`}>
+        {username}
+    </Link>
 }
 
 export default UserLink

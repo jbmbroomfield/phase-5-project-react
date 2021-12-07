@@ -1,20 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const SubsectionLink = ({ 
-    subsection
-}) => {
+const SubsectionLink = ({  subsection }) => {
 
-    const subsectionAttributes = subsection.attributes
-    
-    const slug = subsectionAttributes.slug
-    const title = subsectionAttributes.title
+    if (!subsection || !subsection.attributes) {
+        return null
+    }
 
-    return (
-        <Link to={`/forum/${slug}`}>
-            {title}
-        </Link>
-    )
+    const { slug, title } = subsection.attributes
+
+    return <Link to={`/forum/${slug}`}>
+        {title}
+    </Link>
 }
 
 export default SubsectionLink
