@@ -11,6 +11,9 @@ const Navbar = ({ currentUser, logout }) => {
             return <>
                 <li><NavLink className="nav-link" to="/login">Login</NavLink></li>
                 <li><NavLink className="nav-link" to="/signup">Sign Up</NavLink></li>
+                { currentUser.attributes.guest_data && 
+                    <li><span className="nav-link" onClick={logout}>Clear Data</span></li>
+                }
             </>
         }
         return <li><span className="nav-link" onClick={logout}>Logout</span></li>

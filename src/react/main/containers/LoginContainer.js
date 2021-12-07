@@ -12,16 +12,17 @@ const LoginContainer = () => {
     const dispatch = useDispatch()
 
     const currentUser = useSelector(state => state.currentUser)
+    const loggedIn = currentUser && currentUser.attributes.account_level !== 'guest'
 
     const history = useHistory()
 
     useEffect(() => {
-        if (currentUser) {
+        if (loggedIn) {
             history.push('/')
         }
-    }, [currentUser, history])
+    }, [loggedIn, history])
 
-    if (currentUser) {
+    if (loggedIn) {
         // history.push("/")
         return null
     }

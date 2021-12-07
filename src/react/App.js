@@ -9,10 +9,7 @@ import MainContainer from './main/containers/MainContainer'
 import AsideRightContainer from './asideRight/containers/AsideRightContainer'
 import BottomBarContainer from './bottom/containers/BottomBarContainer'
 
-import { fetchCurrentUser } from 'redux/actions/currentUserActions'
-import { fetchSections } from 'redux/actions/sectionsActions'
-import { fetchSubsections } from 'redux/actions/subsectionsActions'
-import { fetchUsers } from 'redux/actions/usersActions'
+import { fetchData } from 'redux/actions/dataActions'
 import { fetchNotifications } from 'redux/actions/notificationsActions'
 import { setBottomPopUp } from 'redux/actions/bottomPopUpActions'
 
@@ -27,12 +24,7 @@ const App = () => {
 	const bottomPopUp = useSelector(state => state.bottomPopUp)
 
 	useEffect(() => {
-		const mainOnUpdate = () => {
-			dispatch(fetchCurrentUser())
-			dispatch(fetchSections())
-			dispatch(fetchSubsections())
-			dispatch(fetchUsers())
-		}
+		const mainOnUpdate = () => dispatch(fetchData())
 		mainOnUpdate()
 		return mainChannel(mainOnUpdate)
 	}, [dispatch])

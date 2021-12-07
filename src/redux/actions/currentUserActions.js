@@ -1,12 +1,13 @@
 import API from "./API"
 import { setJwt } from "jwt"
+import { fetchData } from "./dataActions"
 
 export const setCurrentUser = currentUser => ({
     type: 'SET_CURRENT_USER',
     currentUser
 })
 
-export const removeCurrentUser = () => ({
+const removeCurrentUser = () => ({
     type: 'REMOVE_CURRENT_USER'
 })
 
@@ -39,19 +40,6 @@ export const login = (username, password, redirect) => (
     }
 )
 
-// export const guestLogin = (redirect) => (
-//     dispatch => {
-//         API.post('guest-login')
-//         .then(json => {
-//             if (json.jwt) {
-//                 setJwt(json.jwt)
-//                 dispatch(setCurrentUser(json.user.data))
-//                 redirect(json.jwt)
-//             }
-//         })
-//     }
-// )
-
 const loginBody = (username, password) => ({
     user: {
         username: username,
@@ -60,6 +48,13 @@ const loginBody = (username, password) => ({
         }
     }
 })
+
+export const logout = () => (
+    dispatch => {
+        dispatch(removeCurrentUser())
+        dispatch(fetchData())
+    }
+)
 
 export const uploadAvatar = (avatarImage, jwt) => (
     dispatch => {

@@ -4,7 +4,7 @@ import { useHistory } from 'react-router'
 
 import Navbar from '../components/Navbar'
 
-import { removeCurrentUser } from 'redux/actions/currentUserActions'
+import { logout } from 'redux/actions/currentUserActions'
 
 const NavbarContainer = () => {
 
@@ -14,15 +14,13 @@ const NavbarContainer = () => {
     
     const history = useHistory()
 
-    const logout = () => {
-        dispatch(removeCurrentUser())
-        history.push("/")
-    }
-
     const renderNavbar = () => (
         <Navbar
             currentUser={currentUser}
-            logout={logout}
+            logout={() => {
+                dispatch(logout())
+                history.push("/")
+            }}
         />
     )
 
