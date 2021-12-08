@@ -58,7 +58,6 @@ export const logout = () => (
 
 export const uploadAvatar = avatarImage => (
     dispatch => {
-        console.log(avatarImage)
         const body = {avatar_image: avatarImage}
         API.postForm('upload_avatar', body)
     }

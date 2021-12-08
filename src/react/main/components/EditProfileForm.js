@@ -41,7 +41,6 @@ const EditProfileForm = ({ uploadAvatar, currentUser, currentTimeZone }) => {
             time_zone: state.timezone
         }
         editProfile(attributes)
-        console.log(state.avatarImage)
         uploadAvatar(state.avatarImage)
         history.push("/")
     }
