@@ -115,3 +115,8 @@ div.content {
 /* .last-post {
   font-size: 90%;
 } */
+
+.avatar-profile {
+  width: 150px;
+  height: 150px;
+}

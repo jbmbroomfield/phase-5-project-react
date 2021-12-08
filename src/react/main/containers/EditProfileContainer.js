@@ -16,7 +16,7 @@ const EditProfileContainer = () => {
             <div className="page">
                 <h1>Edit Profile</h1>
                 <EditProfileForm
-                    uploadAvatar={() => dispatch(uploadAvatar())}
+                    uploadAvatar={avatarImage => dispatch(uploadAvatar(avatarImage))}
                     currentUser={currentUser}
                     currentTimeZone={currentUser && currentUser.attributes && currentUser.attributes.time_zone}
                 />

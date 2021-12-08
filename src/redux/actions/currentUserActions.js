@@ -56,8 +56,9 @@ export const logout = () => (
     }
 )
 
-export const uploadAvatar = (avatarImage, jwt) => (
+export const uploadAvatar = avatarImage => (
     dispatch => {
+        console.log(avatarImage)
         const body = {avatar_image: avatarImage}
         API.postForm('upload_avatar', body)
     }
@@ -75,8 +76,8 @@ export const signup = (
             password, passwordConfirmation,
         ))
         .then(json => {
-            const uploadAvatarAndRedirect = jwt => {
-                uploadAvatar(avatarImage, jwt)
+            const uploadAvatarAndRedirect = () => {
+                uploadAvatar(avatarImage)
             }
             dispatch(login(username, password, uploadAvatarAndRedirect))
         })

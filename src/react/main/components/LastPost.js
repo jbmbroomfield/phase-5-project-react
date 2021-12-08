@@ -49,13 +49,11 @@ const LastPost = ({
         return <>in <TopicLink topic={topic} /><br /></>
     }
 
-    return (
-        <div className="last-post">
-            <strong>{attributes.created_at_s}</strong>{renderGreenArrow()}<br />
-            { renderTopic() }
-            by <UserLink user={attributes.user} />
-        </div>
-    )
+    return <div className="last-post">
+        <strong>{attributes.created_at_s}</strong>{renderGreenArrow()}<br />
+        { renderTopic() }
+        by <UserLink user={attributes.user} />
+    </div>
 }
 
 export default LastPost

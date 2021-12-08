@@ -3,8 +3,6 @@ import { useHistory } from 'react-router-dom'
 
 import TimezoneSelect from 'react-timezone-select'
 
-import { getJwt } from "jwt"
-
 import { editProfile } from 'redux/actions/currentUserActions'
 
 const DisplayAvatar = ({ src }) => (
@@ -43,7 +41,8 @@ const EditProfileForm = ({ uploadAvatar, currentUser, currentTimeZone }) => {
             time_zone: state.timezone
         }
         editProfile(attributes)
-        uploadAvatar(state.avatarImage, getJwt())
+        console.log(state.avatarImage)
+        uploadAvatar(state.avatarImage)
         history.push("/")
     }
 
