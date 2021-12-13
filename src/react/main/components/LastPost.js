@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router'
 
 import { setScrollId } from 'redux/actions/scrollIdActions'
@@ -13,24 +13,21 @@ const LastPost = ({
 
 	const dispatch = useDispatch()
 
-    const subsections = useSelector(state => state.subsections)
-
     const history = useHistory()
 
-    if (!lastPost) {
+    if (!lastPost || !lastPost.attributes) {
         return null
     }
 
-    const topic = lastPost.attributes.topic
-    const topicSlug = topic.attributes.slug
-    const subsectionId = parseInt(topic.attributes.subsection_id)
-    const subsection = subsections.find(subsection => parseInt(subsection.id) === subsectionId)
-    const subsectionSlug = subsection?.attributes.slug
+    const lastPostAttributes = lastPost.attributes
 
-    const attributes = lastPost.attributes
+    const topic = lastPostAttributes.topic
+    const topicAttributes = topic.attributes
+    const topicSlug = topicAttributes.slug
+    const subsectionSlug = topicAttributes.subsection_slug
 
     const goToPost = () => {
-        dispatch(setScrollId(attributes.tag))
+        dispatch(setScrollId(lastPostAttributes.tag))
         history.push(`/forum/${subsectionSlug}/${topicSlug}`)
     }
 
@@ -50,9 +47,9 @@ const LastPost = ({
     }
 
     return <div className="last-post">
-        <strong>{attributes.created_at_s}</strong>{renderGreenArrow()}<br />
+        <strong>{lastPostAttributes.created_at_s}</strong>{renderGreenArrow()}<br />
         { renderTopic() }
-        by <UserLink user={attributes.user} />
+        by <UserLink user={lastPostAttributes.user} />
     </div>
 }
 
