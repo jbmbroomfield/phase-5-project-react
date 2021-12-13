@@ -14,7 +14,9 @@ const addOrUpdateObject = (state, newObject) => {
     const newState = [...state]
     const existingObject = findObject(newState, newObject)
     if (existingObject) {
-        existingObject.attributes = {...newObject.attributes}
+        for (const key in newObject.attributes) {
+            existingObject.attributes[key] = newObject.attributes[key] || existingObject.attributes[key]
+        }
     } else {
         newState.push(newObject)
     }

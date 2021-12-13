@@ -10,6 +10,7 @@ import { fetchTopics, fetchTopic } from 'redux/actions/topicsActions'
 import subsectionChannel from 'channels/subsectionChannel'
 // import SubsectionLink from 'react/sharedComponents/SubsectionLink'
 import { Link } from 'react-router-dom'
+import { fetchSubsection } from 'redux/actions/subsectionsActions'
 
 
 const SubsectionContainer = ({ 
@@ -39,6 +40,7 @@ const SubsectionContainer = ({
     }
 
     useEffect(() => {
+        dispatch(fetchSubsection(subsectionSlug))
         dispatch(fetchTopics(subsectionSlug))
         const fetchTopicFunction = (subsectionSlug, topicSlug) => dispatch(fetchTopic(subsectionSlug, topicSlug))
         return subsectionChannel(subsectionSlug, fetchTopicFunction)

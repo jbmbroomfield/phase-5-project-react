@@ -4,17 +4,20 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import Section from '../components/Section'
 
-import { fetchSubsection } from 'redux/actions/subsectionsActions'
+import { fetchSubsection, fetchSubsections } from 'redux/actions/subsectionsActions'
 
 import sectionsChannel from 'channels/sectionsChannel'
+import { fetchSections } from 'redux/actions/sectionsActions'
 
 
 
 const SectionsContainer = () => {
 
     const dispatch = useDispatch()
-    
+
 	useEffect(() => {
+        dispatch(fetchSections())
+        dispatch(fetchSubsections())
 		return sectionsChannel(subsectionSlug => dispatch(fetchSubsection(subsectionSlug)))
 	}, [dispatch])
 
