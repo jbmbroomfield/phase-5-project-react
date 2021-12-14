@@ -16,6 +16,7 @@ const SectionsContainer = () => {
     const dispatch = useDispatch()
 
 	useEffect(() => {
+        window.scrollTo(0, 0)
         dispatch(fetchSections())
         dispatch(fetchSubsections())
 		return sectionsChannel(subsectionSlug => dispatch(fetchSubsection(subsectionSlug)))
