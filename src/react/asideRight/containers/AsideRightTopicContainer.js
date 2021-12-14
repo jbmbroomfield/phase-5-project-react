@@ -7,7 +7,6 @@ import { addViewer, addPoster } from 'redux/actions/topicsActions'
 
 
 import PageControlContainer from './PageControlContainer'
-import Subscribe from '../components/Subscribe'
 import MenuItemContainer from './MenuItemContainer'
 import TopicSettings from '../components/TopicSettings'
 import Filter from '../components/Filter'
@@ -17,6 +16,7 @@ import { excludeAllUsers, includeAllUsers, toggleFlagFilter, toggleUserFilter } 
 
 import getTopicDisplay from 'getTopicDisplay'
 import WhoCanContainer from './WhoCanContainer'
+import SubscribeContainer from './SubscribeContainer'
 
 const AsideRightTopicContainer = ({
     match,
@@ -87,7 +87,6 @@ const AsideRightTopicContainer = ({
     }
 
     const renderTopicUsers = () => {
-
         if (topicAttributes.who_can_view === 'anyone') {
             if (topicAttributes.who_can_post === 'anyone') {
                 return renderUsersContainer('Poster', false)
@@ -101,18 +100,6 @@ const AsideRightTopicContainer = ({
             { renderUsersContainer('Viewer', true) }
             { renderUsersContainer('Poster', true) }
         </>
-
-        // if (['all', 'users'].includes(topicAttributes.who_can_view)) {
-        //     return renderUsersContainer('Poster')
-        // }
-        // if (['all', 'users'].includes(topicAttributes.who_can_post)) {
-        //     return renderUsersContainer('User')
-        // }
-        // return <>
-        //     { renderUsersContainer('Viewer') }
-        //     { renderUsersContainer('Poster') }
-        // </>
-
     }
 
     const renderTopicSettings = () => {
@@ -148,7 +135,7 @@ const AsideRightTopicContainer = ({
         <>
             <PageControlContainer topicDisplay={topicDisplay} page={page} pages={pages} />
             { renderFilter() }
-            <Subscribe
+            <SubscribeContainer
                 subscribed={subscribed}
                 handleSubscribe={handleSubscribe}
                 handleUnsubscribe={handleUnsubscribe}
