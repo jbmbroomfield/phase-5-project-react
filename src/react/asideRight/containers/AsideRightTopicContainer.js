@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { subscribeToTopic } from 'redux/actions/userTopicsActions'
+import { updateUserTopic } from 'redux/actions/userTopicsActions'
 import { editTopic } from 'redux/actions/topicsActions'
 import { addViewer, addPoster } from 'redux/actions/topicsActions'
 
@@ -41,13 +41,7 @@ const AsideRightTopicContainer = ({
     const userTopic = userTopics.find(
         userTopic => userTopic.attributes.topic_slug === topicSlug
     )
-    const subscribed = userTopic && userTopic.attributes.subscribed
-    const handleSubscribe = () => {
-        dispatch(subscribeToTopic(subsectionSlug, topicSlug, true))
-    }
-    const handleUnsubscribe = () => {
-        dispatch(subscribeToTopic(subsectionSlug, topicSlug, false))
-    }
+    const userTopicAttributes = userTopic && userTopic.attributes ? userTopic.attributes : {}
     const {page, pages} = topicDisplay
 
     const renderOwnerSettings = () => {
@@ -136,9 +130,8 @@ const AsideRightTopicContainer = ({
             <PageControlContainer topicDisplay={topicDisplay} page={page} pages={pages} />
             { renderFilter() }
             <SubscribeContainer
-                subscribed={subscribed}
-                handleSubscribe={handleSubscribe}
-                handleUnsubscribe={handleUnsubscribe}
+                status={userTopicAttributes.status}
+                updateStatus={status => dispatch(updateUserTopic(subsectionSlug, topicSlug, {status}))}
             />
             { renderTopicSettings() }
             { renderTopicUsers() }

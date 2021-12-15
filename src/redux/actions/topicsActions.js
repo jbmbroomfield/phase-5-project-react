@@ -1,5 +1,6 @@
 import API from './API'
 import { setGuestData } from './currentUserActions'
+import { fetchUserTopic, fetchUserTopics } from './userTopicsActions'
 
 const addTopics = topics => ({
     type: 'ADD_TOPICS',
@@ -16,8 +17,13 @@ export const fetchTopics = subsectionSlug => (
     dispatch => {
         API.get(`forum/${subsectionSlug}/topics`)
         .then(json => {
-            json.data && dispatch(addTopics(json.data))
+            const topics = json.data
+            if (!topics) {
+                return 
+            }
+            dispatch(addTopics(topics))
         })
+        dispatch(fetchUserTopics(subsectionSlug))
     }
 )
 
@@ -25,16 +31,17 @@ export const fetchTopic = (subsectionSlug, topicSlug, errorRedirect = null) => (
     dispatch => {
         API.get(`forum/${subsectionSlug}/${topicSlug}`)
         .then(json => {
-            if (json.data) {
-                const topic = json.data
-                if (topic.attributes.who_can_view === 'url') {
-                    dispatch(setGuestData())
-                }
-                dispatch(addTopics([topic]))
-            } else if (errorRedirect) {
-                errorRedirect()
+            const topic = json.data
+            if (!topic) {
+                errorRedirect && errorRedirect()
+                return
             }
+            if (topic.attributes.who_can_view === 'url') {
+                dispatch(setGuestData())
+            }
+            dispatch(addTopics([topic]))
         })
+        dispatch(fetchUserTopic(subsectionSlug, topicSlug))
     }
 )
 

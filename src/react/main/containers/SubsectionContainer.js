@@ -19,6 +19,9 @@ const SubsectionContainer = ({
 
     const subsections = useSelector(state => state.subsections)
     let topics = useSelector(state => state.topics)
+    // const userTopics = useSelector(state => state.userTopics)
+    // const currentUser = useSelector(state => state.currentUser)
+    // const currentUserAttributes = currentUser && currentUser.attributes ? currentUser.attributes : {}
 
     const dispatch = useDispatch()
 
@@ -26,6 +29,12 @@ const SubsectionContainer = ({
     const subsection = subsections.find(subsection => subsection.attributes.slug === subsectionSlug)
     const subsectionId = subsection && parseInt(subsection.id)
     topics = topics.filter(topic => topic.attributes.subsection_slug === subsectionSlug)
+    // if (!currentUserAttributes.show_ignored) {
+    //     topics = topics.filter(topic => {
+    //         const userTopic = userTopics.find(userTopic => userTopic)
+    //         topic.attributes
+    //     })
+    // }
     topics.sort((a, b) => b.attributes.last_post.attributes.created_at_i - a.attributes.last_post.attributes.created_at_i)
 
     const [displayTextArea, setDisplayTextArea] = useState(false)

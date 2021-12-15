@@ -4,21 +4,33 @@ import MenuPill from '../components/MenuPill'
 import MenuItemContainer from './MenuItemContainer'
 
 const SubscribeContainer = ({
-    subscribed,
-    handleSubscribe, handleUnsubscribe
+    status,
+    updateStatus,
 }) => {
-    
+
     const tick = <FA icon="check" color="green" />
+    const cross = <FA icon="times" color="#555" />
 
-    const heading = subscribed ? <>Subscribed {tick}</> : 'Not Subscribed'
-    
-    const value = subscribed ? 'Unsubscribe' : <>Subscribe {tick}</>
+    const heading = {
+        subscribed: <>Subscribed {tick}</>,
+        unsubscribed: <>Not Subscribed</>,
+        ignored: <>Ignored {cross}</>,
+    }[status]
 
-    const handleClick = () => subscribed ? handleUnsubscribe() : handleSubscribe()
+    const button = newStatus => {
+        const value = {
+            subscribed: <>Subscribe {tick}</>,
+            unsubscribed: status === 'subscribed' ? <>Unsubscribe</> : <>Unignore</>,
+            ignored: <>Ignore {cross}</>
+        }[newStatus]
+        return <MenuPill value={value} onClick={() => updateStatus(newStatus)} />
+    }
 
-    const renderContent = () => <MenuPill value={value} onClick={handleClick}>
-        
-    </MenuPill>
+    const renderContent = () => ({
+        subscribed: <>{button('unsubscribed')} {button('ignored')}</>,
+        unsubscribed: <>{button('subscribed')} {button('ignored')}</>,
+        ignored: <>{button('subscribed')} {button('unsubscribed')}</>,
+    }[status])
 
     return <MenuItemContainer
         heading={heading}

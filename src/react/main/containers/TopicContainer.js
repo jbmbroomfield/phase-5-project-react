@@ -7,7 +7,7 @@ import Post from '../components/Post'
 import UnpublishedPost from '../components/UnpublishedPost'
 
 import { fetchPosts, fetchPost } from 'redux/actions/postsActions'
-import { fetchUserTopic } from 'redux/actions/userTopicsActions'
+// import { fetchUserTopic } from 'redux/actions/userTopicsActions'
 import { insertIntoDraft } from 'redux/actions/draftsActions'
 import { createFlag, deleteFlag } from 'redux/actions/flagsActions'
 import { setPages, setPage } from 'redux/actions/topicDisplaysActions'
@@ -40,6 +40,7 @@ const TopicContainer = ({
     const topicDisplays = useSelector(state => state.topicDisplays)
     const currentUser = useSelector(state => state.currentUser)
     const scrollId = useSelector(state => state.scrollId)
+    const userTopics = useSelector(state => state.userTopics)
 
     const currentUserAttributes = currentUser && currentUser.attributes ? currentUser.attributes : {}
 
@@ -57,7 +58,12 @@ const TopicContainer = ({
     const topicId = topic && parseInt(topic.id)
     const pageSize = (currentUser && currentUser.attributes && currentUser.attributes.page_size) || 25
 
-    const topicAttributes = topic ? topic.attributes : {}
+    const userTopic = userTopics.find(user_topic => {
+        if (!user_topic.attributes) {
+            return null
+        }
+        return user_topic.attributes.topic_slug === topicSlug && user_topic.attributes.subsection_slug === subsectionSlug
+    })
 
     const [titleInput, setTitleInput] = useState('')
 
@@ -73,7 +79,7 @@ const TopicContainer = ({
         const errorRedirect = () => history.push('/')
         dispatch(fetchTopic(subsectionSlug, topicSlug, errorRedirect))
         dispatch(fetchPosts(subsectionSlug, topicSlug))
-        dispatch(fetchUserTopic(subsectionSlug, topicSlug))
+        // dispatch(fetchUserTopic(subsectionSlug, topicSlug))
         const fetchPostFunc = postId => dispatch(fetchPost(postId))
         const fetchTopicFunc = (subsectionSlug, topicSlug) => dispatch(fetchTopic(subsectionSlug, topicSlug))
         return topicChannel(subsectionSlug, topicSlug, fetchPostFunc, fetchTopicFunc)
@@ -97,6 +103,12 @@ const TopicContainer = ({
         topicDisplay.page && dispatch(setPage(topicSlug, topicDisplay.page))
     }, [dispatch, topicSlug, topicDisplay.pages, topicDisplay.page])
     
+    if (!topic || !userTopic || !topic.attributes || !userTopic.attributes) {
+        return null
+    }
+
+    const topicAttributes = topic.attributes
+    const userTopicAttributes = userTopic.attributes
 
     const renderPosts = () => {
         if (topicAttributes.status === 'unpublished') {
@@ -128,7 +140,7 @@ const TopicContainer = ({
                     createFlag={category => dispatch(createFlag(topicId, post.id, category))}
                     deleteFlag={category => dispatch(deleteFlag(topicId, post.id, category))}
                     timezone={timezone}
-                    canPost={topicAttributes.can_post}
+                    canPost={userTopicAttributes.can_post}
                     guestName={postAttributes.guest_name}
                 />
         </TrackVisibility>
@@ -158,10 +170,6 @@ const TopicContainer = ({
             onBlur={editTitle}
             placeholder={'Choose a title'}
         />
-    }
-
-    if (!topic) {
-        return null
     }
     return (
         <>
