@@ -1,4 +1,4 @@
-export const setCurrentSubsection = currentTopic => ({
+export const setCurrentTopic = currentTopic => ({
     type: 'SET_CURRENT_TOPIC',
     currentTopic,
 })

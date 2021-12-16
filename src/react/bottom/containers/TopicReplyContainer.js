@@ -10,7 +10,6 @@ import { setDraft } from 'redux/actions/draftsActions'
 import { addPoster, updateSlug } from 'redux/actions/topicsActions'
 
 const TopicReplyContainer = ({
-    match,
     setBottomPopUp,
     focusTextArea, textAreaRef,
 }) => {
@@ -29,32 +28,31 @@ const TopicReplyContainer = ({
 
     const bottomPopUp = useSelector(state => state.bottomPopUp)
     const drafts = useSelector(state => state.drafts)
-    const topics = useSelector(state => state.topics)
     const currentUser = useSelector(state => state.currentUser)
     const currentUserAttributes = currentUser && currentUser.attributes ? currentUser.attributes : {}
 
-    
+    const subsection = useSelector(state => state.currentSubsection)
+    const topic = useSelector(state => state.currentTopic)
+    const userTopic = useSelector(state => state.currentUserTopic)
+
+    const subsectionAttributes = subsection ? subsection.attributes : {}
+    const topicAttributes = topic ? topic.attributes : {}
+    const userTopicAttributes = userTopic ? userTopic.attributes : {}
+
+    const subsectionSlug = subsectionAttributes.slug
+    const topicSlug = topicAttributes.slug
+    const topicId = topic && parseInt(topic.id)
+
+
     const [guestName, setGuestName] = useState(currentUserAttributes.username)
     
     const history = useHistory()
-
-    const subsectionSlug = match.params.subsectionSlug
-    // const subsection = subsections.find(subsection => subsection.attributes?.slug === subsectionSlug)
-    const topicSlug = match.params.topicSlug
-    const topic = topics.find(topic => {
-        if (!topic.attributes) {
-            return null
-        }
-        return topic.attributes.slug === topicSlug && topic.attributes.subsection_slug === subsectionSlug
-    })
-    const topicId = topic && parseInt(topic.id)
-    const topicAttributes = topic ? topic.attributes : {}
     
     const draft = drafts && drafts.find(draft => parseInt(draft.attributes.topic_id) === topicId)
     const text = draft ? draft.attributes.text : ''
     const selection = draft ? draft.attributes.selection : [0, 0]
 
-    const canPost = topicAttributes && topicAttributes.can_post
+    const canPost = userTopicAttributes.can_post
 
     const submitPassword = () => {
         setEnteredPassword('')
@@ -107,7 +105,7 @@ const TopicReplyContainer = ({
 
     const renderBottomBar = () => (
         (
-            topicAttributes.can_post ||
+            userTopicAttributes.can_post ||
             (
                 topicAttributes.who_can_post === 'password' &&
                 (currentUserAttributes.account_level !== 'guest' || topicAttributes.guest_access === 'post')
@@ -123,7 +121,7 @@ const TopicReplyContainer = ({
             focusTextArea={focusTextArea}
             timezone={currentUser?.attributes.time_zone}
             topicId={topicId}
-            canPost={topicAttributes.can_post}
+            canPost={canPost}
             password={topicAttributes.password}
             subsectionSlug={subsectionSlug}
             topicSlug={topicSlug}

@@ -11,8 +11,8 @@ const SubsectionSummary = ({
     }
 
     const attributes = subsection.attributes
-    const topicCount = attributes.topic_count || <Spinner />
-    const postCount = attributes.post_count || <Spinner />
+    const topicCount = attributes.topic_count === null ? <Spinner /> : attributes.topic_count
+    const postCount = attributes.post_count === null ? <Spinner /> : attributes.topic_count
     const lastPost = attributes.last_post ? <div><LastPost lastPost={attributes.last_post} showTopic={true} /></div> : <Spinner />
 
     return (

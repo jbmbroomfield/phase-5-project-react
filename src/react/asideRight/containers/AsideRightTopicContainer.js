@@ -18,31 +18,32 @@ import getTopicDisplay from 'getTopicDisplay'
 import WhoCanContainer from './WhoCanContainer'
 import SubscribeContainer from './SubscribeContainer'
 
-const AsideRightTopicContainer = ({
-    match,
-}) => {
+const AsideRightTopicContainer = () => {
 
     const dispatch = useDispatch()
 
-    const userTopics = useSelector(state => state.userTopics)
     const topicDisplays = useSelector(state => state.topicDisplays)
-    const topics = useSelector(state => state.topics)
     const currentUser = useSelector(state => state.currentUser)
+
+    const subsection = useSelector(state => state.currentSubsection)
+    const topic = useSelector(state => state.currentTopic)
+    const userTopic = useSelector(state => state.currentUserTopic)
+
+    const subsectionAttributes = subsection ? subsection.attributes : {}
+    const topicAttributes = topic ? topic.attributes : {}
+    const userTopicAttributes = userTopic ? userTopic.attributes : {}
+
+    const subsectionSlug = subsectionAttributes.slug
+    const topicSlug = topicAttributes.slug
 
     const currentUserAttributes = currentUser && currentUser.attributes ? currentUser.attributes : {}
 
-    const subsectionSlug = match.params.subsectionSlug
-    const topicSlug = match.params.topicSlug
-    const topic = topics.find(topic => {
-        return topic.attributes?.slug === topicSlug
-    })
-    const topicAttributes = topic ? topic.attributes : {}
     const topicDisplay = getTopicDisplay(topicDisplays, topicSlug)
-    const userTopic = userTopics.find(
-        userTopic => userTopic.attributes.topic_slug === topicSlug
-    )
-    const userTopicAttributes = userTopic && userTopic.attributes ? userTopic.attributes : {}
     const {page, pages} = topicDisplay
+
+    if (!topic) {
+        return null
+    }
 
     const renderOwnerSettings = () => {
         return <>

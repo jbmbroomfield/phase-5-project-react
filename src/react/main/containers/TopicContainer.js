@@ -22,6 +22,9 @@ import getTopicDisplay from 'getTopicDisplay'
 import { Link } from 'react-router-dom'
 // import TopicLink from 'react/sharedComponents/TopicLink'
 import SubsectionLink from 'react/sharedComponents/SubsectionLink'
+import { removeCurrentSubsection, setCurrentSubsection } from 'redux/actions/currentSubsectionActions'
+import { removeCurrentTopic, setCurrentTopic } from 'redux/actions/currentTopicActions'
+import { removeCurrentUserTopic, setCurrentUserTopic } from 'redux/actions/currentUserTopicActions'
 
 const TopicContainer = ({
     match,
@@ -64,6 +67,17 @@ const TopicContainer = ({
         }
         return user_topic.attributes.topic_slug === topicSlug && user_topic.attributes.subsection_slug === subsectionSlug
     })
+
+    useEffect(() => {
+        subsection && dispatch(setCurrentSubsection(subsection))
+        topic && dispatch(setCurrentTopic(topic))
+        userTopic && dispatch(setCurrentUserTopic(userTopic))
+        return () => {
+            dispatch(removeCurrentSubsection())
+            dispatch(removeCurrentTopic())
+            dispatch(removeCurrentUserTopic())
+        }
+    }, [dispatch, subsection, topic, userTopic])
 
     const [titleInput, setTitleInput] = useState('')
 

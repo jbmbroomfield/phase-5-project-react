@@ -11,6 +11,7 @@ import subsectionChannel from 'channels/subsectionChannel'
 // import SubsectionLink from 'react/sharedComponents/SubsectionLink'
 import { Link } from 'react-router-dom'
 import { fetchSubsection } from 'redux/actions/subsectionsActions'
+import { removeCurrentSubsection, setCurrentSubsection } from 'redux/actions/currentSubsectionActions'
 
 
 const SubsectionContainer = ({ 
@@ -36,6 +37,13 @@ const SubsectionContainer = ({
     //     })
     // }
     topics.sort((a, b) => b.attributes.last_post.attributes.created_at_i - a.attributes.last_post.attributes.created_at_i)
+
+    useEffect(() => {
+        if (subsection) {
+            dispatch(setCurrentSubsection(subsection))
+        }
+        return () => dispatch(removeCurrentSubsection())
+    }, [dispatch, subsection])
 
     const [displayTextArea, setDisplayTextArea] = useState(false)
     const [title, setTitle] = useState('')

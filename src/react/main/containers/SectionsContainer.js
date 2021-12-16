@@ -8,6 +8,9 @@ import { fetchSubsection, fetchSubsections } from 'redux/actions/subsectionsActi
 
 import sectionsChannel from 'channels/sectionsChannel'
 import { fetchSections } from 'redux/actions/sectionsActions'
+import { removeCurrentSubsection } from 'redux/actions/currentSubsectionActions'
+import { removeCurrentTopic } from 'redux/actions/currentTopicActions'
+import { removeCurrentUserTopic } from 'redux/actions/currentUserTopicActions'
 
 
 
@@ -17,6 +20,9 @@ const SectionsContainer = () => {
 
 	useEffect(() => {
         window.scrollTo(0, 0)
+        dispatch(removeCurrentSubsection())
+        dispatch(removeCurrentTopic())
+        dispatch(removeCurrentUserTopic())
         dispatch(fetchSections())
         dispatch(fetchSubsections())
 		return sectionsChannel(subsectionSlug => dispatch(fetchSubsection(subsectionSlug)))
