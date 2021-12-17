@@ -50,3 +50,14 @@
   overflow: auto;
   overflow-wrap: break-word;
 }
+
+/* .post-info div img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: red;
+} */
+
+.poster {
+  margin-bottom: 10px;
+}

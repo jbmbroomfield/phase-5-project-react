@@ -4,29 +4,35 @@ import Spinner from 'react/sharedComponents/Spinner'
 import LastPost from './LastPost'
 
 const SubsectionSummary = ({
-    subsection
+    subsection, currentUser
 }) => {
-    if (!subsection) {
+    if (!subsection || !currentUser) {
         return null
     }
 
-    const attributes = subsection.attributes
-    const topicCount = attributes.topic_count === null ? <Spinner /> : attributes.topic_count
-    const postCount = attributes.post_count === null ? <Spinner /> : attributes.topic_count
-    const lastPost = attributes.last_post ? <div><LastPost lastPost={attributes.last_post} showTopic={true} /></div> : <Spinner />
+    const currentUserAttributes = currentUser && currentUser.attributes ? currentUser.attributes : {}
+    const showIgnored = currentUser && currentUserAttributes.show_ignored
 
-    return (
-        <div className="subsection-summary">
-            <div>
-                <Link to={`forum/${subsection.attributes.slug}`}>
-                    {subsection.attributes.title}
-                </Link>
-            </div>
-            <div>{topicCount}</div>
-            <div>{postCount}</div>
-            <div>{lastPost}</div>
+    const subsectionAttributes = subsection ? subsection.attributes : {}
+    const topicCount = showIgnored ? subsectionAttributes.topic_count : subsectionAttributes.unignored_topic_count
+    const postCount = showIgnored ? subsectionAttributes.post_count : subsectionAttributes.unignored_post_count
+    const lastPost = showIgnored ? subsectionAttributes.last_post : subsectionAttributes.last_unignored_post
+    const renderLastPost = () => {
+        if (!lastPost) return <Spinner />
+        if (!lastPost.id) return null
+        return <div><LastPost lastPost={lastPost} showTopic={true} /></div>
+    }
+
+    return <div className="subsection-summary">
+        <div>
+            <Link to={`forum/${subsection.attributes.slug}`}>
+                {subsection.attributes.title}
+            </Link>
         </div>
-    )
+        <div>{topicCount === null ? <Spinner /> : Math.max(topicCount, 0)}</div>
+        <div>{postCount === null ? <Spinner /> : Math.max(postCount, 0)}</div>
+        <div>{renderLastPost()}</div>
+    </div>
 }
 
 export default SubsectionSummary

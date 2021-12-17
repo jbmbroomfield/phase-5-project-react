@@ -25,6 +25,7 @@ import SubsectionLink from 'react/sharedComponents/SubsectionLink'
 import { removeCurrentSubsection, setCurrentSubsection } from 'redux/actions/currentSubsectionActions'
 import { removeCurrentTopic, setCurrentTopic } from 'redux/actions/currentTopicActions'
 import { removeCurrentUserTopic, setCurrentUserTopic } from 'redux/actions/currentUserTopicActions'
+import { fetchSubsection } from 'redux/actions/subsectionsActions'
 
 const TopicContainer = ({
     match,
@@ -93,6 +94,7 @@ const TopicContainer = ({
         const errorRedirect = () => history.push('/')
         dispatch(fetchTopic(subsectionSlug, topicSlug, errorRedirect))
         dispatch(fetchPosts(subsectionSlug, topicSlug))
+        dispatch(fetchSubsection(subsectionSlug))
         // dispatch(fetchUserTopic(subsectionSlug, topicSlug))
         const fetchPostFunc = postId => dispatch(fetchPost(postId))
         const fetchTopicFunc = (subsectionSlug, topicSlug) => dispatch(fetchTopic(subsectionSlug, topicSlug))

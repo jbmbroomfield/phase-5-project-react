@@ -1,4 +1,5 @@
 import API from './API'
+import { setCurrentUserTopic } from './currentUserTopicActions'
 
 // const addUserTopic = userTopic => ({
 //     type: 'ADD_USER_TOPIC',
@@ -59,6 +60,7 @@ export const updateUserTopic = (subsectionSlug, topicSlug, body) => (
                 return
             }
             dispatch(addUserTopics(user_topic))
+            dispatch(setCurrentUserTopic(user_topic))
         })
     }
 )

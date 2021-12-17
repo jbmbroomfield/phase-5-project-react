@@ -7,7 +7,7 @@ const PostInfo = ({ user, avatarUrl, guestName }) => {
 
     return (
         <div className="post-info">
-            <div>{ !user || user.attributes.account_level === 'guest' ? <u>{guestName}</u> : <UserLink user={user} /> }</div>
+            <div className="poster">{ !user || user.attributes.account_level === 'guest' ? <u>{guestName}</u> : <UserLink user={user} /> }</div>
             <div><img className="avatar" src={avatarSrc} alt="avatar" /></div>
         </div>
     )

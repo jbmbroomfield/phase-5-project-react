@@ -19,20 +19,20 @@ const PostNotes = ({
     const renderLike = () => {
         const className = "fa fa-thumbs-up" + (liked ? " fa-thumbs-up-liked" : "")
         return (
-            <div>
+            <span>
                 <i className={className} onClick={handleLike}></i>
                 { Number.isInteger(likeCount) && likeCount > 0 && <span className='like-count'>({likeCount || 0})</span> }
-            </div>
+            </span>
         )
     }
 
     const renderDislike = () => {
         const className = "fa fa-thumbs-down" + (disliked ? " fa-thumbs-down-disliked" : "")
         return (
-            <div>
+            <span>
                 <i className={className} onClick={handleDislike}></i>
                 { Number.isInteger(dislikeCount) && dislikeCount > 0 && <span className='dislike-count'>({dislikeCount || 0})</span> }
-            </div>
+            </span>
         )
     }
 

@@ -17,7 +17,7 @@ const TopicSummary = ({
             <div><TopicLink topic={topic} /></div>
             <div><UserLink user={firstPoster} /></div>
             <div>{postCount}</div>
-            <div><LastPost lastPost={lastPost} /></div>
+            { lastPost && lastPost.id && <div><LastPost lastPost={lastPost} /></div> }
         </div>
     )
 }

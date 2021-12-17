@@ -3,13 +3,14 @@ import React from 'react'
 import SubsectionSummary from './SubsectionSummary'
 import SubsectionSummaryHeader from './SubsectionSummaryHeader'
 
-const Section = ({ title, subsections }) => {
+const Section = ({ title, subsections, currentUser }) => {
 
     const renderSubsections = () => (
         subsections.map(subsection => (
             <SubsectionSummary
                 key={subsection.id}
                 subsection={subsection}
+                currentUser={currentUser}
             />
         ))
     )

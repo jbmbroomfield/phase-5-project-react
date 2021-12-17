@@ -18,9 +18,11 @@ const SubsectionContainer = ({
     match,
 }) => {
 
+    const currentUser = useSelector(state => state.currentUser)
     const subsections = useSelector(state => state.subsections)
+    const currentUserAttributes = currentUser ? currentUser.attributes : {}
     let topics = useSelector(state => state.topics)
-    // const userTopics = useSelector(state => state.userTopics)
+    const userTopics = useSelector(state => state.userTopics)
     // const currentUser = useSelector(state => state.currentUser)
     // const currentUserAttributes = currentUser && currentUser.attributes ? currentUser.attributes : {}
 
@@ -30,6 +32,17 @@ const SubsectionContainer = ({
     const subsection = subsections.find(subsection => subsection.attributes.slug === subsectionSlug)
     const subsectionId = subsection && parseInt(subsection.id)
     topics = topics.filter(topic => topic.attributes.subsection_slug === subsectionSlug)
+
+    if (!currentUserAttributes.show_ignored) {
+        topics = topics.filter(topic => {
+            const userTopic = userTopics.find(user_topic => (
+                user_topic.attributes.subsection_slug === topic.attributes.subsection_slug &&
+                user_topic.attributes.topic_slug === topic.attributes.slug
+            ))
+            return !userTopic || userTopic.attributes.status !== 'ignored'
+        })
+    }
+    
     // if (!currentUserAttributes.show_ignored) {
     //     topics = topics.filter(topic => {
     //         const userTopic = userTopics.find(userTopic => userTopic)

@@ -30,6 +30,7 @@ const SectionsContainer = () => {
 
     const sections = useSelector(state => state.sections)
     const subsections = useSelector(state => state.subsections)
+    const currentUser = useSelector(state => state.currentUser)
 
     const getSubsections = sectionId => (
         subsections.filter(subsection => (
@@ -43,6 +44,7 @@ const SectionsContainer = () => {
                 key={section.id}
                 title={section.attributes.title}
                 subsections={getSubsections(section.id)}
+                currentUser={currentUser}
             />
         ))
     }
