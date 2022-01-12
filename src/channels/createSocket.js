@@ -1,4 +1,5 @@
 const url = "ws://localhost:3000/cable"
+// const url = "ws://radiant-wildwood-07843.herokuapp.com/api/v1/"
 
 const createSocket = (params, messageFunctions) => {
     

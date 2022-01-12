@@ -30,7 +30,7 @@ const AsideLeftContainer = () => {
     return (
         <aside className="aside-left">
             <div className="notifications">
-                <div className="aside-header notifications-header">Notifications</div>
+                <div className="aside-header notifications-header">Notifications ({notifications.length})</div>
                 { renderNotifications() }
             </div>
             {/* <div className="aside-header stats-header">Stats</div> */}

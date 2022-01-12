@@ -1,4 +1,5 @@
 import API from './API'
+import { setCurrentTopic } from './currentTopicActions'
 import { setGuestData } from './currentUserActions'
 import { fetchUserTopic, fetchUserTopics } from './userTopicsActions'
 
@@ -36,6 +37,7 @@ export const fetchTopic = (subsectionSlug, topicSlug, errorRedirect = null) => (
                 errorRedirect && errorRedirect()
                 return
             }
+            dispatch(setCurrentTopic(topic))
             if (topic.attributes.who_can_view === 'url') {
                 dispatch(setGuestData())
             }
@@ -63,6 +65,13 @@ export const editTopic = (subsectionSlug, topicSlug, attributes) => (
             topic: attributes
         }
         API.patch(`forum/${subsectionSlug}/${topicSlug}`, body)
+        .then(json => {
+            const topic = json.data
+            if (!topic) {
+                return
+            }
+            fetchTopic(subsectionSlug, topicSlug)
+        })
     }
 )
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router'
 
@@ -11,13 +11,15 @@ const SignupContainer = () => {
 	const dispatch = useDispatch()
     
     const currentUser = useSelector(state => state.currentUser)
+    const loggedIn = currentUser && currentUser.attributes.account_level !== 'guest'
 
     const history = useHistory()
 
-    if (currentUser && currentUser.attributes) {
-        history.push("/")
-        return null
-    }
+    useEffect(() => {
+        if (loggedIn) {
+            history.push('/')
+        }
+    }, [loggedIn, history])
 
     const renderSignupContainer = () => (
         <div>

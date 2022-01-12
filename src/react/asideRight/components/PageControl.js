@@ -6,6 +6,7 @@ const PageControl = ({
 }) => {
     return (
         <div className="aside-header page-control">
+            <div>Page {page}</div>
             <span
                 className="btn btn-page-control"
                 onClick={() => setPage(1)}
@@ -25,7 +26,6 @@ const PageControl = ({
             <i
                 className="fa fa-chevron-right btn btn-page-control"
                 onClick={() => {
-                    console.log('up one')
                     setPage(page + 1)
                 }}
             ></i>

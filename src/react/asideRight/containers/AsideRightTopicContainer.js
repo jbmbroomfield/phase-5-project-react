@@ -130,10 +130,10 @@ const AsideRightTopicContainer = () => {
         <>
             <PageControlContainer topicDisplay={topicDisplay} page={page} pages={pages} />
             { renderFilter() }
-            <SubscribeContainer
+            { currentUserAttributes.slug !== topicAttributes.user_slug && <SubscribeContainer
                 status={userTopicAttributes.status}
                 updateStatus={status => dispatch(updateUserTopic(subsectionSlug, topicSlug, {status}))}
-            />
+            /> }
             { renderTopicSettings() }
             { renderTopicUsers() }
         </>

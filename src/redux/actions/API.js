@@ -3,6 +3,7 @@ import { getJwt } from "jwt"
 class API {
 
     static #BASE_URL = 'http://localhost:3000/api/v1/'
+    // static #BASE_URL = 'https://radiant-wildwood-07843.herokuapp.com/api/v1/'
     static #BASE_HEADERS = {
         'Content-Type': 'application/json',
         'Accept': 'application/json'

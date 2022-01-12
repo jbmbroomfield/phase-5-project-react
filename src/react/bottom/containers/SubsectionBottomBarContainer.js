@@ -26,7 +26,7 @@ const SubsectionBottomBarContainer = ({ match }) => {
         dispatch(createTopic(subsectionSlug, title, redirect))
     }
 
-    return currentUser ? <SubsectionBottomBar handleNewTopic={handleNewTopic} /> : <div className="bottom-bar"></div>
+    return currentUser && currentUser.attributes && currentUser.attributes.account_level !== 'guest' ? <SubsectionBottomBar handleNewTopic={handleNewTopic} /> : <div className="bottom-bar"></div>
 }
 
 export default SubsectionBottomBarContainer
